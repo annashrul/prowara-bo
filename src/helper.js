@@ -150,7 +150,9 @@ export const addFooters = doc => {
     doc.setFontSize(8);
     return doc;
 }
-
+export const rplcSpace = (val){
+    return val.replace(" ","_");
+}
 export const rmComma = (angka) => {
     let numbers=0;
     if(parseFloat(angka)<0){

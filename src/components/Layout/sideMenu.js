@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom"
 import {connect} from 'react-redux'
 import {withRouter} from "react-router-dom"
 import { logoutUser } from "redux/actions/authActions";
@@ -9,6 +8,7 @@ import Preloader from "../../Preloader";
 import SingleMenu from "../common/singleMenu";
 import DoubleMenu from "../common/doubleMenu";
 import ThirdMenu from "../common/thirdMenu";
+import {rplcSpace} from "../../helper";
 
 class SideMenu extends Component {
     constructor(props){
@@ -42,13 +42,13 @@ class SideMenu extends Component {
             if(v.sub!==undefined){
                 v.sub.map((val,key)=>{
                     if(val.sub===undefined){
-                        if(`/${val.label.replaceAll(" ","_")}`=== path) {
+                        if("/"+rplcSpace(val.label)=== path){
                             if(val.parent===v.label)v.isToggle=!v.isToggle;
                         }
                     }
                     if(val.sub!==undefined){
                         val.sub.map((row,idx)=>{
-                            if(`/${row.label.replaceAll(" ","_")}`=== path)v.isToggle=true;val.isToggle=true;
+                            if("/"+rplcSpace(row.label)=== path)v.isToggle=true;val.isToggle=true;
                         })
                     }
 
