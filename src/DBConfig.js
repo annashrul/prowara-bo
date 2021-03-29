@@ -1,5 +1,5 @@
 export const DBConfig = {
-    name: 'sangku_bo',
+    name: 'prowara_bo',
     version: 1,
     objectStoresMeta: [
         {

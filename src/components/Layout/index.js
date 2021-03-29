@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link,Redirect } from 'react-router-dom'
 import Header from './header'
 import SideMenu from './sideMenu'
 import {connect} from 'react-redux'
@@ -21,6 +21,7 @@ class Layout extends Component {
     }
 
     componentWillMount() {
+        this.getProps(this.props);
     }
     handleLogout = () => {
         this.props.logoutUser();
@@ -31,11 +32,21 @@ class Layout extends Component {
     getTimeout() {
         return document.getElementById("coolyeah").value;
     }
+
+    getProps(param){
+
+    }
+
+    componentDidMount(){
+        this.getProps(this.props);
+    }
+
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.auth.user) {
             const favicon = this.getFaviconEl(); // Accessing favicon element
             favicon.href = nextProps.auth.user.fav_icon;
             document.title = `SangQu - ${this.props.page}`;
+            this.getProps(nextProps);
         }
     }
 

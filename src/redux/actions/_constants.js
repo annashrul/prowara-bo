@@ -27,12 +27,6 @@ export const HEADERS ={
   PASSWORD  : "$2b$08$hLMU6rEvNILCMaQbthARK.iCmDRO7jNbUB8CcvyRStqsHD4UQxjDO"
 }
 
-/****************
-      PASSWORD MODAL ADD LOCATION
-*****************/
-export const LOC_VERIF ={
-  password: "bmV0aW4xMjM0YSE="
-}
 
 /****************
       MODAL

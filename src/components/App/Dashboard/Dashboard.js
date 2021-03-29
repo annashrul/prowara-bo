@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Layout from 'components/Layout';
 import moment from 'moment';
-import {toRp} from "helper";
 // import {FetchStock} from 'redux/actions/dashboard/dashboard.action'
 import 'bootstrap-daterangepicker/daterangepicker.css';
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
 import {HEADERS} from 'redux/actions/_constants'
 
 import Cards from './src/Cards'
@@ -14,9 +13,10 @@ import Info from './src/Info'
 import Chart from './src/charts'
 import Clock from "../../common/clock";
 import Default from 'assets/default.png';
+import {toCurrency} from "../../../helper";
 
-const socket = socketIOClient(HEADERS.URL);
-
+// const socket = socketIOClient(HEADERS.URL);
+//
 class Dashboard extends Component {
     constructor(props) {
         super(props);
@@ -149,21 +149,21 @@ class Dashboard extends Component {
         //     this.refreshData();
         // })
         
-        socket.on("set_dashboard_bo", (data) => {
-            this.setState({
-                penjualan_pin:data.penjualan_pin,
-                penjualan_paket:data.penjualan_paket,
-                pie_membership:data.pie_membership,
-                pie_karir:data.pie_karir,
-                pie_signup:data.pie_signup,
-                saldo_member: data.saldo_member,
-                total_penarikan: data.total_penarikan,
-                total_member: data.total_member,
-                total_penjualan: data.total_penjualan,
-                get_sponsor_terbaik: data.get_sponsor_terbaik,
-                get_member_baru: data.get_member_baru,
-            });
-        });
+        // socket.on("set_dashboard_bo", (data) => {
+        //     this.setState({
+        //         penjualan_pin:data.penjualan_pin,
+        //         penjualan_paket:data.penjualan_paket,
+        //         pie_membership:data.pie_membership,
+        //         pie_karir:data.pie_karir,
+        //         pie_signup:data.pie_signup,
+        //         saldo_member: data.saldo_member,
+        //         total_penarikan: data.total_penarikan,
+        //         total_member: data.total_member,
+        //         total_penjualan: data.total_penjualan,
+        //         get_sponsor_terbaik: data.get_sponsor_terbaik,
+        //         get_member_baru: data.get_member_baru,
+        //     });
+        // });
     }
 
     componentWillReceiveProps = (nextProps) => {
@@ -192,10 +192,10 @@ class Dashboard extends Component {
       }
 
     refreshData(start=null,end=null){
-        socket.emit('get_dashboard_bo', {
-            datefrom: start!==null?start:this.state.startDate,
-            dateto: end!==null?end:this.state.endDate,
-        })
+        // socket.emit('get_dashboard_bo', {
+        //     datefrom: start!==null?start:this.state.startDate,
+        //     dateto: end!==null?end:this.state.endDate,
+        // })
     }
 
     componentWillMount(){
@@ -262,10 +262,10 @@ class Dashboard extends Component {
                     <div className="col-md-12">
                         {/* Dashboard Widget Area */}
                         <div className="row">
-                            <Cards title="TOTAL SALDO MEMBER" data={"Rp "+toRp(this.state.saldo_member)} icon="fa fa-money text-primary"/>
-                            <Cards title="TOTAL PENARIKAN" data={"Rp "+toRp(this.state.total_penarikan)} icon="fa fa-dollar text-primary"/>
-                            <Cards title="TOTAL PENJUALAN" data={"Rp "+toRp(this.state.total_penjualan)} icon="fa fa-shopping-cart text-primary"/>
-                            <Cards title="MEMBER AKTIF" data={toRp(this.state.total_member)} icon="fa fa-users text-primary"/>
+                            <Cards title="TOTAL SALDO MEMBER" data={"Rp "+toCurrency(this.state.saldo_member)} icon="fa fa-money text-primary"/>
+                            <Cards title="TOTAL PENARIKAN" data={"Rp "+toCurrency(this.state.total_penarikan)} icon="fa fa-dollar text-primary"/>
+                            <Cards title="TOTAL PENJUALAN" data={"Rp "+toCurrency(this.state.total_penjualan)} icon="fa fa-shopping-cart text-primary"/>
+                            <Cards title="MEMBER AKTIF" data={toCurrency(this.state.total_member)} icon="fa fa-users text-primary"/>
                         </div>
                         {/* Dashboard Widget Area */}
                     </div>

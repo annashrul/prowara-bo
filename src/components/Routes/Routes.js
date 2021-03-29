@@ -48,8 +48,8 @@ const Routes = (
             <PrivateRoute path="/pin/:pin" exact strict component={Pin} />
             {/* PAKET SECTION END */}
             {/* MASTERDATA SECTION START */}
-            <PrivateRoute path="/user_list" exact strict component={UserList} />
-            <PrivateRoute path="/user_level" exact strict component={UserLevel} />
+            <PrivateRoute path="/daftar_pengguna" exact strict component={UserList} />
+            <PrivateRoute path="/akses_pengguna" exact strict component={UserLevel} />
             {/* MASTERDATA SECTION END */}
             {/* MANAGEMENT CONTENT SECTION START */}
             <PrivateRoute path="/member" exact strict component={Member} />
@@ -63,7 +63,7 @@ const Routes = (
             <PrivateRoute path="/report_redeem" exact strict component={ReportRedeem} />
             <PrivateRoute path="/report_reward" exact strict component={ReportReward} />
             <PrivateRoute path="/redeem" exact strict component={ReportRedeem} />
-            <PrivateRoute path="/report_barang" exact strict component={ReportBarang} />
+            <PrivateRoute path="/delivery_note" exact strict component={ReportBarang} />
             <PrivateRoute path="/claim" exact strict component={Claim} />
             {/* LAPORAN SECTION END */}
             {/* E-WALLET SECTION START */}

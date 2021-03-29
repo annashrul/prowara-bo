@@ -142,11 +142,11 @@ class IndexUserList extends Component{
             data
         } = this.props.data;
         return(
-            <Layout page={"User List"}>
+            <Layout page={"Daftar Pengguna"}>
                 <div className="row align-items-center">
                     <div className="col-6">
                         <div className="dashboard-header-title mb-3">
-                            <h5 className="mb-0 font-weight-bold">User List</h5>
+                            <h5 className="mb-0 font-weight-bold">Daftar Pengguna</h5>
                         </div>
                     </div>
                 </div>
@@ -154,8 +154,8 @@ class IndexUserList extends Component{
                     <div className="col-12 box-margin">
                         <div className="card">
                             <div className="card-body">
-                                <div className="row" style={{zoom:"90%"}}>
-                                    <div className="col-6 col-xs-6 col-md-2">
+                                <div className="row">
+                                    <div className="col-6 col-xs-6 col-md-3">
                                         <div className="form-group">
                                             <label>Periode </label>
                                             <DateRangePicker
@@ -168,7 +168,7 @@ class IndexUserList extends Component{
                                     <div className="col-12 col-xs-12 col-md-3">
                                         <div className="form-group">
                                             <label>Cari</label>
-                                            <input type="text" className="form-control" name="any" placeholder={"cari disini"} defaultValue={this.state.any} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
+                                            <input type="text" className="form-control" name="any" placeholder={"cari disini"} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
                                         </div>
                                     </div>
                                     <div className="col-2 col-xs-2 col-md-4">
@@ -178,7 +178,7 @@ class IndexUserList extends Component{
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{overflowX: "auto",zoom:"80%"}}>
+                                <div style={{overflowX: "auto"}}>
                                     <table className="table table-hover">
                                         <thead className="bg-light">
                                         <tr>
@@ -193,7 +193,7 @@ class IndexUserList extends Component{
                                         </thead>
                                         <tbody>
                                         {
-                                            typeof data === 'object' ? data.length > 0 ?
+                                            !this.props.isLoading?typeof data === 'object' ? data.length > 0 ?
                                                 data.map((v, i) => {
                                                     return (
                                                         <tr key={i}>
@@ -212,6 +212,9 @@ class IndexUserList extends Component{
                                                         </tr>
                                                     );
                                                 })
+                                                : <tr>
+                                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                                </tr>
                                                 : <tr>
                                                     <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
                                                 </tr>
