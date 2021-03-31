@@ -11,6 +11,7 @@ import FormPenarikanBonus from '../modals/laporan/form_penarikan_bonus';
 import {getDeposit, getExcelDeposit, postDeposit} from "../../../redux/actions/ewallet/deposit.action";
 import Select from 'react-select';
 import * as Swal from "sweetalert2";
+import Preloader from "../../../Preloader";
 
 class IndexDeposit extends Component{
     constructor(props){
@@ -155,9 +156,6 @@ class IndexDeposit extends Component{
 
         }
     }
-
-
-
     printDocumentXLsx = (e,param) => {
         e.preventDefault();
         let where=`perpage=${param}&datefrom=${this.state.dateFrom}&dateto=${this.state.dateTo}`;
@@ -263,6 +261,8 @@ class IndexDeposit extends Component{
                         </div>
                     </div>
                 </div>
+                {this.props.isLoadingExcel||this.props.isLoading ?<Preloader/>:null}
+
                 <div className="row">
                     <div className="col-12 box-margin">
                         <div className="card">
@@ -310,8 +310,9 @@ class IndexDeposit extends Component{
                                                         <i className="fa fa-search"/>
                                                     </button>
                                                     <button style={{marginTop:"28px",marginRight:"5px"}} className="btn btn-primary"  onClick={(e => this.printDocumentXLsx(e,per_page*last_page))}>
-                                                        <i className="fa fa-print"/> {!this.props.isLoadingExcel?'Export':'loading...'}
+                                                        <i className="fa fa-print"/>
                                                     </button>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -345,8 +346,7 @@ class IndexDeposit extends Component{
                                 <tbody>
                                 {
 
-                                    !this.props.isLoading?this.state.data.length > 0 ?
-                                        this.state.data.map((v, i) => {
+                                    typeof data === 'object' ? data.length > 0 ? data.map((v, i) => {
                                         totAmount = totAmount+parseInt(v.amount);
                                         let status='';
                                             if(v.status===0){
@@ -381,28 +381,31 @@ class IndexDeposit extends Component{
                                         })
                                         : <tr>
                                             <td colSpan={10} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                                        </tr> : (()=>{
-                                        let container =[];
-                                        for(let x=0; x<10; x++){
-                                            container.push(
-                                                <tr key={x}>
-                                                    <td style={columnStyle}>{<Skeleton circle={true} height={40} width={40}/>}</td>
-                                                    <td style={columnStyle}>
-                                                        <Skeleton height={30} width={30}/>
-                                                    </td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                </tr>
-                                            )
-                                        }
-                                        return container;
-                                    })()
+                                        </tr> : <tr>
+                                            <td colSpan={10} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                        </tr>
+                                    // : (()=>{
+                                    //     let container =[];
+                                    //     for(let x=0; x<10; x++){
+                                    //         container.push(
+                                    //             <tr key={x}>
+                                    //                 <td style={columnStyle}>{<Skeleton circle={true} height={40} width={40}/>}</td>
+                                    //                 <td style={columnStyle}>
+                                    //                     <Skeleton height={30} width={30}/>
+                                    //                 </td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //             </tr>
+                                    //         )
+                                    //     }
+                                    //     return container;
+                                    // })()
 
 
 
@@ -441,9 +444,9 @@ class IndexDeposit extends Component{
 const mapStateToProps = (state) => {
     return {
         isLoading: state.depositReducer.isLoading,
-        isLoadingExcel: state.depositReducer.isLoadingExcel,
         isOpen:state.modalReducer,
         data:state.depositReducer.data,
+        isLoadingExcel: state.depositReducer.isLoadingExcel,
         dataExcel:state.depositReducer.excel,
 
     }

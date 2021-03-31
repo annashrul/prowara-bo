@@ -10,6 +10,7 @@ import Select from 'react-select';
 import {ModalToggle} from "redux/actions/modal.action";
 import {ToastQ} from "helper";
 import {postBankList, putBankList} from "../../../../redux/actions/setting/bank.action";
+import Preloader from "../../../../Preloader";
 
 class FormUserList extends Component{
     constructor(props){
@@ -139,6 +140,9 @@ class FormUserList extends Component{
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "formBankPerusahaan"} size="md">
                 <ModalHeader toggle={this.toggle}>{this.state.id!==''?`Ubah Bank`:`Tambah Bank`}</ModalHeader>
+                {
+                    this.props.isLoadingPost?<Preloader/>:null
+                }
                 <ModalBody>
                     <div className="form-group">
                         <label>Bank</label>
@@ -166,7 +170,7 @@ class FormUserList extends Component{
                 <ModalFooter>
                     <div className="form-group" style={{textAlign:"right"}}>
                         <button style={{color:"white"}} type="button" className="btn btn-warning mb-2 mr-2" onClick={this.toggle} ><i className="ti-close"/>Keluar</button>
-                        <button type="submit" className="btn btn-primary mb-2 mr-2" onClick={this.handleSubmit} ><i className="ti-save" />{!this.props.isLoadingPost?'Simpan':'Loading ......'}</button>
+                        <button type="submit" className="btn btn-primary mb-2 mr-2" onClick={this.handleSubmit} ><i className="ti-save" /> Simpan</button>
                     </div>
                 </ModalFooter>
 

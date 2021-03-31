@@ -6,12 +6,14 @@ const initialState = {
     isLoading: true,
     isLoadingDetail: true,
     isLoadingPost: false,
+    isLoadingExcel: false,
     isError: false,
     status: "",
     msg: "",
     data: [],
     edit:[],
-    detail:[]
+    detail:[],
+    excel:[],
 }
 
 export const penarikanReducer = (state = initialState, action) => {
@@ -21,6 +23,12 @@ export const penarikanReducer = (state = initialState, action) => {
                 status: action.data.status,
                 msg: action.data.msg,
                 data: action.data.result,
+            });
+        case PENARIKAN.EXCEL:
+            return Object.assign({}, state, {
+                status: action.data.status,
+                msg: action.data.msg,
+                excel: action.data.result,
             });
 
         case PENARIKAN.DETAIL:
@@ -36,6 +44,10 @@ export const penarikanReducer = (state = initialState, action) => {
         case PENARIKAN.LOADING:
             return Object.assign({}, state, {
                 isLoading: action.load
+            });
+        case PENARIKAN.LOADING_EXCEL:
+            return Object.assign({}, state, {
+                isLoadingExcel: action.load
             });
         case PENARIKAN.LOADING_DETAIL:
             return Object.assign({}, state, {

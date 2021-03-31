@@ -113,102 +113,97 @@ class SideMenu extends Component {
         const {
             aksesMember
         }=this.state;
-        return (
-            <nav>
-                {
-                    this.props.auth.user.access_level===undefined?<Preloader/>:(
-                        <ul className="sidebar-menu" data-widget="tree">
-                            <SingleMenu display={'1'} isActive={path==='/'?"active":''} path={"/"} icon={"fa fa-dashboard"} label={"Dashboard"}/>
-                            {
-                                (()=>{
-                                    let child =[];
-                                    aksesMember.map((val,idx)=>{
-                                        if(val.sub===undefined&&val.otherSub===undefined){
-                                            child.push(
-                                                <SingleMenu key={idx} display={val.isChecked} isActive={path===val.path?'active':''} path={val.path} icon={"fa fa-dashboard"} label={val.label}/>
-                                            )
-                                        }
-                                        else if(val.sub!==undefined&&val.otherSub===undefined){
-                                            child.push(
-                                                <DoubleMenu
-                                                    key={idx}
-                                                    changeMenu={this.menuChange.bind(this)}
-                                                    isActive={val.isToggle}
-                                                    isDisplay={val.isChecked}
-                                                    arg1={val.label}
-                                                    arg2={''}
-                                                    icon={'zmdi zmdi-receipt'}
-                                                    label={val.label}
-                                                    path={path}
-                                                    data={
-                                                        (()=>{
-                                                            let subChild =[];
-                                                            val.sub.map(menuVal=>{
-                                                                if(menuVal.label!==''){
-                                                                    subChild.push(
-                                                                        {path:menuVal.path,display:menuVal.isChecked,label:menuVal.label}
-                                                                    )
-                                                                }
-                                                                return null;
-                                                            });
-                                                            return subChild;
-                                                        })()
-                                                    }
-                                                />
-                                            )
-                                        }
-                                        else{
-                                            child.push(
-                                                <ThirdMenu
-                                                    key={idx}
-                                                    changeMenu={this.menuChange.bind(this)}
-                                                    changeSubMenu={this.menuChange.bind(this)}
-                                                    isActive={val.isToggle}
-                                                    isDisplay={val.isChecked}
-                                                    arg1={val.label}
-                                                    arg2={''}
-                                                    label={val.label}
-                                                    path={path}
-                                                    data={
-                                                        (()=>{
-                                                            let subChild =[];
-                                                            val.sub.map(valKey=>{
-                                                                subChild.push(
-                                                                    {
-                                                                        isActive:valKey.isToggle, isDisplay:valKey.isChecked, arg1:valKey.label, label:valKey.label.replaceAll("_"," ").toLowerCase(), path:valKey.path,
-                                                                        data:(()=>{
-                                                                            let thirdSub=[];
+         return (
+             this.props.auth.user.access_level===undefined?<Preloader/> : <nav>
+                 <ul className="sidebar-menu" data-widget="tree">
+                     <SingleMenu display={'1'} isActive={path==='/'?"active":''} path={"/"} icon={"fa fa-dashboard"} label={"Dashboard"}/>
+                     {
+                         (()=>{
+                             let child =[];
+                             aksesMember.map((val,idx)=>{
+                                 if(val.sub===undefined&&val.otherSub===undefined){
+                                     child.push(
+                                         <SingleMenu key={idx} display={val.isChecked} isActive={path===val.path?'active':''} path={val.path} icon={"fa fa-dashboard"} label={val.label}/>
+                                     )
+                                 }
+                                 else if(val.sub!==undefined&&val.otherSub===undefined){
+                                     child.push(
+                                         <DoubleMenu
+                                             key={idx}
+                                             changeMenu={this.menuChange.bind(this)}
+                                             isActive={val.isToggle}
+                                             isDisplay={val.isChecked}
+                                             arg1={val.label}
+                                             arg2={''}
+                                             icon={'zmdi zmdi-receipt'}
+                                             label={val.label}
+                                             path={path}
+                                             data={
+                                                 (()=>{
+                                                     let subChild =[];
+                                                     val.sub.map(menuVal=>{
+                                                         if(menuVal.label!==''){
+                                                             subChild.push(
+                                                                 {path:menuVal.path,display:menuVal.isChecked,label:menuVal.label}
+                                                             )
+                                                         }
+                                                         return null;
+                                                     });
+                                                     return subChild;
+                                                 })()
+                                             }
+                                         />
+                                     )
+                                 }
+                                 else{
+                                     child.push(
+                                         <ThirdMenu
+                                             key={idx}
+                                             changeMenu={this.menuChange.bind(this)}
+                                             changeSubMenu={this.menuChange.bind(this)}
+                                             isActive={val.isToggle}
+                                             isDisplay={val.isChecked}
+                                             arg1={val.label}
+                                             arg2={''}
+                                             label={val.label}
+                                             path={path}
+                                             data={
+                                                 (()=>{
+                                                     let subChild =[];
+                                                     val.sub.map(valKey=>{
+                                                         subChild.push(
+                                                             {
+                                                                 isActive:valKey.isToggle, isDisplay:valKey.isChecked, arg1:valKey.label, label:valKey.label.replaceAll("_"," ").toLowerCase(), path:valKey.path,
+                                                                 data:(()=>{
+                                                                     let thirdSub=[];
 
-                                                                            if(valKey.sub!==undefined)valKey.sub.map((row,idx)=>{
-                                                                                thirdSub.push({isDisplay:row.isChecked,label:row.label,path:row.path});
-                                                                                return null;
-                                                                            });
-                                                                            return thirdSub
-                                                                        })()
-                                                                    }
-                                                                )
+                                                                     if(valKey.sub!==undefined)valKey.sub.map((row,idx)=>{
+                                                                         thirdSub.push({isDisplay:row.isChecked,label:row.label,path:row.path});
+                                                                         return null;
+                                                                     });
+                                                                     return thirdSub
+                                                                 })()
+                                                             }
+                                                         )
 
-                                                            })
-                                                            return subChild;
-                                                        })()
-                                                    }
-                                                />
-                                            );
-                                        }
-                                        return null;
-                                    });
-                                    return child;
-                                })()
+                                                     })
+                                                     return subChild;
+                                                 })()
+                                             }
+                                         />
+                                     );
+                                 }
+                                 return null;
+                             });
+                             return child;
+                         })()
 
-                            }
+                     }
 
-                            {/* ===================================LOGOUT MODUL START */}
-                            <li><a href={null} style={{cursor:'pointer',color:'#a6b6d0'}} onClick={(event)=>this.handleLogout(event)}> <i className="fa fa-sign-out" /><span> Logout</span></a></li>
-                            {/* ===================================LOGOUT MODUL END=================================== */}
-                        </ul>
-                    )
-                }
-
+                     {/* ===================================LOGOUT MODUL START */}
+                     <li><a href={null} style={{cursor:'pointer',color:'#a6b6d0'}} onClick={(event)=>this.handleLogout(event)}> <i className="fa fa-sign-out" /><span> Logout</span></a></li>
+                     {/* ===================================LOGOUT MODUL END=================================== */}
+                 </ul>
             </nav>
         )
     }

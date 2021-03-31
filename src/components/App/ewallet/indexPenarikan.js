@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
 import {DateRangePicker} from "react-bootstrap-daterangepicker";
-import Paginationq, {rangeDate,noImage, rmComma, ToastQ, toCurrency, toRp} from "../../../helper";
+import Paginationq, {rangeDate, noImage, rmComma, ToastQ, toCurrency, toRp, toExcel, myDate} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
 import Skeleton from 'react-loading-skeleton';
@@ -11,7 +11,8 @@ import FormPenarikanBonus from '../modals/laporan/form_penarikan_bonus';
 import {getDeposit, postDeposit} from "../../../redux/actions/ewallet/deposit.action";
 import Select from 'react-select';
 import * as Swal from "sweetalert2";
-import {getPenarikan, postPenarikan} from "../../../redux/actions/ewallet/penarikan.action";
+import {getExcelPenarikan, getPenarikan, postPenarikan} from "../../../redux/actions/ewallet/penarikan.action";
+import Preloader from "../../../Preloader";
 
 class IndexPenarikan extends Component{
     constructor(props){
@@ -125,7 +126,76 @@ class IndexPenarikan extends Component{
         })
 
     }
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.dataExcel.data!==this.props.dataExcel.data){
+            this.getExcel(this.props);
+        }
+    }
+    getExcel(props){
+        if(props.dataExcel.data!==undefined){
+            if(props.dataExcel.data.length>0){
+                let content=[];
+                let total=0;
+                props.dataExcel.data.map((v,i)=>{
+                    total=total+parseInt(v.amount,10);
+                    let status='';
+                    if(v.status===0){status='Pending';}
+                    if(v.status===1){status='Sukses';}
+                    if(v.status===2){status='Gagal';}
+                    content.push([
+                        v.kd_trx,
+                        v.full_name,
+                        v.bank_name,
+                        v.acc_name,
+                        v.acc_no,
+                        parseInt(v.charge,10),
+                        parseInt(v.amount,10),
+                        status,
+                        myDate(v.created_at)
+                    ]);
+                });
+                toExcel(
+                    'LAPORAN PENARIKAN',
+                    `${this.state.dateFrom} - ${this.state.dateTo}`,
+                    [
+                        'KODE TRANSAKSI',
+                        'NAMA',
+                        'BANK',
+                        'ATAS NAMA',
+                        'NO REKENING',
+                        'BIAYA ADMIN',
+                        'JUMLAH',
+                        'STATUS',
+                        'TANGGAL'
+                    ],
+                    content,
+                    [
+                        [''],
+                        [''],
+                        [
+                            'TOTAL',
+                            '',
+                            '',
+                            '',
+                            '',
+                            '',
+                            total
+                        ]
+                    ]
+                )
+            }
 
+        }
+    }
+    printDocumentXLsx = (e,param) => {
+        e.preventDefault();
+        let where=`perpage=${param}&datefrom=${this.state.dateFrom}&dateto=${this.state.dateTo}`;
+        if(this.state.any!==null&&this.state.any!==undefined&&this.state.any!==""){
+            where+=`&q=${this.state.any}`;
+        }
+
+        this.props.dispatch(getExcelPenarikan(where));
+    }
     render(){
         const columnStyle ={verticalAlign: "middle", textAlign: "center",whiteSpace: "nowrap"};
         const numStyle ={verticalAlign: "middle", textAlign: "right",whiteSpace: "nowrap"};
@@ -150,6 +220,8 @@ class IndexPenarikan extends Component{
                         </div>
                     </div>
                 </div>
+                {this.props.isLoadingExcel||this.props.isLoading ?<Preloader/>:null}
+
                 <div className="row">
                     <div className="col-12 box-margin">
                         <div className="card">
@@ -198,8 +270,9 @@ class IndexPenarikan extends Component{
                                                         <i className="fa fa-search"/>
                                                     </button>
                                                     <button style={{marginTop:"28px",marginRight:"5px"}} className="btn btn-primary"  onClick={(e => this.printDocumentXLsx(e,per_page*last_page))}>
-                                                        <i className="fa fa-print"/> {!this.props.isLoadingExcel?'Export':'loading...'}
+                                                        <i className="fa fa-print"/>
                                                     </button>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -224,18 +297,19 @@ class IndexPenarikan extends Component{
                                     <th rowSpan="2" style={columnStyle}>BIAYA ADMIN</th>
                                     <th rowSpan="2" style={columnStyle}>JUMLAH</th>
                                     <th rowSpan="2" style={columnStyle}>STATUS</th>
+                                    <th rowSpan="2" style={columnStyle}>TANGGAL DIBUAT</th>
                                 </tr>
                                 <tr>
                                     <th style={columnStyle}>NAMA</th>
-                                    <th style={columnStyle}>AKUN</th>
-                                    <th style={columnStyle}>REKENING</th>
+                                    <th style={columnStyle}>ATAS NAMA</th>
+                                    <th style={columnStyle}>NO REKENING</th>
                                 </tr>
 
                                 </thead>
                                 <tbody>
                                 {
 
-                                    !this.props.isLoading? typeof data==='object'? data.length > 0 ?
+                                    typeof data==='object'? data.length > 0 ?
                                         data.map((v, i) => {
                                         totAmount=totAmount+parseInt(v.amount);
                                             let badge = "";
@@ -243,7 +317,6 @@ class IndexPenarikan extends Component{
                                             if(v.status===0){badge="btn-warning";txt="Pending";}
                                             if(v.status===1){badge="btn-success";txt="Success";}
                                             if(v.status===2){badge="btn-danger";txt="Cancel";}
-
                                             return (
                                                 <tr key={i}>
                                                     <td style={columnStyle}>
@@ -261,43 +334,47 @@ class IndexPenarikan extends Component{
                                                     <td style={numStyle}>Rp {v.charge===null||parseInt(v.charge)===0?0:toCurrency(parseInt(v.charge))} .-</td>
                                                     <td style={numStyle}>Rp {parseInt(v.amount)===0?0:toCurrency(parseInt(v.amount))} .-</td>
                                                     <td style={columnStyle}><button className={`btn ${badge} btn-sm`}>{txt}</button></td>
+                                                    <td style={columnStyle}>{myDate(v.created_at)}</td>
+
                                                 </tr>
                                             );
                                         })
                                         : <tr>
-                                            <td colSpan={10} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                            <td colSpan={11} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
                                         </tr>:
                                         <tr>
-                                            <td colSpan={10} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                                        </tr> : (()=>{
-                                        let container =[];
-                                        for(let x=0; x<10; x++){
-                                            container.push(
-                                                <tr key={x}>
-                                                    <td style={columnStyle}>{<Skeleton circle={true} height={40} width={40}/>}</td>
-                                                    <td style={columnStyle}>
-                                                        <Skeleton height={30} width={30}/>
-                                                    </td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                    <td style={columnStyle}>{<Skeleton/>}</td>
-                                                </tr>
-                                            )
-                                        }
-                                        return container;
-                                    })()
+                                            <td colSpan={11} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                        </tr>
+                                    // (()=>{
+                                    //     let container =[];
+                                    //     for(let x=0; x<10; x++){
+                                    //         container.push(
+                                    //             <tr key={x}>
+                                    //                 <td style={columnStyle}>{<Skeleton circle={true} height={40} width={40}/>}</td>
+                                    //                 <td style={columnStyle}>
+                                    //                     <Skeleton height={30} width={30}/>
+                                    //                 </td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //                 <td style={columnStyle}>{<Skeleton/>}</td>
+                                    //             </tr>
+                                    //         )
+                                    //     }
+                                    //     return container;
+                                    // })()
                                 }
                                 </tbody>
                                 <tfoot style={{backgroundColor:"#EEEEEE"}}>
                                 <tr>
                                     <th colSpan={8}>TOTAL PERPAGE</th>
                                     <th colSpan={1} style={numStyle}>Rp {totAmount===0?0:toCurrency(totAmount)} .-</th>
-                                    <th/>
+                                    <th colSpan={2}/>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -321,6 +398,9 @@ const mapStateToProps = (state) => {
         isLoading: state.penarikanReducer.isLoading,
         isOpen:state.modalReducer,
         data:state.penarikanReducer.data,
+        isLoadingExcel: state.penarikanReducer.isLoadingExcel,
+        dataExcel:state.penarikanReducer.excel,
+
     }
 }
 

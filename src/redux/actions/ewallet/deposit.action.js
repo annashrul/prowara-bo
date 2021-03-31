@@ -107,7 +107,6 @@ export const getExcelDeposit = (where='') => {
         axios.get(HEADERS.URL + `${url}`)
             .then(function (response) {
                 const data = response.data;
-                console.log(data.result.length);
                 dispatch(setDataExcel(data));
                 if(data.result.length===0){
                     Swal.fire(

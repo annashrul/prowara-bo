@@ -10,7 +10,12 @@ export function setLoading(load) {
         load
     }
 }
-
+export function setLoadingExcel(load) {
+    return {
+        type: PENARIKAN.LOADING_EXCEL,
+        load
+    }
+}
 
 export function setLoadingDetail(load) {
     return {
@@ -34,6 +39,12 @@ export function setIsError(load) {
 export function setData(data = []) {
     return {
         type: PENARIKAN.SUCCESS,
+        data
+    }
+}
+export function setDataExcel(data = []) {
+    return {
+        type: PENARIKAN.EXCEL,
         data
     }
 }
@@ -73,6 +84,39 @@ export const getPenarikan = (where='') => {
             })
             .catch(function (error) {
                 dispatch(setLoading(false));
+                if (error.message === 'Network Error') {
+                    Swal.fire(
+                        'Network Failed!.',
+                        'Please check your connection',
+                        'error'
+                    );
+                }
+            })
+
+    }
+};
+export const getExcelPenarikan = (where='') => {
+    return (dispatch) => {
+        dispatch(setLoadingExcel(true));
+        let url = 'transaction/withdrawal';
+        if(where!==''){
+            url+=`?${where}`;
+        }
+        axios.get(HEADERS.URL + `${url}`)
+            .then(function (response) {
+                const data = response.data;
+                dispatch(setDataExcel(data));
+                if(data.result.length===0){
+                    Swal.fire(
+                        'Terjadi Kesalahan',
+                        'Data Tidak Tersedia',
+                        'error'
+                    );
+                }
+                dispatch(setLoadingExcel(false));
+            })
+            .catch(function (error) {
+                dispatch(setLoadingExcel(false));
                 if (error.message === 'Network Error') {
                     Swal.fire(
                         'Network Failed!.',
