@@ -39,7 +39,9 @@ export const statusOrder = (type, status, iswhite = false) => {
         return (!iswhite ? (status ? confirmY : confirm) : confirmWhite)
     }
 }
-
+export const myDate = (val) =>{
+    return moment(val).locale('id').format("L")
+}
 export const toExcel=(title='',periode='',head=[],content=[],foot=[])=>{
     let header = [
         [title],

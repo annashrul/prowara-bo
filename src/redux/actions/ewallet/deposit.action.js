@@ -10,6 +10,12 @@ export function setLoading(load) {
         load
     }
 }
+export function setLoadingExcel(load) {
+    return {
+        type: DEPOSIT.LOADING_EXCEL,
+        load
+    }
+}
 
 
 export function setLoadingDetail(load) {
@@ -34,6 +40,12 @@ export function setIsError(load) {
 export function setData(data = []) {
     return {
         type: DEPOSIT.SUCCESS,
+        data
+    }
+}
+export function setDataExcel(data = []) {
+    return {
+        type: DEPOSIT.EXCEL,
         data
     }
 }
@@ -84,6 +96,44 @@ export const getDeposit = (where='') => {
 
     }
 };
+
+export const getExcelDeposit = (where='') => {
+    return (dispatch) => {
+        dispatch(setLoadingExcel(true));
+        let url = 'transaction/deposit';
+        if(where!==''){
+            url+=`?${where}`;
+        }
+        axios.get(HEADERS.URL + `${url}`)
+            .then(function (response) {
+                const data = response.data;
+                console.log(data.result.length);
+                dispatch(setDataExcel(data));
+                if(data.result.length===0){
+                    Swal.fire(
+                        'Terjadi Kesalahan',
+                        'Data Tidak Tersedia',
+                        'error'
+                    );
+                }
+
+
+                dispatch(setLoadingExcel(false));
+            })
+            .catch(function (error) {
+                dispatch(setLoadingExcel(false));
+                if (error.message === 'Network Error') {
+                    Swal.fire(
+                        'Network Failed!.',
+                        'Please check your connection',
+                        'error'
+                    );
+                }
+            })
+
+    }
+};
+
 
 
 export const postDeposit = (data,id) => async dispatch =>{

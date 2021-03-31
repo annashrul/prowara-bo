@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
 import {DateRangePicker} from "react-bootstrap-daterangepicker";
-import Paginationq, {rangeDate} from "../../../helper";
+import Paginationq, {myDate, rangeDate} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
 import Skeleton from 'react-loading-skeleton';
@@ -173,13 +173,13 @@ class IndexUserLevel extends Component{
                                     </div>
                                 </div>
                                 <div style={{overflowX: "auto"}}>
-                                    <table className="table table-hover">
-                                        <thead className="bg-light">
+                                    <table className="table table-bordered">
+                                        <thead className="thead-dark">
                                         <tr>
-                                            <th className="text-black" style={headStyle}>NO</th>
-                                            <th className="text-black" style={headStyle}>#</th>
-                                            <th className="text-black" style={headStyle}>NAMA</th>
-                                            <th className="text-black" style={headStyle}>TANGGAL</th>
+                                            <th style={headStyle}>NO</th>
+                                            <th style={headStyle}>#</th>
+                                            <th style={headStyle}>NAMA</th>
+                                            <th style={headStyle}>TANGGAL</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -188,15 +188,13 @@ class IndexUserLevel extends Component{
                                                 data.map((v, i) => {
                                                     return (
                                                         <tr key={i}>
-                                                            <td style={headStyle}>
-                                                                <span className="circle">{i+1 + (10 * (parseInt(current_page,10)-1))}</span>
-                                                            </td>
+                                                            <td style={headStyle}>{i+1 + (10 * (parseInt(current_page,10)-1))}</td>
                                                             <td style={headStyle}>
                                                                 <button onClick={(e)=>this.handleModal(e,i)} className={"btn btn-secondary btn-sm"} style={{marginRight:"10px"}}><i className={"fa fa-pencil"}/></button>
                                                                 <button onClick={(e)=>this.handleDelete(e,v.id)} className={"btn btn-danger btn-sm"}><i className={"fa fa-close"}/></button>
                                                             </td>
                                                             <td style={headStyle}>{v.level}</td>
-                                                            <td style={headStyle}>{moment(v.created_at).locale('id').format("ddd, Do MMM YYYY hh:mm:ss")}</td>
+                                                            <td style={headStyle}>{myDate(v.created_at)}</td>
                                                         </tr>
                                                     );
                                                 })

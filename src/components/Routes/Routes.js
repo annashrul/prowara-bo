@@ -45,7 +45,7 @@ const Routes = (
             <PrivateRoute path="/barang" exact strict component={Barang} />
             <PrivateRoute path="/barang_redeem" exact strict component={BarangRedeem} />
             <PrivateRoute path="/barang_reward" exact strict component={BarangReward} />
-            <PrivateRoute path="/pin/:pin" exact strict component={Pin} />
+            <PrivateRoute path="/pin" exact strict component={Pin} />
             {/* PAKET SECTION END */}
             {/* MASTERDATA SECTION START */}
             <PrivateRoute path="/daftar_pengguna" exact strict component={UserList} />
@@ -65,18 +65,17 @@ const Routes = (
             <PrivateRoute path="/redeem" exact strict component={ReportRedeem} />
             <PrivateRoute path="/delivery_note" exact strict component={ReportBarang} />
             <PrivateRoute path="/claim" exact strict component={Claim} />
-            {/* LAPORAN SECTION END */}
-            {/* E-WALLET SECTION START */}
-            <PrivateRoute path="/deposit" exact strict component={Deposit} />
-            <PrivateRoute path="/saldo" exact strict component={Saldo} />
-            <PrivateRoute path="/penarikan" exact strict component={Penarikan} />
+            <PrivateRoute path="/laporan/transaksi" exact strict component={Saldo} />
             <PrivateRoute path="/produk" exact strict component={Penjualan} />
-
+            {/* E-WALLET SECTION START */}
+            <PrivateRoute path="/laporan/deposit" exact strict component={Deposit} />
+            <PrivateRoute path="/laporan/penarikan" exact strict component={Penarikan} />
             {/* E-WALLET SECTION END */}
+            {/* LAPORAN SECTION END */}
 
-            <PrivateRoute path="/setting" exact strict component={Setting} />
+            <PrivateRoute path="/pengaturan/umum" exact strict component={Setting} />
             <PrivateRoute path="/setting/website" exact strict component={Website} />
-            <PrivateRoute path="/setting/bank" exact strict component={Bank} />
+            <PrivateRoute path="/pengaturan/bank" exact strict component={Bank} />
             <PrivateRoute path="/setting/ppob" exact strict component={Ppob} />
 
             {/* PRINT SECTION START */}

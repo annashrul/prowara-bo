@@ -556,7 +556,7 @@ class FormPaket extends Component{
                                 <div className="col-md-6 col-sm-12">
                                      <div className="form-group">
                                         <label>PPN</label>
-                                        <input type="numer" className={"form-control"} name={"ppn"} value={this.state.ppn} onChange={this.handleChange}/>
+                                        <input type="number" className={"form-control"} name={"ppn"} value={this.state.ppn} onChange={this.handleChange}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-sm-12">

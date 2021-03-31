@@ -31,15 +31,27 @@ class FormUserLevel extends Component{
                     {label:"daftar pengguna",path:"/daftar_pengguna",parent:'pengguna',isChecked:false},
                     {label:"akses pengguna",path:"/akses_pengguna",parent:'pengguna',isChecked:false},
                 ]},
+                // {label:"e-wallet",path:"",isChecked:false,isToggle:false,sub:[
+                //     {label:"deposit",path:"/deposit",parent:'e-wallet',isChecked:false},
+                //     {label:"penarikan",path:"/penarikan",parent:'e-wallet',isChecked:false},
+                //     {label:"transfer",path:"/transfer",parent:'e-wallet',isChecked:false},
+                // ]},
                 {label:"laporan",path:"",isChecked:false,isToggle:false,sub:[
-                    {label:"pembelian",path:"",parent:'laporan',isChecked:false,sub:[
-                        {label:"delivery note",path:"/delivery_note",parent:'pembelian',isChecked:false,sub:undefined},
+                    {label:"transaksi",path:"/laporan/transaksi",parent:'laporan',isChecked:false},
+                    {label:"penjualan",path:"/laporan/penjualan",parent:'laporan',isChecked:false},
+                    {label:"e-wallet",path:"",parent:'laporan',isChecked:false,sub:[
+                        {label:"deposit",path:"/laporan/deposit",parent:'e-wallet',isChecked:false,sub:undefined},
+                        {label:"penarikan",path:"/laporan/penarikan",parent:'e-wallet',isChecked:false,sub:undefined},
+                        {label:"transfer",path:"/laporan/transfer",parent:'e-wallet',isChecked:false,sub:undefined},
                     ]},
-                    {label:"penjualan",path:"",parent:'laporan',isChecked:false,sub:[
-                        {label:"kas",path:"kas",parent:'penjualan',isChecked:false,sub:undefined},
-                    ]},
+                    // {label:"penjualan",path:"",parent:'laporan',isChecked:false,sub:[
+                    //     {label:"kas",path:"kas",parent:'penjualan',isChecked:false,sub:undefined},
+                    // ]},
                 ],otherSub:true},
-                {label:"pengaturan",path:"/pengaturan",isChecked:false,isToggle:false,sub:undefined},
+                {label:"pengaturan",path:"",isChecked:false,isToggle:false,sub:[
+                    {label:"umum",path:"/pengaturan/umum",parent:'pengaturan',isChecked:false},
+                    {label:"bank",path:"/pengaturan/bank",parent:'pengaturan',isChecked:false},
+                ]},
             ],
             lvl    : "",
         }
@@ -65,13 +77,19 @@ class FormUserLevel extends Component{
     handleAllChecked = (event,param) => {
         let menu = this.state.menu;
         menu.map((val,key)=>{
-            if(param===val.label)val.isChecked=event.target.checked;
+            if(param===val.label){
+                val.isChecked=event.target.checked;
+            }
             if(val.sub!==undefined){
                 val.sub.map((row,i)=>{
-                    if(param===val.label||param===row.label)row.isChecked=event.target.checked;
+                    if(param===val.label||param===row.label){
+                        row.isChecked=event.target.checked;
+                    }
                     if(row.sub!==undefined){
                         row.sub.map((res,idx)=>{
-                            if(param===val.label||param===row.label||param===res.label)res.isChecked=event.target.checked;
+                            if(param===val.label||param===row.label||param===res.label){
+                                res.isChecked=event.target.checked;
+                            }
                         })
                     }
 
@@ -106,12 +124,12 @@ class FormUserLevel extends Component{
         const {menu} = this.state;
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "formUserLevel"} size="lg">
-                <ModalHeader toggle={this.toggle}>{this.props.detail.id===''?"Tambah User Level":"Ubah User Level"}</ModalHeader>
+                <ModalHeader toggle={this.toggle}>{this.props.detail.id===''?"Tambah":"Ubah"} Akses Pengguna</ModalHeader>
                 <ModalBody>
                     <div className="row">
                         <div className="col-12">
                             <div className="form-group">
-                                <label>Nama User Level</label>
+                                <label>Nama Akses</label>
                                 <input type="text" className="form-control" name="lvl" value={this.state.lvl}  onChange={(e)=>this.handleChange(e)} />
                             </div>
                         </div>
@@ -123,6 +141,7 @@ class FormUserLevel extends Component{
                                             <div className="form-group">
                                                 <input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.label)}  value="checkedall" /> <b style={{color:'red'}}>{val.label.replace('_',' ').toUpperCase()}</b>
                                             </div>
+                                            <hr/>
                                         </div>
                                     );
                                 }
@@ -132,6 +151,7 @@ class FormUserLevel extends Component{
                                             <div className="form-group">
                                                 <input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.label)}  value="checkedall" /> <b style={{color:'red'}}>{val.label.replace('_',' ').toUpperCase()}</b>
                                             </div>
+                                            <hr/>
                                             <div className="row">
                                                 {
                                                     val.sub.map((row,idx)=>{
@@ -141,6 +161,7 @@ class FormUserLevel extends Component{
                                                                 <div className="form-group">
                                                                     <input onChange={(e)=>this.handleAllChecked(e,row.label)} id={row.label} className={row.label} type="checkbox" checked={row.isChecked} value={row.value} /> <b style={{color:'green'}}>{row.label.replace('_',' ').toUpperCase()}</b>
                                                                 </div>
+                                                                <hr/>
                                                                 <div className="row" style={{marginLeft:"3px"}}>
                                                                     {
                                                                         (()=> {
@@ -152,6 +173,7 @@ class FormUserLevel extends Component{
                                                                                             <div className="form-group">
                                                                                                 <input onChange={(e)=>this.handleAllChecked(e,res.label)} id={res.label} className={res.label} type="checkbox" checked={res.isChecked} value={res.value} /> <b style={{color:'orange'}}>{res.label.replace('_',' ').toUpperCase()}</b>
                                                                                             </div>
+                                                                                            <hr/>
                                                                                         </div>
 
                                                                                     );

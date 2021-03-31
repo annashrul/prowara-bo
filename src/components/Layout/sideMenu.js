@@ -21,7 +21,11 @@ class SideMenu extends Component {
     menuChange(argument){
         let arr = this.state.aksesMember;
         arr.map((v,i)=>{
-            if(argument.parent===v.label&&argument.child==='')v.isToggle=!v.isToggle;
+            if(argument.parent===v.label&&argument.child===''){
+                v.isToggle=!v.isToggle;
+            }else{
+                v.isToggle=false;
+            }
             if(v.sub!==undefined){
                 v.sub.map((row,idx)=>{
                     if(argument.parent===v.label&&argument.child!==''){
@@ -29,7 +33,11 @@ class SideMenu extends Component {
                             v.isToggle=true;
                             row.isToggle=!row.isToggle;
                         }
+                        else{
+                            row.isToggle=false;
+                        }
                     }
+
                 })
             }
         });
@@ -42,15 +50,22 @@ class SideMenu extends Component {
             if(v.sub!==undefined){
                 v.sub.map((val,key)=>{
                     if(val.sub===undefined){
-                        if("/"+rplcSpace(val.label)=== path){
-                            if(val.parent===v.label)v.isToggle=!v.isToggle;
+                        if(val.path===path){
+                            v.isToggle=false;
+                            if(val.parent===v.label){
+                                v.isToggle=!v.isToggle;
+                            }
                         }
-                    }
-                    if(val.sub!==undefined){
+                    }else if(val.sub!==undefined){
                         val.sub.map((row,idx)=>{
-                            if("/"+rplcSpace(row.label)=== path)v.isToggle=true;val.isToggle=true;
+                            if(row.path===path){
+                                v.isToggle=true;
+                                val.isToggle=!val.isToggle;
+                            }
+
                         })
                     }
+
 
                 })
             }
@@ -160,10 +175,11 @@ class SideMenu extends Component {
                                                             val.sub.map(valKey=>{
                                                                 subChild.push(
                                                                     {
-                                                                        isActive:valKey.isToggle, isDisplay:valKey.isChecked, arg1:valKey.label, label:valKey.label.replaceAll("_"," ").toLowerCase(), path:``,
+                                                                        isActive:valKey.isToggle, isDisplay:valKey.isChecked, arg1:valKey.label, label:valKey.label.replaceAll("_"," ").toLowerCase(), path:valKey.path,
                                                                         data:(()=>{
                                                                             let thirdSub=[];
-                                                                            valKey.sub.map((row,idx)=>{
+
+                                                                            if(valKey.sub!==undefined)valKey.sub.map((row,idx)=>{
                                                                                 thirdSub.push({isDisplay:row.isChecked,label:row.label,path:row.path});
                                                                                 return null;
                                                                             });

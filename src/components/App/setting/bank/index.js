@@ -9,7 +9,9 @@ import Skeleton from 'react-loading-skeleton';
 import moment from "moment";
 import FormBank from "../../modals/setting/bank.modal"
 import * as Swal from "sweetalert2";
-import {deleteBankList, getBankList,fetchDataBank} from "redux/actions/setting/bank.action";
+import {deleteBankList, getBankList} from "redux/actions/setting/bank.action";
+import {myDate} from "../../../../helper";
+import {fetchDataBank} from "../../../../redux/actions/setting/bank.action";
 
 
 class Bank extends Component{
@@ -144,40 +146,46 @@ class Bank extends Component{
                     <div className="col-12 box-margin">
                         <div className="card">
                             <div className="card-body">
-                                <div className="row" style={{zoom:"90%"}}>
-                                    <div className="col-6 col-xs-6 col-md-2">
-                                        <div className="form-group">
-                                            <label>Periode </label>
-                                            <DateRangePicker
-                                                autoUpdateInput={true} showDropdowns={true} style={{display:'unset'}} ranges={rangeDate} alwaysShowCalendars={true} onApply={this.handleEvent}>
-                                                <input type="text" readOnly={true} className="form-control" value={`${this.state.dateFrom} to ${this.state.dateTo}`}/>
-                                            </DateRangePicker>
+                                <div className="row">
+                                    <div className="col-md-10">
+                                        <div className="row">
+                                            <div className="col-6 col-xs-6 col-md-3">
+                                                <div className="form-group">
+                                                    <label>Periode </label>
+                                                    <DateRangePicker
+                                                        autoUpdateInput={true} showDropdowns={true} style={{display:'unset'}} ranges={rangeDate} alwaysShowCalendars={true} onApply={this.handleEvent}>
+                                                        <input type="text" readOnly={true} className="form-control" value={`${this.state.dateFrom} to ${this.state.dateTo}`}/>
+                                                    </DateRangePicker>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-12 col-xs-12 col-md-3">
+                                                <div className="form-group">
+                                                    <label>Cari</label>
+                                                    <input type="text" className="form-control" name="any" placeholder={"cari disini"} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="col-12 col-xs-12 col-md-3">
-                                        <div className="form-group">
-                                            <label>Cari</label>
-                                            <input type="text" className="form-control" name="any" placeholder={"cari disini"} defaultValue={this.state.any} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
-                                        </div>
-                                    </div>
-                                    <div className="col-2 col-xs-2 col-md-4">
+                                    <div className="col-12 col-xs-12 col-md-2" style={{textAlign:"right"}}>
                                         <div className="form-group">
                                             <button style={{marginTop:"27px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleSearch(e)}><i className="fa fa-search"/></button>
                                             <button style={{marginTop:"27px",marginLeft:"5px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleModal(e,'')}><i className="fa fa-plus"/></button>
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{overflowX: "auto",zoom:"80%"}}>
-                                    <table className="table table-hover">
-                                        <thead className="bg-light">
+                                <div style={{overflowX: "auto"}}>
+                                    <table className="table table-hover table-bordered">
+                                        <thead className="thead-dark">
                                         <tr>
-                                            <th className="text-black" style={headStyle}>NO</th>
-                                            <th className="text-black" style={headStyle}>#</th>
-                                            <th className="text-black" style={headStyle}>Bank</th>
-                                            <th className="text-black" style={headStyle}>Atas Nama</th>
-                                            <th className="text-black" style={headStyle}>No. Rekening</th>
-                                            <th className="text-black" style={headStyle}>Dibuat pada</th>
+                                            <th style={headStyle}>NO</th>
+                                            <th style={headStyle}>#</th>
+                                            <th style={headStyle}>BANK</th>
+                                            <th style={headStyle}>ATAS NAMA</th>
+                                            <th style={headStyle}>NO REKENING</th>
+                                            <th style={headStyle}>KODE BANK</th>
+                                            <th style={headStyle}>TANGGAL DIBUAT</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -186,9 +194,7 @@ class Bank extends Component{
                                                 data.map((v, i) => {
                                                     return (
                                                         <tr key={i}>
-                                                            <td style={headStyle}>
-                                                                <span className="circle">{i+1 + (10 * (parseInt(current_page,10)-1))}</span>
-                                                            </td>
+                                                            <td style={headStyle}>{i+1 + (10 * (parseInt(current_page,10)-1))}</td>
                                                             <td style={headStyle}>
                                                                 <button onClick={(e)=>this.handleModal(e,i)} className={"btn btn-secondary btn-sm"} style={{marginRight:"10px"}}><i className={"fa fa-pencil"}/></button>
                                                                 <button onClick={(e)=>this.handleDelete(e,v.id)} className={"btn btn-danger btn-sm"}><i className={"fa fa-close"}/></button>
@@ -196,7 +202,8 @@ class Bank extends Component{
                                                             <td style={headStyle}>{v.bank_name}</td>
                                                             <td style={headStyle}>{v.acc_name}</td>
                                                             <td style={headStyle}>{v.acc_no}</td>
-                                                            <td style={headStyle}>{moment(v.created_at).locale('id').format("ddd, Do MMM YYYY hh:mm:ss")}</td>
+                                                            <td style={headStyle}>{v.tf_code}</td>
+                                                            <td style={headStyle}>{myDate(v.created_at)}</td>
                                                         </tr>
                                                     );
                                                 })

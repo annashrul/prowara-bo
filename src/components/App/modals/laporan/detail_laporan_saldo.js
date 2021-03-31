@@ -29,10 +29,10 @@ class DetailLaporanSaldo extends Component{
         this.props.dispatch(ModalToggle(bool));
     };
     componentWillMount(){
-        this.props.dispatch(getDetailLaporanSaldo(`page=1&id_member=${this.props.detail.id}&perpage=10`));
+        this.props.dispatch(getDetailLaporanSaldo(`page=1&id_member=${this.props.detail.id}&perpage=10&${this.props.detail.tgl}`));
     }
     handlePage(num){
-        this.props.dispatch(getDetailLaporanSaldo(`page=${num}&id_member=${this.props.detail.id}&perpage=10`));
+        this.props.dispatch(getDetailLaporanSaldo(`page=${num}&id_member=${this.props.detail.id}&perpage=10&${this.props.detail.tgl}`));
     }
 
 
@@ -58,7 +58,7 @@ class DetailLaporanSaldo extends Component{
 
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "detailLaporanSaldo"} size="lg">
-                <ModalHeader toggle={this.toggle}>Detail Laporan Saldo {this.props.detail.nama}</ModalHeader>
+                <ModalHeader toggle={this.toggle}>Laporan Transaksi {this.props.detail.nama}</ModalHeader>
                 <ModalBody>
                     <div className="row">
                         {
@@ -132,29 +132,29 @@ class DetailLaporanSaldo extends Component{
                     <div className="row">
                         <div className="col-md-12">
                             {
-                                <div style={{padding:'20px',"marginTop":"20px","marginBottom":"20px","float":"left"}}>
+                                <div style={{"marginTop":"20px","marginBottom":"20px","float":"left"}}>
                                     <h5>Ringkasan</h5>
                                     <div className="table-responsive">
                                         <table className="table">
                                             <tr>
                                                 <th>Saldo Awal</th>
                                                 <td>:</td>
-                                                <td className={"txtRed"}>{summary===undefined?0:toCurrency(summary.saldo_awal,true)}</td>
+                                                <td className={"txtGreen"}>{summary===undefined?0:toCurrency(summary.saldo_awal,true)}</td>
                                             </tr>
                                             <tr>
                                                 <th>Saldo Masuk</th>
                                                 <td>:</td>
-                                                <td className={"txtRed"}>{summary===undefined?0:toCurrency(summary.trx_in,true)}</td>
+                                                <td className={"txtGreen"}>{summary===undefined?0:toCurrency(summary.trx_in,true)}</td>
                                             </tr>
                                             <tr>
                                                 <th>Saldo Keluar</th>
                                                 <td>:</td>
-                                                <td className={"txtRed"}>{summary===undefined?0:toCurrency(summary.trx_out,true)}</td>
+                                                <td className={"txtGreen"}>{summary===undefined?0:toCurrency(summary.trx_out,true)}</td>
                                             </tr>
                                             <tr>
                                                 <th>Saldo saat ini</th>
                                                 <td>:</td>
-                                                <td className={"txtRed"}> {
+                                                <td className={"txtGreen"}> {
                                                     summary===undefined?0:toCurrency((parseInt(summary.saldo_awal, 10) + parseInt(summary.trx_in, 10)) - parseInt(summary.trx_out,10), true)
                                                 } </td>
                                             </tr>

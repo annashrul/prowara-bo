@@ -230,7 +230,7 @@ class Dashboard extends Component {
     render() {
         return (
             <Layout page="Dashboard">
-                <div className="row align-items-center" style={{zoom:"80%"}}>
+                <div className="row align-items-center">
                     <div className="col-6">
                         <div className="dashboard-header-title mb-3">
                             <h5 className="mb-0 font-weight-bold">Dashboard</h5>

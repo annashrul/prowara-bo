@@ -161,7 +161,7 @@ class FormUserList extends Component{
     render(){
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "formUserList"} size="md">
-                <ModalHeader toggle={this.toggle}>{this.props.detail.id!==''?`Ubah User List`:`Tambah User List`}</ModalHeader>
+                <ModalHeader toggle={this.toggle}>{this.props.detail.id!==''?`Ubah Pengguna`:`Tambah Pengguna`}</ModalHeader>
                 <ModalBody>
                     <div className="form-group">
                         <label>Nama</label>
@@ -180,7 +180,7 @@ class FormUserList extends Component{
                         <input type="password" className="form-control"  name="conf_password" value={this.state.conf_password} onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
-                        <label>User Level</label>
+                        <label>Akses</label>
                         <Select
                             options={this.state.level_data}
                             placeholder="Pilih User Level"

@@ -10,6 +10,12 @@ export function setLoading(load) {
         load
     }
 }
+export function setLoadingStore(load) {
+    return {
+        type: BANKS.LOADING_STORE,
+        load
+    }
+}
 
 export function setLoadingDetail(load) {
     return {
@@ -115,7 +121,7 @@ export const getBankList = (where) => {
 
 export const postBankList = (data) => {
     return (dispatch) => {
-        dispatch(setLoading(true));
+        dispatch(setLoadingStore(true));
         dispatch(setIsError(false));
         const url = HEADERS.URL + `bank`;
         axios.post(url,data)
@@ -139,10 +145,10 @@ export const postBankList = (data) => {
                     dispatch(ModalToggle(true));
                     dispatch(setIsError(false));
                 }
-                dispatch(setLoading(false));
+                dispatch(setLoadingStore(false));
             })
             .catch(function (error) {
-                dispatch(setLoading(false));
+                dispatch(setLoadingStore(false));
                 dispatch(setIsError(false));
                 if (error.message === 'Network Error') {
                     Swal.fire(
@@ -169,12 +175,13 @@ export const postBankList = (data) => {
 
 export const putBankList = (data,id) => {
     return (dispatch) => {
-        dispatch(setLoading(true));
+        dispatch(setLoadingStore(true));
         dispatch(setIsError(false));
         const url = HEADERS.URL + `bank/${id}`;
         axios.put(url,data)
             .then(function (response) {
                 const data = (response.data);
+                dispatch(setLoadingStore(false));
                 if (data.status === 'success') {
                     Swal.fire({
                         title: 'Success',
@@ -193,10 +200,9 @@ export const putBankList = (data,id) => {
                     dispatch(ModalToggle(true));
                     dispatch(setIsError(false));
                 }
-                dispatch(setLoading(false));
             })
             .catch(function (error) {
-                dispatch(setLoading(false));
+                dispatch(setLoadingStore(false));
                 dispatch(setIsError(false));
                 if (error.message === 'Network Error') {
                     Swal.fire(

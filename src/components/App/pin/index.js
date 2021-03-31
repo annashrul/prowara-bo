@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
-import Paginationq, {rangeDate, toCurrency, toRp} from "../../../helper";
+import Paginationq, {myDate, rangeDate, toCurrency, toRp} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
 import Skeleton from 'react-loading-skeleton';
@@ -27,51 +27,26 @@ class IndexPin extends Component{
         this.handleAdd      = this.handleAdd.bind(this);
     }
     componentWillReceiveProps(nextProps) {
-        const path = nextProps.match.params.pin
-        if(path!==this.state.last){
-            console.log('pin!',path);
-            if(path==='ro'){
-                this.setState({type:1,last:path})
-                this.props.dispatch(getPin(`page=1&type=1`));
-            }else{
-                this.setState({type:0,last:path})
-                this.props.dispatch(getPin(`page=1&type=0`));
-            }
 
-        }
+    }
+    componentWillMount(){
+        this.props.dispatch(getPin(`page=1&perpage=12`));
+
     }
 
-    componentDidMount() {
-        const path = this.props.match.params.pin
-        if (path === 'ro') {
-            this.setState({
-                type: 1,
-                last: path
-            })
-            this.props.dispatch(getPin(`page=1&type=1`));
-        } else {
-            this.setState({
-                type: 0,
-                last: path
-            })
-            this.props.dispatch(getPin(`page=1&type=0`));
-        }
-    }
+
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
     }
 
     handleValidate(){
-        let where="";
+        let where="perpage=12";
         let page = localStorage.getItem("pagePin");
         let any = this.state.any;
 
         if(page!==null&&page!==undefined&&page!==""){
-            where+=`page=${page}`;
-        }else{
-            where+="page=1";
+            where+=`&page=${page}`;
         }
-
         if(any!==null&&any!==undefined&&any!==""){
             localStorage.setItem('pagePin',1)
             where= "page=1";
@@ -108,9 +83,10 @@ class IndexPin extends Component{
             total,
             per_page,
             current_page,
-            data
+            data,
+            total_pin
         } = this.props.data;
-
+        console.log(total_pin);
 
         return(
             <Layout page={"PIN"}>
@@ -123,90 +99,96 @@ class IndexPin extends Component{
                 </div>
                 <div className="row">
                     <div className="col-12 box-margin">
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="row" style={{zoom:"90%"}}>
-                                    <div className="col-12 col-xs-12 col-md-3">
-                                        <div className="form-group">
-                                            <label>Cari</label>
-                                            <input type="text" className="form-control" name="any" placeholder={"cari disini"} defaultValue={this.state.any} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
-                                        </div>
+                        <div className="row">
+                            <div className="col-md-4">
+                                <div className="social-widget">
+                                    <div className="bg-primary p-3 text-center text-white font-30">
+                                        TERSEDIA <br/>
+                                        {total_pin!==undefined?total_pin.tersedia:<Skeleton/>}
                                     </div>
-                                    <div className="col-2 col-xs-2 col-md-4">
-                                        <div className="form-group">
-                                            <button style={{marginTop:"27px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleSearch(e)}><i className="fa fa-search"/></button>
-                                            <button style={{marginTop:"27px",marginLeft:"5px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleAdd(e)}><i className="fa fa-plus"/> Generate PIN</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style={{overflowX: "auto",zoom:"80%"}}>
-                                    <table className="table table-hover">
-                                        <thead className="bg-light">
-                                        <tr>
-                                            <th className="text-black" style={columnStyle}>No</th>
-                                            <th className="text-black" style={columnStyle}>Kode</th>
-                                            <th className="text-black" style={columnStyle}>Pemilik</th>
-                                            <th className="text-black" style={columnStyle}>Harga</th>
-                                            <th className="text-black" style={columnStyle}>Tipe</th>
-                                            <th className="text-black" style={columnStyle}>Status</th>
-                                            <th className="text-black" style={columnStyle}>Tanggal Dibuat</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {
-                                            typeof data === 'object' ? data.length > 0 ?
-                                                data.map((v, i) => {
-                                                    return (
-                                                        <tr key={i}>
-                                                            <td style={columnStyle}>
-                                                                <span className="circle">{i+1 + (10 * (parseInt(current_page,10)-1))}</span>
-                                                            </td>
-                                                            <td style={columnStyle}>{v.kode}</td>
-                                                            <td style={columnStyle}>{v.pemilik}</td>
-                                                            <td style={columnStyle}>Rp {toCurrency(v.harga)} .-</td>
-                                                            <td style={columnStyle}>{v.type===0?<span className='btn btn-success btn-sm'>AKTIVASI</span>:<span className='btn btn-dark btn-sm'>RO</span>}</td>
-                                                            <td style={columnStyle}>{(v.status===0?<span className='btn btn-success btn-sm'>TERSEDIA</span>:(v.status===1?<span className='btn btn-info btn-sm'>DIBELI</span>:(v.status===2?<span className='btn btn-dark btn-sm'>TELAH DIGUNAKAN</span>:<span className='btn btn-warning btn-sm'>PENDING TRX</span>)))}</td>
-                                                            <td style={columnStyle}>{moment(v.created_at).locale('id').format("ddd, Do MMM YYYY hh:mm:ss")}</td>
-                                                        </tr>
-                                                    );
-                                                })
-                                                : <tr>
-                                                    <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                                                </tr>
-                                                :(()=>{
-                                                    let container =[];
-                                                    for(let x=0; x<10; x++){
-                                                        container.push(
-                                                            <tr key={x}>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    return container;
-                                                })()
 
-                                        }
-                                        </tbody>
-                                    </table>
                                 </div>
-                                <div style={{"marginTop":"20px","marginBottom":"20px","float":"right"}}>
-                                    <Paginationq
-                                        current_page={current_page}
-                                        per_page={per_page}
-                                        total={total}
-                                        callback={this.handlePage}
-                                    />
+                            </div>
+                            <div className="col-md-4">
+                                <div className="social-widget">
+                                    <div className="bg-dark p-3 text-center text-white font-30">
+                                        DIMILIKI MEMBER <br/>
+                                        {total_pin!==undefined?total_pin.dimiliki_member:<Skeleton/>}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="social-widget">
+                                    <div className="bg-danger p-3 text-center text-white font-30">
+                                        DIPAKAI <br/>
+                                        {total_pin!==undefined?total_pin.dipakai:<Skeleton/>}
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+                        <br/>
+
+                        <div className="row">
+                            {
+                                !this.props.isLoading? typeof data === 'object' ? data.length > 0 ?
+
+                                    data.map((v, i) => {
+                                        let status = '';
+                                        let colStatus = '';
+                                        if(v.status===0){status='Tersedia';colStatus='text-primary';}
+                                        if(v.status===1){status='Dimiliki Member';colStatus='text-warning';}
+                                        if(v.status===2){status='Dipakai';colStatus='text-danger';}
+                                        return (
+                                            <div key={i} className="col-12 col-sm-6 col-xl-3 box-margin">
+                                                <div className="card widget-new-content p-3 bg-white">
+                                                    <div className="widget---stats d-flex justify-content-between align-items-center mb-15">
+                                                        <div className="widget---content-text">
+                                                            <h6>{v.kode}</h6>
+                                                            <p className={`mb-0 ${colStatus}`}>{status}</p>
+                                                        </div>
+                                                        <h6 className={`mb-0 txtGreen`}>{toCurrency(v.price)}</h6>
+                                                    </div>
+                                                    <div className="progress h-5">
+                                                        <div className="progress-bar w-100 bg-dark" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })
+                                    : <tr>
+                                        <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    </tr>
+                                    : <tr>
+                                        <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    </tr>
+                                    :(()=>{
+                                        let container =[];
+                                        for(let x=0; x<10; x++){
+                                            container.push(
+                                                <div key={x} className="col-12 col-sm-6 col-xl-4 box-margin">
+                                                    <div className="card widget-new-content p-3 bg-white">
+                                                        <span className="progress-description mt-2"><Skeleton width={100}/></span>
+                                                        <span className="progress-description mt-2"><Skeleton width={200}/></span>
+                                                        <span className="progress-description mt-2"><Skeleton/></span>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        return container;
+                                    })()
+
+                            }
+                        </div>
+                        <div style={{"marginTop":"20px","marginBottom":"20px","float":"right"}}>
+                            <Paginationq
+                                current_page={current_page}
+                                per_page={per_page}
+                                total={total}
+                                callback={this.handlePage}
+                            />
+                        </div>
+
                     </div>
                 </div>
                 {

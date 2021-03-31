@@ -9,8 +9,7 @@ import {
 import Select from 'react-select';
 import {ModalToggle} from "redux/actions/modal.action";
 import {ToastQ} from "helper";
-import {postBankList, putBankList} from "redux/actions/setting/bank.action";
-import File64 from "components/common/File64";
+import {postBankList, putBankList} from "../../../../redux/actions/setting/bank.action";
 
 class FormUserList extends Component{
     constructor(props){
@@ -40,12 +39,13 @@ class FormUserList extends Component{
             tf_code: "",
             data_bank:[],
             bank:'',
+            isLoading:true,
         })
     }
 
     static getDerivedStateFromProps(props, state) {
+
         if (props.data !== undefined && props.data.length !== 0) {
-            console.log(props.data);
             if (props.data !== state.prevdataProps) {
                 return {
                     prevdataProps: props.data,
@@ -67,12 +67,10 @@ class FormUserList extends Component{
                         label: v.name
                     });
                 })
-
                 return {
                     prevbankProps: props.list_bank,
                     data_bank: bank
                 }
-
             }
         }
 
@@ -92,34 +90,34 @@ class FormUserList extends Component{
     handleSubmit(e){
         e.preventDefault();
         const data = this.state;
-        if(data.acc_name===''){
+        if (data.bank_name === ''||data.bank_name===undefined) {
+                ToastQ.fire({
+                    icon: 'error',
+                    title: `Seilahkan pilih bank terlebih dahulu.`
+                });
+                return;
+            }
+        else if(data.acc_name===''||data.acc_name===undefined){
             ToastQ.fire({
                 icon: 'error',
                 title: `Form Atas Nama tidak boleh kosong.`
             });
             return;
-        }else if(data.acc_no===''){
+        }
+        else if(data.acc_no===''||data.acc_no===undefined){
             ToastQ.fire({
                 icon: 'error',
                 title: `Form No. Rekening tidak boleh kosong.`
             });
             return;
-        } else if (data.bank_name === '') {
-            ToastQ.fire({
-                icon: 'error',
-                title: `Seilahkan pilih bank terlebih dahulu.`
-            });
-            return;
         }
-        
-
         if(data.id===''){
             this.props.dispatch(postBankList(data));
         }
         else{
             this.props.dispatch(putBankList(data,this.state.id));
         }
-        this.clearState();
+
     }
 
     handleChange = (event) => {
@@ -182,8 +180,8 @@ const mapStateToProps = (state) => {
     return {
         isOpen: state.modalReducer,
         type: state.modalTypeReducer,
-        isLoadingPost: state.userListReducer.isLoadingPost,
-        isError: state.userListReducer.isError,
+        isLoadingPost: state.banksReducer.isLoadingPost,
+        isError: state.banksReducer.isError,
         list_bank: state.banksReducer.list_bank
     }
 }

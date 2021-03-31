@@ -47,7 +47,7 @@ export const banksReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 isLoadingDetail: action.load
             });
-        case BANKS.LOADING_POST:
+        case BANKS.LOADING_STORE:
             return Object.assign({}, state, {
                 isLoadingPost: action.load
             });

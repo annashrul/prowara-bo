@@ -6,12 +6,15 @@ const initialState = {
     isLoading: true,
     isLoadingDetail: true,
     isLoadingPost: false,
+    isLoadingExcel: false,
+
     isError: false,
     status: "",
     msg: "",
     data: [],
     edit:[],
-    detail:[]
+    detail:[],
+    excel:[]
 }
 
 export const depositReducer = (state = initialState, action) => {
@@ -21,6 +24,12 @@ export const depositReducer = (state = initialState, action) => {
                 status: action.data.status,
                 msg: action.data.msg,
                 data: action.data.result,
+            });
+        case DEPOSIT.EXCEL:
+            return Object.assign({}, state, {
+                status: action.data.status,
+                msg: action.data.msg,
+                excel: action.data.result,
             });
 
         case DEPOSIT.DETAIL:
@@ -36,6 +45,10 @@ export const depositReducer = (state = initialState, action) => {
         case DEPOSIT.LOADING:
             return Object.assign({}, state, {
                 isLoading: action.load
+            });
+        case DEPOSIT.LOADING_EXCEL:
+            return Object.assign({}, state, {
+                isLoadingExcel: action.load
             });
         case DEPOSIT.LOADING_DETAIL:
             return Object.assign({}, state, {

@@ -17,9 +17,10 @@
   <!--<link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">-->
   <!-- Master Stylesheet [If you remove this CSS file, your file will be broken undoubtedly.] -->
   <link rel="stylesheet" href="%PUBLIC_URL%/style.css">
+  <!--<link rel="preconnect" href="https://fonts.gstatic.com">-->
+  <!--<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -167,17 +168,23 @@
     .modal-title,.close{
       color:white!important;
     }
-
-    input.form-control{
-      border:1px solid #e8ebf1!important;
+    select.form-control{
+      border:1px solid hsl(0,0%,80%)!important;
       width: 100%;
       height:39px!important;
+      border-radius: 4px!important;
+      color: hsl(0,0%,20%)!important;
+      font-weight: bold;
     }
-    input.form-control-sm{
-      border:1px solid #e8ebf1!important;
+    input.form-control{
+      border:1px solid hsl(0,0%,80%)!important;
       width: 100%;
-      height:25px!important;
+      height:39px!important;
+      border-radius: 4px!important;
+      color: hsl(0,0%,20%)!important;
+      font-weight: bold;
     }
+
     input[type="file"] {
       padding:2px;
     }
@@ -205,15 +212,16 @@
       color: white!important;
     }
     button.cancelBtn,button.applyBtn{
-      font-family: 'Roboto', sans-serif!important;
+      font-family: 'Roboto Condensed', sans-serif!important;
+      /*font-family: 'Roboto', sans-serif!important;*/
       font-weight: bold !important;
     }
     .off, .ends, .available,.month,.drp-selected,.swal2-html-container,.swal2-title{
-      font-family: 'Roboto', sans-serif!important;
+      font-family: 'Roboto Condensed', sans-serif!important;
       font-weight: bold !important;
     }
     .calendar-table>table{
-      font-family: 'Roboto', sans-serif!important;
+      font-family: 'Roboto Condensed', sans-serif!important;
       font-weight: bold !important;
     }
     label{
@@ -233,15 +241,15 @@
     td,
     th,
     a,.apexcharts-legend-text,.apexcharts-yaxis-label,.apexcharts-text,.apexcharts-active,.apexcharts-xaxistooltip,.apexcharts-yaxistooltip,.apexcharts-yaxistooltip-text {
-      font-family: 'Roboto', sans-serif!important;
-      /*font-weight: bold !important;*/
+      font-family: 'Roboto Condensed', sans-serif!important;
+      font-weight: bold !important;
     }
 
     td,
     th,
     a {
-      font-size: 12px !important;
-      font-family: 'Roboto', sans-serif!important;
+      /*font-size: 12px !important;*/
+      font-family: 'Roboto Condensed', sans-serif!important;
     }
 
     .table-responsive {

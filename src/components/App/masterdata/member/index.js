@@ -143,38 +143,23 @@ class IndexMember extends Component{
     handleValidate(){
         let where="";
         let page = localStorage.getItem("pageMember");
-        let dateFrom = this.state.dateFrom;
-        let dateTo = this.state.dateTo;
         let any = this.state.any;
         let searchBy = this.state.searchBy;
-        let membership = this.state.membership;
         let status = this.state.status;
-        let jenjang_karir = this.state.jenjangKarir;
-        localStorage.setItem("dateFromMember",`${dateFrom}`);
-        localStorage.setItem("dateToMember",`${dateTo}`);
         if(page!==null&&page!==undefined&&page!==""){
             where+=`page=${page}`;
         }else{
             where+="page=1";
         }
-        if(dateFrom!==null&&dateFrom!==undefined&&dateFrom!==""){
-            where+=`&datefrom=${dateFrom}&dateto=${dateTo}`;
-        }
+
         if(searchBy!==null&&searchBy!==undefined&&searchBy!==""){
             where+=`&searchby=${searchBy}`;
-        }
-        if(jenjang_karir!==null&&jenjang_karir!==undefined&&jenjang_karir!==""&&jenjang_karir!=="Semua"){
-            where+=`&karir=${jenjang_karir}`;
-        }
-        if(membership!==null&&membership!==undefined&&membership!==""&&membership!=="Semua"){
-            where+=`&membership=${membership}`;
         }
         if(status!==null&&status!==undefined&&status!==""&&status!=="-"){
             where+=`&status=${status}`;
         }
         if(any!==null&&any!==undefined&&any!==""){
             where+="&page=1";
-
             where+=`&q=${any}`;
         }
 
@@ -232,7 +217,7 @@ class IndexMember extends Component{
                                 <div className="row">
                                     <div className="col-md-10">
                                         <div className="row">
-                                            <div className="col-12 col-xs-12 col-md-2">
+                                            <div className="col-12 col-xs-12 col-md-3">
                                                 <div className="form-group">
                                                     <label htmlFor="">Kolom</label>
                                                     <Select
@@ -249,7 +234,7 @@ class IndexMember extends Component{
                                                 </div>
 
                                             </div>
-                                            <div className="col-12 col-xs-12 col-md-2" style={{display:this.state.searchBy==='status'?'block':'none'}}>
+                                            <div className="col-12 col-xs-12 col-md-3" style={{display:this.state.searchBy==='status'?'block':'none'}}>
                                                 <div className="form-group">
                                                     <label>Status</label>
                                                     <Select
@@ -272,14 +257,14 @@ class IndexMember extends Component{
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-6 col-xs-6 col-md-2" style={{textAlign:"right"}}>
+                                    <div className="col-12 col-xs-12 col-md-2" style={{textAlign:"right"}}>
                                         <div className="row">
                                             <div className="col-md-12">
                                                 <div className="form-group">
                                                     <button style={{marginTop:"28px",marginRight:"5px"}} className="btn btn-primary"  onClick={this.handleSearch}>
                                                         <i className="fa fa-search"/>
                                                     </button>
-                                                    <button style={{marginTop:"28px",marginRight:"5px"}} className="btn btn-primary"  onClick={(e => this.printDocumentXLsx(e,per_page*last_page))}>
+                                                    <button style={{marginTop:"28px"}} className="btn btn-primary"  onClick={(e => this.printDocumentXLsx(e,per_page*last_page))}>
                                                         <i className="fa fa-print"/> {!this.props.isLoadingExcel?'Export':'loading...'}
                                                     </button>
                                                 </div>
@@ -291,20 +276,20 @@ class IndexMember extends Component{
                                 </div>
                                 <div style={{overflowX: "auto"}}>
                                     <table className="table table-hover table-bordered">
-                                        <thead className="bg-light">
+                                        <thead className="thead-dark">
                                         <tr>
-                                            <th className="text-black" rowSpan="2" style={headStyle}>No</th>
-                                            <th className="text-black" rowSpan="2" style={headStyle}>Nama</th>
-                                            <th className="text-black" rowSpan="2" style={headStyle}>Referral</th>
-                                            <th className="text-black" rowSpan="2" style={headStyle}>No.Telepon</th>
-                                            <th className="text-black" rowSpan="2" style={headStyle}>Saldo</th>
-                                            <th className="text-black" colSpan="2" style={headStyle}>Jumlah</th>
-                                            <th className="text-black" rowSpan="2" style={headStyle}>Status</th>
+                                            <th rowSpan="2" style={headStyle}>No</th>
+                                            <th rowSpan="2" style={headStyle}>Nama</th>
+                                            <th rowSpan="2" style={headStyle}>Referral</th>
+                                            <th rowSpan="2" style={headStyle}>No.Telepon</th>
+                                            <th rowSpan="2" style={headStyle}>Saldo</th>
+                                            <th colSpan="2" style={headStyle}>Jumlah</th>
+                                            <th rowSpan="2" style={headStyle}>Status</th>
 
                                         </tr>
                                         <tr>
-                                            <th className="text-black" style={headStyle}>Sponsor</th>
-                                            <th className="text-black" style={headStyle}>Pin</th>
+                                            <th style={headStyle}>Sponsor</th>
+                                            <th style={headStyle}>Pin</th>
 
                                         </tr>
                                         </thead>
@@ -318,16 +303,11 @@ class IndexMember extends Component{
 
                                                     return (
                                                         <tr key={i}>
-                                                            <td style={headStyle}>
-                                                                <span className="circle">{i+1 + (10 * (parseInt(current_page,10)-1))}</span>
-                                                            </td>
-
-
+                                                            <td style={headStyle}>{i+1 + (10 * (parseInt(current_page,10)-1))}</td>
                                                             <td style={headStyle}>{v.fullname}</td>
                                                             <td style={headStyle}>{v.referral}</td>
                                                             <td style={headStyle}>{v.mobile_no}</td>
-
-                                                            <td style={numberStyle}>Rp {v.saldo==='0'?0:toCurrency(parseInt(v.saldo,10))} .-</td>
+                                                            <td style={numberStyle} className="txtGreen">Rp {v.saldo==='0'?0:toCurrency(parseInt(v.saldo,10))} .-</td>
                                                             <td style={numberStyle}>{v.sponsor==='0'?0:toCurrency(parseInt(v.sponsor,10))}</td>
                                                             <td style={numberStyle}>{v.pin==='0'?0:toCurrency(parseInt(v.pin,10))}</td>
                                                             <td style={headStyle}>{(v.status===0?<span className="badge badge-danger" style={{padding:'5px'}}>Tidak Aktif</span>:<span className="badge badge-success" style={{padding:'5px'}}>Aktif</span>)}</td>
@@ -365,7 +345,7 @@ class IndexMember extends Component{
                                         <tfoot style={{backgroundColor:"#EEEEEE"}}>
                                         <tr>
                                             <td colSpan={4}>TOTAL PERHALAMAN</td>
-                                            <td style={numberStyle}>Rp {totSaldo===0?0:toCurrency(totSaldo)} .-</td>
+                                            <td style={numberStyle} className="txtGreen">Rp {totSaldo===0?0:toCurrency(totSaldo)} .-</td>
                                             <td style={numberStyle}>{totSponsor===0?0:toCurrency(totSponsor)}</td>
                                             <td style={numberStyle}>{totPin===0?0:toCurrency(totPin)}</td>
                                             <td/>

@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom"
+import {connect} from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 class ThirdMenu extends Component {
     constructor(props){
         super(props);
-        this.state={
-            data:[]
-        };
         this.changeMenu = this.changeMenu.bind(this)
         this.changeSubMenu = this.changeSubMenu.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+    }
+    handleClick(e,val){
+        e.preventDefault();
+        this.props.history.push({pathname: val});
     }
     changeMenu(e,parent,child){
         e.preventDefault();
@@ -26,7 +30,7 @@ class ThirdMenu extends Component {
                 <ul className={"treeview-menu animate__animated" + (this.props.isActive ?" animate__bounceInRight " : " animate__fadeOutLeft ") + "animate__faster"} style={{display:this.props.isActive?"block":"none"}}>
                     {
                         this.props.data.map((v,i)=>{
-                            return v.data!==undefined?(
+                            return v.data.length>0?(
                                 <li key={i} className={`treeview ${v.isActive?'active menu-open':''}`} style={{display:v.isDisplay?'block':'none'}}>
                                     <a href="about:blank" onClick={(e) => this.changeSubMenu(e,this.props.arg1,v.arg1)}>{v.label} <i className="fa fa-angle-right"/></a>
                                     <ul className={"treeview-menu animate__animated" + (v.isActive ?" animate__bounceInRight " : " animate__fadeOutLeft ") + "animate__faster"} style={{display:v.isActive?"block":"none"}}>
@@ -42,8 +46,9 @@ class ThirdMenu extends Component {
                                     </ul>
                                 </li>
                             ):(
-                                <li key={i} className={this.props.path===v.path?"active":''} style={{display:v.isDisplay?'block':'none'}}>
-                                    <Link to={v.path} style={{width:'fit-content'}}>{v.label}</Link>
+                                <li key={i} className={`${v.label} ${this.props.path===v.path?"active":''}`} style={{display:v.isDisplay?'block':'none'}}>
+                                    <a href="javascript:void(0)" onClick={(e)=>this.handleClick(e,v.path)}>{v.label}</a>
+                                    {/*<Link to={v.path} style={{width:'fit-content'}}>{v.label}</Link>*/}
                                 </li>
                             )
 
@@ -54,5 +59,5 @@ class ThirdMenu extends Component {
         );
     }
 }
-
-export  default ThirdMenu;
+export default withRouter (ThirdMenu);
+// export  default ThirdMenu;

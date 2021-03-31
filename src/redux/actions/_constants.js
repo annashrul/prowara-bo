@@ -20,7 +20,7 @@ export const NOTIF_ALERT = {
 }
 
 export const HEADERS ={
-  URL       : "http://192.168.100.10:3010/",
+  URL       : "http://192.168.100.10:6691/",
   // URL: 'http://ptnetindo.com:6694/',
   TOKEN     : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2RiN2M5OC0wNWNmLTQ4NDgtOGM3Yy0yZTFiYTczZGUwNmYiLCJpYXQiOjE1NzAxNzM0ODYsImV4cCI6MTU3MDc3ODI4Nn0.1NiWtt2luG83am8FJSvWpL5p35Oxd8GSJJTwhFmAdgw",
   USERNAME  : "netindo",
@@ -299,12 +299,13 @@ let prefDeposit='DEPOSIT';
 export const DEPOSIT = {
     LOADING: `SET_${prefDeposit}_LOADING`,
     LOADING_DETAIL: `SET_${prefDeposit}_LOADING_DETAIL`,
+    LOADING_EXCEL: `SET_${prefDeposit}_LOADING_EXCEL`,
     LOADING_POST: `SET_${prefDeposit}_LOADING_POST`,
     IS_ERROR: `SET_${prefDeposit}_IS_ERROR`,
     SUCCESS: `SUCCESS_${prefDeposit}`,
     FAILED: `FAILED_${prefDeposit}`,
     DETAIL: `DETAIL_${prefDeposit}`,
-    EDIT: `EDIT_${prefDeposit}`
+    EXCEL: `EXCEL_${prefDeposit}`
 }
 /****************
  PENARIKAN
@@ -442,6 +443,7 @@ export const KURIR = {
 let mbank = 'BANKS';
 export const BANKS = {
   LOADING: `SET_${mbank}_LOADING`,
+  LOADING_STORE: `SET_${mbank}_LOADING_STORE`,
   IS_ERROR: `SET_${mbank}_IS_ERROR`,
   SUCCESS: `SUCCESS_${mbank}`,
   LISTBANK: `LISTBANK_${mbank}`,
