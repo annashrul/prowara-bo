@@ -32,6 +32,7 @@
     "react-draft-wysiwyg": "^1.14.5",
     "react-easy-print": "^0.6.0",
     "react-free-scrollbar": "^0.3.4",
+    "react-html-replace": "^0.1.6",
     "react-idle": "^3.0.0",
     "react-indexed-db": "^1.0.12",
     "react-infinite-scroll-component": "^5.1.0",

@@ -146,7 +146,7 @@ class FormUserLevel extends Component{
                                             <div className="form-group">
                                                 <input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.label)}  value="checkedall" /> <b style={{color:'red'}}>{val.label.replace('_',' ').toUpperCase()}</b>
                                             </div>
-                                            <hr/>
+                                            <hr style={{border:"1px solid #343a40"}}/>
                                         </div>
                                     );
                                 }
@@ -156,7 +156,7 @@ class FormUserLevel extends Component{
                                             <div className="form-group">
                                                 <input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.label)}  value="checkedall" /> <b style={{color:'red'}}>{val.label.replace('_',' ').toUpperCase()}</b>
                                             </div>
-                                            <hr/>
+                                            <hr style={{border:"1px solid #343a40"}}/>
                                             <div className="row">
                                                 {
                                                     val.sub.map((row,idx)=>{
@@ -166,7 +166,7 @@ class FormUserLevel extends Component{
                                                                 <div className="form-group">
                                                                     <input onChange={(e)=>this.handleAllChecked(e,row.label)} id={row.label} className={row.label} type="checkbox" checked={row.isChecked} value={row.value} /> <b style={{color:'green'}}>{row.label.replace('_',' ').toUpperCase()}</b>
                                                                 </div>
-                                                                <hr/>
+                                                                <hr style={{border:"1px solid #343a40"}}/>
                                                                 <div className="row" style={{marginLeft:"3px"}}>
                                                                     {
                                                                         (()=> {
@@ -178,7 +178,7 @@ class FormUserLevel extends Component{
                                                                                             <div className="form-group">
                                                                                                 <input onChange={(e)=>this.handleAllChecked(e,res.label)} id={res.label} className={res.label} type="checkbox" checked={res.isChecked} value={res.value} /> <b style={{color:'orange'}}>{res.label.replace('_',' ').toUpperCase()}</b>
                                                                                             </div>
-                                                                                            <hr/>
+                                                                                            <hr style={{border:"1px solid #343a40"}}/>
                                                                                         </div>
 
                                                                                     );

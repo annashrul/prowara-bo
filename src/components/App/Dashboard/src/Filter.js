@@ -7,7 +7,7 @@ class Charts extends Component {
     render(){
         return(
             <div className="row">
-                <div className="col-md-2 col-sm-2 col-lg-3">
+                <div className="col-md-12 col-sm-12 col-lg-6">
                     <div className="form-group">
                         <DateRangePicker
                             autoUpdateInput={true} showDropdowns={true} style={{display:'unset'}} ranges={rangeDate} alwaysShowCalendars={true} onApply={this.props.handleEvent}>

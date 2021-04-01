@@ -4,9 +4,9 @@ import Chart from "react-apexcharts";
 class Charts extends Component {
     render(){
         return(
-            <div className="card text-center">
+            <div className="bgWithOpacity text-center">
                 <div className="card-body">
-                    <h4 className="card-title">{this.props.title}</h4>
+                    <h4 className="card-title text-white">{this.props.title}</h4>
                     <Chart
                         options={this.props.data.options}
                         series={this.props.data.series}

@@ -118,14 +118,14 @@ export default class File64 extends React.Component {
           htmlFor={"imageUpload"+this.props.ids}
           // onclick = "javascript:document.getElementById('imageUpload').click();"
           style = {{
-              width: '30%',
+              width: '100%',
               float: 'left',
               cursor: 'pointer',
-              backgroundColor: '#EEEEEE',
-              borderColor: '#34465B',
+              backgroundColor: '#343a40',
+              borderColor: '#343a40',
               transition: '400ms',
               fontSize: '.9em',
-              borderRadius: '.15rem',
+              borderRadius: '50px',
               fontWeight: 600,
               letterSpacing: '0.5px',
               display: 'inline-block',
@@ -137,22 +137,23 @@ export default class File64 extends React.Component {
               padding: '.55rem .75rem',
               lineHeight: '1.2'
           }} > {this.props.lang==='en'?'Select file':'Pilih berkas'} </label> 
-        <div 
-          style = {{
-              paddingTop: '10px',
-              paddingLeft: '10px',
-              fontSize: '.8em',
-              width: "70%",
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              float: 'left'
-            }} > 
-            {
-              this.state.files.name ? this.state.files.name : this.props.lang === 'en' ? 'No file selected.' : 'Belum ada file yang dipilih.'
-            } 
-        </div>
-        <div style={{clear:'both'}}></div>
+        {/*<div */}
+          {/*style = {{*/}
+              {/*paddingTop: '0px',*/}
+              {/*paddingLeft: '0px',*/}
+              {/*fontSize: '.8em',*/}
+              {/*width: "70%",*/}
+              {/*overflow: 'hidden',*/}
+              {/*textOverflow: 'ellipsis',*/}
+              {/*whiteSpace: 'nowrap',*/}
+              {/*float: 'left',*/}
+              {/*color:"white"*/}
+            {/*}} > */}
+            {/*{*/}
+              {/*this.state.files.name ? this.state.files.name : this.props.lang === 'en' ? 'No file selected.' : 'Belum ada file yang dipilih.'*/}
+            {/*} */}
+        {/*</div>*/}
+        {/*<div style={{clear:'both'}}></div>*/}
         {
           this.state.error!==''?
           <label id="password-error" style={{fontSize:'0.7rem',color:'#dc3545',marginTop:'.1rem'}} htmlFor="password">{this.state.error}</label>:''

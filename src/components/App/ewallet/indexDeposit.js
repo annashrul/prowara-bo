@@ -21,7 +21,7 @@ class IndexDeposit extends Component{
             any:"",
             dateFrom:moment(new Date()).format("yyyy-MM-DD"),
             dateTo:moment(new Date()).format("yyyy-MM-DD"),
-            status_data:[{value:'kd_trx',label:'KODE TRX'},{value:'full_name',label:'NAMA'},{value:'status',label:'STATUS'}],
+            status_data:[{value:'kd_trx',label:'kode transaksi'},{value:'full_name',label:'nama'},{value:'status',label:'status'}],
             status:'',
             data:[],
             isLoading:false
@@ -225,17 +225,16 @@ class IndexDeposit extends Component{
                             <div className="col-12 col-xs-12 col-md-3">
                                 <div className="form-group">
                                     <label>Kolom</label>
-                                    <Select
-
-                                        options={this.state.status_data}
-                                        placeholder="==== Pilih Kolom ===="
-                                        onChange={this.handleChangeStatus}
-                                        value={
-                                            this.state.status_data.find(op => {
-                                                return op.value === this.state.status
+                                    <select name="status" className="form-control" value={this.state.status} onChange={this.handleChange} >
+                                        {
+                                            this.state.status_data.map((v,i)=>{
+                                                return(
+                                                    <option value={v.value}>{v.label}</option>
+                                                );
                                             })
                                         }
-                                    />
+                                    </select>
+
                                 </div>
                             </div>
                             <div className="col-12 col-xs-12 col-md-3">
@@ -343,7 +342,7 @@ class IndexDeposit extends Component{
 
                         }
                         </tbody>
-                        <tfoot style={{backgroundColor:"#EEEEEE"}}>
+                        <tfoot>
                         <tr>
                             <th colSpan={6}>TOTAL PERHALAMAN</th>
                             <th colSpan={1} style={numStyle} className="txtGreen">Rp {totAmount===0?0:toCurrency(totAmount)} .-</th>

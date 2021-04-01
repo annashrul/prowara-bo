@@ -127,6 +127,11 @@ class IndexMember extends Component{
     }
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
+        this.state.status= event.target.value;
+        if(event.target.name==='status'){
+            let where = this.handleValidate();
+            this.props.dispatch(getMember(where));
+        }
     }
     handleValidate(){
         let where="";
@@ -235,17 +240,16 @@ class IndexMember extends Component{
                                     <div className="col-12 col-xs-12 col-md-3">
                                         <div className="form-group">
                                             <label htmlFor="">Kolom</label>
-                                            <Select
-
-                                                options={this.state.searchByData}
-                                                placeholder="Kolom"
-                                                onChange={this.handleSearchBy}
-                                                value={
-                                                    this.state.searchByData.find(op => {
-                                                        return op.value === this.state.searchBy
+                                            <select name="searchBy" className="form-control" value={this.state.searchBy} onChange={this.handleChange}>
+                                                {
+                                                    this.state.searchByData.map((v,i)=>{
+                                                        return(
+                                                            <option key={i} value={v.value}>{v.label}</option>
+                                                        );
                                                     })
                                                 }
-                                            />
+                                            </select>
+
 
                                         </div>
 
@@ -253,16 +257,16 @@ class IndexMember extends Component{
                                     <div className="col-12 col-xs-12 col-md-3" style={{display:this.state.searchBy==='status'?'block':'none'}}>
                                         <div className="form-group">
                                             <label>Status</label>
-                                            <Select
-                                                options={this.state.statusData}
-                                                placeholder="Status"
-                                                onChange={this.handleStatus}
-                                                value={
-                                                    this.state.statusData.find(op => {
-                                                        return op.value === this.state.status
+                                            <select name="status" className="form-control" value={this.state.status} onChange={this.handleChange}>
+                                                {
+                                                    this.state.statusData.map((v,i)=>{
+                                                        return(
+                                                            <option key={i} value={v.value}>{v.label}</option>
+                                                        );
                                                     })
                                                 }
-                                            />
+                                            </select>
+
                                         </div>
                                     </div>
                                     <div className="col-12 col-xs-12 col-md-3" style={{display:this.state.searchBy==='status'?'none':'block'}}>

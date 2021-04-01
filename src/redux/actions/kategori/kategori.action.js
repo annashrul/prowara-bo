@@ -52,16 +52,19 @@ export function setDataFailed(data = []) {
 
 export const fetchKategori = (where) => {
     return (dispatch) => {
+
         dispatch(setLoading(true));
         let url =  `category/${where}`;
-        console.log(url);
         axios.get(HEADERS.URL + `${url}`)
             .then(function (response) {
+
+
                 const data = response.data;
                 dispatch(setData(data));
                 dispatch(setLoading(false));
             })
             .catch(function (error) {
+                console.log("error",error);
                 dispatch(setLoading(false));
                 if (error.message === 'Network Error') {
                     Swal.fire(

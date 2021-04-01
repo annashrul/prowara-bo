@@ -95,7 +95,7 @@ class IndexPin extends Component{
                 <div className="row" style={{zoom:"80%"}}>
                     <div className="col-6 col-xs-6 col-md-4 mt-1">
                         <div className="social-widget">
-                            <div className="bg-primary p-3 text-center text-white font-30">
+                            <div className="p-3 text-center text-white font-30" style={{fontWeight:"bold",letterSpacing:"2px",backgroundColor:'rgba(0,0,255,0.3)'}}>
                                 TERSEDIA <br/>
                                 {total_pin!==undefined?total_pin.tersedia:0}
                             </div>
@@ -104,7 +104,7 @@ class IndexPin extends Component{
                     </div>
                     <div className="col-6 col-xs-6 col-md-4 mt-1">
                         <div className="social-widget">
-                            <div className="bg-warning p-3 text-center text-white font-30">
+                            <div className="p-3 text-center text-white font-30" style={{fontWeight:"bold",letterSpacing:"2px",backgroundColor:'rgba(255,255,0,0.3)'}}>
                                 DIPAKAI <br/>
                                 {total_pin!==undefined?total_pin.dipakai:0}
                             </div>
@@ -113,7 +113,7 @@ class IndexPin extends Component{
                     </div>
                     <div className="col-12 col-xs-12 col-md-4 mt-1">
                         <div className="social-widget">
-                            <div className="bg-danger p-3 text-center text-white font-30">
+                            <div className="p-3 text-center text-white font-30" style={{fontWeight:"bold",letterSpacing:"2px",backgroundColor:'rgba(255,0,0,0.3)'}}>
                                 DIMILIKI MEMBER <br/>
                                 {total_pin!==undefined?total_pin.dimiliki_member:0}
                             </div>
@@ -130,15 +130,15 @@ class IndexPin extends Component{
                                 let status = '';
                                 let colStatus = '';
                                 if(v.status===0){status='Tersedia';colStatus='text-primary';}
-                                if(v.status===1){status='Dimiliki Member';colStatus='text-warning';}
-                                if(v.status===2){status='Dipakai';colStatus='text-danger';}
+                                if(v.status===1){status='Dimiliki Member';colStatus='text-danger';}
+                                if(v.status===2){status='Dipakai';colStatus='text-warning';}
                                 return (
                                     <div key={i} className="col-6 col-sm-6 col-xl-3 box-margin">
                                         <div className="card widget-new-content p-3 mainBgOpacity">
                                             <div className="widget---stats d-flex justify-content-between align-items-center mb-15">
                                                 <div className="widget---content-text">
                                                     <h6 className="text-white">{v.kode}</h6>
-                                                    <p className={`mb-0 ${colStatus}`}>{status}</p>
+                                                    <p className={`mb-0 ${colStatus}`} style={{letterSpacing:"2px"}}><b>{status}</b></p>
                                                 </div>
                                                 <h6 className={`mb-0 txtGreen`}>{toCurrency(v.price)}</h6>
                                             </div>

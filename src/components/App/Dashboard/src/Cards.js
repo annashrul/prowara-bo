@@ -4,12 +4,12 @@ class Cards extends Component {
     render(){
         return(
             <div className="col-md-6 col-xl-3 box-margin">
-                <div className="card">
-                    <div className="card-header bg-transparent border-bottom-0">{this.props.title}</div>
+                <div className="bgWithOpacity">
+                    <div className="card-header bg-transparent border-bottom-0 text-white"><b>{this.props.title}</b></div>
                     <div className="card-body">
                         <div className="row justify-content-between" style={{paddingLeft:12,paddingRight:12}}>
                             <h2><i className={this.props.icon}/></h2>
-                            <h2 style={{paddingLeft:5}} className="font-20">{this.props.data}</h2>
+                            <h2 style={{paddingLeft:5}} className="font-30 text-white"><b>{this.props.data}</b></h2>
                         </div>
                     </div>
                 </div>

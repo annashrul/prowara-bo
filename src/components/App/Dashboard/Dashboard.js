@@ -233,39 +233,35 @@ class Dashboard extends Component {
                 <div className="row align-items-center">
                     <div className="col-6">
                         <div className="dashboard-header-title mb-3">
-                            <h5 className="mb-0 font-weight-bold">Dashboard</h5>
+                            <Filter
+                                startDate={this.state.startDate}
+                                endDate ={this.state.endDate}
+                                handleEvent={this.handleEvent}
+                            />
                         </div>
                     </div>
                     {/* Dashboard Info Area */}
                     <div className="col-6">
                         <div className="dashboard-infor-mation d-flex flex-wrap align-items-center mb-3">
                             <div className="dashboard-clock">
-                                <div id="dashboardDate">{moment().format("dddd, Do MMM YYYY")}</div>
+                                <div id="dashboardDate" className="text-muted">{moment().format("dddd, Do MMM YYYY")}</div>
                                 <Clock/>
                             </div>
                             <div className="dashboard-btn-group d-flex align-items-center">
-                                <button type="button" onClick={(e)=>this.handleSubmit(e)} className="btn btn-primary ml-1 float-right"><i className="fa fa-refresh"></i></button>
+                                <button type="button" onClick={(e)=>this.handleSubmit(e)} className="btn btn-primary ml-1 float-right"><i className="fa fa-refresh"/></button>
                             </div>
 
                         </div>
                     </div>
-                     <div className="col-md-12 col-sm-12 col-lg-12">
-                        <div className="form-group">
-                            <Filter
-                                startDate={this.state.startDate}
-                                endDate ={this.state.endDate}
-                                handleEvent={this.handleEvent}
-                            / >
-                        </div>
-                    </div>
+
 
                     <div className="col-md-12">
                         {/* Dashboard Widget Area */}
                         <div className="row">
-                            <Cards title="TOTAL SALDO MEMBER" data={"Rp "+toCurrency(this.state.saldo_member)} icon="fa fa-money text-primary"/>
-                            <Cards title="TOTAL PENARIKAN" data={"Rp "+toCurrency(this.state.total_penarikan)} icon="fa fa-dollar text-primary"/>
-                            <Cards title="TOTAL PENJUALAN" data={"Rp "+toCurrency(this.state.total_penjualan)} icon="fa fa-shopping-cart text-primary"/>
-                            <Cards title="MEMBER AKTIF" data={toCurrency(this.state.total_member)} icon="fa fa-users text-primary"/>
+                            <Cards title="TOTAL SALDO MEMBER" data={"Rp "+toCurrency(this.state.saldo_member)} icon="fa fa-money text-white"/>
+                            <Cards title="TOTAL PENARIKAN" data={"Rp "+toCurrency(this.state.total_penarikan)} icon="fa fa-dollar text-white"/>
+                            <Cards title="TOTAL PENJUALAN" data={"Rp "+toCurrency(this.state.total_penjualan)} icon="fa fa-shopping-cart text-white"/>
+                            <Cards title="MEMBER AKTIF" data={toCurrency(this.state.total_member)} icon="fa fa-users text-white"/>
                         </div>
                         {/* Dashboard Widget Area */}
                     </div>
@@ -307,9 +303,9 @@ class Dashboard extends Component {
                 </div>
                 <div className="row">
                     <div className="col-md-3 col-xl-3 box-margin">
-                        <div className="card">
+                        <div className="bgWithOpacity">
                             <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
-                            <h5 className="card-title mb-0">Member Baru</h5>
+                            <h5 className="card-title mb-0 text-white">Member Baru</h5>
                             </div>
                             <div className="card-body" style={{overflowX: 'auto', height: '340px'}}>
                                 <ul className="total-earnings-list">
@@ -336,9 +332,9 @@ class Dashboard extends Component {
                         </div>
                     </div>
                     <div className="col-md-4 col-xl-4 box-margin">
-                        <div className="card">
+                        <div className="bgWithOpacity">
                             <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
-                            <h5 className="card-title mb-0">10 Sponsor terbaik</h5>
+                                <h5 className="card-title mb-0 text-white">10 Sponsor Terbaik</h5>
                             </div>
                             <div className="card-body" style={{overflowX: 'auto', height: '340px'}}>
                                 <ul className="total-earnings-list">

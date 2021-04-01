@@ -65,18 +65,18 @@ class DetailLaporanSaldo extends Component{
                             !this.props.isLoading?typeof data==='object'?data.length>0?data.map((v,i)=>{
                                 return(
                                     <div className='col-md-12 col-sm-12 col-lg-12' key={i}>
-                                        <div className="card rounded mb-2" style={{borderLeft:'8px solid #333'}}>
-                                            <div className="card-body p-3">
+                                        <div className="rounded mb-2 bgWithOpacity" style={{borderLeft:'8px solid #333'}}>
+                                            <div className="p-3">
                                                 <div className="media">
                                                     <div className="media-body text-center mr-2" style={{maxWidth:'100px',minWidth:'100px'}}>
-                                                        <h5 className="mb-1">{moment(v.created_at).format('HH:MM')}</h5>
-                                                        <p className="mb-0 text-muted">
+                                                        <h5 className="mb-1 text-muted text-white">{moment(v.created_at).format('HH:MM')}</h5>
+                                                        <p className="mb-0 text-muted text-white">
                                                             {moment(v.created_at).format('YYYY-DD-MM')}
                                                         </p>
                                                     </div>
                                                     <div className="media-body text-left" style={{marginLeft:'20px'}}>
-                                                        <p className="mb-2 text-mute">{v.note}</p>
-                                                        <h6 className="mb-1 text-black">{v.kd_trx}</h6>
+                                                        <p className="mb-2 text-mute text-white">{v.note}</p>
+                                                        <h6 className="mb-1 text-white">{v.kd_trx}</h6>
                                                     </div>
                                                     <div className="media-body text-left ml-1" style={{maxWidth:'200px',minWidth:'200px'}}>
                                                         <h6 className="mb-1 text-success">+ {parseInt(v.trx_in,10)!==0?toCurrency(parseInt(v.trx_in,10)):0}</h6>

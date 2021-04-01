@@ -203,8 +203,8 @@ class FormBerita extends Component{
                                     lang='id'
                                     previewLink={this.state.prev}
                                     previewConfig={{
-                                        width:'200px',
-                                        height: '200px'
+                                        width:'100%',
+
                                     }}
                                 />
 

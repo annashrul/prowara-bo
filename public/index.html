@@ -139,7 +139,7 @@
       border-top: 1px solid #343a40!important;
       font-size: 14px;
       font-weight: normal!important;
-      color: #fff!important;
+      color: #fff;
     }
     .table-bordered td, .table-bordered th {
       border: 1px solid #1a1c23!important;
@@ -191,7 +191,7 @@
       color: #fff;
       background-color: #D4AF37!important;
       border-color: #D4AF37!important;
-      border-radius: 10px!important;
+      border-radius: 50px!important;
 
     }
     .page-link {
@@ -200,18 +200,18 @@
       padding: .5rem .75rem;
       margin-left: -1px;
       line-height: 1.25;
-      color: #313a46;
-      background-color: #fff;
-      border: 1px solid #D4AF37!important;
+      color: #fff!important;
+      background-color: #343a40!important;
+      border: 1px solid #fff!important;
       cursor: pointer;
-      border-radius: 10px!important;
+      border-radius: 50px!important;
 
     }
     .page-item:first-child .page-link {
        margin-left: 0;
        border-top-left-radius: .25rem;
        border-bottom-left-radius: .25rem;
-      border-radius: 10px!important;
+      border-radius: 50px!important;
 
     }
     .page-link:hover{
@@ -248,6 +248,146 @@
       border-radius: 10px!important;
       padding:10px!important;
     }
+    .dropdown-menu {
+      border: 1px solid #e8ebf1;
+      -webkit-box-shadow: 0px 1px 15px 5px #e6eaec;
+      box-shadow: none!important;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      float: left;
+      min-width: 10rem;
+      padding: .5rem 0;
+      margin: .125rem 0 0;
+      font-size: 1rem;
+      color: #fff!important;
+      text-align: left;
+      list-style: none;
+      background-color: #1a1c23!important;
+      background-clip: padding-box;
+      border: 1px solid rgba(0,0,0,.15);
+      border-radius: .25rem;
+    }
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: .25rem 1.5rem;
+      clear: both;
+      font-weight: 400;
+      color: #fff!important;
+      text-align: inherit;
+      white-space: nowrap;
+      background-color: #1a1c23!important;
+      border: 0;
+    }
+    .daterangepicker {
+      position: absolute;
+      color: inherit;
+      background-color: #1a1c23!important;
+      border-radius: 4px;
+      border: 1px solid #1a1c23!important;
+      width: 278px;
+      max-width: none;
+      padding: 0;
+      margin-top: 7px;
+      top: 100px;
+      left: 20px;
+      z-index: 3001;
+      display: none;
+      font-family: 'Roboto Condensed', sans-serif!important;
+      font-size: 15px;
+      line-height: 1em;
+    }
+    .daterangepicker .ranges li {
+      font-size: 12px;
+      padding: 8px 12px;
+      cursor: pointer;
+      color: white;
+      /*background-color:  #343a40!important;*/
+    }
+    .daterangepicker .ranges li:hover{
+      background-color: #D4AF37!important;
+    }
+    .daterangepicker .ranges li.active {
+      background-color: #D4AF37!important;
+      color: #fff;
+    }
+    .daterangepicker.show-ranges.ltr .drp-calendar.left {
+      border-left: 1px solid transparent!important;
+    }
+    .daterangepicker .calendar-table {
+      border: 1px solid transparent!important;
+      border-radius: 4px;
+      background-color: #1a1c23!important;
+    }
+    .daterangepicker select.monthselect, .daterangepicker select.yearselect {
+      font-size: 12px;
+      padding: 1px;
+      height: auto;
+      margin: 0;
+      cursor: default;
+      background-color: #1a1c23!important;
+      border: 1px solid  transparent!important;
+      color: #fff!important;
+    }
+    .daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
+      white-space: nowrap;
+      text-align: center;
+      vertical-align: middle;
+      min-width: 32px;
+      width: 32px;
+      height: 24px;
+      line-height: 24px;
+      font-size: 12px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      cursor: pointer;
+      color: #fff!important;
+    }
+    .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
+      background-color: #343a40!important;
+      border-color: transparent;
+      color: #999;
+    }
+    .daterangepicker td.active, .daterangepicker td.active:hover {
+      background-color: #D4AF37!important;
+      border-color: transparent;
+      color: #fff;
+    }
+    .daterangepicker td.active, .daterangepicker td:hover{
+      background-color: #D4AF37!important;
+    }
+    .daterangepicker td.in-range {
+      background-color: #D4AF37!important;
+      border-color: transparent;
+      color: #fff;
+      border-radius: 0;
+    }
+    .daterangepicker .drp-buttons {
+      clear: both;
+      text-align: right;
+      padding: 8px;
+      border-top: 1px solid #343a40!important;
+      display: none;
+      line-height: 12px;
+      vertical-align: middle;
+    }
+    .daterangepicker .drp-selected {
+      display: inline-block;
+      font-size: 12px;
+      padding-right: 8px;
+      color: #fff!important;
+    }
+
+    button.cancelBtn {
+      background-color: rgb(250, 89, 29)!important;
+      color: white!important;
+    }
 
     input[type="file"] {
       padding:2px;
@@ -257,12 +397,11 @@
       width: 100% !important;
       height: 100% !important;
     }
-    button.btn-warning{color:white!important;}
-    button.cancelBtn{
-      /*color*/
-      background-color: #5d78ff!important;
-      color: white!important;
+    button.btn-warning{
+      color:white!important;
+      background-color: rgb(250, 89, 29)!important;
     }
+
     button.cancelBtn,button.applyBtn{
       font-family: 'Roboto Condensed', sans-serif!important;
       /*font-family: 'Roboto', sans-serif!important;*/
@@ -363,7 +502,7 @@
       break-inside: avoid-column;
     }
     .txtGreen {
-      color: rgb(66, 181, 73);
+      color: rgb(66, 181, 73)!important;
     }
 
     .bgGreen {
@@ -378,10 +517,15 @@
 
     .mainColor{
       color: #1a1c23!important;
+
     }
     .bgMainColor{
       background-color: #1a1c23!important;
     }
+    .bgWithOpacity{
+      background-color: #343a40!important;
+    }
+
 
   </style>
   <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqD1Z03FoLnIGJTbpAgRvjcchrR-NiICk&libraries=places" async defer></script>-->

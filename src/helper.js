@@ -227,8 +227,10 @@ export const CapitalizeEachWord=(str)=>{
     return splitStr.join(' ');
 }
 export const rmHtml = (str)=>{
-    let stripedHtml =str.replace(/<[^>]+>/g, '');
-    return stripedHtml;
+    // /(&nbsp;|<([^>]+)>)/ig
+    const regex = /(&#39;|&nbsp;|<([^>]+)>)/ig;
+    let cek = str.replace(regex, '');
+    return cek.replace('/<[^>]*(>|$)|&nbsp;|&zwnj;|&raquo;|&laquo;|&gt;/g','')
 }
 var date = new Date();
 date.setDate(date.getDate());

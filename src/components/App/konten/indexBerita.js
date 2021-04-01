@@ -241,29 +241,29 @@ class IndexBerita extends Component{
             data
         } = this.props.data;
 
+        console.log(this.props.kategori.data);
+        console.log(this.props.isLoadingKategori);
+
         return(
             <Layout page={"Berita"}>
-                <div className="row">
-                    <div className="col-6">
-                        <div className="dashboard-header-title mb-3">
-                            <h5 className="mb-0 font-weight-bold">Berita</h5>
-                        </div>
-                    </div>
-                </div>
+
                 {
                     this.props.isLoading?<Preloader/>:null
                 }
+                {/*{*/}
+                    {/*this.props.kategori.data===undefined&&this.props.isLoadingKategori*/}
+                {/*}*/}
                 <div className="row">
-                    <div style={{width:"75%",display: 'flex', alignItems: 'flex-start',marginRight:'5px'}}>
+                    <div style={{width:"60%",display: 'flex', alignItems: 'flex-start',marginRight:'5px'}}>
                         <div className="col-md-12">
                             <div className="row">
-                                <div className="col-8 col-xs-8 col-md-3">
+                                <div className="col-8 col-xs-8 col-md-10">
                                     <div className="form-group">
                                         <label>Cari</label>
                                         <input type="text" className="form-control" name="any" placeholder={"cari disini"} defaultValue={this.state.any} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
                                     </div>
                                 </div>
-                                <div className="col-4 col-xs-4 col-md-4">
+                                <div className="col-4 col-xs-4 col-md-2">
                                     <div className="form-group">
                                         <button style={{marginTop:"27px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleSearch(e)}><i className="fa fa-search"/></button>
                                         <button style={{marginTop:"27px",marginLeft:"5px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleModal(e,'')}><i className="fa fa-plus"/></button>
@@ -284,16 +284,19 @@ class IndexBerita extends Component{
                                                                         margin:"0 auto",
                                                                         breakInside: 'avoid-column'
                                                                     }}>
-                                                                        <div className="ribbon-wrapper card">
+                                                                        <div className="ribbon-wrapper bgWithOpacity">
                                                                             <div className="ribbon ribbon-bookmark ribbon-success">{v.category}</div>
                                                                             <img src={v.picture} style={{width:'100%'}} onError={(e)=>{e.target.onerror = noImage(); e.target.src=`${noImage()}`}} alt="member image"/>
                                                                             <br/>
                                                                             <div className="row">
-                                                                                <div className="col-md-12" style={{padding:"5"}}>
-                                                                                    {myDate(v.created_at)}
-                                                                                    <h4 className="txtRed">{v.title}</h4>
-                                                                                    <p>
-                                                                                        <div dangerouslySetInnerHTML={{__html: String(v.caption).substr(0,200)}} />
+                                                                                <div className="col-md-12 text-muted" style={{padding:"5"}}>
+                                                                                    <br/>
+                                                                                    <p className="text-muted">
+                                                                                        {myDate(v.created_at)}
+                                                                                    </p>
+                                                                                    <h4 className="text-white">{v.title}</h4>
+                                                                                    <p className="text-muted">
+                                                                                        {rmHtml(v.caption)}
                                                                                     </p>
                                                                                 </div>
                                                                                 <div className="col-md-12">
@@ -326,60 +329,62 @@ class IndexBerita extends Component{
                         </div>
 
                     </div>
-                    <div style={{width:"24%"}}>
-                        <StickyBox offsetTop={150} offsetBottom={20}>
-
-                                    <div className="widgets-todo-list-area" style={{marginTop:"24px"}}>
-                                        <form id="form-add-todo" className="form-add-todo d-flex">
-                                            <div className="row">
-                                                <div className="col-md-9">
-                                                    <div className="form-group">
-                                                        <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.handleChange}/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-2">
-                                                    <div className="form-group">
-                                                        <button className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'tambah','')}>
-                                                            {!this.props.isLoadingPost?<i className={"fa fa-send"}/>:<i className="fa fa-circle-o-notch fa-spin"/>}
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        {
-                                            !this.props.isLoadingKategori?typeof this.props.kategori.data==='object'? this.props.kategori.data.length>0?this.props.kategori.data.map((v,i)=>{
-                                                return(
-                                                    <div className="card box-margin">
-                                                        <div className="card-body">
-                                                            <h5 style={{fontSize:'12px'}}>{v.title}</h5>
-                                                            <hr/>
-                                                            <div className="row">
-                                                                <div className="col-md-12">
-                                                                    <button className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'edit',i)}><i className={"todo-item-done fa fa-pencil"}/></button>
-                                                                    <button style={{marginLeft:"5px"}} className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'hapus',i)}><i className={"todo-item-done fa fa-close"}/></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            }):"":"":(()=>{
-                                                let container =[];
-                                                for(let x=0; x<8; x++){
-                                                    container.push(
-                                                        <li key={x}>
-                                                            <Skeleton width={150}/>
-                                                        </li>
-                                                    )
-                                                }
-                                                return container;
-                                            })()
-                                        }
+                    <div style={{width:"39%"}}>
+                        <StickyBox offsetTop={128} offsetBottom={20}>
+                            <div className="widgets-todo-list-area">
+                                <div className="row">
+                                    <div className="col-md-10">
                                         <div className="form-group">
-                                            <button className={"btn btn-primary"} style={{width:"100%"}} onClick={this.handleLoadMore}>{this.props.isLoadingKategori?'tunggu sebentar ...':'tampilkan lebih banyak'}</button>
+                                            <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleActionKategori(event,'tambah','');}}}/>
                                         </div>
                                     </div>
-
-
+                                    <div className="col-md-2">
+                                        <div className="form-group">
+                                            <button className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'tambah','')}>
+                                                {!this.props.isLoadingPost?<i className={"fa fa-send"}/>:<i className="fa fa-circle-o-notch fa-spin"/>}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="table-responsive">
+                                    <table className="table table-bordered">
+                                        <thead className="thead-dark">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>#</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {
+                                            typeof this.props.kategori.data === 'object' ? this.props.kategori.data.length > 0 ? this.props.kategori.data.map((v, i) => {
+                                                return(
+                                                    <tr key={i}>
+                                                        <td>{i+1 + (10 * (parseInt(current_page,10)-1))}</td>
+                                                        <td>{v.title}</td>
+                                                        <td>
+                                                            <UncontrolledButtonDropdown nav>
+                                                                <DropdownToggle caret className="myDropdown">
+                                                                    Pilihan
+                                                                </DropdownToggle>
+                                                                <DropdownMenu>
+                                                                    <DropdownItem onClick={(event)=>this.handleActionKategori(event,'edit',i)}>Ubah</DropdownItem>
+                                                                    <DropdownItem onClick={(event)=>this.handleActionKategori(event,'hapus',i)}>Hapus</DropdownItem>
+                                                                </DropdownMenu>
+                                                            </UncontrolledButtonDropdown>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            }):<tr>
+                                                <td colSpan={3} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                            </tr>:<tr>
+                                                <td colSpan={3} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                            </tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </StickyBox>
                     </div>
                 </div>

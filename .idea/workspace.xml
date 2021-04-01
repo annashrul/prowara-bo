@@ -2,37 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdbe91fa-b40c-4286-9548-33994a09d0f5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/common/thirdMenu.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js" afterPath="$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/Dashboard/src/Cards.js" afterPath="$PROJECT_DIR$/src/components/App/Dashboard/src/Cards.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js" afterPath="$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/Dashboard/src/charts.js" afterPath="$PROJECT_DIR$/src/components/App/Dashboard/src/charts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js" afterPath="$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js" afterPath="$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/konten/indexBerita.js" afterPath="$PROJECT_DIR$/src/components/App/konten/indexBerita.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js" afterPath="$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/masterdata/indexUserLevel.js" afterPath="$PROJECT_DIR$/src/components/App/masterdata/indexUserLevel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/masterdata/indexUserList.js" afterPath="$PROJECT_DIR$/src/components/App/masterdata/indexUserList.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/masterdata/member/index.js" afterPath="$PROJECT_DIR$/src/components/App/masterdata/member/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js" afterPath="$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js" afterPath="$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_list/form_user_list.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_list/form_user_list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/setting/bank.modal.js" afterPath="$PROJECT_DIR$/src/components/App/modals/setting/bank.modal.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/pin/index.js" afterPath="$PROJECT_DIR$/src/components/App/pin/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/setting/bank/index.js" afterPath="$PROJECT_DIR$/src/components/App/setting/bank/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Layout/header.js" afterPath="$PROJECT_DIR$/src/components/Layout/header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Layout/index.js" afterPath="$PROJECT_DIR$/src/components/Layout/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Layout/sideMenu.js" afterPath="$PROJECT_DIR$/src/components/Layout/sideMenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/File64.js" afterPath="$PROJECT_DIR$/src/components/common/File64.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helper.js" afterPath="$PROJECT_DIR$/src/helper.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/_constants.js" afterPath="$PROJECT_DIR$/src/redux/actions/_constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/masterdata/alamat.action.js" afterPath="$PROJECT_DIR$/src/redux/actions/masterdata/alamat.action.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/masterdata/bank.action.js" afterPath="$PROJECT_DIR$/src/redux/actions/masterdata/bank.action.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/masterdata/member.action.js" afterPath="$PROJECT_DIR$/src/redux/actions/masterdata/member.action.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/reducers/masterdata/alamat.reducer.js" afterPath="$PROJECT_DIR$/src/redux/reducers/masterdata/alamat.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/reducers/masterdata/bank.reducer.js" afterPath="$PROJECT_DIR$/src/redux/reducers/masterdata/bank.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/reducers/masterdata/member.reducer.js" afterPath="$PROJECT_DIR$/src/redux/reducers/masterdata/member.reducer.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_transaksi.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/common/doubleMenu.js" afterPath="$PROJECT_DIR$/src/components/common/twoMenu.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/common/singleMenu.js" afterPath="$PROJECT_DIR$/src/components/common/oneMenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/kategori/kategori.action.js" afterPath="$PROJECT_DIR$/src/redux/actions/kategori/kategori.action.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,149 +36,157 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/App/masterdata/member/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="293" column="61" lean-forward="true" selection-start-line="293" selection-start-column="38" selection-end-line="293" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-                <element signature="n#!!block;n#componentWillMount#0;n#IndexMember#0" expanded="false" />
-                <element signature="n#!!block;n#getExcel#0;n#IndexMember#0" expanded="false" />
-                <element signature="e#3724#4109#0" expanded="false" />
-                <element signature="n#!!block;n#printDocumentXLsx#0;n#IndexMember#0" expanded="false" />
-                <element signature="n#!!block;n#handleSearchBy#0;n#IndexMember#0" expanded="false" />
-                <element signature="n#!!block;n#handleStatus#0;n#IndexMember#0" expanded="false" />
-                <element signature="e#4955#5028#0" expanded="false" />
-                <element signature="n#!!block;n#handleValidate#0;n#IndexMember#0" expanded="false" />
-                <element signature="n#!!block;n#handlePage#0;n#IndexMember#0" expanded="false" />
-                <element signature="e#6004#6234#0" expanded="false" />
-                <element signature="n#!!block;n#handleSearch#0;n#IndexMember#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+            <state relative-caret-position="271">
+              <caret line="141" column="18" lean-forward="false" selection-start-line="141" selection-start-column="18" selection-end-line="141" selection-end-column="18" />
               <folding>
                 <element signature="e#2135#2375#0" expanded="false" />
                 <element signature="e#2394#2636#0" expanded="false" />
                 <element signature="e#2646#2729#0" expanded="false" />
                 <element signature="e#2755#2836#0" expanded="false" />
                 <element signature="e#2875#2950#0" expanded="false" />
-                <element signature="e#4291#4527#0" expanded="false" />
-                <element signature="e#4550#4856#0" expanded="false" />
-                <element signature="e#4890#5054#0" expanded="false" />
-                <element signature="e#5070#5360#0" expanded="false" />
-                <element signature="e#5399#5548#0" expanded="false" />
-                <element signature="e#5569#5696#0" expanded="false" />
-                <element signature="e#5718#5795#0" expanded="false" />
-                <element signature="e#5812#5905#0" expanded="false" />
-                <element signature="e#5920#5993#0" expanded="false" />
-                <element signature="e#6016#6124#0" expanded="false" />
-                <element signature="e#6152#6260#0" expanded="false" />
-                <element signature="e#6275#6349#0" expanded="false" />
-                <element signature="e#6374#6400#0" expanded="false" />
-                <element signature="e#6411#6518#0" expanded="false" />
-                <element signature="e#6586#6682#0" expanded="false" />
-                <element signature="e#6719#6882#0" expanded="false" />
-                <element signature="e#6966#7074#0" expanded="false" />
-                <element signature="e#7100#7208#0" expanded="false" />
-                <element signature="e#7226#7294#0" expanded="false" />
-                <element signature="e#7685#7830#0" expanded="false" />
-                <element signature="e#7927#8022#0" expanded="false" />
-                <element signature="e#8032#8096#0" expanded="false" />
-                <element signature="e#8499#8605#0" expanded="false" />
-                <element signature="e#8632#8677#0" expanded="false" />
-                <element signature="e#8710#8754#0" expanded="false" />
-                <element signature="e#8786#8925#0" expanded="false" />
-                <element signature="e#8957#9046#0" expanded="false" />
-                <element signature="e#9084#9118#0" expanded="false" />
-                <element signature="e#9167#9207#0" expanded="false" />
+                <element signature="e#6023#6131#0" expanded="false" />
+                <element signature="e#6159#6267#0" expanded="false" />
+                <element signature="e#6282#6356#0" expanded="false" />
+                <element signature="e#10282#10308#0" expanded="false" />
+                <element signature="e#10319#10426#0" expanded="false" />
+                <element signature="e#10822#10930#0" expanded="false" />
+                <element signature="e#10956#11064#0" expanded="false" />
+                <element signature="e#11082#11150#0" expanded="false" />
+                <element signature="e#11541#11686#0" expanded="false" />
+                <element signature="e#11783#11878#0" expanded="false" />
+                <element signature="e#11888#11952#0" expanded="false" />
+                <element signature="e#12223#12331#0" expanded="false" />
+                <element signature="e#12355#12461#0" expanded="false" />
+                <element signature="e#12488#12533#0" expanded="false" />
+                <element signature="e#12566#12610#0" expanded="false" />
+                <element signature="e#12642#12781#0" expanded="false" />
+                <element signature="e#12813#12902#0" expanded="false" />
+                <element signature="e#12940#12974#0" expanded="false" />
+                <element signature="e#13023#13063#0" expanded="false" />
+                <element signature="e#13077#13104#0" expanded="false" />
+                <element signature="e#13115#13168#0" expanded="false" />
+                <element signature="e#13182#13223#0" expanded="false" />
+                <element signature="e#13301#13412#0" expanded="false" />
+                <element signature="e#13426#13464#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail_invesment.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js">
+      <file leaf-file-name="indexSaldo.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="152" column="57" lean-forward="false" selection-start-line="152" selection-start-column="57" selection-end-line="152" selection-end-column="57" />
+            <state relative-caret-position="-1328">
+              <caret line="215" column="43" lean-forward="false" selection-start-line="215" selection-start-column="43" selection-end-line="215" selection-end-column="43" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="n#!!block;n#getExcel#0;n#IndexSaldo#0" expanded="false" />
+                <element signature="e#6185#9106#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/App/setting/bank/index.js">
+      <file leaf-file-name="indexDeposit.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="132" column="44" lean-forward="false" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+            <state relative-caret-position="268">
+              <caret line="344" column="30" lean-forward="false" selection-start-line="344" selection-start-column="30" selection-end-line="344" selection-end-column="30" />
               <folding>
-                <element signature="n#!!block;n#handleModal#0;n#Bank#0" expanded="false" />
-                <element signature="n#!!block;n#handleDelete#0;n#Bank#0" expanded="false" />
+                <element signature="e#2859#4474#0" expanded="false" />
+                <element signature="e#16819#17155#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/App/pin/index.js">
+      <file leaf-file-name="indexPenarikan.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="256">
-              <caret line="139" column="77" lean-forward="false" selection-start-line="139" selection-start-column="77" selection-end-line="139" selection-end-column="77" />
+              <caret line="329" column="27" lean-forward="false" selection-start-line="329" selection-start-column="27" selection-end-line="329" selection-end-column="27" />
+              <folding>
+                <element signature="e#14172#14325#0" expanded="false" />
+                <element signature="e#16425#16761#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/masterdata/member/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="344" column="91" lean-forward="true" selection-start-line="344" selection-start-column="91" selection-end-line="344" selection-end-column="91" />
+              <folding>
+                <element signature="n#!!block;n#componentWillMount#0;n#IndexMember#0" expanded="false" />
+                <element signature="n#!!block;n#getExcel#0;n#IndexMember#0" expanded="false" />
+                <element signature="e#3724#4109#0" expanded="false" />
+                <element signature="n#!!block;n#printDocumentXLsx#0;n#IndexMember#0" expanded="false" />
+                <element signature="n#!!block;n#handleSearchBy#0;n#IndexMember#0" expanded="false" />
+                <element signature="n#!!block;n#handleStatus#0;n#IndexMember#0" expanded="false" />
+                <element signature="n#!!block;n#handlePage#0;n#IndexMember#0" expanded="false" />
+                <element signature="e#6201#6431#0" expanded="false" />
+                <element signature="n#!!block;n#handleInvestment#0;n#IndexMember#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/App/pin/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="115" column="106" lean-forward="false" selection-start-line="115" selection-start-column="106" selection-end-line="115" selection-end-column="106" />
               <folding>
                 <element signature="e#1307#1380#0" expanded="false" />
                 <element signature="n#!!block;n#handleSearch#0;n#IndexPin#0" expanded="false" />
                 <element signature="n#!!block;n#handleAdd#0;n#IndexPin#0" expanded="false" />
-                <element signature="e#6493#6829#0" expanded="false" />
+                <element signature="e#6752#7088#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sideMenu.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Layout/sideMenu.js">
+      <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="928">
-              <caret line="161" column="56" lean-forward="false" selection-start-line="161" selection-start-column="52" selection-end-line="161" selection-end-column="56" />
+            <state relative-caret-position="240">
+              <caret line="246" column="77" lean-forward="false" selection-start-line="246" selection-start-column="77" selection-end-line="246" selection-end-column="77" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <element signature="n#!!block;n#constructor#0;n#SideMenu#0" expanded="false" />
-                <element signature="n#!!block;n#menuChange#0;n#SideMenu#0" expanded="false" />
-                <element signature="n#!!block;n#handleToggle#0;n#SideMenu#0" expanded="false" />
-                <element signature="n#!!block;n#getProps#0;n#SideMenu#0" expanded="false" />
-                <element signature="n#!!block;n#componentWillMount#0;n#SideMenu#0" expanded="false" />
-                <element signature="n#!!block;n#componentDidMount#0;n#SideMenu#0" expanded="false" />
-                <element signature="e#2777#2818#0" expanded="false" />
-                <element signature="e#2845#3296#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Layout/index.js">
+      <file leaf-file-name="charts.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/src/charts.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="112">
-              <caret line="73" column="65" lean-forward="false" selection-start-line="73" selection-start-column="65" selection-end-line="73" selection-end-column="65" />
+              <caret line="8" column="56" lean-forward="false" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Layout/header.js">
+      <file leaf-file-name="Cards.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/src/Cards.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="91" column="45" lean-forward="true" selection-start-line="91" selection-start-column="45" selection-end-line="91" selection-end-column="45" />
+            <state relative-caret-position="176">
+              <caret line="11" column="107" lean-forward="false" selection-start-line="11" selection-start-column="107" selection-end-line="11" selection-end-column="107" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Filter.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -205,8 +203,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>UserLIst</find>
-      <find>handleToggle</find>
       <find>repo</find>
       <find>font</find>
       <find>font-fam</find>
@@ -235,6 +231,8 @@
       <find>input</find>
       <find>modal</find>
       <find>bold</find>
+      <find>btn-warning</find>
+      <find>.dropdown-menu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -243,19 +241,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/DBConfig.js" />
-        <option value="$PROJECT_DIR$/src/components/common/doubleMenu.js" />
         <option value="$PROJECT_DIR$/src/components/common/singleMenu.js" />
         <option value="$PROJECT_DIR$/src/components/common/PrivateRoute.js" />
-        <option value="$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js" />
-        <option value="$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/setting/bank.reducer.js" />
         <option value="$PROJECT_DIR$/src/components/App/modals/paket/form_paket.js" />
         <option value="$PROJECT_DIR$/src/redux/actions/setting/bank.action.js" />
         <option value="$PROJECT_DIR$/src/components/App/laporan/indexTransaksi.js" />
         <option value="$PROJECT_DIR$/src/components/Routes/Routes.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/ewallet/deposit.reducer.js" />
-        <option value="$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/ewallet/penarikan.reducer.js" />
         <option value="$PROJECT_DIR$/src/redux/actions/ewallet/deposit.action.js" />
         <option value="$PROJECT_DIR$/src/redux/actions/ewallet/penarikan.action.js" />
@@ -266,33 +259,39 @@
         <option value="$PROJECT_DIR$/src/components/App/modals/setting/bank.modal.js" />
         <option value="$PROJECT_DIR$/src/components/App/masterdata/indexUserList.js" />
         <option value="$PROJECT_DIR$/src/components/App/masterdata/indexUserLevel.js" />
-        <option value="$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js" />
-        <option value="$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/masterdata/bank.reducer.js" />
         <option value="$PROJECT_DIR$/src/redux/actions/masterdata/bank.action.js" />
         <option value="$PROJECT_DIR$/src/redux/actions/masterdata/alamat.action.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/masterdata/alamat.reducer.js" />
         <option value="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_transaksi.js" />
-        <option value="$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js" />
         <option value="$PROJECT_DIR$/src/redux/actions/masterdata/member.action.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/masterdata/member.reducer.js" />
-        <option value="$PROJECT_DIR$/src/helper.js" />
-        <option value="$PROJECT_DIR$/src/redux/actions/_constants.js" />
-        <option value="$PROJECT_DIR$/src/redux/actions/kategori/kategori.action.js" />
-        <option value="$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js" />
-        <option value="$PROJECT_DIR$/src/components/App/konten/indexBerita.js" />
-        <option value="$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js" />
         <option value="$PROJECT_DIR$/src/components/common/oneMenu.js" />
         <option value="$PROJECT_DIR$/src/components/common/twoMenu.js" />
         <option value="$PROJECT_DIR$/src/components/Layout/sideMenu.js" />
         <option value="$PROJECT_DIR$/src/components/common/threeMenu.js" />
         <option value="$PROJECT_DIR$/src/components/Layout/header.js" />
         <option value="$PROJECT_DIR$/src/components/Layout/index.js" />
-        <option value="$PROJECT_DIR$/src/components/App/pin/index.js" />
-        <option value="$PROJECT_DIR$/src/components/App/masterdata/member/index.js" />
         <option value="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js" />
         <option value="$PROJECT_DIR$/src/components/App/setting/bank/index.js" />
+        <option value="$PROJECT_DIR$/src/redux/actions/_constants.js" />
+        <option value="$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js" />
+        <option value="$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js" />
+        <option value="$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js" />
+        <option value="$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js" />
+        <option value="$PROJECT_DIR$/src/helper.js" />
+        <option value="$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js" />
+        <option value="$PROJECT_DIR$/src/components/common/File64.js" />
+        <option value="$PROJECT_DIR$/src/components/App/konten/indexBerita.js" />
+        <option value="$PROJECT_DIR$/src/redux/actions/kategori/kategori.action.js" />
+        <option value="$PROJECT_DIR$/src/components/App/masterdata/member/index.js" />
+        <option value="$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js" />
+        <option value="$PROJECT_DIR$/src/components/App/Dashboard/src/charts.js" />
+        <option value="$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/components/App/Dashboard/src/Cards.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js" />
+        <option value="$PROJECT_DIR$/src/components/App/pin/index.js" />
       </list>
     </option>
   </component>
@@ -360,8 +359,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -393,7 +390,110 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="Dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="ewallet" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="konten" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="laporan" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="masterdata" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="masterdata" type="462c0819:PsiDirectoryNode" />
+              <item name="member" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
               <item name="modals" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="modals" type="462c0819:PsiDirectoryNode" />
+              <item name="barang_redeem" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="modals" type="462c0819:PsiDirectoryNode" />
+              <item name="konten" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="modals" type="462c0819:PsiDirectoryNode" />
+              <item name="konten" type="462c0819:PsiDirectoryNode" />
+              <item name="berita" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="modals" type="462c0819:PsiDirectoryNode" />
+              <item name="laporan" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="modals" type="462c0819:PsiDirectoryNode" />
+              <item name="pin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="pin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
@@ -417,12 +517,34 @@
               <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="prowara-bo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="prowara-bo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -459,12 +581,13 @@
       <workItem from="1617171918782" duration="19068000" />
       <workItem from="1617192905771" duration="4169000" />
       <workItem from="1617201146305" duration="17320000" />
-      <workItem from="1617257013921" duration="18101000" />
+      <workItem from="1617257013921" duration="18194000" />
+      <workItem from="1617310617162" duration="9539000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86178000" />
+    <option name="totallyTimeSpent" value="95810000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -477,7 +600,7 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.023026315" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.097039476" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -502,53 +625,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="253" column="33" lean-forward="false" selection-start-line="253" selection-start-column="33" selection-end-line="253" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="45" column="11" lean-forward="false" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/paket/pin.reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/actions/paket/barang.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1153">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redux/reducers/paket/barang.reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/paket/indexBarang.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3648">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/reducers/setting/bank.reducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -569,7 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="126" column="13" lean-forward="false" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -577,14 +652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="48" column="15" lean-forward="true" selection-start-line="45" selection-start-column="8" selection-end-line="48" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="34" column="132" lean-forward="false" selection-start-line="34" selection-start-column="132" selection-end-line="34" selection-end-column="132" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -658,10 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="148" column="55" lean-forward="true" selection-start-line="148" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#handleFile#0;n#FormUserList#0" expanded="false" />
-            <element signature="n#!!block;n#toggle#0;n#FormUserList#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -675,39 +738,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/masterdata/indexUserLevel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="149" column="124" lean-forward="false" selection-start-line="149" selection-start-column="124" selection-end-line="149" selection-end-column="124" />
-          <folding>
-            <element signature="n#!!block;n#handleModal#0;n#IndexUserLevel#0" expanded="false" />
-            <element signature="n#!!block;n#handleDelete#0;n#IndexUserLevel#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="287" column="86" lean-forward="true" selection-start-line="287" selection-start-column="86" selection-end-line="287" selection-end-column="86" />
-          <folding>
-            <element signature="e#6873#9123#0" expanded="false" />
-            <element signature="e#14177#14330#0" expanded="false" />
-            <element signature="e#16466#16802#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/actions/setting/bank.action.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-423">
           <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
-          <folding>
-            <element signature="e#1137#1839#0" expanded="false" />
-            <element signature="e#1880#2625#0" expanded="false" />
-            <element signature="e#2883#3711#0" expanded="false" />
-            <element signature="e#3749#4418#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -728,7 +762,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="6" column="15" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -736,9 +769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
           <caret line="43" column="17" lean-forward="true" selection-start-line="34" selection-start-column="16" selection-end-line="43" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -746,7 +776,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
           <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -754,29 +783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="313">
           <caret line="43" column="17" lean-forward="true" selection-start-line="34" selection-start-column="16" selection-end-line="43" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1312">
-          <caret line="77" column="117" lean-forward="false" selection-start-line="77" selection-start-column="58" selection-end-line="77" selection-end-column="117" />
-          <folding>
-            <element signature="n#!!block;n#getExcel#0;n#IndexSaldo#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="126" column="5" lean-forward="true" selection-start-line="64" selection-start-column="4" selection-end-line="126" selection-end-column="5" />
-          <folding>
-            <element signature="e#2853#4468#0" expanded="false" />
-            <element signature="e#16411#16791#0" expanded="false" />
-            <element signature="e#16860#17196#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -802,10 +808,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/oneMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/twoMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="50" column="23" lean-forward="false" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/threeMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="22" column="158" lean-forward="false" selection-start-line="22" selection-start-column="158" selection-end-line="22" selection-end-column="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Layout/header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1216">
+          <caret line="91" column="45" lean-forward="true" selection-start-line="91" selection-start-column="45" selection-end-line="91" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Layout/sideMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1216">
+          <caret line="161" column="56" lean-forward="false" selection-start-line="161" selection-start-column="52" selection-end-line="161" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+            <element signature="n#!!block;n#constructor#0;n#SideMenu#0" expanded="false" />
+            <element signature="n#!!block;n#menuChange#0;n#SideMenu#0" expanded="false" />
+            <element signature="n#!!block;n#handleToggle#0;n#SideMenu#0" expanded="false" />
+            <element signature="n#!!block;n#getProps#0;n#SideMenu#0" expanded="false" />
+            <element signature="n#!!block;n#componentWillMount#0;n#SideMenu#0" expanded="false" />
+            <element signature="n#!!block;n#componentDidMount#0;n#SideMenu#0" expanded="false" />
+            <element signature="e#2777#2818#0" expanded="false" />
+            <element signature="e#2845#3296#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Layout/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1024">
+          <caret line="73" column="65" lean-forward="false" selection-start-line="73" selection-start-column="65" selection-end-line="73" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2224">
+          <caret line="152" column="57" lean-forward="false" selection-start-line="152" selection-start-column="57" selection-end-line="152" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/actions/_constants.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+        <state relative-caret-position="176">
+          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
           <folding>
             <element signature="e#1040#1207#0" expanded="false" />
             <element signature="e#1284#1522#0" expanded="false" />
@@ -816,11 +887,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="209" column="96" lean-forward="false" selection-start-line="209" selection-start-column="85" selection-end-line="209" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="67" column="82" lean-forward="false" selection-start-line="67" selection-start-column="82" selection-end-line="67" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="206" column="0" lean-forward="false" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/File64.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="155" column="45" lean-forward="false" selection-start-line="139" selection-start-column="11" selection-end-line="155" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/setting/bank/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="132" column="44" lean-forward="false" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+          <folding>
+            <element signature="n#!!block;n#handleModal#0;n#Bank#0" expanded="false" />
+            <element signature="n#!!block;n#handleDelete#0;n#Bank#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="228" column="19" lean-forward="false" selection-start-line="228" selection-start-column="13" selection-end-line="228" selection-end-column="19" />
+        <state relative-caret-position="133">
+          <caret line="230" column="26" lean-forward="false" selection-start-line="230" selection-start-column="26" selection-end-line="230" selection-end-column="26" />
           <folding>
+            <element signature="e#0#38#0" expanded="true" />
             <element signature="e#1480#2061#0" expanded="false" />
             <element signature="e#3361#3400#0" expanded="false" />
             <element signature="e#3435#3477#0" expanded="false" />
@@ -840,205 +955,182 @@
             <element signature="e#7333#8134#0" expanded="false" />
             <element signature="e#8168#8260#0" expanded="false" />
             <element signature="e#8300#8523#0" expanded="false" />
-            <element signature="e#8709#9593#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/masterdata/indexUserLevel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="764">
+          <caret line="149" column="124" lean-forward="false" selection-start-line="149" selection-start-column="124" selection-end-line="149" selection-end-column="124" />
+          <folding>
+            <element signature="n#!!block;n#handleModal#0;n#IndexUserLevel#0" expanded="false" />
+            <element signature="n#!!block;n#handleDelete#0;n#IndexUserLevel#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/actions/kategori/kategori.action.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/oneMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/twoMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="50" column="23" lean-forward="false" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/threeMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="22" column="158" lean-forward="false" selection-start-line="22" selection-start-column="158" selection-end-line="22" selection-end-column="158" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="87" column="32" lean-forward="false" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="32" />
+        <state relative-caret-position="-687">
+          <caret line="66" column="43" lean-forward="false" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App/konten/indexBerita.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="331" column="97" lean-forward="false" selection-start-line="331" selection-start-column="97" selection-end-line="331" selection-end-column="97" />
+        <state relative-caret-position="87">
+          <caret line="62" column="35" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+            <element signature="n#!!block;n#handleValidate#0;n#IndexBerita#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/modals/pin/generate_pin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2688">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
-            <element signature="n#!!block;n#handleValidate#0;n#IndexBerita#0" expanded="false" />
-            <element signature="e#15168#16489#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Layout/header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="91" column="45" lean-forward="true" selection-start-line="91" selection-start-column="45" selection-end-line="91" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Layout/sideMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="161" column="56" lean-forward="false" selection-start-line="161" selection-start-column="52" selection-end-line="161" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="n#!!block;n#constructor#0;n#SideMenu#0" expanded="false" />
-            <element signature="n#!!block;n#menuChange#0;n#SideMenu#0" expanded="false" />
-            <element signature="n#!!block;n#handleToggle#0;n#SideMenu#0" expanded="false" />
-            <element signature="n#!!block;n#getProps#0;n#SideMenu#0" expanded="false" />
-            <element signature="n#!!block;n#componentWillMount#0;n#SideMenu#0" expanded="false" />
-            <element signature="n#!!block;n#componentDidMount#0;n#SideMenu#0" expanded="false" />
-            <element signature="e#2777#2818#0" expanded="false" />
-            <element signature="e#2845#3296#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Layout/index.js">
+    <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/src/charts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
-          <caret line="73" column="65" lean-forward="false" selection-start-line="73" selection-start-column="65" selection-end-line="73" selection-end-column="65" />
+          <caret line="8" column="56" lean-forward="false" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/pin/index.js">
+    <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="139" column="77" lean-forward="false" selection-start-line="139" selection-start-column="77" selection-end-line="139" selection-end-column="77" />
+        <state relative-caret-position="240">
+          <caret line="246" column="77" lean-forward="false" selection-start-line="246" selection-start-column="77" selection-end-line="246" selection-end-column="77" />
           <folding>
-            <element signature="e#1307#1380#0" expanded="false" />
-            <element signature="n#!!block;n#handleSearch#0;n#IndexPin#0" expanded="false" />
-            <element signature="n#!!block;n#handleAdd#0;n#IndexPin#0" expanded="false" />
-            <element signature="e#6493#6829#0" expanded="false" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/Dashboard/src/Cards.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="107" lean-forward="false" selection-start-line="11" selection-start-column="107" selection-end-line="11" selection-end-column="107" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App/masterdata/member/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="293" column="61" lean-forward="true" selection-start-line="293" selection-start-column="38" selection-end-line="293" selection-end-column="61" />
+        <state relative-caret-position="256">
+          <caret line="344" column="91" lean-forward="true" selection-start-line="344" selection-start-column="91" selection-end-line="344" selection-end-column="91" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
             <element signature="n#!!block;n#componentWillMount#0;n#IndexMember#0" expanded="false" />
             <element signature="n#!!block;n#getExcel#0;n#IndexMember#0" expanded="false" />
             <element signature="e#3724#4109#0" expanded="false" />
             <element signature="n#!!block;n#printDocumentXLsx#0;n#IndexMember#0" expanded="false" />
             <element signature="n#!!block;n#handleSearchBy#0;n#IndexMember#0" expanded="false" />
             <element signature="n#!!block;n#handleStatus#0;n#IndexMember#0" expanded="false" />
-            <element signature="e#4955#5028#0" expanded="false" />
-            <element signature="n#!!block;n#handleValidate#0;n#IndexMember#0" expanded="false" />
             <element signature="n#!!block;n#handlePage#0;n#IndexMember#0" expanded="false" />
-            <element signature="e#6004#6234#0" expanded="false" />
-            <element signature="n#!!block;n#handleSearch#0;n#IndexMember#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="152" column="57" lean-forward="false" selection-start-line="152" selection-start-column="57" selection-end-line="152" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/setting/bank/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="132" column="44" lean-forward="false" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
-          <folding>
-            <element signature="n#!!block;n#handleModal#0;n#Bank#0" expanded="false" />
-            <element signature="n#!!block;n#handleDelete#0;n#Bank#0" expanded="false" />
+            <element signature="e#6201#6431#0" expanded="false" />
+            <element signature="n#!!block;n#handleInvestment#0;n#IndexMember#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+        <state relative-caret-position="271">
+          <caret line="141" column="18" lean-forward="false" selection-start-line="141" selection-start-column="18" selection-end-line="141" selection-end-column="18" />
           <folding>
             <element signature="e#2135#2375#0" expanded="false" />
             <element signature="e#2394#2636#0" expanded="false" />
             <element signature="e#2646#2729#0" expanded="false" />
             <element signature="e#2755#2836#0" expanded="false" />
             <element signature="e#2875#2950#0" expanded="false" />
-            <element signature="e#4291#4527#0" expanded="false" />
-            <element signature="e#4550#4856#0" expanded="false" />
-            <element signature="e#4890#5054#0" expanded="false" />
-            <element signature="e#5070#5360#0" expanded="false" />
-            <element signature="e#5399#5548#0" expanded="false" />
-            <element signature="e#5569#5696#0" expanded="false" />
-            <element signature="e#5718#5795#0" expanded="false" />
-            <element signature="e#5812#5905#0" expanded="false" />
-            <element signature="e#5920#5993#0" expanded="false" />
-            <element signature="e#6016#6124#0" expanded="false" />
-            <element signature="e#6152#6260#0" expanded="false" />
-            <element signature="e#6275#6349#0" expanded="false" />
-            <element signature="e#6374#6400#0" expanded="false" />
-            <element signature="e#6411#6518#0" expanded="false" />
-            <element signature="e#6586#6682#0" expanded="false" />
-            <element signature="e#6719#6882#0" expanded="false" />
-            <element signature="e#6966#7074#0" expanded="false" />
-            <element signature="e#7100#7208#0" expanded="false" />
-            <element signature="e#7226#7294#0" expanded="false" />
-            <element signature="e#7685#7830#0" expanded="false" />
-            <element signature="e#7927#8022#0" expanded="false" />
-            <element signature="e#8032#8096#0" expanded="false" />
-            <element signature="e#8499#8605#0" expanded="false" />
-            <element signature="e#8632#8677#0" expanded="false" />
-            <element signature="e#8710#8754#0" expanded="false" />
-            <element signature="e#8786#8925#0" expanded="false" />
-            <element signature="e#8957#9046#0" expanded="false" />
-            <element signature="e#9084#9118#0" expanded="false" />
-            <element signature="e#9167#9207#0" expanded="false" />
+            <element signature="e#6023#6131#0" expanded="false" />
+            <element signature="e#6159#6267#0" expanded="false" />
+            <element signature="e#6282#6356#0" expanded="false" />
+            <element signature="e#10282#10308#0" expanded="false" />
+            <element signature="e#10319#10426#0" expanded="false" />
+            <element signature="e#10822#10930#0" expanded="false" />
+            <element signature="e#10956#11064#0" expanded="false" />
+            <element signature="e#11082#11150#0" expanded="false" />
+            <element signature="e#11541#11686#0" expanded="false" />
+            <element signature="e#11783#11878#0" expanded="false" />
+            <element signature="e#11888#11952#0" expanded="false" />
+            <element signature="e#12223#12331#0" expanded="false" />
+            <element signature="e#12355#12461#0" expanded="false" />
+            <element signature="e#12488#12533#0" expanded="false" />
+            <element signature="e#12566#12610#0" expanded="false" />
+            <element signature="e#12642#12781#0" expanded="false" />
+            <element signature="e#12813#12902#0" expanded="false" />
+            <element signature="e#12940#12974#0" expanded="false" />
+            <element signature="e#13023#13063#0" expanded="false" />
+            <element signature="e#13077#13104#0" expanded="false" />
+            <element signature="e#13115#13168#0" expanded="false" />
+            <element signature="e#13182#13223#0" expanded="false" />
+            <element signature="e#13301#13412#0" expanded="false" />
+            <element signature="e#13426#13464#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1328">
+          <caret line="215" column="43" lean-forward="false" selection-start-line="215" selection-start-column="43" selection-end-line="215" selection-end-column="43" />
+          <folding>
+            <element signature="n#!!block;n#getExcel#0;n#IndexSaldo#0" expanded="false" />
+            <element signature="e#6185#9106#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="344" column="30" lean-forward="false" selection-start-line="344" selection-start-column="30" selection-end-line="344" selection-end-column="30" />
+          <folding>
+            <element signature="e#2859#4474#0" expanded="false" />
+            <element signature="e#16819#17155#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="329" column="27" lean-forward="false" selection-start-line="329" selection-start-column="27" selection-end-line="329" selection-end-column="27" />
+          <folding>
+            <element signature="e#14172#14325#0" expanded="false" />
+            <element signature="e#16425#16761#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/pin/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="115" column="106" lean-forward="false" selection-start-line="115" selection-start-column="106" selection-end-line="115" selection-end-column="106" />
+          <folding>
+            <element signature="e#1307#1380#0" expanded="false" />
+            <element signature="n#!!block;n#handleSearch#0;n#IndexPin#0" expanded="false" />
+            <element signature="n#!!block;n#handleAdd#0;n#IndexPin#0" expanded="false" />
+            <element signature="e#6752#7088#0" expanded="false" />
           </folding>
         </state>
       </provider>
