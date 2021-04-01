@@ -8,6 +8,7 @@ import Skeleton from 'react-loading-skeleton';
 import {getPin} from "../../../redux/actions/paket/pin.action";
 import moment from "moment";
 import GeneratePin from "../modals/pin/generate_pin"
+import Preloader from "../../../Preloader";
 
 
 class IndexPin extends Component{
@@ -90,106 +91,80 @@ class IndexPin extends Component{
 
         return(
             <Layout page={"PIN"}>
-                <div className="row align-items-center">
-                    <div className="col-6">
-                        <div className="dashboard-header-title mb-3">
-                            <h5 className="mb-0 font-weight-bold">PIN</h5>
+                {this.props.isLoading ?<Preloader/>:null}
+                <div className="row" style={{zoom:"80%"}}>
+                    <div className="col-6 col-xs-6 col-md-4 mt-1">
+                        <div className="social-widget">
+                            <div className="bg-primary p-3 text-center text-white font-30">
+                                TERSEDIA <br/>
+                                {total_pin!==undefined?total_pin.tersedia:0}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="col-6 col-xs-6 col-md-4 mt-1">
+                        <div className="social-widget">
+                            <div className="bg-warning p-3 text-center text-white font-30">
+                                DIPAKAI <br/>
+                                {total_pin!==undefined?total_pin.dipakai:0}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="col-12 col-xs-12 col-md-4 mt-1">
+                        <div className="social-widget">
+                            <div className="bg-danger p-3 text-center text-white font-30">
+                                DIMILIKI MEMBER <br/>
+                                {total_pin!==undefined?total_pin.dimiliki_member:0}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <br/>
+
                 <div className="row">
-                    <div className="col-12 box-margin">
-                        <div className="row">
-                            <div className="col-md-4">
-                                <div className="social-widget">
-                                    <div className="bg-primary p-3 text-center text-white font-30">
-                                        TERSEDIA <br/>
-                                        {total_pin!==undefined?total_pin.tersedia:<Skeleton/>}
-                                    </div>
+                    {
+                        typeof data === 'object' ? data.length > 0 ?
 
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="social-widget">
-                                    <div className="bg-dark p-3 text-center text-white font-30">
-                                        DIMILIKI MEMBER <br/>
-                                        {total_pin!==undefined?total_pin.dimiliki_member:<Skeleton/>}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="social-widget">
-                                    <div className="bg-danger p-3 text-center text-white font-30">
-                                        DIPAKAI <br/>
-                                        {total_pin!==undefined?total_pin.dipakai:<Skeleton/>}
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
-
-                        <div className="row">
-                            {
-                                !this.props.isLoading? typeof data === 'object' ? data.length > 0 ?
-
-                                    data.map((v, i) => {
-                                        let status = '';
-                                        let colStatus = '';
-                                        if(v.status===0){status='Tersedia';colStatus='text-primary';}
-                                        if(v.status===1){status='Dimiliki Member';colStatus='text-warning';}
-                                        if(v.status===2){status='Dipakai';colStatus='text-danger';}
-                                        return (
-                                            <div key={i} className="col-12 col-sm-6 col-xl-3 box-margin">
-                                                <div className="card widget-new-content p-3 bg-white">
-                                                    <div className="widget---stats d-flex justify-content-between align-items-center mb-15">
-                                                        <div className="widget---content-text">
-                                                            <h6>{v.kode}</h6>
-                                                            <p className={`mb-0 ${colStatus}`}>{status}</p>
-                                                        </div>
-                                                        <h6 className={`mb-0 txtGreen`}>{toCurrency(v.price)}</h6>
-                                                    </div>
-                                                    <div className="progress h-5">
-                                                        <div className="progress-bar w-100 bg-dark" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"/>
-                                                    </div>
+                            data.map((v, i) => {
+                                let status = '';
+                                let colStatus = '';
+                                if(v.status===0){status='Tersedia';colStatus='text-primary';}
+                                if(v.status===1){status='Dimiliki Member';colStatus='text-warning';}
+                                if(v.status===2){status='Dipakai';colStatus='text-danger';}
+                                return (
+                                    <div key={i} className="col-6 col-sm-6 col-xl-3 box-margin">
+                                        <div className="card widget-new-content p-3 mainBgOpacity">
+                                            <div className="widget---stats d-flex justify-content-between align-items-center mb-15">
+                                                <div className="widget---content-text">
+                                                    <h6 className="text-white">{v.kode}</h6>
+                                                    <p className={`mb-0 ${colStatus}`}>{status}</p>
                                                 </div>
+                                                <h6 className={`mb-0 txtGreen`}>{toCurrency(v.price)}</h6>
                                             </div>
-                                        );
-                                    })
-                                    : <tr>
-                                        <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                                    </tr>
-                                    : <tr>
-                                        <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                                    </tr>
-                                    :(()=>{
-                                        let container =[];
-                                        for(let x=0; x<10; x++){
-                                            container.push(
-                                                <div key={x} className="col-12 col-sm-6 col-xl-4 box-margin">
-                                                    <div className="card widget-new-content p-3 bg-white">
-                                                        <span className="progress-description mt-2"><Skeleton width={100}/></span>
-                                                        <span className="progress-description mt-2"><Skeleton width={200}/></span>
-                                                        <span className="progress-description mt-2"><Skeleton/></span>
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
-                                        return container;
-                                    })()
+                                            <div className="progress h-5">
+                                                <div className="progress-bar w-100 bg-dark" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                            : <tr>
+                                <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                            </tr>
+                            : <tr>
+                                <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                            </tr>
 
-                            }
-                        </div>
-                        <div style={{"marginTop":"20px","marginBottom":"20px","float":"right"}}>
-                            <Paginationq
-                                current_page={current_page}
-                                per_page={per_page}
-                                total={total}
-                                callback={this.handlePage}
-                            />
-                        </div>
-
-                    </div>
+                    }
+                </div>
+                <div style={{"marginTop":"20px","marginBottom":"20px","float":"right"}}>
+                    <Paginationq
+                        current_page={current_page}
+                        per_page={per_page}
+                        total={total}
+                        callback={this.handlePage}
+                    />
                 </div>
                 {
                     this.props.isOpen===true?<GeneratePin

@@ -11,6 +11,7 @@ import {getUserLevel} from "../../../../../redux/actions/masterdata/user_level.a
 import {ModalToggle} from "../../../../../redux/actions/modal.action";
 import {ToastQ} from "../../../../../helper";
 import {postUserList, putUserList} from "../../../../../redux/actions/masterdata/user_list.action";
+import Preloader from "../../../../../Preloader";
 
 class FormUserList extends Component{
     constructor(props){
@@ -49,19 +50,10 @@ class FormUserList extends Component{
 
     componentWillReceiveProps(nextProps){
         let data=[];
-
         if(nextProps.dataLevel.data!==undefined){
             if(nextProps.dataLevel.data.length>0){
-                console.log(nextProps.dataLevel.data);
                 nextProps.dataLevel.data.map((v,i)=>{
                     data.push({value:v.id,label:v.level});
-                    // this.setState({
-                    //     name:'',
-                    //     username:'',
-                    //     password:'',
-                    //     level:'',
-                    //     status:'',
-                    // })
                 })
             }
         }
@@ -70,8 +62,8 @@ class FormUserList extends Component{
             this.setState({
                 name:nextProps.detail.name,
                 username:nextProps.detail.username,
-                password:nextProps.detail.password,
-                conf_password:nextProps.detail.conf_password,
+                password:'',
+                conf_password:'',
                 status:nextProps.detail.status,
             })
         }
@@ -103,9 +95,6 @@ class FormUserList extends Component{
         parseData['level']    = this.state.level;
         parseData['status']    = this.state.status;
 
-        // if(parseData['password'])
-
-        console.log(parseData);
         if(parseData['name']===''){
             ToastQ.fire({icon:'error',title:`nama tidak boleh kosong`});
             return;
@@ -125,8 +114,6 @@ class FormUserList extends Component{
             }
         }
 
-
-
         if(parseData['level']===''){
             ToastQ.fire({icon:'error',title:`level tidak boleh kosong`});
             return;
@@ -145,7 +132,6 @@ class FormUserList extends Component{
         else{
             this.props.dispatch(putUserList(parseData,this.props.detail.id));
         }
-        this.clearState();
     }
 
     handleChange = (event) => {
@@ -156,12 +142,15 @@ class FormUserList extends Component{
         e.preventDefault();
         const bool = !this.props.isOpen;
         this.props.dispatch(ModalToggle(bool));
+        this.clearState();
     };
 
     render(){
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "formUserList"} size="md">
                 <ModalHeader toggle={this.toggle}>{this.props.detail.id!==''?`Ubah Pengguna`:`Tambah Pengguna`}</ModalHeader>
+                {this.props.isLoadingPost?<Preloader/>:null}
+
                 <ModalBody>
                     <div className="form-group">
                         <label>Nama</label>
@@ -204,7 +193,7 @@ class FormUserList extends Component{
                 <ModalFooter>
                     <div className="form-group" style={{textAlign:"right"}}>
                         <button style={{color:"white"}} type="button" className="btn btn-warning mb-2 mr-2" onClick={this.toggle} ><i className="ti-close"/>Keluar</button>
-                        <button type="submit" className="btn btn-primary mb-2 mr-2" onClick={this.handleSubmit} ><i className="ti-save" />{!this.props.isLoadingPost?'Simpan':'Loading ......'}</button>
+                        <button type="submit" className="btn btn-primary mb-2" onClick={this.handleSubmit} ><i className="ti-save" /> Simpan</button>
                     </div>
                 </ModalFooter>
 

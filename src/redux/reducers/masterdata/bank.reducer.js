@@ -3,7 +3,8 @@
 import {BANK} from "../../actions/_constants";
 
 const initialState = {
-    isLoadingDetail: true,
+    isLoadingDetail: false,
+    isShowModal: false,
     status: "",
     msg: "",
     data: [],
@@ -20,6 +21,10 @@ export const bankReducer = (state = initialState, action) => {
         case BANK.LOADING_DETAIL:
             return Object.assign({}, state, {
                 isLoadingDetail: action.load
+            });
+        case BANK.SHOW_MODAL:
+            return Object.assign({}, state, {
+                isShowModal: action.load
             });
         default:
             return state

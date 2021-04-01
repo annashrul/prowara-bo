@@ -44,14 +44,13 @@ export const myDate = (val) =>{
 }
 export const toExcel=(title='',periode='',head=[],content=[],foot=[])=>{
     let header = [
-        [title],
+        [title.toUpperCase()],
         [`PERIODE : ${periode}`],
         [''],
         head
     ];
     let footer = foot;
-    let raw = content;
-    let body = header.concat(raw);
+    let body = header.concat(content);
     let data = footer===undefined||footer===[]?body:body.concat(footer);
     console.log(`=========================> ${data} <==========================`);
     let ws = XLSX.utils.json_to_sheet(data, {skipHeader:true});
@@ -67,13 +66,13 @@ export const toExcel=(title='',periode='',head=[],content=[],foot=[])=>{
     });
     ws["A1"].s = {
         alignment: {
-            vertical: 'center',
+            vertical: 'middle',
         }
     };
 
     let wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, title);
-    let exportFileName = `${title.replaceAll(" ","_")}_${moment(new Date()).format('YYYYMMDDHHMMss')}.xlsx`;
+    XLSX.utils.book_append_sheet(wb, ws, title.toUpperCase());
+    let exportFileName = `${title.replaceAll(" ","_").toUpperCase()}_${moment(new Date()).format('YYYYMMDDHHMMss')}.xlsx`;
     XLSX.writeFile(wb, exportFileName, {type:'file', bookType:"xlsx"});
     return;
 }
@@ -262,10 +261,10 @@ class Paginationq extends Component{
                 linkClass="page-link"
                 activeClass="page-item active"
                 disabledClass="page-item disabled"
-                prevPageText='prev'
-                nextPageText='next'
-                firstPageText='first'
-                lastPageText='last'
+                prevPageText='sebelumnya'
+                nextPageText='selanjutnya'
+                firstPageText='pertama'
+                lastPageText='terakhir'
             />
         )
     }

@@ -83,7 +83,7 @@ class Header extends Component {
     render() {
         return (
             // <!-- Top Header Area -->
-            <header className="top-header-area d-flex align-items-center justify-content-between" style={{backgroundColor:(!isMobile?'':'#242939')}} >
+            <header className="top-header-area d-flex align-items-center justify-content-between  bgMainColor" style={{backgroundColor:(!isMobile?'':'#242939')}} >
                 <div className="left-side-content-area d-flex align-items-center">
                     {/* Mobile Logo */}
                     <div className="mobile-logo mr-3 mr-sm-4">
@@ -92,7 +92,7 @@ class Header extends Component {
                     {/* <!-- Triggers --> */}
                     <div className="ecaps-triggers mr-1 mr-sm-3">
                         <div className="menu-collasped" id="menuCollasped" onClick={(e)=>{e.preventDefault();this.handleEcaps();}}>
-                            <i className="zmdi zmdi-menu"/>
+                            <i className="zmdi zmdi-menu" style={{color:"white"}}/>
                         </div>
                         <div className="mobile-menu-open" id="mobileMenuOpen" onClick={(e)=>{e.preventDefault();this.handleMobileEcaps();}}>
                             <i className="zmdi zmdi-menu"/>

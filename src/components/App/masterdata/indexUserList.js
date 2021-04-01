@@ -10,6 +10,7 @@ import moment from "moment";
 import FormUserList from "../modals/masterdata/user_list/form_user_list"
 import * as Swal from "sweetalert2";
 import {deleteUserList, getUserList} from "../../../redux/actions/masterdata/user_list.action";
+import Preloader from "../../../Preloader";
 
 
 class IndexUserList extends Component{
@@ -18,10 +19,7 @@ class IndexUserList extends Component{
         this.state={
             detail:{},
             any:"",
-            dateFrom:moment(new Date()).format("yyyy-MM-DD"),
-            dateTo:moment(new Date()).format("yyyy-MM-DD")
         };
-        this.handleEvent    = this.handleEvent.bind(this);
         this.handleChange   = this.handleChange.bind(this);
         this.handlePage     = this.handlePage.bind(this);
         this.handleSearch   = this.handleSearch.bind(this);
@@ -31,51 +29,28 @@ class IndexUserList extends Component{
     }
 
     componentWillMount(){
-        this.props.dispatch(getUserList(`page=1`));
+        let where = this.handleValidate();
+        this.props.dispatch(getUserList(`page=1&${where}`));
     }
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
     }
-
     handleValidate(){
-        let where="";
-        let page = localStorage.getItem("pageUserList");
-        let dateFrom = this.state.dateFrom;
-        let dateTo = this.state.dateTo;
-        let any = this.state.any;
-        localStorage.setItem("dateFromUserList",`${dateFrom}`);
-        localStorage.setItem("dateToUserList",`${dateTo}`);
-
-        if(page!==null&&page!==undefined&&page!==""){
-            where+=`page=${page}`;
-        }else{
-            where+="page=1";
-        }
-        if(dateFrom!==null&&dateFrom!==undefined&&dateFrom!==""){
-            where+=`&datefrom=${dateFrom}&dateto=${dateTo}`;
-        }
-
-        if(any!==null&&any!==undefined&&any!==""){
-            where+=`&q=${any}`;
+        let data = this.state;
+        let where=``;
+        if(data.any !== null && data.any !== undefined && data.any !== ""){
+            where+=`&q=${data.any}`;
         }
         return where;
 
     }
 
     handlePage(pageNumber){
-        localStorage.setItem("pageUserList",pageNumber);
         let where = this.handleValidate();
-        this.props.dispatch(getUserList(where));
+        this.props.dispatch(getUserList(`page=${pageNumber}&${where}`));
 
     }
-    handleEvent = (event, picker) => {
-        const from = moment(picker.startDate._d).format('YYYY-MM-DD');
-        const to = moment(picker.endDate._d).format('YYYY-MM-DD');
-        this.setState({
-            dateFrom:from,
-            dateTo:to
-        });
-    };
+
     handleSearch(e){
         e.preventDefault();
         let where = this.handleValidate();
@@ -143,114 +118,78 @@ class IndexUserList extends Component{
         } = this.props.data;
         return(
             <Layout page={"Daftar Pengguna"}>
-                <div className="row align-items-center">
-                    <div className="col-6">
-                        <div className="dashboard-header-title mb-3">
-                            <h5 className="mb-0 font-weight-bold">Daftar Pengguna</h5>
-                        </div>
-                    </div>
-                </div>
+                {this.props.isLoading ?<Preloader/>:null}
                 <div className="row">
-                    <div className="col-12 box-margin">
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-6 col-xs-6 col-md-3">
-                                        <div className="form-group">
-                                            <label>Periode </label>
-                                            <DateRangePicker
-                                                autoUpdateInput={true} showDropdowns={true} style={{display:'unset'}} ranges={rangeDate} alwaysShowCalendars={true} onApply={this.handleEvent}>
-                                                <input type="text" readOnly={true} className="form-control" value={`${this.state.dateFrom} to ${this.state.dateTo}`}/>
-                                            </DateRangePicker>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-12 col-xs-12 col-md-3">
-                                        <div className="form-group">
-                                            <label>Cari</label>
-                                            <input type="text" className="form-control" name="any" placeholder={"cari disini"} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
-                                        </div>
-                                    </div>
-                                    <div className="col-2 col-xs-2 col-md-4">
-                                        <div className="form-group">
-                                            <button style={{marginTop:"27px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleSearch(e)}><i className="fa fa-search"/></button>
-                                            <button style={{marginTop:"27px",marginLeft:"5px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleModal(e,'')}><i className="fa fa-plus"/></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style={{overflowX: "auto"}}>
-                                    <table className="table table-bordered">
-                                        <thead className="thead-dark">
-                                        <tr>
-                                            <th style={headStyle}>NO</th>
-                                            <th style={headStyle}>#</th>
-                                            <th style={headStyle}>NAMA</th>
-                                            <th style={headStyle}>USERNAME</th>
-                                            <th style={headStyle}>AKSES</th>
-                                            <th style={headStyle}>STATUS</th>
-                                            <th style={headStyle}>TANGGAL</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {
-                                            !this.props.isLoading?typeof data === 'object' ? data.length > 0 ?
-                                                data.map((v, i) => {
-                                                    return (
-                                                        <tr key={i}>
-                                                            <td style={headStyle}>
-                                                                {i+1 + (10 * (parseInt(current_page,10)-1))}
-                                                            </td>
-                                                            <td style={headStyle}>
-                                                                <button onClick={(e)=>this.handleModal(e,i)} className={"btn btn-secondary btn-sm"} style={{marginRight:"10px"}}><i className={"fa fa-pencil"}/></button>
-                                                                <button onClick={(e)=>this.handleDelete(e,v.id)} className={"btn btn-danger btn-sm"}><i className={"fa fa-close"}/></button>
-                                                            </td>
-                                                            <td style={headStyle}>{v.name}</td>
-                                                            <td style={headStyle}>{v.username}</td>
-                                                            <td style={headStyle}>{v.level}</td>
-                                                            <td style={headStyle}>{statusQ(v.status)}</td>
-                                                            <td style={headStyle}>{myDate(v.created_at)}</td>
-                                                        </tr>
-                                                    );
-                                                })
-                                                : <tr>
-                                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                                                </tr>
-                                                : <tr>
-                                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                                                </tr>
-                                                :(()=>{
-                                                    let container =[];
-                                                    for(let x=0; x<10; x++){
-                                                        container.push(
-                                                            <tr key={x}>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                                <td>{<Skeleton/>}</td>
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    return container;
-                                                })()
-
-                                        }
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div style={{"marginTop":"20px","marginBottom":"20px","float":"right"}}>
-                                    <Paginationq
-                                        current_page={current_page}
-                                        per_page={per_page}
-                                        total={total}
-                                        callback={this.handlePage}
-                                    />
+                    <div className="col-md-10">
+                        <div className="row">
+                            <div className="col-12 col-xs-12 col-md-3">
+                                <div className="form-group">
+                                    <label>Cari</label>
+                                    <input type="text" className="form-control" name="any" placeholder={"cari disini"} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div className="col-12 col-xs-12 col-md-2" style={{textAlign:"right"}}>
+                        <div className="form-group">
+                            <button style={{marginTop:"28px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleSearch(e)}><i className="fa fa-search"/></button>
+                            <button style={{marginTop:"28px",marginLeft:"5px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleModal(e,'')}><i className="fa fa-plus"/></button>
+                        </div>
+                    </div>
+                </div>
+                <div style={{overflowX: "auto"}}>
+                    <table className="table table-bordered">
+                        <thead className="thead-dark">
+                        <tr>
+                            <th style={headStyle}>NO</th>
+                            <th style={headStyle}>#</th>
+                            <th style={headStyle}>NAMA</th>
+                            <th style={headStyle}>USERNAME</th>
+                            <th style={headStyle}>AKSES</th>
+                            <th style={headStyle}>STATUS</th>
+                            <th style={headStyle}>TANGGAL</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            typeof data === 'object' ? data.length > 0 ?
+                                data.map((v, i) => {
+                                    return (
+                                        <tr key={i}>
+                                            <td style={headStyle}>
+                                                {i+1 + (10 * (parseInt(current_page,10)-1))}
+                                            </td>
+                                            <td style={headStyle}>
+                                                <button onClick={(e)=>this.handleModal(e,i)} type="button" className={"btn btn-primary"} style={{marginRight:"10px"}}><i className="fa fa-pencil"/></button>
+                                                <button onClick={(e)=>this.handleDelete(e,v.id)} type="button" className={"btn btn-primary"}><i className="fa fa-close"/></button>
+                                            </td>
+                                            <td style={headStyle}>{v.name}</td>
+                                            <td style={headStyle}>{v.username}</td>
+                                            <td style={headStyle}>{v.level}</td>
+                                            <td style={headStyle}>{statusQ(v.status)}</td>
+                                            <td style={headStyle}>{myDate(v.created_at)}</td>
+                                        </tr>
+                                    );
+                                })
+                                : <tr>
+                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                </tr>
+                            : <tr>
+                                <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                            </tr>
+
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div style={{"marginTop":"20px","marginBottom":"20px","float":"right"}}>
+                    <Paginationq
+                        current_page={current_page}
+                        per_page={per_page}
+                        total={total}
+                        callback={this.handlePage}
+                    />
                 </div>
                 {
                     this.props.isOpen===true?<FormUserList detail={this.state.detail}/>:null

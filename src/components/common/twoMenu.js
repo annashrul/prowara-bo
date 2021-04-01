@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom"
 
-class DoubleMenu extends Component {
+class TwoMenu extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -48,4 +48,4 @@ class DoubleMenu extends Component {
     }
 }
 
-export  default DoubleMenu;
+export  default TwoMenu;

@@ -40,10 +40,11 @@ class FormBerita extends Component{
     }
 
     componentWillReceiveProps(nextProps){
+        console.log(nextProps);
         if(nextProps.kategori.data.length>0){
             let dataKategori=[];
             nextProps.kategori.data.map((v,i)=>{
-                dataKategori.push({value:v.id,label:v.title})
+                dataKategori.push({value:v.id,label:v.title});
                 return;
             });
             this.setState({data_kategori:dataKategori});

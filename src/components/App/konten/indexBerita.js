@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
-import {noImage, rmHtml, ToastQ, toCurrency} from "../../../helper";
+import {myDate, noImage, rmHtml, ToastQ, toCurrency} from "../../../helper";
 import Skeleton from 'react-loading-skeleton';
 import moment from "moment";
 import {
@@ -20,6 +20,8 @@ import {
 } from "../../../redux/actions/kategori/kategori.action";
 import StickyBox from "react-sticky-box";
 import {BrowserView, MobileView,isBrowser, isMobile} from 'react-device-detect';
+import {NOTIF_ALERT} from "../../../redux/actions/_constants";
+import Preloader from "../../../Preloader";
 
 moment.locale('id');// en
 
@@ -58,7 +60,7 @@ class IndexBerita extends Component{
     }
     componentWillMount(){
         this.props.dispatch(getContent('berita',`page=1`));
-        this.props.dispatch(fetchKategori(`berita?page=1&perpage=${this.state.perpage}`));
+        this.props.dispatch(fetchKategori(`berita?page=1`));
 
     }
     handleChange = (event) => {
@@ -152,7 +154,7 @@ class IndexBerita extends Component{
         this.setState({
             isScroll:false
         });
-        let parsedata={title:this.state.title,type:0};
+        let parsedata={title:this.state.title,type:1};
         if(param==='tambah'){
             if(this.state.title===''){
                 ToastQ.fire({icon:'error',title:`inputan tidak boleh kosong`});
@@ -248,130 +250,136 @@ class IndexBerita extends Component{
                         </div>
                     </div>
                 </div>
+                {
+                    this.props.isLoading?<Preloader/>:null
+                }
                 <div className="row">
-                    <div style={{width:isMobile?"100%":"75%",zoom:'85%',display: 'flex', alignItems: 'flex-start',marginRight:'5px'}}>
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-8 col-xs-8 col-md-3">
-                                        <div className="form-group">
-                                            <label>Cari</label>
-                                            <input type="text" className="form-control" name="any" placeholder={"cari disini"} defaultValue={this.state.any} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
-                                        </div>
-                                    </div>
-                                    <div className="col-4 col-xs-4 col-md-4">
-                                        <div className="form-group">
-                                            <button style={{marginTop:"27px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleSearch(e)}><i className="fa fa-search"/></button>
-                                            <button style={{marginTop:"27px",marginLeft:"5px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleModal(e,'')}><i className="fa fa-plus"/></button>
-                                        </div>
+                    <div style={{width:"75%",display: 'flex', alignItems: 'flex-start',marginRight:'5px'}}>
+                        <div className="col-md-12">
+                            <div className="row">
+                                <div className="col-8 col-xs-8 col-md-3">
+                                    <div className="form-group">
+                                        <label>Cari</label>
+                                        <input type="text" className="form-control" name="any" placeholder={"cari disini"} defaultValue={this.state.any} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
                                     </div>
                                 </div>
-                                <div className="row">
-                                    {
-                                        !this.props.isLoading?typeof data === 'object' ? data.length>0 ? data.map((v,i)=>{
-                                            return(
-                                                <div key={i} className="col-6 col-xs-6 col-md-3 col-lg-3" style={{marginBottom:'5px'}}>
-                                                    <div className="card">
-                                                        <img className="card-img-top" src={v.picture} onError={(e)=>{e.target.onerror = null; e.target.src=`${noImage()}`}} alt="member image"/>
-                                                        <div className="card-body">
-                                                            <div className="row">
-                                                                <div className="col-md-9">
-                                                                    <h5 className="card-title">{v.title} <span className={"badge badge-success"}>{v.category}</span></h5>
+                                <div className="col-4 col-xs-4 col-md-4">
+                                    <div className="form-group">
+                                        <button style={{marginTop:"27px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleSearch(e)}><i className="fa fa-search"/></button>
+                                        <button style={{marginTop:"27px",marginLeft:"5px"}} type="button" className="btn btn-primary" onClick={(e)=>this.handleModal(e,'')}><i className="fa fa-plus"/></button>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div className="col-md-12">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <main>
+                                                {
+                                                    typeof data==='object'?data.length>0?data.map((v,i)=>{
+                                                        return(
+                                                            <article key={i}>
+                                                                <div className="box-margin">
+                                                                    <div className="coupon" style={{
+                                                                        borderRadius:"15px",
+                                                                        margin:"0 auto",
+                                                                        breakInside: 'avoid-column'
+                                                                    }}>
+                                                                        <div className="ribbon-wrapper card">
+                                                                            <div className="ribbon ribbon-bookmark ribbon-success">{v.category}</div>
+                                                                            <img src={v.picture} style={{width:'100%'}} onError={(e)=>{e.target.onerror = noImage(); e.target.src=`${noImage()}`}} alt="member image"/>
+                                                                            <br/>
+                                                                            <div className="row">
+                                                                                <div className="col-md-12" style={{padding:"5"}}>
+                                                                                    {myDate(v.created_at)}
+                                                                                    <h4 className="txtRed">{v.title}</h4>
+                                                                                    <p>
+                                                                                        <div dangerouslySetInnerHTML={{__html: String(v.caption).substr(0,200)}} />
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div className="col-md-12">
+                                                                                    <div className="btn-group btn-block" style={{textAlign:"right"}}>
+                                                                                        <UncontrolledButtonDropdown nav>
+                                                                                            <DropdownToggle caret className="myDropdown">
+                                                                                                Pilihan
+                                                                                            </DropdownToggle>
+                                                                                            <DropdownMenu>
+                                                                                                <DropdownItem onClick={(e)=>this.handleModal(e,i)}>Ubah</DropdownItem>
+                                                                                                <DropdownItem onClick={(e)=>this.handleDelete(e,v.id)}>Hapus</DropdownItem>
+                                                                                            </DropdownMenu>
+                                                                                        </UncontrolledButtonDropdown>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div className="col-md-3">
+                                                            </article>
+                                                        );
+                                                    }):"":""
+                                                }
+                                            </main>
+                                        </div>
 
-                                                                    <UncontrolledButtonDropdown nav>
-                                                                        <DropdownToggle className="d-inline-block">
-                                                                            <i className="fa fa-bars"/>
-                                                                        </DropdownToggle>
-                                                                        <DropdownMenu>
-                                                                            <DropdownItem onClick={(e)=>this.handleModal(e,i)}>Ubah</DropdownItem>
-                                                                            <DropdownItem onClick={(e)=>this.handleDelete(e,v.id)}>Hapus</DropdownItem>
-                                                                        </DropdownMenu>
-                                                                    </UncontrolledButtonDropdown>
-
-                                                                </div>
-                                                            </div>
-                                                            <p className="card-text">{v.caption.length>20?rmHtml(v.caption).substr(0,20)+' ...':rmHtml(v.caption)}</p>
-                                                            <p className="card-text"><small className="text-muted">{moment(v.created_at).startOf('hour').fromNow()}</small></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            );
-                                        }):"":"":(()=>{
-                                            let container =[];
-                                            for(let x=0; x<8; x++){
-                                                container.push(
-                                                    <div key={x} className="col-6 col-xs-6 col-md-3 col-lg-3" style={{marginBottom:'5px'}}>
-                                                        <div className="card">
-                                                            <img src="https://www.sustainablesanantonio.com/wp-content/plugins/ldd-directory-lite/public/images/noimage.png" className="card-img-top" alt="..."/>
-                                                            <div className="card-body">
-                                                                <h5 className="card-title"><Skeleton width={100}/></h5>
-                                                                <p className="card-text"><Skeleton/></p>
-                                                                <p className="card-text"><Skeleton/></p>
-                                                                <p className="card-text"><Skeleton/></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )
-                                            }
-                                            return container;
-                                        })()
-                                    }
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <div style={{width:isMobile?"100%":"24%", zoom:"90%"}}>
-                        <StickyBox offsetTop={120} offsetBottom={20}>
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="widgets-todo-list-area">
+                    <div style={{width:"24%"}}>
+                        <StickyBox offsetTop={150} offsetBottom={20}>
+
+                                    <div className="widgets-todo-list-area" style={{marginTop:"24px"}}>
                                         <form id="form-add-todo" className="form-add-todo d-flex">
-                                            <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.handleChange}/>
-                                            <button className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'tambah','')}>
-                                                {!this.props.isLoadingPost?<i className={"fa fa-send"}/>:<i className="fa fa-circle-o-notch fa-spin"/>}
-                                            </button>
+                                            <div className="row">
+                                                <div className="col-md-9">
+                                                    <div className="form-group">
+                                                        <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.handleChange}/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-2">
+                                                    <div className="form-group">
+                                                        <button className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'tambah','')}>
+                                                            {!this.props.isLoadingPost?<i className={"fa fa-send"}/>:<i className="fa fa-circle-o-notch fa-spin"/>}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </form>
-                                        <form id="form-todo-list">
-                                            <ul id="ecapsToDo-list" className="todo-list" style={{height:'450px',maxHeight:'100%',overflowY:'auto'}}>
-                                                {
-                                                    !this.props.isLoadingKategori?typeof this.props.kategori.data==='object'? this.props.kategori.data.length>0?this.props.kategori.data.map((v,i)=>{
-                                                        return(
-                                                            <li key={i} id={`item${i}`}>
-                                                                <label className="ckbox">
-                                                                    <button className={"btn btn-info btn-sm"} onClick={(event)=>this.handleActionKategori(event,'edit',i)}><i className={"todo-item-done fa fa-pencil"}/></button>
-                                                                    <span/>
-                                                                </label>
-                                                                <label className="ckbox">
-                                                                    <button className={"btn btn-danger btn-sm"} onClick={(event)=>this.handleActionKategori(event,'hapus',i)}><i className={"todo-item-done fa fa-close"}/></button>
-                                                                    <span/>
-                                                                </label>
-                                                                <h5 style={{fontSize:'12px'}}>{v.title}</h5>
-                                                            </li>
-                                                        );
-                                                    }):"":"":(()=>{
-                                                        let container =[];
-                                                        for(let x=0; x<8; x++){
-                                                            container.push(
-                                                                <li key={x}>
-                                                                    <Skeleton width={150}/>
-                                                                </li>
-                                                            )
-                                                        }
-                                                        return container;
-                                                    })()
+                                        {
+                                            !this.props.isLoadingKategori?typeof this.props.kategori.data==='object'? this.props.kategori.data.length>0?this.props.kategori.data.map((v,i)=>{
+                                                return(
+                                                    <div className="card box-margin">
+                                                        <div className="card-body">
+                                                            <h5 style={{fontSize:'12px'}}>{v.title}</h5>
+                                                            <hr/>
+                                                            <div className="row">
+                                                                <div className="col-md-12">
+                                                                    <button className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'edit',i)}><i className={"todo-item-done fa fa-pencil"}/></button>
+                                                                    <button style={{marginLeft:"5px"}} className={"btn btn-primary"} onClick={(event)=>this.handleActionKategori(event,'hapus',i)}><i className={"todo-item-done fa fa-close"}/></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }):"":"":(()=>{
+                                                let container =[];
+                                                for(let x=0; x<8; x++){
+                                                    container.push(
+                                                        <li key={x}>
+                                                            <Skeleton width={150}/>
+                                                        </li>
+                                                    )
                                                 }
-                                            </ul>
-                                        </form>
-                                        <hr/>
+                                                return container;
+                                            })()
+                                        }
                                         <div className="form-group">
                                             <button className={"btn btn-primary"} style={{width:"100%"}} onClick={this.handleLoadMore}>{this.props.isLoadingKategori?'tunggu sebentar ...':'tampilkan lebih banyak'}</button>
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
+
                         </StickyBox>
                     </div>
                 </div>

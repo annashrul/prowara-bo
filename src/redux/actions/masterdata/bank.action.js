@@ -10,6 +10,12 @@ export function setLoadingDetail(load) {
         load
     }
 }
+export function setShowModal(load) {
+    return {
+        type: BANK.SHOW_MODAL,
+        load
+    }
+}
 export function setDataDetail(data = []) {
     return {
         type: BANK.DETAIL,
@@ -21,14 +27,26 @@ export function setDataDetail(data = []) {
 export const getDetailBank = (where) => {
     return (dispatch) => {
         dispatch(setLoadingDetail(true));
+        dispatch(setShowModal(false));
         let url = `bank_member?id_member=${where}`;
         axios.get(HEADERS.URL + `${url}`)
             .then(function (response) {
                 const data = response.data;
+                if(data.result.length===0){
+                    Swal.fire(
+                        'Terjadi Kesalahan',
+                        'Data Tidak Tersedia',
+                        'error'
+                    );
+                    dispatch(setShowModal(false));
+                }else{
+                    dispatch(setShowModal(true));
+                }
                 dispatch(setDataDetail(data));
                 dispatch(setLoadingDetail(false));
             })
             .catch(function (error) {
+                dispatch(setShowModal(false));
                 dispatch(setLoadingDetail(false));
                 if (error.message === 'Network Error') {
                     Swal.fire(

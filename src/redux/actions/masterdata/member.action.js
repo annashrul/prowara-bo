@@ -11,6 +11,25 @@ export function setLoading(load) {
     }
 }
 
+export function setLoadingInvesment(load) {
+    return {
+        type: MEMBER.LOADING_INVESMENT,
+        load
+    }
+}
+export function setLoadingExcelInvesment(load) {
+    return {
+        type: MEMBER.LOADING_EXCEL_INVESMENT,
+        load
+    }
+}
+export function setShowModal(load) {
+    return {
+        type: MEMBER.SHOW_MODAL,
+        load
+    }
+}
+
 export function setLoadingExcel(load) {
     return {
         type: MEMBER.LOADING_EXCEL,
@@ -48,6 +67,18 @@ export function setApproval(data = []) {
 export function setData(data = []) {
     return {
         type: MEMBER.SUCCESS,
+        data
+    }
+}
+export function setInvesment(data = []) {
+    return {
+        type: MEMBER.DATA_INVESMENT,
+        data
+    }
+}
+export function setExcelInvesment(data = []) {
+    return {
+        type: MEMBER.EXCEL_INVESMENT,
         data
     }
 }
@@ -132,7 +163,6 @@ export const getExcelMember = (where) => {
 
     }
 };
-
 export const getListApproval = (where) => {
     return (dispatch) => {
         dispatch(setLoading(true));
@@ -160,7 +190,6 @@ export const getListApproval = (where) => {
 
     }
 };
-
 export const putMember = (data,id) => {
     return (dispatch) => {
         Swal.fire({
@@ -223,4 +252,62 @@ export const putMember = (data,id) => {
             })
     }
 }
+
+export const getInvesment = (where) => {
+    return (dispatch) => {
+        dispatch(setShowModal(false));
+        dispatch(setLoadingInvesment(true));
+        let url = 'transaction/history/investment';
+        if(where){
+            url+=`?${where}`;
+        }
+        axios.get(HEADERS.URL + `${url}`)
+            .then(function (response) {
+                const data = response.data;
+                dispatch(setShowModal(true));
+                dispatch(setInvesment(data));
+                dispatch(setLoadingInvesment(false));
+            })
+            .catch(function (error) {
+                dispatch(setShowModal(false));
+                dispatch(setLoadingInvesment(false));
+                if (error.message === 'Network Error') {
+                    Swal.fire(
+                        'Network Failed!.',
+                        'Please check your connection',
+                        'error'
+                    );
+                }
+            })
+
+    }
+};
+
+export const getExcelInvesment = (where) => {
+    return (dispatch) => {
+        dispatch(setLoadingExcelInvesment(true));
+        let url = 'transaction/history/investment';
+        if(where){
+            url+=`?${where}`;
+        }
+        axios.get(HEADERS.URL + `${url}`)
+            .then(function (response) {
+                const data = response.data;
+                dispatch(setExcelInvesment(data));
+                dispatch(setLoadingExcelInvesment(false));
+            })
+            .catch(function (error) {
+                dispatch(setLoadingExcelInvesment(false));
+                if (error.message === 'Network Error') {
+                    Swal.fire(
+                        'Network Failed!.',
+                        'Please check your connection',
+                        'error'
+                    );
+                }
+            })
+
+    }
+};
+
 

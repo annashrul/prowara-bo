@@ -10,6 +10,7 @@ import {
 import {ModalToggle} from "../../../../../redux/actions/modal.action";
 import {stringifyFormData,ToastQ} from "../../../../../helper";
 import {postUserLevel, putUserLevel} from "../../../../../redux/actions/masterdata/user_level.action";
+import Preloader from "../../../../../Preloader";
 
 
 class FormUserLevel extends Component{
@@ -23,10 +24,10 @@ class FormUserLevel extends Component{
             menu:[
                 {label:"member",path:"/member",isChecked:false,isToggle:false,sub:undefined},
                 {label:"pin",path:"/pin",isChecked:false,isToggle:false,sub:undefined},
-                {label:"konten",path:"",isChecked:false,isToggle:false,sub:[
-                    {label:"testimoni",path:"/testimoni",parent:'konten',isChecked:false},
-                    {label:"berita",path:"/berita",parent:'konten',isChecked:false},
-                ]},
+                // {label:"konten",path:"",isChecked:false,isToggle:false,sub:[
+                //     {label:"testimoni",path:"/testimoni",parent:'konten',isChecked:false},
+                //     {label:"berita",path:"/berita",parent:'konten',isChecked:false},
+                // ]},
                 {label:"pengguna",path:"",isChecked:false,isToggle:false,sub:[
                     {label:"daftar pengguna",path:"/daftar_pengguna",parent:'pengguna',isChecked:false},
                     {label:"akses pengguna",path:"/akses_pengguna",parent:'pengguna',isChecked:false},
@@ -38,16 +39,19 @@ class FormUserLevel extends Component{
                 // ]},
                 {label:"laporan",path:"",isChecked:false,isToggle:false,sub:[
                     {label:"transaksi",path:"/laporan/transaksi",parent:'laporan',isChecked:false},
-                    {label:"penjualan",path:"/laporan/penjualan",parent:'laporan',isChecked:false},
+                    {label:"penjualan",path:"",parent:'laporan',isChecked:false,sub:[
+                        {label:"paket",path:"/laporan/paket",parent:'penjualan',isChecked:false,sub:undefined},
+                        {label:"pin",path:"/laporan/pin",parent:'penjualan',isChecked:false,sub:undefined},
+                    ]},
                     {label:"e-wallet",path:"",parent:'laporan',isChecked:false,sub:[
                         {label:"deposit",path:"/laporan/deposit",parent:'e-wallet',isChecked:false,sub:undefined},
                         {label:"penarikan",path:"/laporan/penarikan",parent:'e-wallet',isChecked:false,sub:undefined},
                         {label:"transfer",path:"/laporan/transfer",parent:'e-wallet',isChecked:false,sub:undefined},
                     ]},
-                    // {label:"penjualan",path:"",parent:'laporan',isChecked:false,sub:[
-                    //     {label:"kas",path:"kas",parent:'penjualan',isChecked:false,sub:undefined},
-                    // ]},
+
                 ],otherSub:true},
+                {label:"berita",path:"/berita",isChecked:false,isToggle:false,sub:undefined},
+
                 {label:"pengaturan",path:"",isChecked:false,isToggle:false,sub:[
                     {label:"umum",path:"/pengaturan/umum",parent:'pengaturan',isChecked:false},
                     {label:"bank",path:"/pengaturan/bank",parent:'pengaturan',isChecked:false},
@@ -87,7 +91,7 @@ class FormUserLevel extends Component{
                     }
                     if(row.sub!==undefined){
                         row.sub.map((res,idx)=>{
-                            if(param===val.label||param===row.label||param===res.label){
+                            if(param===val.label||param===row.label&&param===res.label){
                                 res.isChecked=event.target.checked;
                             }
                         })
@@ -125,6 +129,7 @@ class FormUserLevel extends Component{
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "formUserLevel"} size="lg">
                 <ModalHeader toggle={this.toggle}>{this.props.detail.id===''?"Tambah":"Ubah"} Akses Pengguna</ModalHeader>
+                {this.props.isLoadingPost?<Preloader/>:null}
                 <ModalBody>
                     <div className="row">
                         <div className="col-12">
@@ -203,7 +208,7 @@ class FormUserLevel extends Component{
                 <ModalFooter>
                     <div className="form-group" style={{textAlign:"right"}}>
                         <button style={{color:"white"}} type="button" className="btn btn-warning mb-2 mr-2" onClick={this.toggle} ><i className="ti-close"/>Keluar</button>
-                        <button type="submit" className="btn btn-primary mb-2 mr-2" onClick={this.handleSubmit} ><i className="ti-save" />{!this.props.isLoadingPost?'Simpan':'Loading ......'}</button>
+                        <button type="submit" className="btn btn-primary mb-2 mr-2" onClick={this.handleSubmit} ><i className="ti-save" />Simpan </button>
                     </div>
                 </ModalFooter>
             </WrapperModal>

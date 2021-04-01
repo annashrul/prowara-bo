@@ -45,7 +45,6 @@ class FormUserList extends Component{
     }
 
     static getDerivedStateFromProps(props, state) {
-
         if (props.data !== undefined && props.data.length !== 0) {
             if (props.data !== state.prevdataProps) {
                 return {
@@ -74,13 +73,11 @@ class FormUserList extends Component{
                 }
             }
         }
-
+        return null;
     }
 
 
-    componentWillMount(){
-        // this.props.dispatch(getUserLevel());
-    }
+
 
     handleChangeBank(val){
         this.setState({
@@ -91,6 +88,13 @@ class FormUserList extends Component{
     handleSubmit(e){
         e.preventDefault();
         const data = this.state;
+        let parsedata={
+            "bank_name":data.bank_name,
+            "acc_name":data.acc_name,
+            "acc_no":data.acc_no,
+            "tf_code":data.tf_code
+        };
+
         if (data.bank_name === ''||data.bank_name===undefined) {
                 ToastQ.fire({
                     icon: 'error',
@@ -112,11 +116,13 @@ class FormUserList extends Component{
             });
             return;
         }
-        if(data.id===''){
-            this.props.dispatch(postBankList(data));
+
+        if(this.props.data.id===''){
+            // console.log(parsedata);
+            this.props.dispatch(postBankList(parsedata));
         }
         else{
-            this.props.dispatch(putBankList(data,this.state.id));
+            this.props.dispatch(putBankList(parsedata,this.props.detail.id));
         }
 
     }
@@ -140,9 +146,7 @@ class FormUserList extends Component{
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "formBankPerusahaan"} size="md">
                 <ModalHeader toggle={this.toggle}>{this.state.id!==''?`Ubah Bank`:`Tambah Bank`}</ModalHeader>
-                {
-                    this.props.isLoadingPost?<Preloader/>:null
-                }
+                {this.props.isLoadingPost?<Preloader/>:null}
                 <ModalBody>
                     <div className="form-group">
                         <label>Bank</label>

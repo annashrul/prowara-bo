@@ -45,7 +45,7 @@ class Layout extends Component {
         if (nextProps.auth.user) {
             const favicon = this.getFaviconEl(); // Accessing favicon element
             favicon.href = nextProps.auth.user.fav_icon;
-            document.title = `SangQu - ${this.props.page}`;
+            document.title = `Prowara - ${this.props.page}`;
             this.getProps(nextProps);
         }
     }
@@ -65,17 +65,17 @@ class Layout extends Component {
         return (
                 <div className={this.props.triggerEcaps?"ecaps-page-wrapper sidemenu-hover-" + this.state.sideHover + " menu-collasped-active":"ecaps-page-wrapper " + (this.props.triggerMobileEcaps?"mobile-menu-active":"")}>
                 {/* Side Menu */}
-                    <div className="ecaps-sidemenu-area" onMouseEnter={this.mouseEnterHandle} onMouseLeave={this.mouseOutHandle}>
+                    <div className="ecaps-sidemenu-area bgMainColor" onMouseEnter={this.mouseEnterHandle} onMouseLeave={this.mouseOutHandle}>
                         {/* Desktop Logo */}
-                        <div className="ecaps-logo">
-                            <Link to="/" style={{backgroundColor:'#242939'}}><img className="desktop-logo" src={BgAuth} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}}  alt="Desktop Logo" style={{maxHeight:'30px'}} /> <img className="small-logo" src={BgAuth} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}} alt="Mobile Logo" /></Link>
+                        <div className="ecaps-logo ">
+                            <Link to="/" ><img className="desktop-logo" src={BgAuth} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}}  alt="Desktop Logo" style={{maxHeight:'30px'}} /> <img className="small-logo" src={BgAuth} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}} alt="Mobile Logo" /></Link>
                         </div>
                         {/* Side Nav */}
-                        <div className="slimScrollDiv" style={{position: "relative", width: "auto", height: "100%"}}>
+                        <div className="slimScrollDiv bgMainColor" style={{position: "relative", width: "auto", height: "100%"}}>
                                 <div className="ecaps-sidenav" id="ecapsSideNav" style={{overflowY: "unset",width: "auto", height: "100%"}}>
                             <FreeScrollbar>
                                     {/* Side Menu Area */}
-                                    <div className="side-menu-area" style={{paddingRight:'8px', marginTop:'unset'}}>
+                                    <div className="side-menu-area " style={{paddingRight:'8px', marginTop:'unset'}}>
                                         {/* Sidebar Menu */}
                                         <SideMenu/>
                                     </div>

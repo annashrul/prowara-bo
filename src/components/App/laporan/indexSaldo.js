@@ -181,9 +181,7 @@ class IndexSaldo extends Component{
                                                             autoUpdateInput={true} showDropdowns={true}
                                                             style={{display: 'unset'}} ranges={rangeDate}
                                                             alwaysShowCalendars={true} onApply={this.handleEvent}>
-                                                            <input type="text" readOnly={true}
-                                                                   className="form-control"
-                                                                   value={`${this.state.dateFrom} to ${this.state.dateTo}`}/>
+                                                            <input type="text" readOnly={true} className="form-control" value={`${this.state.dateFrom} to ${this.state.dateTo}`}/>
                                                         </DateRangePicker>
                                                     </div>
                                                 </div>
@@ -260,7 +258,7 @@ class IndexSaldo extends Component{
                                                     <tr key={i}>
                                                         <td style={columnStyle}>{i + 1 + (10 * (parseInt(current_page, 10) - 1))} </td>
                                                         <td style={columnStyle}>
-                                                            <button className={"btn btn-primary btn-sm"}
+                                                            <button className={"btn btn-primary"}
                                                                     onClick={(e) => this.handleDetail(e, v.id, v.fullname)}>
                                                                 <i className={"fa fa-eye"}/></button>
                                                         </td>

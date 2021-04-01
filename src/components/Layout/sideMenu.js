@@ -5,10 +5,9 @@ import { logoutUser } from "redux/actions/authActions";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import Preloader from "../../Preloader";
-import SingleMenu from "../common/singleMenu";
-import DoubleMenu from "../common/doubleMenu";
-import ThirdMenu from "../common/thirdMenu";
-import {rplcSpace} from "../../helper";
+import OneMenu from "../common/oneMenu";
+import TwoMenu from "../common/twoMenu";
+import ThreeMenu from "../common/threeMenu";
 
 class SideMenu extends Component {
     constructor(props){
@@ -17,17 +16,16 @@ class SideMenu extends Component {
             aksesMember:[],
         }
     }
-
     menuChange(argument){
         let arr = this.state.aksesMember;
-        arr.map((v,i)=>{
+        arr.map(v => {
             if(argument.parent===v.label&&argument.child===''){
                 v.isToggle=!v.isToggle;
             }else{
                 v.isToggle=false;
             }
             if(v.sub!==undefined){
-                v.sub.map((row,idx)=>{
+                v.sub.map(row => {
                     if(argument.parent===v.label&&argument.child!==''){
                         if(argument.child===row.label){
                             v.isToggle=true;
@@ -37,47 +35,45 @@ class SideMenu extends Component {
                             row.isToggle=false;
                         }
                     }
-
                 })
             }
         });
         this.setState({aksesMember:arr})
     }
-
     handleToggle(props,array){
         const path = props.location.pathname;
-        array.map((v,i)=>{
+        array.map(v=>{
+            v.isToggle=false;
             if(v.sub!==undefined){
-                v.sub.map((val,key)=>{
+                v.sub.map(val=>{
                     if(val.sub===undefined){
                         if(val.path===path){
-                            v.isToggle=false;
                             if(val.parent===v.label){
                                 v.isToggle=!v.isToggle;
                             }
                         }
-                    }else if(val.sub!==undefined){
-                        val.sub.map((row,idx)=>{
+                    }
+                    val.isToggle=false;
+                    if(val.sub!==undefined){
+                        val.sub.map(row=>{
                             if(row.path===path){
                                 v.isToggle=true;
                                 val.isToggle=!val.isToggle;
                             }
-
                         })
                     }
-
-
                 })
             }
         });
         this.setState({aksesMember:array})
     }
-
     getProps(param){
         if (param.auth.user) {
             if(param.auth.user!==undefined){
                 let akses = param.auth.user.access_level;
-                if(akses!==undefined)this.handleToggle(param,akses);
+                if(akses!==undefined){
+                    this.handleToggle(param,akses);
+                }
             }
 
         }
@@ -110,32 +106,30 @@ class SideMenu extends Component {
 
     render() {
         const path = this.props.location.pathname;
-        const {
-            aksesMember
-        }=this.state;
+        const {aksesMember}=this.state;
          return (
              this.props.auth.user.access_level===undefined?<Preloader/> : <nav>
                  <ul className="sidebar-menu" data-widget="tree">
-                     <SingleMenu display={'1'} isActive={path==='/'?"active":''} path={"/"} icon={"fa fa-dashboard"} label={"Dashboard"}/>
+                     <OneMenu display={'1'} isActive={path==='/'?"active":''} path={"/"} icon={"fa fa-dashboard"} label={"Dashboard"}/>
                      {
                          (()=>{
                              let child =[];
                              aksesMember.map((val,idx)=>{
                                  if(val.sub===undefined&&val.otherSub===undefined){
                                      child.push(
-                                         <SingleMenu key={idx} display={val.isChecked} isActive={path===val.path?'active':''} path={val.path} icon={"fa fa-dashboard"} label={val.label}/>
+                                         <OneMenu key={idx} display={val.isChecked} isActive={path===val.path?'active':''} path={val.path} icon={"fa fa-list"} label={val.label}/>
                                      )
                                  }
                                  else if(val.sub!==undefined&&val.otherSub===undefined){
                                      child.push(
-                                         <DoubleMenu
+                                         <TwoMenu
                                              key={idx}
                                              changeMenu={this.menuChange.bind(this)}
                                              isActive={val.isToggle}
                                              isDisplay={val.isChecked}
                                              arg1={val.label}
                                              arg2={''}
-                                             icon={'zmdi zmdi-receipt'}
+                                             icon={'fa fa-list'}
                                              label={val.label}
                                              path={path}
                                              data={
@@ -157,7 +151,7 @@ class SideMenu extends Component {
                                  }
                                  else{
                                      child.push(
-                                         <ThirdMenu
+                                         <ThreeMenu
                                              key={idx}
                                              changeMenu={this.menuChange.bind(this)}
                                              changeSubMenu={this.menuChange.bind(this)}

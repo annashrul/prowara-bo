@@ -3,7 +3,8 @@
 import {ALAMAT} from "../../actions/_constants";
 
 const initialState = {
-    isLoadingDetail: true,
+    isLoadingDetail: false,
+    isShowModal: false,
     status: "",
     msg: "",
     data: [],
@@ -20,6 +21,10 @@ export const alamatReducer = (state = initialState, action) => {
         case ALAMAT.LOADING_DETAIL:
             return Object.assign({}, state, {
                 isLoadingDetail: action.load
+            });
+        case ALAMAT.SHOW_MODAL:
+            return Object.assign({}, state, {
+                isShowModal: action.load
             });
         default:
             return state

@@ -20,8 +20,8 @@ export const NOTIF_ALERT = {
 }
 
 export const HEADERS ={
-  // URL       : "http://192.168.100.10:6691/",
-  URL: 'http://ptnetindo.com:6706/',
+  URL       : "http://192.168.100.10:6691/",
+  // URL: 'http://ptnetindo.com:6706/',
   TOKEN     : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2RiN2M5OC0wNWNmLTQ4NDgtOGM3Yy0yZTFiYTczZGUwNmYiLCJpYXQiOjE1NzAxNzM0ODYsImV4cCI6MTU3MDc3ODI4Nn0.1NiWtt2luG83am8FJSvWpL5p35Oxd8GSJJTwhFmAdgw",
   USERNAME  : "netindo",
   PASSWORD  : "$2b$08$hLMU6rEvNILCMaQbthARK.iCmDRO7jNbUB8CcvyRStqsHD4UQxjDO"
@@ -175,6 +175,11 @@ export const MEMBER = {
     EDIT: `EDIT_${prefMember}`,
     LOADING_EXCEL: `SET_${prefMember}_LOADING_EXCEL`,
     EXCEL: `EXCEL_${prefMember}`,
+    LOADING_INVESMENT: `SET_${prefMember}_LOADING_INVESMENT`,
+    DATA_INVESMENT: `DATA_INVESMENT_${prefMember}`,
+    SHOW_MODAL: `SHOW_MODAL_${prefMember}`,
+    LOADING_EXCEL_INVESMENT: `SET_${prefMember}_LOADING_EXCEL`,
+    EXCEL_INVESMENT: `EXCEL_INVESMENT_${prefMember}`,
 
 }
 /****************
@@ -198,6 +203,8 @@ let prefAlamat='ALAMAT';
 export const ALAMAT = {
     LOADING_DETAIL: `SET_${prefAlamat}_LOADING_DETAIL`,
     DETAIL: `DETAIL_${prefAlamat}`,
+    SHOW_MODAL:`SHOW_MODAL_${prefAlamat}`,
+
 }
 /****************
  BANK
@@ -206,6 +213,7 @@ let prefBank='BANK';
 export const BANK = {
     LOADING_DETAIL: `SET_${prefBank}_LOADING_DETAIL`,
     DETAIL: `DETAIL_${prefBank}`,
+    SHOW_MODAL:`SHOW_MODAL_${prefBank}`,
 }
 /****************
  CONTENT
