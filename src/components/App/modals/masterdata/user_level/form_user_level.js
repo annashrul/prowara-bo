@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import WrapperModal from "../../_wrapper.modal";
 import connect from "react-redux/es/connect/connect";
+import Switch from "react-switch";
 
 import {
     ModalBody,
@@ -8,7 +9,7 @@ import {
     ModalFooter
 } from "reactstrap";
 import {ModalToggle} from "../../../../../redux/actions/modal.action";
-import {stringifyFormData,ToastQ} from "../../../../../helper";
+import {ToastQ} from "../../../../../helper";
 import {postUserLevel, putUserLevel} from "../../../../../redux/actions/masterdata/user_level.action";
 import Preloader from "../../../../../Preloader";
 
@@ -20,51 +21,42 @@ class FormUserLevel extends Component{
         this.toggle = this.toggle.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeToggle = this.handleChangeToggle.bind(this);
         this.state = {
             menu:[
-                {label:"member",path:"/member",isChecked:false,isToggle:false,sub:undefined},
-                {label:"pin",path:"/pin",isChecked:false,isToggle:false,sub:undefined},
-                // {label:"konten",path:"",isChecked:false,isToggle:false,sub:[
-                //     {label:"testimoni",path:"/testimoni",parent:'konten',isChecked:false},
-                //     {label:"berita",path:"/berita",parent:'konten',isChecked:false},
-                // ]},
-                {label:"pengguna",path:"",isChecked:false,isToggle:false,sub:[
-                    {label:"daftar pengguna",path:"/daftar_pengguna",parent:'pengguna',isChecked:false},
-                    {label:"akses pengguna",path:"/akses_pengguna",parent:'pengguna',isChecked:false},
+                {id:0,label:"member",path:"/member",isChecked:false,isToggle:false,sub:undefined},
+                {id:1,label:"pin",path:"/pin",isChecked:false,isToggle:false,sub:undefined},
+                {id:2,label:"pengguna",path:"",isChecked:false,isToggle:false,sub:[
+                    {id:3,label:"daftar pengguna",path:"/daftar_pengguna",parent:'pengguna',isChecked:false},
+                    {id:4,label:"akses pengguna",path:"/akses_pengguna",parent:'pengguna',isChecked:false},
                 ]},
-                // {label:"e-wallet",path:"",isChecked:false,isToggle:false,sub:[
-                //     {label:"deposit",path:"/deposit",parent:'e-wallet',isChecked:false},
-                //     {label:"penarikan",path:"/penarikan",parent:'e-wallet',isChecked:false},
-                //     {label:"transfer",path:"/transfer",parent:'e-wallet',isChecked:false},
-                // ]},
-                {label:"laporan",path:"",isChecked:false,isToggle:false,sub:[
-                    {label:"transaksi",path:"/laporan/transaksi",parent:'laporan',isChecked:false},
-                    {label:"penjualan",path:"",parent:'laporan',isChecked:false,sub:[
-                        {label:"paket",path:"/laporan/paket",parent:'penjualan',isChecked:false,sub:undefined},
-                        {label:"pin",path:"/laporan/pin",parent:'penjualan',isChecked:false,sub:undefined},
+                {id:5,label:"laporan",path:"",isChecked:false,isToggle:false,sub:[
+                    {id:6,label:"transaksi",path:"/laporan/transaksi",parent:'laporan',isChecked:false},
+                    {id:7,label:"penjualan",path:"",parent:'laporan',isChecked:false,sub:[
+                        {id:8,label:"paket",path:"/laporan/paket",parent:'penjualan',isChecked:false,sub:undefined},
+                        {id:9,label:"pin",path:"/laporan/pin",parent:'penjualan',isChecked:false,sub:undefined},
                     ]},
-                    {label:"e-wallet",path:"",parent:'laporan',isChecked:false,sub:[
-                        {label:"deposit",path:"/laporan/deposit",parent:'e-wallet',isChecked:false,sub:undefined},
-                        {label:"penarikan",path:"/laporan/penarikan",parent:'e-wallet',isChecked:false,sub:undefined},
-                        {label:"transfer",path:"/laporan/transfer",parent:'e-wallet',isChecked:false,sub:undefined},
+                    {id:10,label:"e-wallet",path:"",parent:'laporan',isChecked:false,sub:[
+                        {id:11,label:"deposit",path:"/laporan/deposit",parent:'e-wallet',isChecked:false,sub:undefined},
+                        {id:12,label:"penarikan",path:"/laporan/penarikan",parent:'e-wallet',isChecked:false,sub:undefined},
+                        {id:13,label:"transfer",path:"/laporan/transfer",parent:'e-wallet',isChecked:false,sub:undefined},
                     ]},
-
                 ],otherSub:true},
-                {label:"berita",path:"/berita",isChecked:false,isToggle:false,sub:undefined},
-
-                {label:"pengaturan",path:"",isChecked:false,isToggle:false,sub:[
-                    {label:"umum",path:"/pengaturan/umum",parent:'pengaturan',isChecked:false},
-                    {label:"bank",path:"/pengaturan/bank",parent:'pengaturan',isChecked:false},
+                {id:14,label:"berita",path:"/berita",isChecked:false,isToggle:false,sub:undefined},
+                {id:15,label:"pengaturan",path:"",isChecked:false,isToggle:false,sub:[
+                    {id:16,label:"umum",path:"/pengaturan/umum",parent:'pengaturan',isChecked:false},
+                    {id:17,label:"bank",path:"/pengaturan/bank",parent:'pengaturan',isChecked:false},
                 ]},
             ],
             lvl    : "",
+            checked:false
         }
     }
 
     getProps(param){
         if (param.detail.id !== '') {
-            // this.setState({lvl:param.detail.lvl,menu:param.detail.access});
-            this.setState({lvl:param.detail.lvl,menu:this.state.menu});
+            this.setState({lvl:param.detail.lvl,menu:param.detail.access});
+            // this.setState({lvl:param.detail.lvl,menu:this.state.menu});
         }
     }
     componentWillReceiveProps(nextProps) {
@@ -73,26 +65,26 @@ class FormUserLevel extends Component{
     componentWillMount(){
         this.getProps(this.props);
     }
-    toggle = (e) => {
+    toggle (e){
         e.preventDefault();
         const bool = !this.props.isOpen;
         this.props.dispatch(ModalToggle(bool));
     };
-    handleAllChecked = (event,param) => {
+    handleAllChecked (event,param){
         let menu = this.state.menu;
-        menu.map((val,key)=>{
-            if(param===val.label){
-                val.isChecked=event.target.checked;
+        menu.forEach(val=>{
+            if(param===val.id){
+                val.isChecked=event;
             }
             if(val.sub!==undefined){
-                val.sub.map((row,i)=>{
-                    if(param===val.label||param===row.label){
-                        row.isChecked=event.target.checked;
+                val.sub.forEach(row=>{
+                    if(param===val.id||param===row.id){
+                        row.isChecked=event;
                     }
                     if(row.sub!==undefined){
-                        row.sub.map((res,idx)=>{
-                            if(param===val.label||param===row.label&&param===res.label){
-                                res.isChecked=event.target.checked;
+                        row.sub.forEach(res=>{
+                            if(param===val.id||param===row.id||param===res.id){
+                                res.isChecked=event;
                             }
                         })
                     }
@@ -102,11 +94,15 @@ class FormUserLevel extends Component{
         });
         this.setState({menu:menu});
     };
-    handleChange = (event) => {
+    handleChange (event){
         this.setState({ [event.target.name]: event.target.value });
         let err = Object.assign({}, this.state.error, {[event.target.name]: ""});
         this.setState({error: err});
     };
+    handleChangeToggle(e,val) {
+        console.log(e,val)
+        this.setState({ checked:val});
+    }
     handleSubmit(e){
         e.preventDefault();
         let parseData   = {};
@@ -144,9 +140,11 @@ class FormUserLevel extends Component{
                                     return(
                                         <div className="col-md-12" key={key}>
                                             <div className="form-group">
-                                                <input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.label)}  value="checkedall" /> <b style={{color:'red'}}>{val.label.replace('_',' ').toUpperCase()}</b>
+                                                <label htmlFor=""><b style={{color:'white',letterSpacing:"2px"}}>{val.label.replace('_',' ').toUpperCase()}</b></label>
+                                                <br/>
+                                                <Switch onChange={(e)=>this.handleAllChecked(e,val.id)} checked={val.isChecked}/>
+                                                {/*<input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.id)}  value="checkedall" /> <b style={{color:'red',letterSpacing:"2px"}}>{val.label.replace('_',' ').toUpperCase()}</b>*/}
                                             </div>
-                                            <hr style={{border:"1px solid #343a40"}}/>
                                         </div>
                                     );
                                 }
@@ -154,9 +152,11 @@ class FormUserLevel extends Component{
                                     return(
                                         <div className="col-md-12" key={key}>
                                             <div className="form-group">
-                                                <input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.label)}  value="checkedall" /> <b style={{color:'red'}}>{val.label.replace('_',' ').toUpperCase()}</b>
+                                                <label htmlFor=""><b style={{color:'white',letterSpacing:"2px"}}>{val.label.replace('_',' ').toUpperCase()}</b></label>
+                                                <br/>
+                                                <Switch onChange={(e)=>this.handleAllChecked(e,val.id)} checked={val.isChecked}/>
+                                                {/*<input type="checkbox" checked={val.isChecked} onChange={(e)=>this.handleAllChecked(e,val.id)}  value="checkedall" /> <b style={{color:'red',letterSpacing:"2px"}}>{val.label.replace('_',' ').toUpperCase()}</b>*/}
                                             </div>
-                                            <hr style={{border:"1px solid #343a40"}}/>
                                             <div className="row">
                                                 {
                                                     val.sub.map((row,idx)=>{
@@ -164,21 +164,25 @@ class FormUserLevel extends Component{
                                                         return(
                                                             <div className={`${row.sub!==undefined?'col-md-12':'col-md-3'}`} key={idx}  style={{marginLeft:"9px"}}>
                                                                 <div className="form-group">
-                                                                    <input onChange={(e)=>this.handleAllChecked(e,row.label)} id={row.label} className={row.label} type="checkbox" checked={row.isChecked} value={row.value} /> <b style={{color:'green'}}>{row.label.replace('_',' ').toUpperCase()}</b>
+                                                                    <label htmlFor=""><b style={{color:'#D4AF37',letterSpacing:"2px"}}>{row.label.replace('_',' ').toUpperCase()}</b></label>
+                                                                    <br/>
+                                                                    <Switch onChange={(e)=>this.handleAllChecked(e,row.id)} checked={row.isChecked}/>
+                                                                    {/*<input onChange={(e)=>this.handleAllChecked(e,row.id)} id={row.label} className={row.label} type="checkbox" checked={row.isChecked} value={row.value} /> <b style={{color:'green',letterSpacing:"2px"}}>{row.label.replace('_',' ').toUpperCase()}</b>*/}
                                                                 </div>
-                                                                <hr style={{border:"1px solid #343a40"}}/>
                                                                 <div className="row" style={{marginLeft:"3px"}}>
                                                                     {
                                                                         (()=> {
                                                                             let child = [];
                                                                             if(row.sub!==undefined){
-                                                                                row.sub.map((res,i)=>{
+                                                                                row.sub.forEach((res,i)=>{
                                                                                     child.push(
-                                                                                        <div className="col-md-3">
+                                                                                        <div className="col-md-3" key={i}>
                                                                                             <div className="form-group">
-                                                                                                <input onChange={(e)=>this.handleAllChecked(e,res.label)} id={res.label} className={res.label} type="checkbox" checked={res.isChecked} value={res.value} /> <b style={{color:'orange'}}>{res.label.replace('_',' ').toUpperCase()}</b>
+                                                                                                <label htmlFor=""><b style={{color:'orange',letterSpacing:"2px"}}>{res.label.replace('_',' ').toUpperCase()}</b></label>
+                                                                                                <br/>
+                                                                                                <Switch onChange={(e)=>this.handleAllChecked(e,res.id)} checked={res.isChecked}/>
+                                                                                                {/*<input onChange={(e)=>this.handleAllChecked(e,res.id)} id={res.label} className={res.label} type="checkbox" checked={res.isChecked} value={res.value} /> <b style={{color:'orange',letterSpacing:"2px"}}>{res.label.replace('_',' ').toUpperCase()}</b>*/}
                                                                                             </div>
-                                                                                            <hr style={{border:"1px solid #343a40"}}/>
                                                                                         </div>
 
                                                                                     );

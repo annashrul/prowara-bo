@@ -1,26 +1,26 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
-import Layout from 'components/Layout';
-import Paginationq, {noImage, rangeDate, statusQ, toCurrency, toRp} from "helper";
-import {NOTIF_ALERT} from "redux/actions/_constants";
-import {ModalToggle, ModalType} from "redux/actions/modal.action";
+import Layout from '../../../../components/Layout';
+import Paginationq, {statusQ, toCurrency} from "../../../../helper";
+import {NOTIF_ALERT} from "../../../../redux/actions/_constants";
+import {ModalToggle, ModalType} from "../../../../redux/actions/modal.action";
 import moment from "moment";
 import DetailAlamat from "../../modals/masterdata/member/detail_alamat"
 import DetailBank from "../../modals/masterdata/member/detail_bank"
 import DetailInvesment from "../../modals/masterdata/member/detail_invesment"
-import {getMember, putMember} from "redux/actions/masterdata/member.action";
+import {getMember, putMember} from "../../../../redux/actions/masterdata/member.action";
 import UncontrolledButtonDropdown from "reactstrap/es/UncontrolledButtonDropdown";
 import DropdownToggle from "reactstrap/es/DropdownToggle";
 import DropdownMenu from "reactstrap/es/DropdownMenu";
 import DropdownItem from "reactstrap/es/DropdownItem";
 import {fetchKategori} from "../../../../redux/actions/kategori/kategori.action";
-import Select from 'react-select';
-import {getExcelMember, getInvesment} from "../../../../redux/actions/masterdata/member.action";
+import {getExcelMember} from "../../../../redux/actions/masterdata/member.action";
 import {toExcel} from "../../../../helper";
 import Preloader from "../../../../Preloader";
 import {getDetailBank} from "../../../../redux/actions/masterdata/bank.action";
 import {getDetailAlamat} from "../../../../redux/actions/masterdata/alamat.action";
 import * as Swal from "sweetalert2";
+import Select from 'react-select';
 
 class IndexMember extends Component{
     constructor(props){
@@ -28,6 +28,7 @@ class IndexMember extends Component{
         this.state={
             detail:{},
             any:"",
+            isLoading:false,
             dateFrom:moment(new Date()).format("yyyy-MM-DD"),
             dateTo:moment(new Date()).format("yyyy-MM-DD"),
             searchBy:'fullname',
@@ -41,7 +42,7 @@ class IndexMember extends Component{
             membership:'',
             jenjangKarir:'',
             status:'',
-            statusData:[{value:'-',label:"Semua"},{value:0,label:"Tidak Aktif"},{value:1,label:"Aktif"}]
+            statusData:[{value:'',label:"Semua"},{value:0,label:"Tidak Aktif"},{value:1,label:"Aktif"}]
 
         };
         this.handleEvent    = this.handleEvent.bind(this);
@@ -82,8 +83,10 @@ class IndexMember extends Component{
     getExcel(props){
         if(props.dataExcel.data!==undefined){
             if(props.dataExcel.data.length>0){
+                this.setState({isLoading:false});
+                let stts=this.state.status;
                 let content=[];
-                props.dataExcel.data.map((v,i)=>{
+                props.dataExcel.data.forEach((v,i)=>{
                     content.push([
                         v.fullname,
                         v.referral,
@@ -95,7 +98,7 @@ class IndexMember extends Component{
                     ]);
                 });
                 toExcel(
-                    'LAPORAN MEMBER',
+                    `LAPORAN MEMBER ${stts===0?'Tidak Aktif':(stts===1?'Aktif':'')}` ,
                     `SEMUA PERIODE`,
                     [
                         'NAMA',
@@ -114,8 +117,13 @@ class IndexMember extends Component{
     }
     printDocumentXLsx(e,param){
         e.preventDefault();
+        this.setState({isLoading:true});
         let where=this.handleValidate();
-        this.props.dispatch(getExcelMember(`perpage=${param}&${where}`));
+        if(this.state.status!==''){
+            this.props.dispatch(getExcelMember(`status=${this.state.status}&perpage=${param}&${where}`));
+        }else{
+            this.props.dispatch(getExcelMember(`perpage=${param}&${where}`));
+        }
     }
     handleSearchBy(val){
         this.setState({
@@ -124,36 +132,31 @@ class IndexMember extends Component{
     }
     handleStatus(val){
         this.setState({status:val.value});
-    }
-    handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value});
-        this.state.status= event.target.value;
-        if(event.target.name==='status'){
-            let where = this.handleValidate();
-            this.props.dispatch(getMember(where));
-        }
-    }
-    handleValidate(){
-        let where="";
-        let page = localStorage.getItem("pageMember");
-        let any = this.state.any;
-        let searchBy = this.state.searchBy;
-        let status = this.state.status;
-        if(page!==null&&page!==undefined&&page!==""){
-            where+=`page=${page}`;
+        let where = this.handleValidate();
+        // console.log(where);
+        if(val.value!==''){
+            this.props.dispatch(getMember(`page=1&status=${val.value}&${where}`));
+
         }else{
-            where+="page=1";
+            this.props.dispatch(getMember(`page=1&${where}`));
+
         }
 
-        if(searchBy!==null&&searchBy!==undefined&&searchBy!==""){
-            where+=`&searchby=${searchBy}`;
-        }
-        if(status!==null&&status!==undefined&&status!==""&&status!=="-"){
-            where+=`&status=${status}`;
-        }
+    }
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+        })
+
+
+    }
+    handleValidate(){
+        let any = this.state.any;
+        let searchBy = this.state.searchBy;
+        let where=`searchby=${searchBy}`;
         if(any!==null&&any!==undefined&&any!==""){
-            where+="&page=1";
             where+=`&q=${any}`;
+            this.setState({any:''});
         }
 
         return where;
@@ -231,7 +234,7 @@ class IndexMember extends Component{
         let totSponsor=0;
         return(
             <Layout page={"Member"}>
-                {this.props.isLoadingExcel||this.props.isLoading||this.props.isLoadingBank||this.props.isLoadingAlamat ?<Preloader/>:null}
+                {this.state.isLoading||this.props.isLoading||this.props.isLoadingBank||this.props.isLoadingAlamat ?<Preloader/>:null}
                 <div className="row">
                     <div className="col-12 box-margin">
                         <div className="row">
@@ -240,32 +243,37 @@ class IndexMember extends Component{
                                     <div className="col-12 col-xs-12 col-md-3">
                                         <div className="form-group">
                                             <label htmlFor="">Kolom</label>
-                                            <select name="searchBy" className="form-control" value={this.state.searchBy} onChange={this.handleChange}>
-                                                {
-                                                    this.state.searchByData.map((v,i)=>{
-                                                        return(
-                                                            <option key={i} value={v.value}>{v.label}</option>
-                                                        );
+                                            <Select
+                                                options={this.state.searchByData}
+                                                placeholder="==== Pilih Kategori ===="
+                                                onChange={this.handleSearchBy}
+                                                value={
+                                                    this.state.searchByData.find(op => {
+                                                        return op.value === this.state.searchBy
                                                     })
                                                 }
-                                            </select>
 
-
+                                            />
                                         </div>
 
                                     </div>
                                     <div className="col-12 col-xs-12 col-md-3" style={{display:this.state.searchBy==='status'?'block':'none'}}>
                                         <div className="form-group">
                                             <label>Status</label>
-                                            <select name="status" className="form-control" value={this.state.status} onChange={this.handleChange}>
-                                                {
-                                                    this.state.statusData.map((v,i)=>{
-                                                        return(
-                                                            <option key={i} value={v.value}>{v.label}</option>
-                                                        );
+
+                                            <Select
+                                                options={this.state.statusData}
+                                                placeholder="==== Pilih ===="
+                                                onChange={this.handleStatus}
+                                                value={
+                                                    this.state.statusData.find(op => {
+                                                        return op.value === this.state.status
                                                     })
                                                 }
-                                            </select>
+
+                                            />
+
+
 
                                         </div>
                                     </div>
@@ -285,7 +293,7 @@ class IndexMember extends Component{
                                                 <i className="fa fa-search"/>
                                             </button>
                                             <button style={{marginTop:"28px"}} className="btn btn-primary"  onClick={(e => this.printDocumentXLsx(e,per_page*last_page))}>
-                                                <i className="fa fa-print"/>
+                                                <i className="fa fa-print"/> {this.props.loading?'.....':''}
                                             </button>
                                         </div>
                                     </div>
@@ -345,16 +353,16 @@ class IndexMember extends Component{
                                                     <td style={numberStyle} className="txtGreen">Rp {v.saldo==='0'?0:toCurrency(parseInt(v.saldo,10))} .-</td>
                                                     <td style={numberStyle}>{v.sponsor==='0'?0:toCurrency(parseInt(v.sponsor,10))}</td>
                                                     <td style={numberStyle}>{v.pin==='0'?0:toCurrency(parseInt(v.pin,10))}</td>
-                                                    <td style={headStyle}>{(v.status===0?<span className="badge badge-danger" style={{padding:'5px'}}>Tidak Aktif</span>:<span className="badge badge-success" style={{padding:'5px'}}>Aktif</span>)}</td>
+                                                    <td style={headStyle}>{statusQ(v.status)}</td>
 
                                                 </tr>
                                             );
                                         })
                                         : <tr>
-                                            <td colSpan={19} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                            <td colSpan={19} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                                         </tr>
                                     : <tr>
-                                        <td colSpan={19} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                        <td colSpan={19} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                                     </tr>
                                 }
                                 </tbody>
@@ -422,7 +430,7 @@ const mapStateToProps = (state) => {
         isLoading: state.memberReducer.isLoading,
         data:state.memberReducer.data,
 
-        isLoadingExcel: state.memberReducer.isLoadingExcel,
+        loading: state.memberReducer.isLoadingExcel,
         dataExcel:state.memberReducer.excel,
 
         isLoadingAlamat: state.alamatReducer.isLoadingDetail,

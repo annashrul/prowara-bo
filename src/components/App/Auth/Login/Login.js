@@ -5,7 +5,6 @@ import BgAuth from "../../../../assets/logo.png"
 import './login.css'
 import {loginUser} from '../../../../redux/actions/authActions';
 import Swal from 'sweetalert2'
-import {HEADERS} from '../../../../redux/actions/_constants'
 class Login extends Component {
     constructor(props) {
         super(props);

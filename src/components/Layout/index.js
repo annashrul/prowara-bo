@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Link,Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Header from './header'
 import SideMenu from './sideMenu'
 import {connect} from 'react-redux'

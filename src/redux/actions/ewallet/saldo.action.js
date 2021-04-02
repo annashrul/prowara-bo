@@ -1,7 +1,6 @@
 import axios from "axios"
 import Swal from "sweetalert2";
-import {SALDO, HEADERS,NOTIF_ALERT} from "../_constants";
-import {ModalToggle} from "../modal.action";
+import {SALDO, HEADERS} from "../_constants";
 
 
 export function setLoading(load) {

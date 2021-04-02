@@ -1,8 +1,6 @@
 import axios from "axios"
 import Swal from "sweetalert2";
 import {MEMBER, HEADERS,NOTIF_ALERT} from "../_constants";
-import {ModalToggle} from "../modal.action";
-
 
 export function setLoading(load) {
     return {
@@ -136,6 +134,7 @@ export const getMember = (where) => {
 
     }
 };
+
 export const getExcelMember = (where) => {
     return (dispatch) => {
         dispatch(setLoadingExcel(true));
@@ -143,6 +142,8 @@ export const getExcelMember = (where) => {
         if(where){
             url+=`?${where}`;
         }
+
+        console.log(url);
 
         axios.get(HEADERS.URL + `${url}`)
             .then(function (response) {
@@ -204,7 +205,6 @@ export const putMember = (data,id) => {
         const url = HEADERS.URL + `member/${id}`;
         axios.put(url,data)
             .then(function (response) {
-                const data = (response.data);
                 setTimeout(
                     function () {
                         Swal.close() ;
@@ -252,7 +252,6 @@ export const putMember = (data,id) => {
             })
     }
 }
-
 export const getInvesment = (where) => {
     return (dispatch) => {
         dispatch(setShowModal(false));
@@ -282,7 +281,6 @@ export const getInvesment = (where) => {
 
     }
 };
-
 export const getExcelInvesment = (where) => {
     return (dispatch) => {
         dispatch(setLoadingExcelInvesment(true));

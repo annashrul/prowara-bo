@@ -18,14 +18,14 @@ class SideMenu extends Component {
     }
     menuChange(argument){
         let arr = this.state.aksesMember;
-        arr.map(v => {
+        arr.forEach(v => {
             if(argument.parent===v.label&&argument.child===''){
                 v.isToggle=!v.isToggle;
             }else{
                 v.isToggle=false;
             }
             if(v.sub!==undefined){
-                v.sub.map(row => {
+                v.sub.forEach(row => {
                     if(argument.parent===v.label&&argument.child!==''){
                         if(argument.child===row.label){
                             v.isToggle=true;
@@ -42,10 +42,10 @@ class SideMenu extends Component {
     }
     handleToggle(props,array){
         const path = props.location.pathname;
-        array.map(v=>{
+        array.forEach(v=>{
             v.isToggle=false;
             if(v.sub!==undefined){
-                v.sub.map(val=>{
+                v.sub.forEach(val=>{
                     if(val.sub===undefined){
                         if(val.path===path){
                             if(val.parent===v.label){
@@ -55,7 +55,7 @@ class SideMenu extends Component {
                     }
                     val.isToggle=false;
                     if(val.sub!==undefined){
-                        val.sub.map(row=>{
+                        val.sub.forEach(row=>{
                             if(row.path===path){
                                 v.isToggle=true;
                                 val.isToggle=!val.isToggle;
@@ -114,7 +114,7 @@ class SideMenu extends Component {
                      {
                          (()=>{
                              let child =[];
-                             aksesMember.map((val,idx)=>{
+                             aksesMember.forEach((val,idx)=>{
                                  if(val.sub===undefined&&val.otherSub===undefined){
                                      child.push(
                                          <OneMenu key={idx} display={val.isChecked} isActive={path===val.path?'active':''} path={val.path} icon={"fa fa-list"} label={val.label}/>
@@ -135,7 +135,7 @@ class SideMenu extends Component {
                                              data={
                                                  (()=>{
                                                      let subChild =[];
-                                                     val.sub.map(menuVal=>{
+                                                     val.sub.forEach(menuVal=>{
                                                          if(menuVal.label!==''){
                                                              subChild.push(
                                                                  {path:menuVal.path,display:menuVal.isChecked,label:menuVal.label}
@@ -164,14 +164,14 @@ class SideMenu extends Component {
                                              data={
                                                  (()=>{
                                                      let subChild =[];
-                                                     val.sub.map(valKey=>{
+                                                     val.sub.forEach(valKey=>{
                                                          subChild.push(
                                                              {
                                                                  isActive:valKey.isToggle, isDisplay:valKey.isChecked, arg1:valKey.label, label:valKey.label.replaceAll("_"," ").toLowerCase(), path:valKey.path,
                                                                  data:(()=>{
                                                                      let thirdSub=[];
 
-                                                                     if(valKey.sub!==undefined)valKey.sub.map((row,idx)=>{
+                                                                     if(valKey.sub!==undefined)valKey.sub.forEach((row,idx)=>{
                                                                          thirdSub.push({isDisplay:row.isChecked,label:row.label,path:row.path});
                                                                          return null;
                                                                      });
@@ -195,7 +195,7 @@ class SideMenu extends Component {
                      }
 
                      {/* ===================================LOGOUT MODUL START */}
-                     <li><a href={null} style={{cursor:'pointer',color:'#a6b6d0'}} onClick={(event)=>this.handleLogout(event)}> <i className="fa fa-sign-out" /><span> Logout</span></a></li>
+                     <li><a href="about:blank" style={{cursor:'pointer',color:'#a6b6d0'}} onClick={(event)=>this.handleLogout(event)}> <i className="fa fa-sign-out" /><span> Logout</span></a></li>
                      {/* ===================================LOGOUT MODUL END=================================== */}
                  </ul>
             </nav>

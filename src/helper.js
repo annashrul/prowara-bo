@@ -8,37 +8,7 @@ import NoData from "assets/nodata.png";
 import Yes from "assets/status-Y.png";
 import No from "assets/status-T.png";
 import {CopyToClipboard} from "react-copy-to-clipboard";
-import dollarY from 'assets/status/dollar_y.svg'
-import dollar from 'assets/status/dollar.svg'
-import dollarWhite from 'assets/status/dollar_white.svg'
-import pack_deliveryY from 'assets/status/pack_delivery_y.svg'
-import pack_deliveryWhite from 'assets/status/pack_delivery_y_white.svg'
-import pack_delivery from 'assets/status/pack_delivery_y_non.svg'
-import pack_deliveredY from 'assets/status/pack_delivered_y.svg'
-import pack_deliveredWhite from 'assets/status/pack_delivered_y_white.svg'
-import pack_delivered from 'assets/status/pack_delivered_y_non.svg'
-import truckY from 'assets/status/truck_y.svg'
-import truckWhite from 'assets/status/truck_y_white.svg'
-import truck from 'assets/status/truck_y_non.svg'
-import confirmY from 'assets/status/confirmation.svg'
-import confirmWhite from 'assets/status/confirmation_white.svg'
-import confirm from 'assets/status/confirmation_non.svg'
 import XLSX from 'xlsx'
-import Select from 'react-select';
-import Skeleton from 'react-loading-skeleton';
-export const statusOrder = (type, status, iswhite = false) => {
-    if (type === 'dollar') {
-        return (!iswhite ? (status ? dollarY : dollar) : dollarWhite)
-    } else if (type === 'packing') {
-        return (!iswhite ? (status ? pack_deliveryY : pack_delivery) : pack_deliveryWhite)
-    } else if (type === 'delivered') {
-        return (!iswhite ? (status ? pack_deliveredY : pack_delivered) : pack_deliveredWhite)
-    } else if (type === 'truck') {
-        return (!iswhite ? (status ? truckY : truck) : truckWhite)
-    } else if (type === 'confirm') {
-        return (!iswhite ? (status ? confirmY : confirm) : confirmWhite)
-    }
-}
 export const myDate = (val) =>{
     return moment(val).locale('id').format("L")
 }
@@ -100,10 +70,7 @@ export const copyTxt = (txt)=>{
 export const noData = ()=>{
     return NoData;
 }
-export const validateEmail=(email)=>{
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
+
 export const toCurrency = (angka) => {
     let numbers=0;
     if(angka===null) return 0;
@@ -235,7 +202,7 @@ export const rmHtml = (str)=>{
 var date = new Date();
 date.setDate(date.getDate());
 export const rangeDate = {
-    'Hari Ini'          : [moment(),moment()],
+    'Hari Ini'          : [moment().locale('id'),moment()],
     'Kemarin'           : [date.setDate(date.getDate()-1), date.setDate(date.getDate())],
     '7 Hari Terakhir'   : [moment().subtract(6, 'days'), moment()],
     '30 Hari Terakhir'  : [moment().subtract(29, 'days'), moment()],
@@ -244,7 +211,7 @@ export const rangeDate = {
     'Bulan Ini'         : [moment().startOf('month'), moment().endOf('month')],
     'Bulan Lalu'        : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
     'Tahun Ini'         : [moment().startOf('year'), moment().endOf('year')],
-    'Tahun Lalu'        : [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
+    'Tahun Lalu'        : [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
 };
 
 class Paginationq extends Component{
@@ -257,7 +224,7 @@ class Paginationq extends Component{
                 activePage={parseInt(this.props.current_page,10)}
                 itemsCountPerPage={parseInt(this.props.per_page,10)}
                 totalItemsCount={parseInt(this.props.total,10)}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={3}
                 onChange={this.props.callback}
                 itemClass="page-item"
                 linkClass="page-link"

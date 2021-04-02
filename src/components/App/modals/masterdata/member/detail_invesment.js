@@ -58,7 +58,7 @@ class DetailInvesment extends Component{
             if(props.dataExcel.data.length>0){
                 let content=[];
                 // let totTrx;
-                props.dataExcel.data.map((v,i)=>{
+                props.dataExcel.data.forEach((v,i)=>{
                     content.push([
                         v.kd_trx,
                         v.fullname,
@@ -171,19 +171,19 @@ class DetailInvesment extends Component{
                                     totTrxOut=totTrxOut+parseInt(v.trx_out,10);
                                     return(
                                         <tr key={i}>
-                                            <td>{i+1 + (10 * (parseInt(current_page,10)-1))}</td>
-                                            <td>{v.kd_trx}</td>
-                                            <td>{v.fullname}</td>
+                                            <td style={headStyle}>{i+1 + (10 * (parseInt(current_page,10)-1))}</td>
+                                            <td style={headStyle}>{v.kd_trx}</td>
+                                            <td style={headStyle}>{v.fullname}</td>
                                             <td style={numberStyle} className="txtGreen">Rp {parseInt(v.trx_in,10)===0?0:toCurrency(parseInt(v.trx_in,10))} .-</td>
                                             <td style={numberStyle} className="txtGreen">Rp {parseInt(v.trx_out,10)===0?0:toCurrency(parseInt(v.trx_out,10))} .-</td>
-                                            <td>{v.note}</td>
-                                            <td>{myDate(v.created_at)}</td>
+                                            <td style={headStyle}>{v.note}</td>
+                                            <td style={headStyle}>{myDate(v.created_at)}</td>
                                         </tr>
                                     );
                                 }):<tr>
-                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={7} style={headStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr>:<tr>
-                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={7} style={headStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr>
                             }
                             </tbody>

@@ -13,12 +13,67 @@
   <title>Prowara</title>
 
   <style>
+    .css-1pahdxg-control {
+      box-shadow: 0 0 0 1px #343a40!important;
+      border-color: #343a40!important;
+      border-radius: 50px!important;
+      border-style: solid;
+      border-width: 1px;
+      background-color:#343a40!important;
 
-    .css-yk16xz-control:focus{
-      outline: 0!important;
-      box-shadow: none!important;
-      min-height: 39px!important;
-      background-color: #0a833d!important;
+    }
+    .css-26l3qy-menu{
+      top:100%;
+      background-color:#343a40!important;
+      border-radius:4px!important;box-shadow:0 0 0 1px hsla(0,0%,0%,0.1),0 4px 11px hsla(0,0%,0%,0.1);
+      margin-bottom:0px;
+      margin-top:8px;
+      position:absolute;
+      width:100%;
+      z-index:1;
+      box-sizing:border-box;
+    }
+    .css-9gakcf-option{
+      background-color:#D4AF37!important;
+      color:hsl(0,0%,100%);
+      cursor:default;
+      display:block;
+      font-size:inherit;
+      /*padding:8px 12px;*/
+      width:100%;
+      -webkit-user-select:none;
+      -moz-user-select:none;
+      -ms-user-select:none;
+      user-select:none;
+      -webkit-tap-highlight-color:rgba(0,0,0,0);
+      box-sizing:border-box;}
+    .css-1n7v3ny-option:active{background-color:#D4AF37!important;}
+    .css-yt9ioa-option:active{background-color:red!important;}
+    .css-tlfecz-indicatorContainer:hover{
+      color:#D4AF37!important;
+    }
+    .css-yt9ioa-option{  background-color:#343a40!important;color:#fff!important;cursor:default;display:block;font-size:inherit;padding:8px 12px;width:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing:border-box;}
+    .css-1n7v3ny-option{
+      background-color:#D4AF37!important;
+      color:#fff!important;
+      cursor:default;
+      display:block;
+      font-size:inherit;
+      padding:8px 12px;
+      width:100%;
+      -webkit-user-select:none;
+      -moz-user-select:none;
+      -ms-user-select:none;
+      user-select:none;
+      -webkit-tap-highlight-color:rgba(0,0,0,0);
+      box-sizing:border-box;
+    }
+    .css-b8ldur-Input{
+      color: #fff!important;
+    }
+    .css-1wa3eu0-placeholder{
+      color: #fff!important;
+
     }
     .css-1uccc91-singleValue {
       color: #fff!important;
@@ -97,9 +152,6 @@
       width: 80px;
       padding: .5rem;
     }
-
-
-
     .custom-map-modal {
       width: 100%;
       height: 100%;
@@ -153,12 +205,6 @@
     select {
       -webkit-appearance: none;
       -moz-appearance: none;
-      /*background: transparent;*/
-      /*background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");*/
-      /*background-repeat: no-repeat;*/
-      /*background-position-x: 100%;*/
-      /*background-position-y: 5px;*/
-      /*border: 1px solid #dfdfdf;*/
       border-radius: 2px;
       margin-right: 2rem;
       padding: 1rem;
@@ -180,6 +226,7 @@
       height:39px!important;
       border-radius: 50px!important;
       color: #fff!important;
+      font-size: 14px!important;
       /*font-weight: bold;*/
       background-color: #343a40!important;
       /*opacity: 0.5;*/
@@ -404,8 +451,6 @@
 
     button.cancelBtn,button.applyBtn{
       font-family: 'Roboto Condensed', sans-serif!important;
-      /*font-family: 'Roboto', sans-serif!important;*/
-      /*font-weight: bold !important;*/
     }
     .off, .ends, .available,.month,.drp-selected,.swal2-html-container,.swal2-title{
       font-family: 'Roboto Condensed', sans-serif!important;
@@ -417,7 +462,7 @@
     }
     ::placeholder{
       color:#fff!important;
-      font-size: 12px!important;
+      font-size: 14px!important;
     }
     .input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group>.input-group-append:last-child>.input-group-text:not(:last-child), .input-group>.input-group-append:not(:last-child)>.btn, .input-group>.input-group-append:not(:last-child)>.input-group-text, .input-group>.input-group-prepend>.btn, .input-group>.input-group-prepend>.input-group-text {
       border-top-left-radius: 10px!important;
@@ -455,23 +500,25 @@
     a {
       /*font-size: 12px !important;*/
       font-family: 'Roboto Condensed', sans-serif!important;
+      letter-spacing: 1px!important;
     }
 
 
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 16px;
+      width: 5px;
+      height:5px;
+      background-color: #1a1c23!important;
     }
 
     ::-webkit-scrollbar-button {
-      width: 8px;
-      height: 5px;
+      width: 5px;
+      height:5px;
     }
 
     ::-webkit-scrollbar-track {
-      background: #eee;
-      border: thin solid lightgray;
-      box-shadow: 0px 0px 3px #dfdfdf inset;
+      background: #1a1c23!important;
+      border: thin solid  #1a1c23!important;
+      box-shadow: 0px 0px 3px  #1a1c23 inset;
       border-radius: 10px;
     }
 

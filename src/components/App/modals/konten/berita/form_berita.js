@@ -39,28 +39,37 @@ class FormBerita extends Component{
         }
     }
 
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps);
-        if(nextProps.kategori.data.length>0){
-            let dataKategori=[];
-            nextProps.kategori.data.map((v,i)=>{
-                dataKategori.push({value:v.id,label:v.title});
-                return;
-            });
-            this.setState({data_kategori:dataKategori});
+    getProps(props){
+        if(props.kategori.data!==undefined){
+            if(props.kategori.data.length>0){
+                let dataKategori=[];
+                props.kategori.data.forEach((v,i)=>{
+                    dataKategori.push({value:v.id,label:v.title});
+                    return;
+                });
+                this.setState({data_kategori:dataKategori});
+            }
         }
-        if(nextProps.detail.id!==''){
+        if(props.detail.id!==''){
             this.setState({
-                caption:nextProps.detail.caption,
-                id_category:nextProps.detail.id_category,
-                title:nextProps.detail.title,
-                video:nextProps.detail.video,
+                caption:props.detail.caption,
+                id_category:props.detail.id_category,
+                title:props.detail.title,
+                video:props.detail.video,
             });
-            this.handleChangeKategori({value:nextProps.detail.id_category,label:nextProps.detail.category})
+            this.handleChangeKategori({value:props.detail.id_category,label:props.detail.category})
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        this.getProps(nextProps);
+    }
+    componentDidMount(){
+        this.getProps(this.props);
+    }
+
     componentWillMount(){
+
         this.props.dispatch(fetchKategori('berita'));
     }
 
@@ -155,7 +164,6 @@ class FormBerita extends Component{
 
     }
     render(){
-        const columnStyle = {verticalAlign: "middle", textAlign: "center",whiteSpace:"nowrap"};
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "formBerita"} size="md">
                 <ModalHeader toggle={this.toggle}>{this.props.detail.id===''?'Tambah':'Ubah'} Berita</ModalHeader>

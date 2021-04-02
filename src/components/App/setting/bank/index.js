@@ -1,12 +1,9 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
-import {DateRangePicker} from "react-bootstrap-daterangepicker";
-import Paginationq, {noImage, rangeDate, statusQ, toCurrency, toRp} from "helper";
+import Paginationq from "helper";
 import {NOTIF_ALERT} from "redux/actions/_constants";
 import {ModalToggle, ModalType} from "redux/actions/modal.action";
-import Skeleton from 'react-loading-skeleton';
-import moment from "moment";
 import FormBank from "../../modals/setting/bank.modal"
 import * as Swal from "sweetalert2";
 import {deleteBankList, getBankList} from "redux/actions/setting/bank.action";
@@ -32,7 +29,7 @@ class Bank extends Component{
 
     componentWillMount(){
         let where=this.handleValidate();
-        this.props.dispatch(getBankList(`page=1&${where}`));
+        this.props.dispatch(getBankList(`page=1${where!==''?`&${where}`:''}`));
     }
     handleChange(event){
         this.setState({[event.target.name]: event.target.value});
@@ -49,7 +46,7 @@ class Bank extends Component{
     }
     handlePage(pageNumber){
         let where = this.handleValidate();
-        this.props.dispatch(getBankList(`page=${pageNumber}&${where}`));
+        this.props.dispatch(getBankList(`page=${pageNumber}${where!==''?`&${where}`:''}`));
     }
 
     handleSearch(e){
@@ -162,10 +159,10 @@ class Bank extends Component{
                                     );
                                 })
                                 : <tr>
-                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={7} style={headStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr>
                                 :<tr>
-                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={7} style={headStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr>
 
                         }

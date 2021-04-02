@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Layout from 'components/Layout';
 import moment from 'moment';
-// import {FetchStock} from 'redux/actions/dashboard/dashboard.action'
 import 'bootstrap-daterangepicker/daterangepicker.css';
 // import socketIOClient from "socket.io-client";
-import {HEADERS} from 'redux/actions/_constants'
 
 import Cards from './src/Cards'
 import Filter from './src/Filter'
-import Info from './src/Info'
 import Chart from './src/charts'
 import Clock from "../../common/clock";
 import Default from 'assets/default.png';
@@ -322,7 +319,7 @@ class Dashboard extends Component {
                                                     <p className="mb-0" style={{fontSize:'.7em'}}>Join: {moment(item.created_at).format("yyyy-MM-DD")}</p>
                                                     </div>
                                                 </div>
-                                                <a className="text-light badge badge-primary">{item.membership}</a>
+                                                {/*<a href={"#"} className="text-light badge badge-primary">{item.membership}</a>*/}
                                             </li>
                                             )
                                         ):''
@@ -350,7 +347,7 @@ class Dashboard extends Component {
                                                     <p className="mb-0">{item.jenjang_karir}</p>
                                                     </div>
                                                 </div>
-                                                <a className="text-light badge badge-warning">{item.sponsor}<br/>Sponsor</a>
+                                                <p className="text-light badge badge-warning">{item.sponsor}<br/>Sponsor</p>
                                             </li>
                                             )
                                         ):''

@@ -4,7 +4,6 @@ import WrapperModal from '../../_wrapper.modal'
 import {
     ModalHeader,
     ModalBody,
-    ModalFooter,
 } from 'reactstrap';
 import {ModalToggle} from "../../../../../redux/actions/modal.action";
 import {NOTIF_ALERT} from "../../../../../redux/actions/_constants";

@@ -1,12 +1,9 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
-import {DateRangePicker} from "react-bootstrap-daterangepicker";
-import Paginationq, {myDate, rangeDate} from "../../../helper";
+import Paginationq, {myDate} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
-import Skeleton from 'react-loading-skeleton';
-import moment from "moment";
 import FormUserLevel from "../modals/masterdata/user_level/form_user_level"
 import * as Swal from "sweetalert2";
 import {deleteUserLevel, getUserLevel} from "../../../redux/actions/masterdata/user_level.action";
@@ -32,7 +29,7 @@ class IndexUserLevel extends Component{
     }
     componentWillMount(){
         let where = this.handleValidate();
-        this.props.dispatch(getUserLevel(`page=1&${where}`));
+        this.props.dispatch(getUserLevel(`page=1${where!==''?`&${where}`:''}`));
     }
     handleValidate(){
         let data=this.state;
@@ -45,7 +42,7 @@ class IndexUserLevel extends Component{
 
     handlePage(pageNumber){
         let where = this.handleValidate();
-        this.props.dispatch(getUserLevel(`page=${pageNumber}&${where}`));
+        this.props.dispatch(getUserLevel(`page=${pageNumber}${where!==''?`&${where}`:''}`));
     }
 
     handleSearch(e){
@@ -92,21 +89,13 @@ class IndexUserLevel extends Component{
 
     render(){
         const headStyle ={verticalAlign: "middle", textAlign: "center",whiteSpace: "nowrap"};
-        const numberStyle ={verticalAlign: "middle", textAlign: "right",whiteSpace: "nowrap"};
-        const stringStyle ={verticalAlign: "middle", textAlign: "left",whiteSpace: "nowrap"};
         const {
             total,
             per_page,
-            offset,
-            to,
-            last_page,
             current_page,
-            from,
             data
         } = this.props.data;
-        console.log(data);
-        let totSaldo=0;
-        let totPenarikan=0;
+
         return(
             <Layout page={"Akses Pengguna"}>
                 {this.props.isLoading ?<Preloader/>:null}
@@ -155,10 +144,10 @@ class IndexUserLevel extends Component{
                                     );
                                 })
                                 : <tr>
-                                    <td colSpan={4} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={4} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                                 </tr>
                                 : <tr>
-                                    <td colSpan={4} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={4} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                                 </tr>
 
                         }

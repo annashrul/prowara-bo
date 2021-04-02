@@ -20,6 +20,7 @@ class FormUserList extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeUserLevel = this.handleChangeUserLevel.bind(this);
+        this.handleStatus = this.handleStatus.bind(this);
         this.state={
             name:'',
             username:'',
@@ -27,7 +28,8 @@ class FormUserList extends Component{
             conf_password:'',
             level:'',
             status:'1',
-            level_data:[]
+            level_data:[],
+            status_data:[{value:"1",label:"Aktif"},{value:"0",label:"Tidak Aktif"}],
         }
 
     }
@@ -52,7 +54,7 @@ class FormUserList extends Component{
         let data=[];
         if(nextProps.dataLevel.data!==undefined){
             if(nextProps.dataLevel.data.length>0){
-                nextProps.dataLevel.data.map((v,i)=>{
+                nextProps.dataLevel.data.forEach((v,i)=>{
                     data.push({value:v.id,label:v.level});
                 })
             }
@@ -137,7 +139,9 @@ class FormUserList extends Component{
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
-
+    handleStatus(val){
+        this.setState({status:val.value});
+    }
     toggle(e){
         e.preventDefault();
         const bool = !this.props.isOpen;
@@ -184,10 +188,18 @@ class FormUserList extends Component{
                     </div>
                     <div className="form-group">
                         <label>Status</label>
-                        <select name="status" className={"form-control"} defaultValue={this.state.status} onChange={this.handleChange}>
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
+                        <Select
+                            options={this.state.status_data}
+                            placeholder="Pilih User Level"
+                            onChange={this.handleStatus}
+                            value={
+                                this.state.status_data.find(op => {
+                                    return op.value === this.state.status
+                                })
+                            }
+
+                        />
+
                     </div>
                 </ModalBody>
                 <ModalFooter>

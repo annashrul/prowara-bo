@@ -2,17 +2,13 @@ import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
 import {DateRangePicker} from "react-bootstrap-daterangepicker";
-import Paginationq, {rangeDate, noImage, rmComma, ToastQ, toCurrency, toRp, toExcel, myDate} from "../../../helper";
+import Paginationq, {rangeDate, toCurrency, toExcel, myDate} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
-import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
-import Skeleton from 'react-loading-skeleton';
 import moment from "moment";
-import FormPenarikanBonus from '../modals/laporan/form_penarikan_bonus';
-import {getDeposit, postDeposit} from "../../../redux/actions/ewallet/deposit.action";
-import Select from 'react-select';
 import * as Swal from "sweetalert2";
 import {getExcelPenarikan, getPenarikan, postPenarikan} from "../../../redux/actions/ewallet/penarikan.action";
 import Preloader from "../../../Preloader";
+import Select from "react-select";
 
 class IndexPenarikan extends Component{
     constructor(props){
@@ -22,13 +18,16 @@ class IndexPenarikan extends Component{
             any:"",
             dateFrom:moment(new Date()).format("yyyy-MM-DD"),
             dateTo:moment(new Date()).format("yyyy-MM-DD"),
-            status_data:[{value:'kd_trx',label:'kode transaksi'},{value:'full_name',label:'nama'},{value:'status',label:'status'}],
+            kolom_data:[{value:'kd_trx',label:'kode transaksi'},{value:'full_name',label:'nama'},{value:'status',label:'status'}],
+            kolom:'',
+            status_data:[{value:'',label:'semua status'},{value:'0',label:'pending'},{value:'1',label:'sukses'},{value:'2',label:'gagal'}],
             status:'',
             data:[],
         };
         this.handleChange      = this.handleChange.bind(this);
         this.handlePage      = this.handlePage.bind(this);
         this.handleChangeStatus      = this.handleChangeStatus.bind(this);
+        this.handleChangeKolom      = this.handleChangeKolom.bind(this);
         this.handleApproval      = this.handleApproval.bind(this);
         this.handleSearch      = this.handleSearch.bind(this);
         this.handleEvent      = this.handleEvent.bind(this);
@@ -40,8 +39,8 @@ class IndexPenarikan extends Component{
         if(data.dateFrom!==null&&data.dateFrom!==undefined&&data.dateFrom!==""){
             where+=`&datefrom=${data.dateFrom}&dateto=${data.dateTo}`;
         }
-        if(data.status!==null&&data.status!==undefined&&data.status!==""){
-            where+=`&searchby=${data.status}`;
+        if(data.kolom!==null&&data.kolom!==undefined&&data.kolom!==""){
+            where+=`&searchby=${data.kolom}`;
         }
         if(data.any!==null&&data.any!==undefined&&data.any!==""){
             where+=`&q=${btoa(data.any)}`;
@@ -73,6 +72,18 @@ class IndexPenarikan extends Component{
         this.setState({
             status:val.value
         })
+        let where = this.handleValidate();
+        if(val.value!==''){
+            this.props.dispatch(getPenarikan(`page=1&status=${val.value}${where}`));
+        }else{
+            this.props.dispatch(getPenarikan(`page=1${where}`));
+
+        }
+    }
+    handleChangeKolom(val){
+        this.setState({
+            kolom:val.value
+        })
     }
     handleEvent = (event, picker) => {
         event.preventDefault();
@@ -82,6 +93,8 @@ class IndexPenarikan extends Component{
             dateFrom:from,
             dateTo:to
         });
+        this.props.dispatch(getPenarikan(`page=1&datefrom=${from}&dateto=${to}`));
+
     };
 
 
@@ -116,7 +129,7 @@ class IndexPenarikan extends Component{
             if(props.dataExcel.data.length>0){
                 let content=[];
                 let total=0;
-                props.dataExcel.data.map((v,i)=>{
+                props.dataExcel.data.forEach((v,i)=>{
                     total=total+parseInt(v.amount,10);
                     let status='';
                     if(v.status===0){status='Pending';}
@@ -180,11 +193,8 @@ class IndexPenarikan extends Component{
         const {
             total,
             per_page,
-            offset,
-            to,
             last_page,
             current_page,
-            from,
             data
         } = this.props.data;
         return(
@@ -205,18 +215,35 @@ class IndexPenarikan extends Component{
                             <div className="col-12 col-xs-12 col-md-3">
                                 <div className="form-group">
                                     <label>Kolom</label>
-                                    <select name="status" className="form-control" value={this.state.status} onChange={this.handleChange} >
-                                        {
-                                            this.state.status_data.map((v,i)=>{
-                                                return(
-                                                    <option value={v.value}>{v.label}</option>
-                                                );
+                                    <Select
+                                        options={this.state.kolom_data}
+                                        placeholder="==== Pilih Kolom ===="
+                                        onChange={this.handleChangeKolom}
+                                        value={
+                                            this.state.kolom_data.find(op => {
+                                                return op.value === this.state.kolom
                                             })
                                         }
-                                    </select>
+                                    />
                                 </div>
                             </div>
-                            <div className="col-12 col-xs-12 col-md-3">
+                            <div className="col-12 col-xs-12 col-md-3" style={{display:this.state.kolom==='status'?'block':'none'}}>
+                                <div className="form-group">
+                                    <label>Status</label>
+                                    <Select
+                                        options={this.state.status_data}
+                                        placeholder="==== Pilih Kolom ===="
+                                        onChange={this.handleChangeStatus}
+                                        value={
+                                            this.state.status_data.find(op => {
+                                                return op.value === this.state.status
+                                            })
+                                        }
+
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-12 col-xs-12 col-md-3" style={{display:this.state.kolom!=='status'?'block':'none'}}>
                                 <div className="form-group">
                                     <label>Cari</label>
                                     <input type="text" className="form-control" name="any" placeholder={"cari disini"} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
@@ -297,34 +324,11 @@ class IndexPenarikan extends Component{
                                     );
                                 })
                                 : <tr>
-                                    <td colSpan={11} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={11} style={columnStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr>:
                                 <tr>
-                                    <td colSpan={11} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={11} style={columnStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr>
-                            // (()=>{
-                            //     let container =[];
-                            //     for(let x=0; x<10; x++){
-                            //         container.push(
-                            //             <tr key={x}>
-                            //                 <td style={columnStyle}>{<Skeleton circle={true} height={40} width={40}/>}</td>
-                            //                 <td style={columnStyle}>
-                            //                     <Skeleton height={30} width={30}/>
-                            //                 </td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //                 <td style={columnStyle}>{<Skeleton/>}</td>
-                            //             </tr>
-                            //         )
-                            //     }
-                            //     return container;
-                            // })()
                         }
                         </tbody>
                         <tfoot>

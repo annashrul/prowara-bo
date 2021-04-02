@@ -2,17 +2,12 @@ import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
 import {DateRangePicker} from "react-bootstrap-daterangepicker";
-import Paginationq, {rangeDate, noImage, rmComma, ToastQ, toCurrency, toRp, toExcel} from "../../../helper";
+import Paginationq, {rangeDate, toCurrency, toExcel} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
-import Skeleton from 'react-loading-skeleton';
 import moment from "moment";
 import DetailLaporanSaldo from '../modals/laporan/detail_laporan_saldo';
 import {getExcelLaporanSaldo, getLaporanSaldo} from "../../../redux/actions/ewallet/saldo.action";
-import XLSX from 'xlsx'
-import {fetchKategori} from "../../../redux/actions/kategori/kategori.action";
-import Select from 'react-select';
-import { LoopCircleLoading } from 'react-loadingg';
 import Preloader from "../../../Preloader";
 
 class IndexSaldo extends Component{
@@ -34,9 +29,8 @@ class IndexSaldo extends Component{
 
     }
     handleValidate(){
-        let page = "1";
         let data = this.state;
-        let where=`page=${page}&perpage=10&datefrom=${data.dateFrom}&dateto=${data.dateTo}`;
+        let where=`perpage=10&datefrom=${data.dateFrom}&dateto=${data.dateTo}`;
         if(data.any!==null && data.any!==undefined && data.any!==""){
             where+=`&q=${data.any}`;
         }
@@ -50,18 +44,18 @@ class IndexSaldo extends Component{
     }
     componentWillMount(){
         let where=this.handleValidate();
-        this.props.dispatch(getLaporanSaldo(where));
+        this.props.dispatch(getLaporanSaldo("page=1&"+where));
 
     }
 
     handleSearch(e){
         e.preventDefault();
         let where = this.handleValidate();
-        this.props.dispatch(getLaporanSaldo(where));
+        this.props.dispatch(getLaporanSaldo("page=1&"+where));
     }
     handlePage(num){
         let where = this.handleValidate();
-        this.props.dispatch(getLaporanSaldo(where));
+        this.props.dispatch(getLaporanSaldo(`page=${num}&${where}`));
 
     }
     handleEvent = (event, picker) => {
@@ -89,7 +83,7 @@ class IndexSaldo extends Component{
         if(props.dataExcel.data!==undefined){
             if(props.dataExcel.data.length>0){
                 let content=[];
-                props.dataExcel.data.map((v,i)=>{
+                props.dataExcel.data.forEach((v,i)=>{
                     content.push([
                         v.fullname,
                         parseInt(v.saldo_awal,10),
@@ -139,7 +133,6 @@ class IndexSaldo extends Component{
     render(){
         const columnStyle ={verticalAlign: "middle", textAlign: "center",whiteSpace: "nowrap"};
         const numStyle ={verticalAlign: "middle", textAlign: "right",whiteSpace: "nowrap"};
-        // const data = this.state.data;
         let totPlafon=0;
         let totSaldoAwal=0;
         let totSaldoAkhir=0;
@@ -148,15 +141,11 @@ class IndexSaldo extends Component{
         const {
             total,
             per_page,
-            offset,
-            to,
             last_page,
             current_page,
-            from,
             data,
             summary
         } = this.props.data;
-        console.log("sum",summary);
         return(
             <Layout page={"Laporan Transaksi"}>
                 {this.props.isLoadingExcel||this.props.isLoading ?<Preloader/>:null}
@@ -167,9 +156,14 @@ class IndexSaldo extends Component{
                                 <div className="form-group">
                                     <label>Periode </label>
                                     <DateRangePicker
-                                        autoUpdateInput={true} showDropdowns={true}
-                                        style={{display: 'unset'}} ranges={rangeDate}
-                                        alwaysShowCalendars={true} onApply={this.handleEvent}>
+
+                                        autoUpdateInput={true}
+                                        showDropdowns={false}
+                                        style={{display: 'unset'}}
+                                        ranges={rangeDate}
+                                        alwaysShowCalendars={true}
+                                        showCustomRangeLabel={false}
+                                        onApply={this.handleEvent}>
                                         <input type="text" readOnly={true} className="form-control" value={`${this.state.dateFrom} to ${this.state.dateTo}`}/>
                                     </DateRangePicker>
                                 </div>
@@ -270,12 +264,10 @@ class IndexSaldo extends Component{
                                     );
                                 })
                                 : <tr>
-                                    <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/>
-                                    </td>
+                                    <td colSpan={9} style={columnStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr> :
                                 <tr>
-                                    <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/>
-                                    </td>
+                                    <td colSpan={9} style={columnStyle}><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></td>
                                 </tr>
 
                         }

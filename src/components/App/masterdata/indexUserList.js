@@ -1,12 +1,9 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
-import {DateRangePicker} from "react-bootstrap-daterangepicker";
-import Paginationq, {myDate, rangeDate, statusQ} from "../../../helper";
+import Paginationq, {myDate, statusQ} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
-import Skeleton from 'react-loading-skeleton';
-import moment from "moment";
 import FormUserList from "../modals/masterdata/user_list/form_user_list"
 import * as Swal from "sweetalert2";
 import {deleteUserList, getUserList} from "../../../redux/actions/masterdata/user_list.action";
@@ -30,14 +27,15 @@ class IndexUserList extends Component{
 
     componentWillMount(){
         let where = this.handleValidate();
-        this.props.dispatch(getUserList(`page=1&${where}`));
+        this.props.dispatch(getUserList(`page=1${where!==''?`&${where}`:''}`));
+
     }
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
     }
     handleValidate(){
         let data = this.state;
-        let where=``;
+        let where='';
         if(data.any !== null && data.any !== undefined && data.any !== ""){
             where+=`&q=${data.any}`;
         }
@@ -47,8 +45,7 @@ class IndexUserList extends Component{
 
     handlePage(pageNumber){
         let where = this.handleValidate();
-        this.props.dispatch(getUserList(`page=${pageNumber}&${where}`));
-
+        this.props.dispatch(getUserList(`page=${pageNumber}${where!==''?`&${where}`:''}`));
     }
 
     handleSearch(e){
@@ -104,16 +101,10 @@ class IndexUserList extends Component{
 
     render(){
         const headStyle ={verticalAlign: "middle", textAlign: "center",whiteSpace: "nowrap"};
-        const numberStyle ={verticalAlign: "middle", textAlign: "right",whiteSpace: "nowrap"};
-        const stringStyle ={verticalAlign: "middle", textAlign: "left",whiteSpace: "nowrap"};
         const {
             total,
             per_page,
-            offset,
-            to,
-            last_page,
             current_page,
-            from,
             data
         } = this.props.data;
         return(
@@ -173,10 +164,10 @@ class IndexUserList extends Component{
                                     );
                                 })
                                 : <tr>
-                                    <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                    <td colSpan={7} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                                 </tr>
                             : <tr>
-                                <td colSpan={7} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                <td colSpan={7} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                             </tr>
 
                         }

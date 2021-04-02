@@ -7,9 +7,13 @@ const initialState = {
     isLoadingDetail: true,
     isLoadingPost: false,
     isLoadingExcel: false,
+
     isError: false,
+
     isLoadingInvesment:true,
+
     isShowModal:false,
+
     isLoadingExcelInvesment: false,
 
     status: "",

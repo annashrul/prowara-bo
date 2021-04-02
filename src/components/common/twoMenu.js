@@ -33,7 +33,7 @@ class TwoMenu extends Component {
                 <a href="about:blank" onClick={(e) => this.changeMenu(e,this.props.arg1,this.props.arg2)}><i className={`${this.props.icon}`}/> <span>{this.props.label}</span> <i className="fa fa-angle-right" /></a>
                 <ul className={"treeview-menu animate__animated" + (this.props.isActive ?" animate__bounceInRight " : " animate__fadeOutLeft ") + "animate__faster"} style={{display:this.props.isActive?"block" : "none"}}>
                     {
-                        this.props.data!==undefined?this.props.data.map((v,i)=>{
+                        this.props.data!==undefined?this.props.data.map((v, i)=>{
                             return(
                                 <li key={i} className={`${this.props.path===`${v.path}`?"active":''}`} style={v.display?{display:"block"}:{display:"none"}}>
                                     <Link to={v.path} style={{width:'fit-content'}}>{v.label}</Link>

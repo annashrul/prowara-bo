@@ -4,7 +4,6 @@ import connect from "react-redux/es/connect/connect";
 import {
     ModalBody,
     ModalHeader,
-    ModalFooter
 } from "reactstrap";
 import {ModalToggle} from "../../../../redux/actions/modal.action";
 import {getDetailLaporanSaldo} from "../../../../redux/actions/ewallet/saldo.action";
@@ -37,25 +36,13 @@ class DetailLaporanSaldo extends Component{
 
 
     render(){
-        const columnStyle ={verticalAlign: "middle", textAlign: "center",whiteSpace: "nowrap"};
-        const numStyle ={verticalAlign: "middle", textAlign: "right",whiteSpace: "nowrap"};
         const {
             total,
             per_page,
-            offset,
-            to,
-            last_page,
             current_page,
-            from,
             data,
             summary
         } = this.props.data;
-        console.log(summary);
-        let totTrxIn=0,totTrxOut=0,totSaldoAwal=0;
-        console.log(data);
-
-
-
         return (
             <WrapperModal isOpen={this.props.isOpen && this.props.type === "detailLaporanSaldo"} size="lg">
                 <ModalHeader toggle={this.toggle}>Laporan Transaksi {this.props.detail.nama}</ModalHeader>

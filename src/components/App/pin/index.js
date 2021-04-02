@@ -1,13 +1,11 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
-import Paginationq, {myDate, rangeDate, toCurrency, toRp} from "../../../helper";
+import Paginationq, {toCurrency} from "../../../helper";
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
-import Skeleton from 'react-loading-skeleton';
 import {getPin} from "../../../redux/actions/paket/pin.action";
 import moment from "moment";
-import GeneratePin from "../modals/pin/generate_pin"
 import Preloader from "../../../Preloader";
 
 
@@ -79,7 +77,6 @@ class IndexPin extends Component{
 
 
     render(){
-        const columnStyle ={verticalAlign: "middle", textAlign: "center",whiteSpace: "nowrap"};
         const {
             total,
             per_page,
@@ -87,7 +84,6 @@ class IndexPin extends Component{
             data,
             total_pin
         } = this.props.data;
-        console.log(total_pin);
 
         return(
             <Layout page={"PIN"}>
@@ -133,12 +129,12 @@ class IndexPin extends Component{
                                 if(v.status===1){status='Dimiliki Member';colStatus='text-danger';}
                                 if(v.status===2){status='Dipakai';colStatus='text-warning';}
                                 return (
-                                    <div key={i} className="col-6 col-sm-6 col-xl-3 box-margin">
+                                    <div key={i} className="col-6 col-xs-6 col-sm-4 col-xl-3 box-margin">
                                         <div className="card widget-new-content p-3 mainBgOpacity">
                                             <div className="widget---stats d-flex justify-content-between align-items-center mb-15">
                                                 <div className="widget---content-text">
                                                     <h6 className="text-white">{v.kode}</h6>
-                                                    <p className={`mb-0 ${colStatus}`} style={{letterSpacing:"2px"}}><b>{status}</b></p>
+                                                    <p className={`mb-0 ${colStatus}`} style={{letterSpacing:"1px"}}><b>{status}</b></p>
                                                 </div>
                                                 <h6 className={`mb-0 txtGreen`}>{toCurrency(v.price)}</h6>
                                             </div>
@@ -149,12 +145,8 @@ class IndexPin extends Component{
                                     </div>
                                 );
                             })
-                            : <tr>
-                                <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                            </tr>
-                            : <tr>
-                                <td colSpan={9} style={columnStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
-                            </tr>
+                            : <div><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></div>
+                        : <div><img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`}/></div>
 
                     }
                 </div>
@@ -166,12 +158,7 @@ class IndexPin extends Component{
                         callback={this.handlePage}
                     />
                 </div>
-                {
-                    this.props.isOpen===true?<GeneratePin
-                        detail={this.state.detail}
-                    />:null
-                }
-                {/*<FormPaket/>*/}
+
             </Layout>
         );
     }

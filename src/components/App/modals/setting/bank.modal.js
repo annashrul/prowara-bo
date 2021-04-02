@@ -61,7 +61,7 @@ class FormUserList extends Component{
         if (props.list_bank !== undefined && props.list_bank.length !== 0) {
             if (props.list_bank !== state.prevbankProps) {
                 const bank = [];
-                props.list_bank.map((v, i) => {
+                props.list_bank.forEach((v, i) => {
                     bank.push({
                         value: v.code,
                         label: v.name

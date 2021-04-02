@@ -1,14 +1,13 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import Layout from 'components/Layout';
-import {myDate, noImage, rmHtml, ToastQ, toCurrency} from "../../../helper";
-import Skeleton from 'react-loading-skeleton';
+import {myDate, noImage, rmHtml, ToastQ} from "../../../helper";
 import moment from "moment";
 import {
     UncontrolledButtonDropdown,
     DropdownMenu,
     DropdownItem,
-    DropdownToggle, Dropdown
+    DropdownToggle
 } from 'reactstrap';
 import {deleteContent, getContent} from "../../../redux/actions/konten/konten.action";
 import {ModalToggle, ModalType} from "../../../redux/actions/modal.action";
@@ -19,7 +18,6 @@ import {
     putKategori
 } from "../../../redux/actions/kategori/kategori.action";
 import StickyBox from "react-sticky-box";
-import {BrowserView, MobileView,isBrowser, isMobile} from 'react-device-detect';
 import {NOTIF_ALERT} from "../../../redux/actions/_constants";
 import Preloader from "../../../Preloader";
 
@@ -202,8 +200,6 @@ class IndexBerita extends Component{
         });
         let perpage = parseInt(this.props.kategori.per_page,10);
         let lengthBrg = parseInt(this.props.kategori.data.length,10);
-        console.log("perpage",perpage);
-        console.log("lengthBrg",lengthBrg);
         if(perpage===lengthBrg || perpage<lengthBrg){
             this.props.dispatch(fetchKategori(`berita?page=1&perpage=${this.state.perpage}`));
             this.setState({scrollPage:this.state.scrollPage+5});
@@ -228,21 +224,10 @@ class IndexBerita extends Component{
         if(this.state.isScroll===true)this.handleScroll();
 
         const headStyle ={verticalAlign: "middle", textAlign: "center",whiteSpace: "nowrap"};
-        const numberStyle ={verticalAlign: "middle", textAlign: "right",whiteSpace: "nowrap"};
-        const stringStyle ={verticalAlign: "middle", textAlign: "left",whiteSpace: "nowrap"};
         const {
-            total,
-            per_page,
-            offset,
-            to,
-            last_page,
             current_page,
-            from,
             data
         } = this.props.data;
-
-        console.log(this.props.kategori.data);
-        console.log(this.props.isLoadingKategori);
 
         return(
             <Layout page={"Berita"}>
@@ -260,7 +245,7 @@ class IndexBerita extends Component{
                                 <div className="col-8 col-xs-8 col-md-10">
                                     <div className="form-group">
                                         <label>Cari</label>
-                                        <input type="text" className="form-control" name="any" placeholder={"cari disini"} defaultValue={this.state.any} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
+                                        <input type="text" className="form-control" name="any" placeholder={"cari disini"} value={this.state.any} onChange={this.handleChange}  onKeyPress={event=>{if(event.key==='Enter'){this.handleSearch(event);}}}/>
                                     </div>
                                 </div>
                                 <div className="col-4 col-xs-4 col-md-2">
@@ -286,7 +271,7 @@ class IndexBerita extends Component{
                                                                     }}>
                                                                         <div className="ribbon-wrapper bgWithOpacity">
                                                                             <div className="ribbon ribbon-bookmark ribbon-success">{v.category}</div>
-                                                                            <img src={v.picture} style={{width:'100%'}} onError={(e)=>{e.target.onerror = noImage(); e.target.src=`${noImage()}`}} alt="member image"/>
+                                                                            <img src={`${v.picture}`} style={{width:'100%'}} onError={(e)=>{e.target.onerror = null; e.target.src=`${noImage()}`}} alt="member"/>
                                                                             <br/>
                                                                             <div className="row">
                                                                                 <div className="col-md-12 text-muted" style={{padding:"5"}}>
@@ -376,9 +361,9 @@ class IndexBerita extends Component{
                                                     </tr>
                                                 );
                                             }):<tr>
-                                                <td colSpan={3} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                                <td colSpan={3} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                                             </tr>:<tr>
-                                                <td colSpan={3} style={headStyle}><img src={NOTIF_ALERT.NO_DATA}/></td>
+                                                <td colSpan={3} style={headStyle}><img alt={"-"} src={NOTIF_ALERT.NO_DATA}/></td>
                                             </tr>
                                         }
                                         </tbody>

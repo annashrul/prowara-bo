@@ -11,9 +11,9 @@ import {
     UncontrolledButtonDropdown,
     DropdownMenu,
     DropdownItem,
-    DropdownToggle, Button, UncontrolledCollapse
+    DropdownToggle
 } from 'reactstrap';
-import Default from 'assets/default.png';
+import {noImage} from "../../helper";
 // import socketIOClient from "socket.io-client";
 
 
@@ -87,7 +87,7 @@ class Header extends Component {
                 <div className="left-side-content-area d-flex align-items-center">
                     {/* Mobile Logo */}
                     <div className="mobile-logo mr-3 mr-sm-4">
-                        <Link to={'./'} ><img src={BgAuth} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}}  alt="Mobile Logo"/></Link>
+                        <Link to={'./'} ><img src={BgAuth} onError={(e)=>{e.target.onerror = null; e.target.src=`${noImage()}`}}  alt="Mobile Logo"/></Link>
                     </div>
                     {/* <!-- Triggers --> */}
                     <div className="ecaps-triggers mr-1 mr-sm-3">
@@ -112,17 +112,17 @@ class Header extends Component {
                         <div className="nav-item dropdown" style={{listStyleType:'none'}}>
                              <UncontrolledButtonDropdown nav >
                                 <DropdownToggle caret  className="nohover">
-                                    <img src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}}  alt=""/>
+                                    <img src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${noImage()}`}}  alt=""/>
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <div className="user-profile-area">
                                         <div className="user-profile-heading">
                                             <div className="profile-img">
-                                                <img className="chat-img mr-2" src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}}  alt=""/>
+                                                <img className="chat-img mr-2" src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${noImage()}`}}  alt=""/>
                                             </div>
                                             <div className="profile-text">
                                                 <h6>{this.props.auth.user.name}</h6>
-                                                <span>{this.props.auth.user.level}</span>
+                                                <span className="text-white">{this.props.auth.user.level}</span>
                                             </div>
                                         </div>
                                         <DropdownItem  onClick={this.handleLogout}>
@@ -144,15 +144,14 @@ class Header extends Component {
                         <div className="nav-item dropdown">
                             <UncontrolledButtonDropdown nav >
                                 <DropdownToggle caret  className="nohover">
-                                    <img src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}}  alt=""/>
+                                    <img src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${noImage()}`}}  alt=""/>
                                     <div className="user-name">
                                         <table>
                                             <thead>
                                             <tr>
                                                 <td className="fs1">
                                                     <p>{this.props.auth.user.name}</p>
-                                                    <span>{this.props.auth.user.level}</span>
-
+                                                    <span className="text-white">{this.props.auth.user.level}</span>
                                                 </td>
                                                 <td className="fs1"  style={{paddingLeft:'10px'}}>
                                                     <p>
@@ -169,7 +168,7 @@ class Header extends Component {
                                     <div className="user-profile-area">
                                         <div className="user-profile-heading">
                                             <div className="profile-img">
-                                                <img className="chat-img mr-2" src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${Default}`}}  alt=""/>
+                                                <img className="chat-img mr-2" src={this.props.auth.user.foto} onError={(e)=>{e.target.onerror = null; e.target.src=`${noImage()}`}}  alt=""/>
                                             </div>
                                             <div className="profile-text">
                                                 <h6>{this.props.auth.user.name}</h6>
