@@ -151,10 +151,9 @@ class IndexPenarikan extends Component {
         let content = [];
         let total = 0;
         props.dataExcel.data.forEach((v, i) => {
-          total = total + parseInt(v.amount, 10);
-          let konv =
-            parseInt(v.amount, 10) *
-            parseInt(this.props.configWallet.konversi_poin, 10);
+          let konv = parseInt(this.props.configWallet.konversi_poin, 10);
+          total = total + parseFloat(v.amount) * konv;
+
           let status = "";
           if (v.status === 0) {
             status = "Pending";
@@ -167,12 +166,12 @@ class IndexPenarikan extends Component {
           }
           content.push([
             v.kd_trx,
-            v.full_name,
+            v.fullname,
             v.bank_name,
             v.acc_name,
             v.acc_no,
-            parseInt(v.charge, 10),
-            konv,
+            parseFloat(v.amount) * konv,
+            parseFloat(v.charge) * konv,
             status,
             myDate(v.created_at),
           ]);
@@ -186,13 +185,13 @@ class IndexPenarikan extends Component {
             "BANK",
             "ATAS NAMA",
             "NO REKENING",
-            "BIAYA ADMIN",
             "JUMLAH",
+            "BIAYA ADMIN",
             "STATUS",
             "TANGGAL",
           ],
           content,
-          [[""], [""], ["TOTAL", "", "", "", "", "", total]]
+          [[""], [""], ["TOTAL", "", "", "", "", total]]
         );
       }
     }
@@ -355,7 +354,7 @@ class IndexPenarikan extends Component {
                 <th rowSpan="2" style={columnStyle}>
                   BANK
                 </th>
-                <th colSpan="2" style={columnStyle}>
+                <th rowSpan="2" style={columnStyle}>
                   JUMLAH
                 </th>
 
@@ -369,24 +368,19 @@ class IndexPenarikan extends Component {
                   TANGGAL DIBUAT
                 </th>
               </tr>
-              <tr>
-                <th style={columnStyle}>POIN</th>
-                <th style={columnStyle}>RUPIAH</th>
-              </tr>
             </thead>
 
             <tbody>
               {typeof data === "object" ? (
                 data.length > 0 ? (
                   data.map((v, i) => {
-                    totAmountPoint = totAmountPoint + parseInt(v.amount);
+                    totAmountPoint = totAmountPoint + parseFloat(v.amount);
                     let nomRp = 0;
+                    let konv = 0;
                     if (this.props.configWallet !== undefined) {
-                      let konv =
-                        parseInt(v.amount, 10) *
-                        parseInt(this.props.configWallet.konversi_poin);
-                      nomRp = konv;
-                      totAmountRp = totAmountRp + parseInt(konv);
+                      konv = parseInt(this.props.configWallet.konversi_poin);
+                      nomRp = parseFloat(v.amount) * konv;
+                      totAmountRp = totAmountRp + parseFloat(v.amount) * konv;
                     }
                     let badge = "";
                     let txt = "";
@@ -435,12 +429,11 @@ class IndexPenarikan extends Component {
                           {v.bank_name} ({v.acc_no})
                         </td>
                         <td style={numStyle} className="txtGreen">
-                          {toCurrency(`${v.amount}`)}
-                        </td>
-                        <td style={numStyle} className="txtGreen">
                           Rp {toRp(nomRp)} .-
                         </td>
-                        <td style={numStyle}>{toCurrency(`${v.charge}`)}</td>
+                        <td style={numStyle} className="txtGreen">
+                          Rp {toRp(parseFloat(v.charge) * konv)} .-
+                        </td>
                         <td style={columnStyle}>
                           <span className={`span ${badge}`}>{txt}</span>
                         </td>
@@ -457,7 +450,7 @@ class IndexPenarikan extends Component {
                 )
               ) : (
                 <tr>
-                  <td colSpan={12} style={columnStyle}>
+                  <td colSpan={11} style={columnStyle}>
                     <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
                   </td>
                 </tr>
@@ -466,9 +459,6 @@ class IndexPenarikan extends Component {
             <tfoot className="bgWithOpacity">
               <tr>
                 <th colSpan={5}>TOTAL PERHALAMAN</th>
-                <th colSpan={1} style={numStyle} className="txtGreen">
-                  {toCurrency(`${totAmountPoint}`)}
-                </th>
                 <th colSpan={1} style={numStyle} className="txtGreen">
                   Rp {toRp(`${totAmountRp}`)} .-
                 </th>
