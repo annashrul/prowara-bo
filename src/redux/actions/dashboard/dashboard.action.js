@@ -9,6 +9,13 @@ export function setLoading(load) {
     }
 }
 
+export function setLoadingBo(load) {
+    return {
+        type: DASHBOARD.LOADING_BO,
+        load
+    }
+}
+
 export function setSendLoading(loadPost) {
     return {
         type: DASHBOARD.POST_LOADING,
@@ -19,6 +26,13 @@ export function setSendLoading(loadPost) {
 export function setDashboard(data = []) {
     return {
         type: DASHBOARD.SUCCESS,
+        data
+    }
+}
+
+export function setBo(data = []) {
+    return {
+        type: DASHBOARD.SUCCESS_BO,
         data
     }
 }
@@ -91,6 +105,27 @@ export const FetchStock = () => {
                 
                 dispatch(setDashboard(data));
                 dispatch(setLoading(false));
+            }).catch(function(error){
+            
+        })
+    }
+}
+
+export const FetchBo = (where = '') => {
+    return (dispatch) => {
+        dispatch(setLoadingBo(true));
+        let url = 'site/backoffice';
+        if (where !== '') {
+            url += `?${where}`;
+        }
+
+        axios.get(HEADERS.URL + `${url}`)
+            .then(function(response){
+                const data = response.data;
+                console.log("action.data.result",data);
+                
+                dispatch(setBo(data));
+                dispatch(setLoadingBo(false));
             }).catch(function(error){
             
         })
