@@ -11,6 +11,7 @@ import Chart from "./src/charts";
 import Clock from "../../common/clock";
 import Default from "assets/default.png";
 import { toCurrency } from "../../../helper";
+import { FetchBo } from "../../../redux/actions/dashboard/dashboard.action";
 
 // const socket = socketIOClient(HEADERS.URL);
 //
@@ -22,13 +23,60 @@ class Dashboard extends Component {
       endDate: moment(new Date()).format("yyyy-MM-DD"),
       saldo_member: 0,
       total_penarikan: 0,
+<<<<<<< HEAD
       total_member: 0,
       total_penjualan: 0,
+=======
+      slot_aktif: 0,
+      total_modal: 0,
+      total_member: 0,
+      member_aktif: [],
+      member_omset: {},
+      // penjualan_paket:[],
+      // saldo_member:0,
+      // total_penarikan:0,
+      // total_member:0,
+      // total_penjualan:0,
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
       get_sponsor_terbaik: [],
       get_member_baru: [],
       location_data: [],
       location: "-",
+<<<<<<< HEAD
       penjualan_pin: {
+=======
+      // penjualan_pin:{
+      //     series: [{
+      //         name: 'series1',
+      //         data: [31, 40]
+      //     }, {
+      //         name: 'series2',
+      //         data: [11, 32]
+      //     }],
+      //     options: {
+      //         chart: {
+      //             height: 350,
+      //             type: 'area'
+      //         },
+      //         dataLabels: {
+      //             enabled: false
+      //         },
+      //         stroke: {
+      //             curve: 'smooth'
+      //         },
+      //         xaxis: {
+      //             type: 'date',
+      //             categories: ["2018-09-19", "2018-09-19"]
+      //         },
+      //         tooltip: {
+      //             x: {
+      //                 format: 'dd/MM/yy'
+      //             },
+      //         },
+      //     },
+      // },
+      penjualan_paket: {
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
         series: [
           {
             name: "series1",
@@ -61,6 +109,7 @@ class Dashboard extends Component {
           },
         },
       },
+<<<<<<< HEAD
       penjualan_paket: {
         series: [
           {
@@ -193,12 +242,125 @@ class Dashboard extends Component {
           return null;
         });
 
+=======
+      // pie_membership: {
+      //     series: [44, 55],
+      //     options: {
+      //         labels: ['Team A', 'Team B'],
+      //         responsive: [{
+      //             breakpoint: 480,
+      //             options: {
+      //                 chart: {
+      //                     width: 200
+      //                 },
+      //                 legend: {
+      //                     position: 'bottom'
+      //                 }
+      //             }
+      //         }]
+      //     },
+      // },
+      // pie_karir: {
+      //     series: [44, 55],
+      //     options: {
+      //         labels: ['Team A', 'Team B'],
+      //         responsive: [{
+      //             breakpoint: 480,
+      //             options: {
+      //                 chart: {
+      //                     width: 200
+      //                 },
+      //                 legend: {
+      //                     position: 'bottom'
+      //                 }
+      //             }
+      //         }]
+      //     },
+      // },
+      // pie_signup: {
+      //     series: [44, 55],
+      //     options: {
+      //         labels: ['Team A', 'Team B'],
+      //         responsive: [{
+      //             breakpoint: 480,
+      //             options: {
+      //                 chart: {
+      //                     width: 200
+      //                 },
+      //                 legend: {
+      //                     position: 'bottom'
+      //                 }
+      //             }
+      //         }]
+      //     },
+      // }
+    };
+    this.handleEvent = this.handleEvent.bind(this);
+
+    // socket.on('refresh_dashboard',(data)=>{
+    //     this.refreshData();
+    // })
+
+    // socket.on("set_dashboard_bo", (data) => {
+    //     this.setState({
+    //         penjualan_pin:data.penjualan_pin,
+    //         penjualan_paket:data.penjualan_paket,
+    //         pie_membership:data.pie_membership,
+    //         pie_karir:data.pie_karir,
+    //         pie_signup:data.pie_signup,
+    //         saldo_member: data.saldo_member,
+    //         total_penarikan: data.total_penarikan,
+    //         total_member: data.total_member,
+    //         total_penjualan: data.total_penjualan,
+    //         get_sponsor_terbaik: data.get_sponsor_terbaik,
+    //         get_member_baru: data.get_member_baru,
+    //     });
+    // });
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.auth.user) {
+      let lk = [
+        {
+          value: "-",
+          label: "Semua Lokasi",
+        },
+      ];
+      let loc = nextProps.auth.user.lokasi;
+      if (loc !== undefined) {
+        loc.map((i) => {
+          lk.push({
+            value: i.kode,
+            label: i.nama,
+          });
+          return null;
+        });
+
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
         this.setState({
           location_data: lk,
           userid: nextProps.auth.user.id,
         });
       }
+<<<<<<< HEAD
     }
+=======
+    }
+    if (this.props.resBo.saldo_member !== undefined) {
+      this.setState({
+        saldo_member: this.props.resBo.saldo_member,
+        total_penarikan: this.props.resBo.total_penarikan,
+        slot_aktif: this.props.resBo.slot_aktif,
+        total_modal: this.props.resBo.total_modal,
+        total_member: this.props.resBo.total_member,
+        member_aktif: this.props.resBo.member_aktif,
+        member_omset: this.props.resBo.member_omset,
+        penjualan_paket: this.props.resBo.penjualan_paket,
+      });
+      console.log("object", this.props.resBo);
+    }
+    console.log("object", this.props.resBo);
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
   };
 
   refreshData(start = null, end = null) {
@@ -209,6 +371,10 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
+<<<<<<< HEAD
+=======
+    this.props.dispatch(FetchBo());
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
     this.refreshData();
     // this.props.dispatch(CheckDaily());
   }
@@ -233,7 +399,14 @@ class Dashboard extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+<<<<<<< HEAD
     this.refreshData();
+=======
+    this.props.dispatch(
+      FetchBo(`datefrom=${this.state.startDate}&dateto=${this.state.endDate}`)
+    );
+    // this.refreshData();
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
   };
 
   render() {
@@ -270,6 +443,7 @@ class Dashboard extends Component {
             </div>
           </div>
 
+<<<<<<< HEAD
           <div className="col-md-12">
             {/* Dashboard Widget Area */}
             <div className="row">
@@ -293,11 +467,47 @@ class Dashboard extends Component {
                 data={toCurrency(`${this.state.total_member}`)}
                 icon="fa fa-users text-white"
               />
+=======
+          <div className="col-md-12" style={{ zoom: "90%" }}>
+            {/* Dashboard Widget Area */}
+            <div className="row">
+              <Cards
+                classCols="col-md-6 col-xl-3 box-margin"
+                title="TOTAL SALDO MEMBER"
+                data={"Rp " + toCurrency(this.state.saldo_member)}
+                icon="fa fa-money text-white"
+              />
+              <Cards
+                classCols="col-md-6 col-xl-3 box-margin"
+                title="TOTAL PENARIKAN"
+                data={"Rp " + toCurrency(this.state.total_penarikan)}
+                icon="fa fa-dollar text-white"
+              />
+              <Cards
+                classCols="col-md-6 col-xl-2 box-margin"
+                title="TOTAL MODAL"
+                data={"Rp " + toCurrency(this.state.total_modal)}
+                icon="fa fa-shopping-cart text-white"
+              />
+              <Cards
+                classCols="col-md-6 col-xl-2 box-margin"
+                title="MEMBER AKTIF"
+                data={toCurrency(this.state.total_member)}
+                icon="fa fa-users text-white"
+              />
+              <Cards
+                classCols="col-md-6 col-xl-2 box-margin"
+                title="SLOT AKTIF"
+                data={toCurrency(this.state.slot_aktif)}
+                icon="fa fa-list text-white"
+              />
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
             </div>
             {/* Dashboard Widget Area */}
           </div>
         </div>
         <div className="row">
+<<<<<<< HEAD
           <div className="col-md-7 box-margin">
             <Chart
               data={this.state.penjualan_pin}
@@ -327,6 +537,34 @@ class Dashboard extends Component {
             />
           </div>
           <div className="col-md-7 box-margin">
+=======
+          {/* <div className="col-md-7 box-margin">
+                        <Chart
+                        data={this.state.penjualan_pin}
+                        title="Penjualan PIN"
+                        type="area"
+                        height={300} />
+                    </div> */}
+          {/* <div className="col-md-5 col-xl-5 box-margin">
+                        <Chart
+                        style={{marginTop:'30px'}}
+                        data={this.state.pie_membership}
+                        title="Membership Status"
+                        type="pie"
+                        height={300} />
+                    </div> */}
+        </div>
+        <div className="row">
+          {/* <div className="col-md-5 col-xl-5 box-margin">
+                        <Chart
+                        style={{marginTop:'30px'}}
+                        data={this.state.pie_karir}
+                        title="Jenjang Karir Member"
+                        type="pie"
+                        height={300} />
+                    </div> */}
+          <div className="col-md-12 box-margin">
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
             <Chart
               data={this.state.penjualan_paket}
               title="Penjualan Paket"
@@ -336,6 +574,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="row">
+<<<<<<< HEAD
           <div className="col-md-3 col-xl-3 box-margin">
             <div className="bgWithOpacity">
               <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
@@ -348,15 +587,34 @@ class Dashboard extends Component {
                 <ul className="total-earnings-list">
                   {this.state.get_member_baru.length > 0
                     ? this.state.get_member_baru.map((item, i) => (
+=======
+          <div className="col-md-6 col-xl-6 box-margin">
+            <div className="bgWithOpacity">
+              <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
+                <h5 className="card-title mb-0 text-white">Member Aktif</h5>
+              </div>
+              <div
+                className="card-body"
+                style={{ overflowX: "auto", height: "300px" }}
+              >
+                <ul className="total-earnings-list">
+                  {this.state.member_aktif.length > 0
+                    ? this.state.member_aktif.map((item, i) => (
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
                         <li key={i}>
                           <div className="author-info d-flex align-items-center">
                             <div className="author-img mr-3">
                               <img
+<<<<<<< HEAD
                                 src={item.picture}
+=======
+                                src={item.foto}
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
                                 onError={(e) => {
                                   e.target.onerror = null;
                                   e.target.src = `${Default}`;
                                 }}
+<<<<<<< HEAD
                                 alt={item.full_name}
                               />
                             </div>
@@ -365,6 +623,20 @@ class Dashboard extends Component {
                               <p className="mb-0" style={{ fontSize: ".7em" }}>
                                 Join:{" "}
                                 {moment(item.created_at).format("yyyy-MM-DD")}
+=======
+                                alt={item.fullname}
+                              />
+                            </div>
+                            <div className="author-text">
+                              <h6 className="mb-0 text-light">
+                                {item.fullname}
+                              </h6>
+                              <p
+                                className="mb-0 text-muted"
+                                style={{ fontSize: ".7em" }}
+                              >
+                                Slot Aktif: {item.slot_active}
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
                               </p>
                             </div>
                           </div>
@@ -376,7 +648,56 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
           <div className="col-md-4 col-xl-4 box-margin">
+=======
+          <div className="col-md-6 col-xl-6 box-margin">
+            <div className="bgWithOpacity">
+              <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
+                <h5 className="card-title mb-0 text-white">Member Omset</h5>
+              </div>
+              <div
+                className="card-body"
+                style={{ overflowX: "auto", height: "300px" }}
+              >
+                <ul className="total-earnings-list">
+                  {this.state.member_omset.length > 0
+                    ? this.state.member_omset.map((item, i) => (
+                        <li key={i}>
+                          <div className="author-info d-flex align-items-center">
+                            <div className="author-img mr-3">
+                              <img
+                                src={item.foto}
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = `${Default}`;
+                                }}
+                                alt={item.fullname}
+                              />
+                            </div>
+                            <div className="author-text">
+                              <h6 className="mb-0 text-light">
+                                {item.fullname}
+                              </h6>
+                              <p
+                                className="mb-0 text-muted"
+                                style={{ fontSize: ".7em" }}
+                              >
+                                Downline Omset:{" "}
+                                {toCurrency(item.downline_omset)}
+                              </p>
+                            </div>
+                          </div>
+                          {/*<a href={"#"} className="text-light badge badge-primary">{item.membership}</a>*/}
+                        </li>
+                      ))
+                    : ""}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 col-xl-4 box-margin d-none">
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
             <div className="bgWithOpacity">
               <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
                 <h5 className="card-title mb-0 text-white">
@@ -427,6 +748,7 @@ class Dashboard extends Component {
             </div>
           </div>
           <div className="col-md-5 col-xl-5 box-margin">
+<<<<<<< HEAD
             <Chart
               style={{ marginTop: "30px" }}
               data={this.state.pie_signup}
@@ -434,6 +756,14 @@ class Dashboard extends Component {
               type="pie"
               height={300}
             />
+=======
+            {/* <Chart
+                        style={{marginTop:'30px'}}
+                        data={this.state.pie_signup}
+                        title="Platform Pendaftaran"
+                        type="pie"
+                        height={300} /> */}
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
           </div>
         </div>
       </Layout>
@@ -445,9 +775,18 @@ class Dashboard extends Component {
 // }
 
 const mapStateToProps = (state) => {
+<<<<<<< HEAD
   return {
     auth: state.auth,
     stock: state.dashboardReducer.data,
+=======
+  console.log("state dashboard", state.dashboardReducer);
+  return {
+    auth: state.auth,
+    stock: state.dashboardReducer.data,
+    resBo: state.dashboardReducer.data_bo,
+    isLoading: state.dashboardReducer.isLoadingBo,
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
     // skipped: state.transactionReducer.skipped,
     // isLoadingCheck: state.transactionReducer.isLoadingCheck,
   };
