@@ -5,6 +5,8 @@ import NotFound from "../common/notfound";
 import Login from "../App/Auth/Login/Login";
 import Dashboard from "../App/Dashboard/Dashboard";
 import Pin from "../App/pin";
+import DaftarPaket from "../App/paket/daftar_paket";
+import KategoriPaket from "../App/paket/kategori_paket";
 import Member from "../App/masterdata/member";
 import UserList from "../App/masterdata/indexUserList";
 import UserLevel from "../App/masterdata/indexUserLevel";
@@ -24,6 +26,13 @@ const Routes = (
       {/* DASHBOARD SECTION END */}
       {/* PAKET SECTION START */}
       <PrivateRoute path="/pin" exact strict component={Pin} />
+      <PrivateRoute path="/daftar_paket" exact strict component={DaftarPaket} />
+      <PrivateRoute
+        path="/kategori_paket"
+        exact
+        strict
+        component={KategoriPaket}
+      />
       {/* PAKET SECTION END */}
       {/* MASTERDATA SECTION START */}
       <PrivateRoute path="/daftar_pengguna" exact strict component={UserList} />

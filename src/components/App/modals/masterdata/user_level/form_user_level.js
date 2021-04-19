@@ -61,6 +61,29 @@ class FormUserLevel extends Component {
             },
           ],
         },
+        {
+          id: 100,
+          label: "paket",
+          path: "",
+          isChecked: false,
+          isToggle: false,
+          sub: [
+            {
+              id: 101,
+              label: "daftar paket",
+              path: "/daftar_paket",
+              parent: "paket",
+              isChecked: false,
+            },
+            {
+              id: 102,
+              label: "kategori paket",
+              path: "/kategori_paket",
+              parent: "paket",
+              isChecked: false,
+            },
+          ],
+        },
 
         {
           id: 5,
@@ -263,7 +286,7 @@ class FormUserLevel extends Component {
             </div>
             {menu.map((val, key) => {
               return val.sub === undefined ? (
-                <div className="col-md-12" key={key}>
+                <div style={{ zoom: "80%" }} className="col-md-12" key={key}>
                   <div className="form-group">
                     <label htmlFor="">
                       <b style={{ color: "white", letterSpacing: "2px" }}>
@@ -278,7 +301,7 @@ class FormUserLevel extends Component {
                   </div>
                 </div>
               ) : (
-                <div className="col-md-12" key={key}>
+                <div style={{ zoom: "80%" }} className="col-md-12" key={key}>
                   <div className="form-group">
                     <label htmlFor="">
                       <b style={{ color: "white", letterSpacing: "2px" }}>

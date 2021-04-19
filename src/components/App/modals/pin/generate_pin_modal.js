@@ -30,7 +30,7 @@ class GeneratePinModal extends Component {
     e.preventDefault();
     let state = this.state;
     if (state.qty === 0 || state.qty === "") {
-      ToastQ.fire({ icon: "error", title: `qty tidak boleh kosong` });
+      ToastQ.fire({ icon: "error", title: `jumlah pin tidak boleh kosong` });
       return;
     }
     if (state.prefix === "") {
