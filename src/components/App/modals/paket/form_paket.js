@@ -5,13 +5,14 @@ import { ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { ModalToggle } from "../../../../redux/actions/modal.action";
 import { ToastQ } from "../../../../helper";
 import Select from "react-select";
-// import { fetchKategoriPaket } from "../../../../redux/actions/paket/kategori.action";
+import { fetchKategori } from "../../../../redux/actions/kategori/kategori.action";
 import File64 from "../../../common/File64";
 import CKEditor from "react-ckeditor-component";
 import {
   postPaket,
   putPaket,
 } from "../../../../redux/actions/paket/paket.action";
+import Preloader from "../../../../Preloader";
 
 class FormPaket extends Component {
   constructor(props) {
@@ -26,10 +27,10 @@ class FormPaket extends Component {
 
     this.state = {
       title: "",
-      picture: "-",
-      video: "-",
+      price: "0",
+      pin_required: "0",
+      gambar: "-",
       caption: "",
-      type: 0,
       id_category: "",
       data_kategori: [],
     };
@@ -51,7 +52,8 @@ class FormPaket extends Component {
         caption: props.detail.caption,
         id_category: props.detail.id_category,
         title: props.detail.title,
-        video: props.detail.video,
+        price: props.detail.price,
+        pin_required: props.detail.pin_required,
       });
       this.handleChangeKategori({
         value: props.detail.id_category,
@@ -68,16 +70,16 @@ class FormPaket extends Component {
   }
 
   componentWillMount() {
-    // this.props.dispatch(fetchKategori("berita"));
+    this.props.dispatch(fetchKategori("membership"));
   }
 
   clearState() {
     this.setState({
       title: "",
-      picture: "-",
-      video: "-",
+      price: "0",
+      pin_required: "0",
+      gambar: "-",
       caption: "",
-      type: 0,
       id_category: "",
       data_kategori: [],
     });
@@ -85,7 +87,7 @@ class FormPaket extends Component {
   handleChangeImage(files) {
     if (files.status === "success") {
       this.setState({
-        picture: files.base64,
+        gambar: files.base64,
       });
     }
   }
@@ -127,11 +129,11 @@ class FormPaket extends Component {
     e.preventDefault();
     let parsedata = {
       title: this.state.title,
-      picture: this.state.picture,
-      video: this.state.video,
+      price: this.state.price,
+      pin_required: this.state.pin_required,
       caption: this.state.caption,
-      type: 0,
       id_category: this.state.id_category,
+      gambar: this.state.gambar,
     };
     if (parsedata["title"] === "") {
       ToastQ.fire({ icon: "error", title: `nama tidak boleh kosong` });
@@ -141,7 +143,14 @@ class FormPaket extends Component {
       ToastQ.fire({ icon: "error", title: `kategori tidak boleh kosong` });
       return;
     }
-
+    if (parsedata["pin_required"] === "" || parsedata["pin_required"] === "0") {
+      ToastQ.fire({ icon: "error", title: `tiket tidak boleh kosong` });
+      return;
+    }
+    if (parsedata["price"] === "" || parsedata["price"] === "0") {
+      ToastQ.fire({ icon: "error", title: `poin tidak boleh kosong` });
+      return;
+    }
     if (parsedata["caption"] === "") {
       ToastQ.fire({ icon: "error", title: `Deskripsi tidak boleh kosong` });
       return;
@@ -161,6 +170,7 @@ class FormPaket extends Component {
         isOpen={this.props.isOpen && this.props.type === "formPaket"}
         size="lg"
       >
+        {this.props.isLoadingPost ? <Preloader /> : null}
         <ModalHeader toggle={this.toggle}>
           {this.props.detail.id === "" ? "Tambah" : "Ubah"} Paket
         </ModalHeader>
@@ -267,7 +277,7 @@ class FormPaket extends Component {
               onClick={this.handleSubmit}
             >
               <i className="ti-save" />
-              {!this.props.isLoadingPost ? "Simpan" : "Loading ......"}
+              Simpan
             </button>
           </div>
         </ModalFooter>

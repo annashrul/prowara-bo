@@ -9,14 +9,14 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-import {
-  deleteContent,
-  getContent,
-} from "../../../redux/actions/konten/konten.action";
+
 import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
 import FormPaket from "../modals/paket/form_paket";
 import * as Swal from "sweetalert2";
-import { getPaket } from "../../../redux/actions/paket/paket.action";
+import {
+  getPaket,
+  deletePaket,
+} from "../../../redux/actions/paket/paket.action";
 import Preloader from "../../../Preloader";
 
 moment.locale("id"); // en
@@ -71,18 +71,14 @@ class DaftarPaket extends Component {
     if (par !== "") {
       this.setState({
         detail: {
-          caption: this.props.data.data[par].caption,
-          id_category: this.props.data.data[par].id_category,
-          category: this.props.data.data[par].category,
-          created_at: this.props.data.data[par].created_at,
           id: this.props.data.data[par].id,
-          picture: this.props.data.data[par].picture,
           title: this.props.data.data[par].title,
-          type: this.props.data.data[par].type,
-          type_no: this.props.data.data[par].type_no,
-          updated_at: this.props.data.data[par].updated_at,
-          video: this.props.data.data[par].video,
-          writer: this.props.data.data[par].writer,
+          price: this.props.data.data[par].price,
+          pin_required: this.props.data.data[par].pin_required,
+          caption: this.props.data.data[par].caption,
+          category: this.props.data.data[par].category,
+          id_category: this.props.data.data[par].id_category,
+          gambar: this.props.data.data[par].gambar,
         },
       });
     } else {
@@ -110,7 +106,7 @@ class DaftarPaket extends Component {
       cancelButtonText: "Batal",
     }).then((result) => {
       if (result.value) {
-        this.props.dispatch(deleteContent(id, "berita"));
+        this.props.dispatch(deletePaket(id));
       }
     });
   }

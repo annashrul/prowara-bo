@@ -14,6 +14,7 @@ import { contentReducer } from "./konten/konten.reducer";
 import { userListReducer } from "./masterdata/user_list.reducer";
 import { userLevelReducer } from "./masterdata/user_level.reducer";
 import { depositReducer } from "./ewallet/deposit.reducer";
+import { configWalletReducer } from "./ewallet/config_wallet.reducer";
 import { penarikanReducer } from "./ewallet/penarikan.reducer";
 import { saldoReducer } from "./ewallet/saldo.reducer";
 import { generalReducer } from "./setting/general.reducer";
@@ -34,6 +35,7 @@ export default combineReducers({
   kategoriReducer,
   contentReducer,
   depositReducer,
+  configWalletReducer,
   penarikanReducer,
   saldoReducer,
   generalReducer,

@@ -7,6 +7,7 @@ import Paginationq, {
   toCurrency,
   myDate,
   toExcel,
+  toRp,
 } from "../../../helper";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
@@ -19,6 +20,7 @@ import {
 import * as Swal from "sweetalert2";
 import Preloader from "../../../Preloader";
 import Select from "react-select";
+import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
 
 class IndexDeposit extends Component {
   constructor(props) {
@@ -62,6 +64,7 @@ class IndexDeposit extends Component {
   componentWillMount() {
     let where = this.handleValidate();
     this.props.dispatch(getDeposit(`page=1&${where}`));
+    this.props.dispatch(getConfigWallet());
   }
   handleValidate() {
     let where = "";
@@ -92,7 +95,10 @@ class IndexDeposit extends Component {
         let content = [];
         let total = 0;
         props.dataExcel.data.forEach((v) => {
-          total = total + parseInt(v.amount, 10);
+          let konv =
+            parseInt(v.amount, 10) *
+            parseInt(this.props.configWallet.konversi_poin, 10);
+          total = total + konv;
           let status = "";
           if (v.status === 0) {
             status = "Pending";
@@ -108,7 +114,7 @@ class IndexDeposit extends Component {
             v.fullname,
             v.acc_name,
             v.acc_no,
-            parseInt(v.amount, 10),
+            konv,
             parseInt(v.unique_code, 10),
             status,
             myDate(v.created_at),
@@ -235,8 +241,10 @@ class IndexDeposit extends Component {
       textAlign: "left",
       whiteSpace: "nowrap",
     };
-    let totAmount = 0;
+    let totAmountPoint = 0;
+    let totAmountRp = 0;
     const { total, per_page, last_page, current_page, data } = this.props.data;
+    console.log("config wallet", this.props.configWallet);
     return (
       <Layout page={"Laporan Deposit"}>
         {this.props.isLoadingExcel || this.props.isLoading ? (
@@ -344,30 +352,57 @@ class IndexDeposit extends Component {
             </div>
           </div>
         </div>
-
         <br />
         <div style={{ overflowX: "auto" }}>
           <table className="table table-bordered">
             <thead className="thead-dark">
               <tr>
-                <th style={columnStyle}>NO</th>
-                <th style={columnStyle}>#</th>
-                <th style={columnStyle}>KODE TRANSAKSI</th>
-                <th style={columnStyle}>NAMA</th>
-                <th style={columnStyle}>BANK TUJUAN</th>
-                <th style={columnStyle}>JUMLAH</th>
-                <th style={columnStyle}>KODE UNIK</th>
-                <th style={columnStyle}>STATUS</th>
+                <th rowSpan="2" style={columnStyle}>
+                  NO
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  #
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  KODE TRANSAKSI
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  NAMA
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  BANK TUJUAN
+                </th>
+                <th colSpan="2" style={columnStyle}>
+                  JUMLAH
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  KODE UNIK
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  STATUS
+                </th>
                 <th rowSpan="2" style={columnStyle}>
                   TANGGAL DIBUAT
                 </th>
+              </tr>
+              <tr>
+                <th style={columnStyle}>POIN</th>
+                <th style={columnStyle}>RUPIAH</th>
               </tr>
             </thead>
             <tbody>
               {typeof data === "object" ? (
                 data.length > 0 ? (
                   data.map((v, i) => {
-                    totAmount = totAmount + parseInt(v.amount);
+                    totAmountPoint = totAmountPoint + parseInt(v.amount);
+                    let nomRp = 0;
+                    if (this.props.configWallet !== undefined) {
+                      let konv =
+                        parseInt(v.amount, 10) *
+                        parseInt(this.props.configWallet.konversi_poin);
+                      nomRp = konv;
+                      totAmountRp = totAmountRp + parseInt(konv);
+                    }
                     let status = "";
                     if (v.status === 0) {
                       status = (
@@ -425,6 +460,9 @@ class IndexDeposit extends Component {
                         <td style={numStyle} className="txtGreen">
                           {toCurrency(`${v.amount}`)}
                         </td>
+                        <td style={numStyle} className="txtGreen">
+                          Rp {toRp(nomRp)} .-
+                        </td>
                         <td style={numStyle} className="txtRed">
                           {v.unique_code}
                         </td>
@@ -435,14 +473,14 @@ class IndexDeposit extends Component {
                   })
                 ) : (
                   <tr>
-                    <td colSpan={10} style={columnStyle}>
+                    <td colSpan={11} style={columnStyle}>
                       <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
                     </td>
                   </tr>
                 )
               ) : (
                 <tr>
-                  <td colSpan={10} style={columnStyle}>
+                  <td colSpan={11} style={columnStyle}>
                     <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
                   </td>
                 </tr>
@@ -452,7 +490,10 @@ class IndexDeposit extends Component {
               <tr>
                 <th colSpan={5}>TOTAL PERHALAMAN</th>
                 <th colSpan={1} style={numStyle} className="txtGreen">
-                  {toCurrency(`${totAmount}`)}
+                  {toCurrency(`${totAmountPoint}`)}
+                </th>
+                <th colSpan={1} style={numStyle} className="txtGreen">
+                  Rp {toRp(`${totAmountRp}`)} .-
                 </th>
                 <th colSpan={3} />
               </tr>
@@ -484,6 +525,7 @@ const mapStateToProps = (state) => {
     data: state.depositReducer.data,
     isLoadingExcel: state.depositReducer.isLoadingExcel,
     dataExcel: state.depositReducer.excel,
+    configWallet: state.configWalletReducer.data,
   };
 };
 

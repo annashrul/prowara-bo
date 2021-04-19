@@ -7,6 +7,7 @@ import Paginationq, {
   toCurrency,
   toExcel,
   myDate,
+  toRp,
 } from "../../../helper";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 import moment from "moment";
@@ -18,6 +19,7 @@ import {
 } from "../../../redux/actions/ewallet/penarikan.action";
 import Preloader from "../../../Preloader";
 import Select from "react-select";
+import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
 
 class IndexPenarikan extends Component {
   constructor(props) {
@@ -76,6 +78,7 @@ class IndexPenarikan extends Component {
   componentWillMount() {
     let where = this.handleValidate();
     this.props.dispatch(getPenarikan(`page=1&${where}`));
+    this.props.dispatch(getConfigWallet());
   }
 
   handleSearch(e) {
@@ -149,6 +152,9 @@ class IndexPenarikan extends Component {
         let total = 0;
         props.dataExcel.data.forEach((v, i) => {
           total = total + parseInt(v.amount, 10);
+          let konv =
+            parseInt(v.amount, 10) *
+            parseInt(this.props.configWallet.konversi_poin, 10);
           let status = "";
           if (v.status === 0) {
             status = "Pending";
@@ -166,7 +172,7 @@ class IndexPenarikan extends Component {
             v.acc_name,
             v.acc_no,
             parseInt(v.charge, 10),
-            parseInt(v.amount, 10),
+            konv,
             status,
             myDate(v.created_at),
           ]);
@@ -213,7 +219,8 @@ class IndexPenarikan extends Component {
       whiteSpace: "nowrap",
     };
     // const data = this.state.data;
-    let totAmount = 0;
+    let totAmountPoint = 0;
+    let totAmountRp = 0;
     const { total, per_page, last_page, current_page, data } = this.props.data;
     return (
       <Layout page={"Penarikan"}>
@@ -333,23 +340,54 @@ class IndexPenarikan extends Component {
           <table className="table table-bordered">
             <thead className="thead-dark">
               <tr>
-                <th style={columnStyle}>NO</th>
-                <th style={columnStyle}>#</th>
-                <th style={columnStyle}>KODE TRANSAKSI</th>
-                <th style={columnStyle}>NAMA</th>
-                <th style={columnStyle}>BANK</th>
-                <th style={columnStyle}>JUMLAH</th>
+                <th rowSpan="2" style={columnStyle}>
+                  NO
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  #
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  KODE TRANSAKSI
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  NAMA
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  BANK
+                </th>
+                <th colSpan="2" style={columnStyle}>
+                  JUMLAH
+                </th>
 
-                <th style={columnStyle}>BIAYA ADMIN</th>
-                <th style={columnStyle}>STATUS</th>
-                <th style={columnStyle}>TANGGAL DIBUAT</th>
+                <th rowSpan="2" style={columnStyle}>
+                  BIAYA ADMIN
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  STATUS
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  TANGGAL DIBUAT
+                </th>
+              </tr>
+              <tr>
+                <th style={columnStyle}>POIN</th>
+                <th style={columnStyle}>RUPIAH</th>
               </tr>
             </thead>
+
             <tbody>
               {typeof data === "object" ? (
                 data.length > 0 ? (
                   data.map((v, i) => {
-                    totAmount = totAmount + parseInt(v.amount);
+                    totAmountPoint = totAmountPoint + parseInt(v.amount);
+                    let nomRp = 0;
+                    if (this.props.configWallet !== undefined) {
+                      let konv =
+                        parseInt(v.amount, 10) *
+                        parseInt(this.props.configWallet.konversi_poin);
+                      nomRp = konv;
+                      totAmountRp = totAmountRp + parseInt(konv);
+                    }
                     let badge = "";
                     let txt = "";
                     if (v.status === 0) {
@@ -399,6 +437,9 @@ class IndexPenarikan extends Component {
                         <td style={numStyle} className="txtGreen">
                           {toCurrency(`${v.amount}`)}
                         </td>
+                        <td style={numStyle} className="txtGreen">
+                          Rp {toRp(nomRp)} .-
+                        </td>
                         <td style={numStyle}>{toCurrency(`${v.charge}`)}</td>
                         <td style={columnStyle}>
                           <span className={`span ${badge}`}>{txt}</span>
@@ -409,14 +450,14 @@ class IndexPenarikan extends Component {
                   })
                 ) : (
                   <tr>
-                    <td colSpan={11} style={columnStyle}>
+                    <td colSpan={12} style={columnStyle}>
                       <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
                     </td>
                   </tr>
                 )
               ) : (
                 <tr>
-                  <td colSpan={11} style={columnStyle}>
+                  <td colSpan={12} style={columnStyle}>
                     <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
                   </td>
                 </tr>
@@ -426,7 +467,10 @@ class IndexPenarikan extends Component {
               <tr>
                 <th colSpan={5}>TOTAL PERHALAMAN</th>
                 <th colSpan={1} style={numStyle} className="txtGreen">
-                  {toCurrency(`${totAmount}`)}
+                  {toCurrency(`${totAmountPoint}`)}
+                </th>
+                <th colSpan={1} style={numStyle} className="txtGreen">
+                  Rp {toRp(`${totAmountRp}`)} .-
                 </th>
                 <th colSpan={3} />
               </tr>
@@ -454,6 +498,7 @@ const mapStateToProps = (state) => {
     data: state.penarikanReducer.data,
     isLoadingExcel: state.penarikanReducer.isLoadingExcel,
     dataExcel: state.penarikanReducer.excel,
+    configWallet: state.configWalletReducer.data,
   };
 };
 

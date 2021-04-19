@@ -183,7 +183,7 @@ export const putPaket = (id, data) => {
   };
 };
 
-export const deleteContent = (id) => async (dispatch) => {
+export const deletePaket = (id) => async (dispatch) => {
   Swal.fire({
     title: "Tunggu sebentar.",
     html: NOTIF_ALERT.CHECKING,
