@@ -197,8 +197,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      //   this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {
