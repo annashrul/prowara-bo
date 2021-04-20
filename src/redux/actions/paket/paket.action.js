@@ -1,58 +1,62 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { KATEGORI, HEADERS, NOTIF_ALERT } from "../_constants";
+import { PAKET, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
 
 export function setLoading(load) {
   return {
-    type: KATEGORI.LOADING,
+    type: PAKET.LOADING,
+    load,
+  };
+}
+
+export function setLoadingDetail(load) {
+  return {
+    type: PAKET.LOADING_DETAIL,
     load,
   };
 }
 export function setLoadingPost(load) {
   return {
-    type: KATEGORI.LOADING_POST,
+    type: PAKET.LOADING_POST,
     load,
   };
 }
 export function setIsError(load) {
   return {
-    type: KATEGORI.IS_ERROR,
+    type: PAKET.IS_ERROR,
     load,
   };
 }
 
 export function setData(data = []) {
   return {
-    type: KATEGORI.SUCCESS,
+    type: PAKET.SUCCESS,
     data,
   };
 }
 
-export function setDataEdit(data = []) {
-  return {
-    type: KATEGORI.EDIT,
-    data,
-  };
-}
 export function setDataDetail(data = []) {
   return {
-    type: KATEGORI.DETAIL,
+    type: PAKET.DETAIL,
     data,
   };
 }
 
 export function setDataFailed(data = []) {
   return {
-    type: KATEGORI.FAILED,
+    type: PAKET.FAILED,
     data,
   };
 }
 
-export const fetchKategori = (where) => {
+export const getPaket = (where) => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    let url = `category/${where}`;
+    let url = "paket";
+    if (where) {
+      url += `?${where}`;
+    }
     axios
       .get(HEADERS.URL + `${url}`)
       .then(function (response) {
@@ -61,7 +65,6 @@ export const fetchKategori = (where) => {
         dispatch(setLoading(false));
       })
       .catch(function (error) {
-        console.log("error", error);
         dispatch(setLoading(false));
         if (error.message === "Network Error") {
           Swal.fire(
@@ -74,11 +77,11 @@ export const fetchKategori = (where) => {
   };
 };
 
-export const postKategori = (data, param) => {
+export const postPaket = (data) => {
   return (dispatch) => {
     dispatch(setLoadingPost(true));
     dispatch(setIsError(false));
-    const url = HEADERS.URL + `category`;
+    const url = HEADERS.URL + `paket`;
     axios
       .post(url, data)
       .then(function (response) {
@@ -89,25 +92,24 @@ export const postKategori = (data, param) => {
             icon: "success",
             text: NOTIF_ALERT.SUCCESS,
           });
-          dispatch(ModalToggle(false));
-
           dispatch(setIsError(true));
-          dispatch(fetchKategori(`${param}?page=1`));
+          dispatch(ModalToggle(false));
+          dispatch(getPaket(`page=1`));
         } else {
           Swal.fire({
             title: "failed",
             icon: "error",
             text: NOTIF_ALERT.FAILED,
           });
-          dispatch(ModalToggle(true));
-
           dispatch(setIsError(false));
+          dispatch(ModalToggle(true));
         }
         dispatch(setLoadingPost(false));
       })
       .catch(function (error) {
         dispatch(setLoadingPost(false));
         dispatch(setIsError(false));
+        dispatch(ModalToggle(true));
         if (error.message === "Network Error") {
           Swal.fire(
             "Network Failed!.",
@@ -128,11 +130,11 @@ export const postKategori = (data, param) => {
   };
 };
 
-export const putKategori = (id, data, param) => {
+export const putPaket = (id, data) => {
   return (dispatch) => {
     dispatch(setLoadingPost(true));
     dispatch(setIsError(false));
-    const url = HEADERS.URL + `category/${id}`;
+    const url = HEADERS.URL + `paket/${id}`;
     axios
       .put(url, data)
       .then(function (response) {
@@ -144,8 +146,8 @@ export const putKategori = (id, data, param) => {
             text: NOTIF_ALERT.SUCCESS,
           });
           dispatch(setIsError(true));
-          dispatch(fetchKategori(`${param}?page=1`));
           dispatch(ModalToggle(false));
+          dispatch(getPaket(`page=1`));
         } else {
           Swal.fire({
             title: "failed",
@@ -160,6 +162,7 @@ export const putKategori = (id, data, param) => {
       .catch(function (error) {
         dispatch(setLoadingPost(false));
         dispatch(setIsError(false));
+        dispatch(ModalToggle(true));
         if (error.message === "Network Error") {
           Swal.fire(
             "Network Failed!.",
@@ -180,7 +183,7 @@ export const putKategori = (id, data, param) => {
   };
 };
 
-export const deleteKategori = (id, param) => async (dispatch) => {
+export const deletePaket = (id) => async (dispatch) => {
   Swal.fire({
     title: "Tunggu sebentar.",
     html: NOTIF_ALERT.CHECKING,
@@ -191,7 +194,7 @@ export const deleteKategori = (id, param) => async (dispatch) => {
   });
 
   axios
-    .delete(HEADERS.URL + `category/${id}`)
+    .delete(HEADERS.URL + `paket/${id}`)
     .then((response) => {
       setTimeout(function () {
         Swal.close();
@@ -210,7 +213,7 @@ export const deleteKategori = (id, param) => async (dispatch) => {
           });
         }
         dispatch(setLoading(false));
-        dispatch(fetchKategori(`${param}?page=1`));
+        dispatch(getPaket(`page=1`));
       }, 800);
     })
     .catch((error) => {

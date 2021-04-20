@@ -5,6 +5,8 @@ import NotFound from "../common/notfound";
 import Login from "../App/Auth/Login/Login";
 import Dashboard from "../App/Dashboard/Dashboard";
 import Pin from "../App/pin";
+import DaftarPaket from "../App/paket/daftar_paket";
+import KategoriPaket from "../App/paket/kategori_paket";
 import Member from "../App/masterdata/member";
 import UserList from "../App/masterdata/indexUserList";
 import UserLevel from "../App/masterdata/indexUserLevel";
@@ -25,6 +27,16 @@ const Routes = (
       {/* DASHBOARD SECTION END */}
       {/* PAKET SECTION START */}
       <PrivateRoute path="/pin" exact strict component={Pin} />
+<<<<<<< HEAD
+      <PrivateRoute path="/daftar_paket" exact strict component={DaftarPaket} />
+      <PrivateRoute
+        path="/kategori_paket"
+        exact
+        strict
+        component={KategoriPaket}
+      />
+=======
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
       {/* PAKET SECTION END */}
       {/* MASTERDATA SECTION START */}
       <PrivateRoute path="/daftar_pengguna" exact strict component={UserList} />
@@ -37,9 +49,15 @@ const Routes = (
       {/* LAPORAN SECTION START */}
       <PrivateRoute path="/laporan/transaksi" exact strict component={Saldo} />
       {/* E-WALLET SECTION START */}
+<<<<<<< HEAD
+      <PrivateRoute path="/ewallet/deposit" exact strict component={Deposit} />
+      <PrivateRoute
+        path="/ewallet/penarikan"
+=======
       <PrivateRoute path="/laporan/deposit" exact strict component={Deposit} />
       <PrivateRoute
         path="/laporan/penarikan"
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
         exact
         strict
         component={Penarikan}
@@ -47,7 +65,10 @@ const Routes = (
       {/* E-WALLET SECTION END */}
       {/* LAPORAN SECTION END */}
       <PrivateRoute path="/pengaturan/bank" exact strict component={Bank} />
+<<<<<<< HEAD
+=======
       <PrivateRoute path="/pengaturan" exact strict component={IndexSetting} />
+>>>>>>> 1bda5c11d26c4fbec56592407a0b7a8634839010
       <Route component={NotFound} />
     </Switch>
   </div>
