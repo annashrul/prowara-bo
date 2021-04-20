@@ -63,7 +63,7 @@ class Index extends Component {
 
         return {
           prevDataProps: props.res_alokasi,
-          wd_min: props.res_alokasi.min_wd,
+          min_wd: props.res_alokasi.min_wd,
           dp_min: props.res_alokasi.dp_min,
           tf_min: props.res_alokasi.tf_min,
 
@@ -214,12 +214,12 @@ class Index extends Component {
                   </div>
                   <input
                     type="number"
-                    name="wd_min"
+                    name="min_wd"
                     onKeyPress={(event) => {
                       if (event.key === "Enter") this.handleEnterSubmit(event);
                     }}
                     onChange={(event) => this.handleChange(event)}
-                    value={this.state.wd_min}
+                    value={this.state.min_wd}
                     className="form-control"
                     placeholder="Minimal Withdrawal"
                   />
@@ -289,7 +289,7 @@ class Index extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <label>Biaya Invest</label>
+                <label>Biaya Penarikan Modal</label>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span className="input-group-text">%</span>
@@ -349,7 +349,7 @@ class Index extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <label>Pembagian Keuntungan</label>
+                <label>Pembagian Keuntungan per Hari</label>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span className="input-group-text">%</span>

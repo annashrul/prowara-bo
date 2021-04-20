@@ -248,7 +248,7 @@ class IndexMember extends Component {
         '<div class="form-group"><label class="text-dark">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
         mobile_no +
         '"></div></div>' +
-        '<div class="form-group"><label class="text-dark">PIN Member</label><div class="input-group"><input type="number" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+        '<div class="form-group"><label class="text-dark">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
       type: "warning",
       showCancelButton: true,
       cancelButtonColor: "grey",
@@ -292,10 +292,16 @@ class IndexMember extends Component {
               title: `No Hp harus berupa angka!`,
             });
             // alert("No Hp harus berupa angka!");
-          } else if (parseData.pin.length === 1 && parseData.pin.length < 6) {
+          } else if (parseData.pin.length > 1 && parseData.pin.length < 6) {
             return ToastQ.fire({
               icon: "warning",
               title: `PIN masih kurang dari 6 digit!`,
+            });
+            // alert("PIN masih kurang dari 6 digit!");
+          } else if (parseData.pin.length > 6) {
+            return ToastQ.fire({
+              icon: "warning",
+              title: `PIN lebih dari 6 digit!`,
             });
             // alert("PIN masih kurang dari 6 digit!");
           } else if (isNaN(String(parseData.pin).replace(/[0-9]/g, ""))) {
@@ -502,11 +508,11 @@ class IndexMember extends Component {
                                     >
                                       Alamat
                                     </DropdownItem> */}
-                                    <DropdownItem
+                                    {/* <DropdownItem
                                       onClick={(e) => this.handleBank(e, v.id)}
                                     >
                                       Bank
-                                    </DropdownItem>
+                                    </DropdownItem> */}
                                     <DropdownItem
                                       onClick={(e) =>
                                         this.handleBankEdit(e, v.id, v.fullname)
