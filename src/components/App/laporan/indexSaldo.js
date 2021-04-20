@@ -174,9 +174,6 @@ class IndexSaldo extends Component {
     } = this.props.data;
     return (
       <Layout page={"Laporan Transaksi"}>
-        {this.props.isLoadingExcel || this.props.isLoading ? (
-          <Preloader />
-        ) : null}
         <div className="row">
           <div className="col-md-10">
             <div className="row">
@@ -301,16 +298,16 @@ class IndexSaldo extends Component {
                         </td>
 
                         <td style={columnStyle}>{v.fullname}</td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.saldo_awal}`)}
                         </td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.trx_in}`)}
                         </td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.trx_out}`)}
                         </td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.saldo_akhir}`)}
                         </td>
                       </tr>
@@ -334,48 +331,48 @@ class IndexSaldo extends Component {
             <tfoot className="bgWithOpacity">
               <tr>
                 <th colSpan={3}>TOTAL PERHALAMAN</th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totSaldoAwal}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totTrxIn}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totTrxOut}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totSaldoAkhir}`)}
                 </th>
               </tr>
 
               <tr>
                 <th colSpan={3}>TOTAL KESELURUHAN</th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.saldo_awal, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.saldo_awal}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.trx_in, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.trx_in}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.trx_out, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.trx_out}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.saldo_akhir, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.saldo_akhir}`)}
                 </th>
               </tr>

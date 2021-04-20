@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import WrapperModal from "../../_wrapper.modal";
 import connect from "react-redux/es/connect/connect";
 import Switch from "react-switch";
-
 import { ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { ModalToggle } from "../../../../../redux/actions/modal.action";
 import { ToastQ } from "../../../../../helper";
@@ -213,8 +212,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      // this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -255,13 +254,8 @@ class FormUserLevel extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    let err = Object.assign({}, this.state.error, {
-      [event.target.name]: "",
-    });
-    this.setState({ error: err });
   }
   handleChangeToggle(e, val) {
-    console.log(e, val);
     this.setState({ checked: val });
   }
   handleSubmit(e) {
@@ -269,7 +263,7 @@ class FormUserLevel extends Component {
     let parseData = {};
     parseData["level"] = this.state.lvl;
     parseData["access_level"] = JSON.stringify(this.state.menu);
-    console.log(parseData);
+    console.log(this.state.menu);
     if (parseData["level"] === "" || parseData["level"] === undefined) {
       ToastQ.fire({
         icon: "error",

@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "../../../../components/Layout";
-import Paginationq, { statusQ, ToastQ, toCurrency } from "../../../../helper";
+import Paginationq, {
+  statusQ,
+  ToastQ,
+  toCurrency,
+  toRp,
+} from "../../../../helper";
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import moment from "moment";
@@ -25,6 +30,7 @@ import { getDetailAlamat } from "../../../../redux/actions/masterdata/alamat.act
 import * as Swal from "sweetalert2";
 import Select from "react-select";
 import FormMemberBank from "../../modals/masterdata/member/form_member_bank";
+import LoadingBar from "react-top-loading-bar";
 
 class IndexMember extends Component {
   constructor(props) {
@@ -239,16 +245,17 @@ class IndexMember extends Component {
     e.preventDefault();
     let proping = this.props;
     Swal.fire({
-      title: "Ubah Member",
+      title: '<span class="text-light">Ubah Member</span>',
       focusConfirm: true,
+      background: "#1a1c23",
       html:
-        '<div class="form-group"><label class="text-dark">Nama Member</label><div class="input-group"><input type="text" id="nameModal" class="form-control" placeholder="Nama Member" value="' +
+        '<div class="form-group"><label class="text-light">Nama Member</label><div class="input-group"><input type="text" id="nameModal" class="form-control" placeholder="Nama Member" value="' +
         name_old +
         '"></div></div>' +
-        '<div class="form-group"><label class="text-dark">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
+        '<div class="form-group"><label class="text-light">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
         mobile_no +
         '"></div></div>' +
-        '<div class="form-group"><label class="text-dark">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+        '<div class="form-group"><label class="text-light">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
       type: "warning",
       showCancelButton: true,
       cancelButtonColor: "grey",
@@ -338,14 +345,16 @@ class IndexMember extends Component {
     let totSaldo = 0;
     let totPin = 0;
     let totSponsor = 0;
+    let totPayment = 0;
+    let totSlot = 0;
+    let totModal = 0;
+    let totOmset = 0;
     return (
       <Layout page={"Member"}>
-        {this.state.isLoading ||
-        this.props.isLoading ||
-        this.props.isLoadingBank ||
-        this.props.isLoadingAlamat ? (
+        {this.props.isLoadingBank || this.props.isLoadingAlamat ? (
           <Preloader />
         ) : null}
+
         <div className="row">
           <div className="col-12 box-margin">
             <div className="row">
@@ -445,33 +454,46 @@ class IndexMember extends Component {
                 <thead className="thead-dark">
                   <tr>
                     <th rowSpan="2" style={headStyle}>
-                      No
+                      NO
                     </th>
                     <th rowSpan="2" style={headStyle}>
                       #
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Nama
+                      NAMA
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Referral
+                      USER ID
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      No.Telepon
+                      NO.TELEPON
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Saldo
+                      SALDO
                     </th>
                     <th colSpan="2" style={headStyle}>
-                      Jumlah
+                      JUMLAH
+                    </th>
+
+                    <th rowSpan="2" style={headStyle}>
+                      TOTAL PENARIKAN
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Status
+                      SLOT AKTIF
+                    </th>
+                    <th rowSpan="2" style={headStyle}>
+                      MODAL
+                    </th>
+                    <th rowSpan="2" style={headStyle}>
+                      OMSET
+                    </th>
+                    <th rowSpan="2" style={headStyle}>
+                      STATUS
                     </th>
                   </tr>
                   <tr>
-                    <th style={headStyle}>Sponsor</th>
-                    <th style={headStyle}>Pin</th>
+                    <th style={headStyle}>SPOMSOR</th>
+                    <th style={headStyle}>PIN</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -481,6 +503,10 @@ class IndexMember extends Component {
                         totSaldo += parseInt(v.saldo, 10);
                         totPin += parseInt(v.pin, 10);
                         totSponsor += parseInt(v.sponsor, 10);
+                        totPayment += parseInt(v.total_payment, 10);
+                        totSlot += parseInt(v.slot_active, 10);
+                        totModal += parseInt(v.total_modal, 10);
+                        totOmset += parseInt(v.omset, 10);
 
                         return (
                           <tr key={i}>
@@ -549,18 +575,30 @@ class IndexMember extends Component {
                             <td style={numberStyle} className="txtGreen">
                               {v.saldo === "0"
                                 ? 0
-                                : toCurrency(parseInt(v.saldo, 10))}
+                                : toRp(parseInt(v.saldo, 10))}
+                              .-
                             </td>
                             <td style={numberStyle}>
                               {v.sponsor === "0"
                                 ? 0
-                                : toCurrency(parseInt(v.sponsor, 10))}
+                                : toRp(parseInt(v.sponsor, 10))}
                             </td>
                             <td style={numberStyle}>
-                              {v.pin === "0"
-                                ? 0
-                                : toCurrency(parseInt(v.pin, 10))}
+                              {v.pin === "0" ? 0 : toRp(parseInt(v.pin, 10))}
                             </td>
+                            <td className="poin" style={numberStyle}>
+                              {toCurrency(v.total_payment)}
+                            </td>
+                            <td style={numberStyle}>
+                              {v.slot_active === "0" ? 0 : toRp(v.slot_active)}
+                            </td>
+                            <td className="poin" style={numberStyle}>
+                              {toCurrency(v.total_modal)}
+                            </td>
+                            <td className="poin" style={numberStyle}>
+                              {toCurrency(v.omset)}
+                            </td>
+
                             <td style={headStyle}>{statusQ(v.status)}</td>
                           </tr>
                         );
@@ -580,17 +618,23 @@ class IndexMember extends Component {
                     </tr>
                   )}
                 </tbody>
-                <tfoot>
+                <tfoot className="bgWithOpacity">
                   <tr>
                     <td colSpan={5}>TOTAL PERHALAMAN</td>
                     <td style={numberStyle} className="txtGreen">
-                      {totSaldo === 0 ? 0 : toCurrency(totSaldo)}
+                      Rp {toRp(totSaldo)} .-
                     </td>
-                    <td style={numberStyle}>
-                      {totSponsor === 0 ? 0 : toCurrency(totSponsor)}
+                    <td style={numberStyle}>{toRp(totSponsor)}</td>
+                    <td style={numberStyle}>{toRp(totPin)}</td>
+                    <td className="poin" style={numberStyle}>
+                      {toCurrency(totPayment)}
                     </td>
-                    <td style={numberStyle}>
-                      {totPin === 0 ? 0 : toCurrency(totPin)}
+                    <td style={numberStyle}>{toRp(totSlot)}</td>
+                    <td className="poin" style={numberStyle}>
+                      {toCurrency(totModal)}
+                    </td>
+                    <td className="poin" style={numberStyle}>
+                      {toCurrency(totOmset)}
                     </td>
                     <td />
                   </tr>

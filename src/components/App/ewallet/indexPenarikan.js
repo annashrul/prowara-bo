@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
 import { DateRangePicker } from "react-bootstrap-daterangepicker";
-import Paginationq, {
-  rangeDate,
-  toCurrency,
-  toExcel,
-  myDate,
-  toRp,
-} from "../../../helper";
+import Paginationq, { rangeDate, toExcel, myDate, toRp } from "../../../helper";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 import moment from "moment";
 import * as Swal from "sweetalert2";
@@ -20,6 +14,7 @@ import {
 import Preloader from "../../../Preloader";
 import Select from "react-select";
 import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
+import LoadingBar from "react-top-loading-bar";
 
 class IndexPenarikan extends Component {
   constructor(props) {
@@ -223,9 +218,6 @@ class IndexPenarikan extends Component {
     const { total, per_page, last_page, current_page, data } = this.props.data;
     return (
       <Layout page={"Penarikan"}>
-        {this.props.isLoadingExcel || this.props.isLoading ? (
-          <Preloader />
-        ) : null}
         <div className="row">
           <div className="col-12 col-xs-12 col-md-10">
             <div className="row">

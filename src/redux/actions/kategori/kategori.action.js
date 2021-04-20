@@ -2,6 +2,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { KATEGORI, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 export function setLoading(load) {
   return {
@@ -51,18 +53,17 @@ export function setDataFailed(data = []) {
 
 export const fetchKategori = (where) => {
   return (dispatch) => {
-    dispatch(setLoading(true));
+    NProgress.start();
     let url = `category/${where}`.toLocaleLowerCase();
     axios
       .get(HEADERS.URL + `${url}`)
       .then(function (response) {
         const data = response.data;
         dispatch(setData(data));
-        dispatch(setLoading(false));
+        NProgress.done();
       })
       .catch(function (error) {
-        console.log("error", error);
-        dispatch(setLoading(false));
+        NProgress.done();
         if (error.message === "Network Error") {
           Swal.fire(
             "Network Failed!.",

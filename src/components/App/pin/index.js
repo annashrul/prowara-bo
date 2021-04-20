@@ -73,7 +73,6 @@ class IndexPin extends Component {
 
     return (
       <Layout page={"PIN"}>
-        {this.props.isLoading ? <Preloader /> : null}
         <div className="row" style={{ zoom: "80%" }}>
           <div className="col-md-12">
             <button

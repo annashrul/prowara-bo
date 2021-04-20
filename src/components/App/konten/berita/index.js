@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
-import { myDate, noImage, rmHtml, ToastQ } from "../../../../helper";
+import { myDate, noImage, rmHtml } from "../../../../helper";
 import moment from "moment";
 import {
   UncontrolledButtonDropdown,
@@ -16,13 +16,6 @@ import {
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import FormBerita from "../../modals/konten/berita/form_berita";
 import * as Swal from "sweetalert2";
-import {
-  deleteKategori,
-  fetchKategori,
-  postKategori,
-  putKategori,
-} from "../../../../redux/actions/kategori/kategori.action";
-import StickyBox from "react-sticky-box";
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import Preloader from "../../../../Preloader";
 
@@ -128,19 +121,10 @@ class IndexBerita extends Component {
   }
 
   render() {
-    const headStyle = {
-      verticalAlign: "middle",
-      textAlign: "center",
-      whiteSpace: "nowrap",
-    };
-    const { current_page, data } = this.props.data;
+    const { data } = this.props.data;
 
     return (
       <Layout page={"Berita"}>
-        {this.props.isLoading ? <Preloader /> : null}
-        {/*{*/}
-        {/*this.props.kategori.data===undefined&&this.props.isLoadingKategori*/}
-        {/*}*/}
         <div className="row">
           <div className="col-md-12">
             <div className="row">
@@ -208,10 +192,6 @@ class IndexBerita extends Component {
                                       <img
                                         src={`${v.picture}`}
                                         style={{ width: "100%" }}
-                                        onError={(e) => {
-                                          e.target.onerror = null;
-                                          e.target.src = `${noImage()}`;
-                                        }}
                                         alt="member"
                                       />
                                       <br />

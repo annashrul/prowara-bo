@@ -82,7 +82,6 @@ class Kategori extends Component {
 
   handlePage(pageNumber) {
     localStorage.setItem(`pageKategori${this.state.param}`, pageNumber);
-    let where = this.handleValidate();
     this.props.dispatch(
       fetchKategori(`${this.state.param}?page=${pageNumber}`)
     );
@@ -145,7 +144,6 @@ class Kategori extends Component {
 
     return (
       <Layout page={`Kategori ${this.state.path}`}>
-        {this.props.isLoading ? <Preloader /> : null}
         <div className="col-md-12">
           <div className="row">
             <div className="col-8 col-xs-8 col-md-10">
