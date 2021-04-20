@@ -239,16 +239,17 @@ class IndexMember extends Component {
     e.preventDefault();
     let proping = this.props;
     Swal.fire({
-      title: "Ubah Member",
+      title: '<span class="text-light">Ubah Member</span>',
       focusConfirm: true,
+      background: "#1a1c23",
       html:
-        '<div class="form-group"><label class="text-dark">Nama Member</label><div class="input-group"><input type="text" id="nameModal" class="form-control" placeholder="Nama Member" value="' +
+        '<div class="form-group"><label class="text-light">Nama Member</label><div class="input-group"><input type="text" id="nameModal" class="form-control" placeholder="Nama Member" value="' +
         name_old +
         '"></div></div>' +
-        '<div class="form-group"><label class="text-dark">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
+        '<div class="form-group"><label class="text-light">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
         mobile_no +
         '"></div></div>' +
-        '<div class="form-group"><label class="text-dark">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+        '<div class="form-group"><label class="text-light">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
       type: "warning",
       showCancelButton: true,
       cancelButtonColor: "grey",
