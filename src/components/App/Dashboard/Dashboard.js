@@ -358,7 +358,9 @@ class Dashboard extends Component {
           <div className="col-md-6 col-xl-6 box-margin">
             <div className="bgWithOpacity">
               <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
-                <h5 className="card-title mb-0 text-white">Member Aktif</h5>
+                <h5 className="card-title mb-0 text-white">
+                  Member Dengan Slot Terbanyak
+                </h5>
               </div>
               <div
                 className="card-body"
@@ -402,7 +404,9 @@ class Dashboard extends Component {
           <div className="col-md-6 col-xl-6 box-margin">
             <div className="bgWithOpacity">
               <div className="card-header bg-transparent user-area d-flex align-items-center justify-content-between">
-                <h5 className="card-title mb-0 text-white">Member Omset</h5>
+                <h5 className="card-title mb-0 text-white">
+                  Member Dengan Omset Terbanyak
+                </h5>
               </div>
               <div
                 className="card-body"
