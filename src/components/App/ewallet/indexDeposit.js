@@ -21,6 +21,7 @@ import * as Swal from "sweetalert2";
 import Preloader from "../../../Preloader";
 import Select from "react-select";
 import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
+import LoadingBar from "react-top-loading-bar";
 
 class IndexDeposit extends Component {
   constructor(props) {
@@ -247,10 +248,6 @@ class IndexDeposit extends Component {
     console.log("config wallet", this.props.configWallet);
     return (
       <Layout page={"Laporan Deposit"}>
-        {this.props.isLoadingExcel || this.props.isLoading ? (
-          <Preloader />
-        ) : null}
-
         <div className="row">
           <div className="col-12 col-xs-12 col-md-10">
             <div className="row">

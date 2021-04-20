@@ -144,7 +144,6 @@ class Kategori extends Component {
 
     return (
       <Layout page={`Kategori ${this.state.path}`}>
-        {this.props.isLoading ? <Preloader /> : null}
         <div className="col-md-12">
           <div className="row">
             <div className="col-8 col-xs-8 col-md-10">

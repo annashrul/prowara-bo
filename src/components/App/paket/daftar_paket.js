@@ -18,6 +18,7 @@ import {
   deletePaket,
 } from "../../../redux/actions/paket/paket.action";
 import Preloader from "../../../Preloader";
+import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 
 moment.locale("id"); // en
 
@@ -116,7 +117,6 @@ class DaftarPaket extends Component {
 
     return (
       <Layout page={"Daftar Paket"}>
-        {this.props.isLoading ? <Preloader /> : null}
         <div className="col-md-12">
           <div className="row">
             <div className="col-8 col-xs-8 col-md-10">
@@ -160,128 +160,136 @@ class DaftarPaket extends Component {
             <br />
             <div className="col-md-12">
               <main>
-                {typeof data === "object"
-                  ? data.length > 0
-                    ? data.map((v, i) => {
-                        return (
-                          <article key={i}>
-                            <div className="box-margin">
-                              <div
-                                className="coupon"
-                                style={{
-                                  borderRadius: "15px",
-                                  margin: "0 auto",
-                                  breakInside: "avoid-column",
-                                }}
-                              >
-                                <div className="ribbon-wrapper bgWithOpacity">
-                                  <div className="ribbon ribbon-bookmark ribbon-success">
-                                    {v.category}
-                                  </div>
-                                  <img
-                                    src={`${v.gambar}`}
-                                    style={{ width: "100%" }}
-                                    alt="member"
-                                  />
-                                  <br />
-                                  <div className="row">
-                                    <div
-                                      className="col-md-12 text-muted"
-                                      style={{ padding: "5" }}
-                                    >
-                                      <br />
-                                      <p className="text-muted">
-                                        {myDate(v.created_at)}
-                                      </p>
-                                      <h4 className="text-white">{v.title}</h4>
-                                      <table className="table">
-                                        <thead>
-                                          <tr>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              Tiket yang dibutuhkan
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              :
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              {v.pin_required} Tiket
-                                            </th>
-                                          </tr>
-                                          <tr>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              Poin
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              :
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="poin"
-                                            >
-                                              {toCurrency(v.price)}
-                                            </th>
-                                          </tr>
-                                        </thead>
-                                      </table>
-                                      <p className="text-muted">
-                                        {rmHtml(v.caption)}
-                                      </p>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <div
-                                        className="btn-group btn-block"
-                                        style={{ textAlign: "right" }}
-                                      >
-                                        <UncontrolledButtonDropdown nav>
-                                          <DropdownToggle
-                                            caret
-                                            className="myDropdown"
+                {typeof data === "object" ? (
+                  data.length > 0 ? (
+                    data.map((v, i) => {
+                      return (
+                        <article key={i}>
+                          <div className="box-margin">
+                            <div
+                              className="coupon"
+                              style={{
+                                borderRadius: "15px",
+                                margin: "0 auto",
+                                breakInside: "avoid-column",
+                              }}
+                            >
+                              <div className="ribbon-wrapper bgWithOpacity">
+                                <div className="ribbon ribbon-bookmark ribbon-success">
+                                  {v.category}
+                                </div>
+                                <img
+                                  src={`${v.gambar}`}
+                                  style={{ width: "100%" }}
+                                  alt="member"
+                                />
+                                <br />
+                                <div className="row">
+                                  <div
+                                    className="col-md-12 text-muted"
+                                    style={{ padding: "5" }}
+                                  >
+                                    <br />
+                                    <p className="text-muted">
+                                      {myDate(v.created_at)}
+                                    </p>
+                                    <h4 className="text-white">{v.title}</h4>
+                                    <table className="table">
+                                      <thead>
+                                        <tr>
+                                          <th
+                                            style={{ padding: "0" }}
+                                            className="text-white"
                                           >
-                                            Pilihan
-                                          </DropdownToggle>
-                                          <DropdownMenu>
-                                            <DropdownItem
-                                              onClick={(e) =>
-                                                this.handleModal(e, i)
-                                              }
-                                            >
-                                              Ubah
-                                            </DropdownItem>
-                                            <DropdownItem
-                                              onClick={(e) =>
-                                                this.handleDelete(e, v.id)
-                                              }
-                                            >
-                                              Hapus
-                                            </DropdownItem>
-                                          </DropdownMenu>
-                                        </UncontrolledButtonDropdown>
-                                      </div>
+                                            Tiket yang dibutuhkan
+                                          </th>
+                                          <th
+                                            style={{ padding: "0" }}
+                                            className="text-white"
+                                          >
+                                            :
+                                          </th>
+                                          <th
+                                            style={{ padding: "0" }}
+                                            className="text-white"
+                                          >
+                                            {v.pin_required} Tiket
+                                          </th>
+                                        </tr>
+                                        <tr>
+                                          <th
+                                            style={{ padding: "0" }}
+                                            className="text-white"
+                                          >
+                                            Poin
+                                          </th>
+                                          <th
+                                            style={{ padding: "0" }}
+                                            className="text-white"
+                                          >
+                                            :
+                                          </th>
+                                          <th
+                                            style={{ padding: "0" }}
+                                            className="poin"
+                                          >
+                                            {toCurrency(v.price)}
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                    </table>
+                                    <p className="text-muted">
+                                      {rmHtml(v.caption)}
+                                    </p>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div
+                                      className="btn-group btn-block"
+                                      style={{ textAlign: "right" }}
+                                    >
+                                      <UncontrolledButtonDropdown nav>
+                                        <DropdownToggle
+                                          caret
+                                          className="myDropdown"
+                                        >
+                                          Pilihan
+                                        </DropdownToggle>
+                                        <DropdownMenu>
+                                          <DropdownItem
+                                            onClick={(e) =>
+                                              this.handleModal(e, i)
+                                            }
+                                          >
+                                            Ubah
+                                          </DropdownItem>
+                                          <DropdownItem
+                                            onClick={(e) =>
+                                              this.handleDelete(e, v.id)
+                                            }
+                                          >
+                                            Hapus
+                                          </DropdownItem>
+                                        </DropdownMenu>
+                                      </UncontrolledButtonDropdown>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </article>
-                        );
-                      })
-                    : ""
-                  : ""}
+                          </div>
+                        </article>
+                      );
+                    })
+                  ) : (
+                    <div>
+                      <img alt='{"-"}' src={`${NOTIF_ALERT.NO_DATA}`} />
+                    </div>
+                  )
+                ) : (
+                  <div>
+                    <img alt='{"-"}' src={`${NOTIF_ALERT.NO_DATA}`} />
+                  </div>
+                )}
               </main>
             </div>
           </div>

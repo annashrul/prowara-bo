@@ -254,13 +254,8 @@ class FormUserLevel extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    let err = Object.assign({}, this.state.error, {
-      [event.target.name]: "",
-    });
-    this.setState({ error: err });
   }
   handleChangeToggle(e, val) {
-    console.log(e, val);
     this.setState({ checked: val });
   }
   handleSubmit(e) {
@@ -268,7 +263,7 @@ class FormUserLevel extends Component {
     let parseData = {};
     parseData["level"] = this.state.lvl;
     parseData["access_level"] = JSON.stringify(this.state.menu);
-    console.log(parseData);
+    console.log(this.state.menu);
     if (parseData["level"] === "" || parseData["level"] === undefined) {
       ToastQ.fire({
         icon: "error",

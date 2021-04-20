@@ -174,9 +174,6 @@ class IndexSaldo extends Component {
     } = this.props.data;
     return (
       <Layout page={"Laporan Transaksi"}>
-        {this.props.isLoadingExcel || this.props.isLoading ? (
-          <Preloader />
-        ) : null}
         <div className="row">
           <div className="col-md-10">
             <div className="row">

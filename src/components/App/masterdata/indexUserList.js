@@ -109,7 +109,6 @@ class IndexUserList extends Component {
     const { total, per_page, current_page, data } = this.props.data;
     return (
       <Layout page={"Daftar Pengguna"}>
-        {this.props.isLoading ? <Preloader /> : null}
         <div className="row">
           <div className="col-md-10">
             <div className="row">

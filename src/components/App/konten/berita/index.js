@@ -125,10 +125,6 @@ class IndexBerita extends Component {
 
     return (
       <Layout page={"Berita"}>
-        {this.props.isLoading ? <Preloader /> : null}
-        {/*{*/}
-        {/*this.props.kategori.data===undefined&&this.props.isLoadingKategori*/}
-        {/*}*/}
         <div className="row">
           <div className="col-md-12">
             <div className="row">

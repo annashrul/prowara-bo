@@ -1,6 +1,8 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { MEMBER, HEADERS, NOTIF_ALERT } from "../_constants";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 export function setLoading(load) {
   return {
@@ -108,7 +110,7 @@ export function setDataFailed(data = []) {
 
 export const getMember = (page = 1, where) => {
   return (dispatch) => {
-    dispatch(setLoading(true));
+    NProgress.start();
     let url = "member";
     if (where) {
       url += `?page=${page}&${where}`;
@@ -119,10 +121,10 @@ export const getMember = (page = 1, where) => {
       .then(function (response) {
         const data = response.data;
         dispatch(setData(data));
-        dispatch(setLoading(false));
+        NProgress.done();
       })
       .catch(function (error) {
-        dispatch(setLoading(false));
+        NProgress.done();
         if (error.message === "Network Error") {
           Swal.fire(
             "Network Failed!.",
@@ -136,7 +138,7 @@ export const getMember = (page = 1, where) => {
 
 export const getExcelMember = (where) => {
   return (dispatch) => {
-    dispatch(setLoadingExcel(true));
+    NProgress.start();
     let url = "member";
     if (where) {
       url += `?${where}`;
@@ -149,10 +151,10 @@ export const getExcelMember = (where) => {
       .then(function (response) {
         const data = response.data;
         dispatch(setExcel(data));
-        dispatch(setLoadingExcel(false));
+        NProgress.done();
       })
       .catch(function (error) {
-        dispatch(setLoadingExcel(false));
+        NProgress.done();
         if (error.message === "Network Error") {
           Swal.fire(
             "Network Failed!.",

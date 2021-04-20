@@ -104,7 +104,6 @@ class IndexUserLevel extends Component {
 
     return (
       <Layout page={"Akses Pengguna"}>
-        {this.props.isLoading ? <Preloader /> : null}
         <div className="row">
           <div className="col-md-10">
             <div className="row">

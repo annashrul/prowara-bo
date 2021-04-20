@@ -30,6 +30,7 @@ import { getDetailAlamat } from "../../../../redux/actions/masterdata/alamat.act
 import * as Swal from "sweetalert2";
 import Select from "react-select";
 import FormMemberBank from "../../modals/masterdata/member/form_member_bank";
+import LoadingBar from "react-top-loading-bar";
 
 class IndexMember extends Component {
   constructor(props) {
@@ -349,12 +350,10 @@ class IndexMember extends Component {
     let totOmset = 0;
     return (
       <Layout page={"Member"}>
-        {this.state.isLoading ||
-        this.props.isLoading ||
-        this.props.isLoadingBank ||
-        this.props.isLoadingAlamat ? (
+        {this.props.isLoadingBank || this.props.isLoadingAlamat ? (
           <Preloader />
         ) : null}
+
         <div className="row">
           <div className="col-12 box-margin">
             <div className="row">
@@ -573,7 +572,7 @@ class IndexMember extends Component {
                             <td style={headStyle}>{v.referral}</td>
                             <td style={headStyle}>{v.mobile_no}</td>
                             <td style={numberStyle} className="txtGreen">
-                              Rp
+                              Rp{" "}
                               {v.saldo === "0"
                                 ? 0
                                 : toRp(parseInt(v.saldo, 10))}
