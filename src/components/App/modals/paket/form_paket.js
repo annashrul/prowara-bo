@@ -33,6 +33,7 @@ class FormPaket extends Component {
       caption: "",
       id_category: "",
       data_kategori: [],
+      prev: "",
     };
   }
 
@@ -54,6 +55,7 @@ class FormPaket extends Component {
         title: props.detail.title,
         price: props.detail.price,
         pin_required: props.detail.pin_required,
+        prev: props.detail.gambar,
       });
       this.handleChangeKategori({
         value: props.detail.id_category,

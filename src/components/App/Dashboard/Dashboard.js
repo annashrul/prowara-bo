@@ -525,4 +525,5 @@ const mapStateToProps = (state) => {
     // isLoadingCheck: state.transactionReducer.isLoadingCheck,
   };
 };
+
 export default connect(mapStateToProps)(Dashboard);

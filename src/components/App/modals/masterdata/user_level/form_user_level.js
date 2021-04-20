@@ -29,6 +29,7 @@ class FormUserLevel extends Component {
           isChecked: false,
           isToggle: false,
           sub: undefined,
+          icons: "fa fa-address-book-o",
         },
         {
           id: 1,
@@ -37,6 +38,7 @@ class FormUserLevel extends Component {
           isChecked: false,
           isToggle: false,
           sub: undefined,
+          icons: "fa fa-vcard",
         },
         {
           id: 2,
@@ -44,6 +46,7 @@ class FormUserLevel extends Component {
           path: "",
           isChecked: false,
           isToggle: false,
+          icons: "fa fa-user-o",
           sub: [
             {
               id: 3,
@@ -67,6 +70,7 @@ class FormUserLevel extends Component {
           path: "",
           isChecked: false,
           isToggle: false,
+          icons: "fa fa-th",
           sub: [
             {
               id: 101,
@@ -91,6 +95,7 @@ class FormUserLevel extends Component {
           path: "",
           isChecked: false,
           isToggle: false,
+          icons: "fa fa-line-chart",
           sub: [
             {
               id: 6,
@@ -133,6 +138,7 @@ class FormUserLevel extends Component {
           path: "",
           isChecked: false,
           isToggle: false,
+          icons: "fa fa-credit-card",
           sub: [
             {
               id: 11,
@@ -156,6 +162,7 @@ class FormUserLevel extends Component {
           path: "/berita",
           isChecked: false,
           isToggle: false,
+          icons: "fa fa-newspaper-o",
           sub: undefined,
         },
         {
@@ -164,6 +171,7 @@ class FormUserLevel extends Component {
           path: "",
           isChecked: false,
           isToggle: false,
+          icons: "fa fa-cogs",
           sub: [
             {
               id: 16,

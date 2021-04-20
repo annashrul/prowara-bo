@@ -121,6 +121,7 @@ class SideMenu extends Component {
           {(() => {
             let child = [];
             aksesMember.forEach((val, idx) => {
+              console.log(val.icons);
               if (val.sub === undefined && val.otherSub === undefined) {
                 child.push(
                   <OneMenu
@@ -128,7 +129,7 @@ class SideMenu extends Component {
                     display={val.isChecked}
                     isActive={path === val.path ? "active" : ""}
                     path={val.path}
-                    icon={"fa fa-list"}
+                    icon={val.icons}
                     label={val.label}
                   />
                 );
@@ -141,7 +142,7 @@ class SideMenu extends Component {
                     isDisplay={val.isChecked}
                     arg1={val.label}
                     arg2={""}
-                    icon={"fa fa-list"}
+                    icon={val.icons}
                     label={val.label}
                     path={path}
                     data={(() => {
@@ -172,6 +173,7 @@ class SideMenu extends Component {
                     arg2={""}
                     label={val.label}
                     path={path}
+                    icon={val.icons}
                     data={(() => {
                       let subChild = [];
                       val.sub.forEach((valKey) => {
