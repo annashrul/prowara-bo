@@ -310,13 +310,13 @@ class Dashboard extends Component {
                 icon="fa fa-shopping-cart text-white"
               />
               <Cards
-                classCols="col-md-6 col-xl-2 box-margin"
+                classCols="col-md-6 col-xl-3 box-margin"
                 title="MEMBER AKTIF"
                 data={this.state.total_member}
                 icon="fa fa-users text-white"
               />
               <Cards
-                classCols="col-md-6 col-xl-2 box-margin"
+                classCols="col-md-6 col-xl-3 box-margin"
                 title="SLOT AKTIF"
                 data={this.state.slot_aktif}
                 icon="fa fa-list text-white"
@@ -518,7 +518,6 @@ class Dashboard extends Component {
 // }
 
 const mapStateToProps = (state) => {
-  console.log("state dashboard", state.dashboardReducer);
   return {
     auth: state.auth,
     stock: state.dashboardReducer.data,
