@@ -299,12 +299,6 @@ class Dashboard extends Component {
               />
               <Cards
                 classCols="col-md-6 col-xl-3 box-margin"
-                title="TOTAL PENARIKAN"
-                data={toCurrency(this.state.total_penarikan)}
-                icon="fa fa-dollar text-white"
-              />
-              <Cards
-                classCols="col-md-6 col-xl-2 box-margin"
                 title="TOTAL MODAL"
                 data={toCurrency(this.state.total_modal)}
                 icon="fa fa-shopping-cart text-white"
