@@ -29,7 +29,7 @@ const Routes = (
       <PrivateRoute path="/pin" exact strict component={Pin} />
       <PrivateRoute path="/daftar_paket" exact strict component={DaftarPaket} />
       <PrivateRoute
-        path="/kategori_paket"
+        path = "/kategori/paket"
         exact
         strict
         component={KategoriPaket}
