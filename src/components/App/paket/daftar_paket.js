@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
-import { myDate, noImage, rmHtml, ToastQ, toCurrency } from "../../../helper";
+import { myDate, rmHtml, toCurrency } from "../../../helper";
 import moment from "moment";
 import {
   UncontrolledButtonDropdown,
@@ -112,12 +112,7 @@ class DaftarPaket extends Component {
   }
 
   render() {
-    const headStyle = {
-      verticalAlign: "middle",
-      textAlign: "center",
-      whiteSpace: "nowrap",
-    };
-    const { current_page, data } = this.props.data;
+    const { data } = this.props.data;
 
     return (
       <Layout page={"Daftar Paket"}>
@@ -210,7 +205,6 @@ class DaftarPaket extends Component {
                                             </th>
                                             <th
                                               style={{ padding: "0" }}
-                                              style={{ padding: "0" }}
                                               className="text-white"
                                             >
                                               :
@@ -231,14 +225,13 @@ class DaftarPaket extends Component {
                                             </th>
                                             <th
                                               style={{ padding: "0" }}
-                                              style={{ padding: "0" }}
                                               className="text-white"
                                             >
                                               :
                                             </th>
                                             <th
                                               style={{ padding: "0" }}
-                                              className="txtGreen"
+                                              className="poin"
                                             >
                                               {toCurrency(v.price)}
                                             </th>

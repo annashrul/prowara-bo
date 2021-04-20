@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import File64 from "components/common/File64";
 import Select from "react-select";
 import { updateGeneral } from "../../../../../redux/actions/setting/general.action";
 // import {fetchGeneral, updateGeneral} from 'redux/actions/setting/general.action'

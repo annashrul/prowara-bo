@@ -174,7 +174,6 @@ class FormMemberBank extends Component {
     }
   }
   render() {
-    const { array_modul } = this.state;
     return (
       <WrapperModal
         isOpen={this.props.isOpen && this.props.type === "formMemberBank"}

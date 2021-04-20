@@ -245,10 +245,10 @@ class DetailInvesment extends Component {
                             {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
                           </td>
                           <td style={headStyle}>{v.kd_trx}</td>
-                          <td style={numberStyle} className="txtGreen">
+                          <td style={numberStyle} className="poin">
                             {toCurrency(v.trx_in)}
                           </td>
-                          <td style={numberStyle} className="txtGreen">
+                          <td style={numberStyle} className="poin">
                             {toCurrency(v.trx_out)}
                           </td>
                           <td style={headStyle}>{v.note}</td>
@@ -274,22 +274,22 @@ class DetailInvesment extends Component {
               <tfoot className="bgWithOpacity">
                 <tr>
                   <td colSpan={2}>TOTAL PERHALAMAN</td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {toCurrency(`${totTrxIn}`)}
                   </td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {toCurrency(`${totTrxOut}`)}
                   </td>
                   <td colSpan={2} />
                 </tr>
                 <tr>
                   <td colSpan={2}>TOTAL KESELURUHAN</td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {summary !== undefined
                       ? toCurrency(`${summary.trx_in}`)
                       : 0}
                   </td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {summary !== undefined
                       ? toCurrency(`${summary.trx_out}`)
                       : 0}

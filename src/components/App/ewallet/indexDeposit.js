@@ -457,7 +457,7 @@ class IndexDeposit extends Component {
                             {v.bank_name} ({v.acc_no})
                           </div>
                         </td>
-                        <td style={numStyle} className="txtGreen">
+                        <td style={numStyle} className="poin">
                           {toCurrency(`${v.amount}`)}
                         </td>
                         <td style={numStyle} className="txtGreen">
@@ -489,7 +489,7 @@ class IndexDeposit extends Component {
             <tfoot className="bgWithOpacity">
               <tr>
                 <th colSpan={5}>TOTAL PERHALAMAN</th>
-                <th colSpan={1} style={numStyle} className="txtGreen">
+                <th colSpan={1} style={numStyle} className="poin">
                   {toCurrency(`${totAmountPoint}`)}
                 </th>
                 <th colSpan={1} style={numStyle} className="txtGreen">

@@ -69,7 +69,7 @@ class FormKategori extends Component {
         {this.props.isLoadingPost ? <Preloader /> : null}
         <ModalHeader toggle={this.toggle}>
           {this.props.detail.id !== "" ? "Ubah" : "Tambah"} Kategori &nbsp;
-          {this.props.detail.param} {this.props.detail.paramType}
+          {this.props.detail.param}
         </ModalHeader>
         <ModalBody>
           <div className="row">

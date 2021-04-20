@@ -134,7 +134,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo Awal</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(`${summary.saldo_awal}`)}
@@ -143,7 +143,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo Masuk</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(`${summary.trx_in}`)}
@@ -152,7 +152,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo Keluar</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(`${summary.trx_out}`)}
@@ -161,7 +161,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo saat ini</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(

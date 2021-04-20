@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "../../../../components/Layout";
-import Paginationq, { statusQ, ToastQ, toCurrency } from "../../../../helper";
+import Paginationq, {
+  statusQ,
+  ToastQ,
+  toCurrency,
+  toRp,
+} from "../../../../helper";
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import moment from "moment";
@@ -338,6 +343,10 @@ class IndexMember extends Component {
     let totSaldo = 0;
     let totPin = 0;
     let totSponsor = 0;
+    let totPayment = 0;
+    let totSlot = 0;
+    let totModal = 0;
+    let totOmset = 0;
     return (
       <Layout page={"Member"}>
         {this.state.isLoading ||
@@ -465,6 +474,19 @@ class IndexMember extends Component {
                     <th colSpan="2" style={headStyle}>
                       Jumlah
                     </th>
+
+                    <th rowSpan="2" style={headStyle}>
+                      Total Penarikan
+                    </th>
+                    <th rowSpan="2" style={headStyle}>
+                      Slot Aktif
+                    </th>
+                    <th rowSpan="2" style={headStyle}>
+                      Modal
+                    </th>
+                    <th rowSpan="2" style={headStyle}>
+                      Omset
+                    </th>
                     <th rowSpan="2" style={headStyle}>
                       Status
                     </th>
@@ -481,6 +503,10 @@ class IndexMember extends Component {
                         totSaldo += parseInt(v.saldo, 10);
                         totPin += parseInt(v.pin, 10);
                         totSponsor += parseInt(v.sponsor, 10);
+                        totPayment += parseInt(v.total_payment, 10);
+                        totSlot += parseInt(v.slot_active, 10);
+                        totModal += parseInt(v.total_modal, 10);
+                        totOmset += parseInt(v.omset, 10);
 
                         return (
                           <tr key={i}>
@@ -547,22 +573,33 @@ class IndexMember extends Component {
                             <td style={headStyle}>{v.referral}</td>
                             <td style={headStyle}>{v.mobile_no}</td>
                             <td style={numberStyle} className="txtGreen">
-                              Rp{" "}
+                              Rp
                               {v.saldo === "0"
                                 ? 0
-                                : toCurrency(parseInt(v.saldo, 10))}{" "}
+                                : toRp(parseInt(v.saldo, 10))}
                               .-
                             </td>
                             <td style={numberStyle}>
                               {v.sponsor === "0"
                                 ? 0
-                                : toCurrency(parseInt(v.sponsor, 10))}
+                                : toRp(parseInt(v.sponsor, 10))}
                             </td>
                             <td style={numberStyle}>
-                              {v.pin === "0"
-                                ? 0
-                                : toCurrency(parseInt(v.pin, 10))}
+                              {v.pin === "0" ? 0 : toRp(parseInt(v.pin, 10))}
                             </td>
+                            <td className="poin" style={numberStyle}>
+                              {toCurrency(v.total_payment)}
+                            </td>
+                            <td style={numberStyle}>
+                              {v.slot_active === "0" ? 0 : toRp(v.slot_active)}
+                            </td>
+                            <td className="poin" style={numberStyle}>
+                              {toCurrency(v.total_modal)}
+                            </td>
+                            <td className="poin" style={numberStyle}>
+                              {toCurrency(v.omset)}
+                            </td>
+
                             <td style={headStyle}>{statusQ(v.status)}</td>
                           </tr>
                         );
@@ -582,17 +619,23 @@ class IndexMember extends Component {
                     </tr>
                   )}
                 </tbody>
-                <tfoot>
+                <tfoot className="bgWithOpacity">
                   <tr>
                     <td colSpan={5}>TOTAL PERHALAMAN</td>
                     <td style={numberStyle} className="txtGreen">
-                      Rp {totSaldo === 0 ? 0 : toCurrency(totSaldo)} .-
+                      Rp {toRp(totSaldo)} .-
                     </td>
-                    <td style={numberStyle}>
-                      {totSponsor === 0 ? 0 : toCurrency(totSponsor)}
+                    <td style={numberStyle}>{toRp(totSponsor)}</td>
+                    <td style={numberStyle}>{toRp(totPin)}</td>
+                    <td className="poin" style={numberStyle}>
+                      {toCurrency(totPayment)}
                     </td>
-                    <td style={numberStyle}>
-                      {totPin === 0 ? 0 : toCurrency(totPin)}
+                    <td style={numberStyle}>{toRp(totSlot)}</td>
+                    <td className="poin" style={numberStyle}>
+                      {toCurrency(totModal)}
+                    </td>
+                    <td className="poin" style={numberStyle}>
+                      {toCurrency(totOmset)}
                     </td>
                     <td />
                   </tr>

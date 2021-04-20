@@ -82,7 +82,6 @@ class Kategori extends Component {
 
   handlePage(pageNumber) {
     localStorage.setItem(`pageKategori${this.state.param}`, pageNumber);
-    let where = this.handleValidate();
     this.props.dispatch(
       fetchKategori(`${this.state.param}?page=${pageNumber}`)
     );

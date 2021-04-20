@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import WrapperModal from "../../_wrapper.modal";
 import connect from "react-redux/es/connect/connect";
 import Switch from "react-switch";
-
 import { ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { ModalToggle } from "../../../../../redux/actions/modal.action";
 import { ToastQ } from "../../../../../helper";
@@ -213,8 +212,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      // this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {

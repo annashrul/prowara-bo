@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
 import { DateRangePicker } from "react-bootstrap-daterangepicker";
-import Paginationq, {
-  rangeDate,
-  toCurrency,
-  toExcel,
-  myDate,
-  toRp,
-} from "../../../helper";
+import Paginationq, { rangeDate, toExcel, myDate, toRp } from "../../../helper";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 import moment from "moment";
 import * as Swal from "sweetalert2";
