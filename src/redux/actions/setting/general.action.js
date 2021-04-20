@@ -1,6 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { GENERAL, HEADERS } from "../_constants";
+import { GENERAL, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
 import { ToastQ } from "helper";
 
@@ -55,6 +55,14 @@ export const fetchGeneral = (where) => {
 export const updateGeneral = (data, type = "site") => {
   return (dispatch) => {
     dispatch(setLoading(true));
+    Swal.fire({
+      title: "Tunggu sebentar.",
+      html: "Sedang Menyimpan Perubahan",
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+      onClose: () => {},
+    });
     dispatch(setIsError(false));
     let url = HEADERS.URL;
     if (type !== "site") url += "site/config/general";
@@ -69,7 +77,7 @@ export const updateGeneral = (data, type = "site") => {
             title: `Berhasil update ${Object.keys(data)[0]}`,
           });
           dispatch(setIsError(true));
-          dispatch(fetchGeneral("page=1"));
+          dispatch(fetchGeneral());
         } else {
           ToastQ.fire({
             icon: "error",
@@ -78,9 +86,11 @@ export const updateGeneral = (data, type = "site") => {
           dispatch(setIsError(false));
         }
         dispatch(setLoading(false));
+        Swal.close();
       })
       .catch(function (error) {
         dispatch(setLoading(false));
+        Swal.close();
         dispatch(setIsError(false));
         dispatch(ModalToggle(true));
         if (error.message === "Network Error") {

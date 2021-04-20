@@ -57,7 +57,7 @@ const Routes = (
       {/* E-WALLET SECTION END */}
       {/* LAPORAN SECTION END */}
       <PrivateRoute path="/pengaturan/bank" exact strict component={Bank} />
-      <PrivateRoute path="/pengaturan" exact strict component={IndexSetting} />
+      <PrivateRoute path="/pengaturan/umum" exact strict component={IndexSetting} />
       <Route component={NotFound} />
     </Switch>
   </div>
