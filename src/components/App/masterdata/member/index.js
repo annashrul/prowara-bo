@@ -547,11 +547,9 @@ class IndexMember extends Component {
                             <td style={headStyle}>{v.referral}</td>
                             <td style={headStyle}>{v.mobile_no}</td>
                             <td style={numberStyle} className="txtGreen">
-                              Rp{" "}
                               {v.saldo === "0"
                                 ? 0
-                                : toCurrency(parseInt(v.saldo, 10))}{" "}
-                              .-
+                                : toCurrency(parseInt(v.saldo, 10))}
                             </td>
                             <td style={numberStyle}>
                               {v.sponsor === "0"
@@ -586,7 +584,7 @@ class IndexMember extends Component {
                   <tr>
                     <td colSpan={5}>TOTAL PERHALAMAN</td>
                     <td style={numberStyle} className="txtGreen">
-                      Rp {totSaldo === 0 ? 0 : toCurrency(totSaldo)} .-
+                      {totSaldo === 0 ? 0 : toCurrency(totSaldo)}
                     </td>
                     <td style={numberStyle}>
                       {totSponsor === 0 ? 0 : toCurrency(totSponsor)}
