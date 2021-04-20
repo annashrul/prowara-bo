@@ -186,12 +186,8 @@ class DaftarPaket extends Component {
                                         {v.category}
                                       </div>
                                       <img
-                                        src={`${v.picture}`}
+                                        src={`${v.gambar}`}
                                         style={{ width: "100%" }}
-                                        onError={(e) => {
-                                          e.target.onerror = null;
-                                          e.target.src = `${noImage()}`;
-                                        }}
                                         alt="member"
                                       />
                                       <br />
