@@ -187,15 +187,12 @@ class FormMemberBank extends Component {
         <ModalBody>
           <div className="row">
             <div className="col-12">
-              <div
-                className="img-thumbnail rounded-lg p-2"
-                style={{ borderColor: "#e8ebf1" }}
-              >
+              <div className="bg-transparent rounded-lg p-2">
                 {/* <hr/> */}
                 <small className="text-muted">Data Bank</small>
 
                 <div className="form-group">
-                  <label className="text-dark">Nama Pemilik Bank</label>
+                  <label className="text-light">Nama Pemilik Bank</label>
                   <input
                     type="text"
                     className="form-control"
@@ -216,7 +213,7 @@ class FormMemberBank extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="text-dark">Nama Bank</label>
+                  <label className="text-light">Nama Bank</label>
                   {typeof this.state.bank_data === "object" ? (
                     this.state.bank_data.length > 0 ? (
                       <Select

@@ -245,16 +245,17 @@ class IndexMember extends Component {
     e.preventDefault();
     let proping = this.props;
     Swal.fire({
-      title: "Ubah Member",
+      title: '<span class="text-light">Ubah Member</span>',
       focusConfirm: true,
+      background: "#1a1c23",
       html:
-        '<div class="form-group"><label class="text-dark">Nama Member</label><div class="input-group"><input type="text" id="nameModal" class="form-control" placeholder="Nama Member" value="' +
+        '<div class="form-group"><label class="text-light">Nama Member</label><div class="input-group"><input type="text" id="nameModal" class="form-control" placeholder="Nama Member" value="' +
         name_old +
         '"></div></div>' +
-        '<div class="form-group"><label class="text-dark">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
+        '<div class="form-group"><label class="text-light">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
         mobile_no +
         '"></div></div>' +
-        '<div class="form-group"><label class="text-dark">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+        '<div class="form-group"><label class="text-light">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
       type: "warning",
       showCancelButton: true,
       cancelButtonColor: "grey",
@@ -572,11 +573,14 @@ class IndexMember extends Component {
                             <td style={headStyle}>{v.referral}</td>
                             <td style={headStyle}>{v.mobile_no}</td>
                             <td style={numberStyle} className="txtGreen">
-                              Rp{" "}
                               {v.saldo === "0"
                                 ? 0
+<<<<<<< HEAD
                                 : toRp(parseInt(v.saldo, 10))}
                               .-
+=======
+                                : toCurrency(parseInt(v.saldo, 10))}
+>>>>>>> 9c97279352871ec00ff195f3898a856dd7eaa665
                             </td>
                             <td style={numberStyle}>
                               {v.sponsor === "0"
@@ -622,12 +626,16 @@ class IndexMember extends Component {
                   <tr>
                     <td colSpan={5}>TOTAL PERHALAMAN</td>
                     <td style={numberStyle} className="txtGreen">
+<<<<<<< HEAD
                       Rp {toRp(totSaldo)} .-
                     </td>
                     <td style={numberStyle}>{toRp(totSponsor)}</td>
                     <td style={numberStyle}>{toRp(totPin)}</td>
                     <td className="poin" style={numberStyle}>
                       {toCurrency(totPayment)}
+=======
+                      {totSaldo === 0 ? 0 : toCurrency(totSaldo)}
+>>>>>>> 9c97279352871ec00ff195f3898a856dd7eaa665
                     </td>
                     <td style={numberStyle}>{toRp(totSlot)}</td>
                     <td className="poin" style={numberStyle}>
