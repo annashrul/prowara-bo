@@ -90,6 +90,39 @@ class FormUserLevel extends Component {
         },
 
         {
+          id: 10,
+          label: "e-wallet",
+          path: "",
+          isChecked: false,
+          isToggle: false,
+          icons: "fa fa-credit-card",
+          sub: [
+            {
+              id: 11,
+              label: "deposit",
+              path: "/ewallet/deposit",
+              parent: "e-wallet",
+              isChecked: false,
+            },
+            {
+              id: 12,
+              label: "penarikan",
+              path: "/ewallet/penarikan",
+              parent: "e-wallet",
+              isChecked: false,
+            },
+          ],
+        },
+        {
+          id: 14,
+          label: "berita",
+          path: "/berita",
+          isChecked: false,
+          isToggle: false,
+          icons: "fa fa-newspaper-o",
+          sub: undefined,
+        },
+        {
           id: 5,
           label: "laporan",
           path: "",
@@ -133,39 +166,6 @@ class FormUserLevel extends Component {
           otherSub: true,
         },
         {
-          id: 10,
-          label: "e-wallet",
-          path: "",
-          isChecked: false,
-          isToggle: false,
-          icons: "fa fa-credit-card",
-          sub: [
-            {
-              id: 11,
-              label: "deposit",
-              path: "/ewallet/deposit",
-              parent: "e-wallet",
-              isChecked: false,
-            },
-            {
-              id: 12,
-              label: "penarikan",
-              path: "/ewallet/penarikan",
-              parent: "e-wallet",
-              isChecked: false,
-            },
-          ],
-        },
-        {
-          id: 14,
-          label: "berita",
-          path: "/berita",
-          isChecked: false,
-          isToggle: false,
-          icons: "fa fa-newspaper-o",
-          sub: undefined,
-        },
-        {
           id: 15,
           label: "pengaturan",
           path: "",
@@ -197,8 +197,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      //   this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {
