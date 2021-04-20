@@ -454,46 +454,46 @@ class IndexMember extends Component {
                 <thead className="thead-dark">
                   <tr>
                     <th rowSpan="2" style={headStyle}>
-                      No
+                      NO
                     </th>
                     <th rowSpan="2" style={headStyle}>
                       #
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Nama
+                      NAMA
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Referral
+                      USER ID
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      No.Telepon
+                      NO.TELEPON
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Saldo
+                      SALDO
                     </th>
                     <th colSpan="2" style={headStyle}>
-                      Jumlah
+                      JUMLAH
                     </th>
 
                     <th rowSpan="2" style={headStyle}>
-                      Total Penarikan
+                      TOTAL PENARIKAN
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Slot Aktif
+                      SLOT AKTIF
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Modal
+                      MODAL
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Omset
+                      OMSET
                     </th>
                     <th rowSpan="2" style={headStyle}>
-                      Status
+                      STATUS
                     </th>
                   </tr>
                   <tr>
-                    <th style={headStyle}>Sponsor</th>
-                    <th style={headStyle}>Pin</th>
+                    <th style={headStyle}>SPOMSOR</th>
+                    <th style={headStyle}>PIN</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -575,12 +575,8 @@ class IndexMember extends Component {
                             <td style={numberStyle} className="txtGreen">
                               {v.saldo === "0"
                                 ? 0
-<<<<<<< HEAD
                                 : toRp(parseInt(v.saldo, 10))}
                               .-
-=======
-                                : toCurrency(parseInt(v.saldo, 10))}
->>>>>>> 9c97279352871ec00ff195f3898a856dd7eaa665
                             </td>
                             <td style={numberStyle}>
                               {v.sponsor === "0"
@@ -626,16 +622,12 @@ class IndexMember extends Component {
                   <tr>
                     <td colSpan={5}>TOTAL PERHALAMAN</td>
                     <td style={numberStyle} className="txtGreen">
-<<<<<<< HEAD
                       Rp {toRp(totSaldo)} .-
                     </td>
                     <td style={numberStyle}>{toRp(totSponsor)}</td>
                     <td style={numberStyle}>{toRp(totPin)}</td>
                     <td className="poin" style={numberStyle}>
                       {toCurrency(totPayment)}
-=======
-                      {totSaldo === 0 ? 0 : toCurrency(totSaldo)}
->>>>>>> 9c97279352871ec00ff195f3898a856dd7eaa665
                     </td>
                     <td style={numberStyle}>{toRp(totSlot)}</td>
                     <td className="poin" style={numberStyle}>
