@@ -5,7 +5,7 @@ import Paginationq, { myDate } from "../../../helper";
 import moment from "moment";
 
 import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
-import FormKategoriPaket from "../modals/paket/form_kategori_paket";
+import FormKategori from "../modals/kategori/form_kategori";
 import * as Swal from "sweetalert2";
 import Preloader from "../../../Preloader";
 import {
@@ -15,12 +15,15 @@ import {
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 moment.locale("id"); // en
 
-class KategoriPaket extends Component {
+class Kategori extends Component {
   constructor(props) {
     super(props);
     this.state = {
       detail: {},
       any: "",
+      param: "",
+      paramType: "",
+      path: this.props.location.pathname.split("/")[2],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -28,8 +31,34 @@ class KategoriPaket extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location !== this.props.location) {
+      this.checkPage();
+    }
+  }
+
+  checkPage() {
+    let newParam = "";
+    let newParamType;
+    let newPath = "";
+    if (this.props.location.pathname.split("/")[2] === "paket") {
+      newParam = "membership";
+      newParamType = 0;
+      newPath = "Paket";
+      this.props.dispatch(fetchKategori(`${newParam}?page=1`));
+    } else {
+      newParam = "berita";
+      newParamType = 1;
+      newPath = "Berita";
+      this.props.dispatch(fetchKategori(`${newParam}?page=1`));
+    }
+    this.setState({ param: newPath, paramType: newParamType, path: newPath });
+  }
+
+  // getProps()
+
   componentWillMount() {
-    this.props.dispatch(fetchKategori(`membership?page=1`));
+    this.checkPage();
   }
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -37,7 +66,7 @@ class KategoriPaket extends Component {
 
   handleValidate() {
     let where = "";
-    let page = localStorage.getItem("pageKategoriPaket");
+    let page = localStorage.getItem(`pageKategori${this.state.param}`);
     let any = this.state.any;
 
     if (page !== null && page !== undefined && page !== "") {
@@ -52,18 +81,24 @@ class KategoriPaket extends Component {
   }
 
   handlePage(pageNumber) {
-    localStorage.setItem("pageKategoriPaket", pageNumber);
+    localStorage.setItem(`pageKategori${this.state.param}`, pageNumber);
     let where = this.handleValidate();
-    this.props.dispatch(fetchKategori(`membership?page=${pageNumber}`));
+    this.props.dispatch(
+      fetchKategori(`${this.state.param}?page=${pageNumber}`)
+    );
   }
   handleSearch(e) {
     e.preventDefault();
-    this.props.dispatch(fetchKategori(`membership?q=${this.state.any}`));
+    this.props.dispatch(
+      fetchKategori(`${this.state.param}?q=${this.state.any}`)
+    );
   }
   handleModal(e, par) {
     if (par !== "") {
       this.setState({
         detail: {
+          paramType: this.state.paramType,
+          param: this.state.param,
           id: this.props.data.data[par].id,
           title: this.props.data.data[par].title,
         },
@@ -71,13 +106,15 @@ class KategoriPaket extends Component {
     } else {
       this.setState({
         detail: {
+          paramType: this.state.paramType,
+          param: this.state.param,
           id: "",
         },
       });
     }
     const bool = !this.props.isOpen;
     this.props.dispatch(ModalToggle(bool));
-    this.props.dispatch(ModalType("formKategoriPaket"));
+    this.props.dispatch(ModalType("formKategori"));
   }
 
   handleDelete(e, id) {
@@ -93,7 +130,7 @@ class KategoriPaket extends Component {
       cancelButtonText: "Batal",
     }).then((result) => {
       if (result.value) {
-        this.props.dispatch(deleteKategori(id, "membership"));
+        this.props.dispatch(deleteKategori(id, this.state.param));
       }
     });
   }
@@ -107,7 +144,7 @@ class KategoriPaket extends Component {
     const { total, per_page, current_page, data } = this.props.data;
 
     return (
-      <Layout page={"Daftar Paket"}>
+      <Layout page={`Kategori ${this.state.path}`}>
         {this.props.isLoading ? <Preloader /> : null}
         <div className="col-md-12">
           <div className="row">
@@ -225,7 +262,7 @@ class KategoriPaket extends Component {
           </div>
         </div>
         {this.props.isOpen === true ? (
-          <FormKategoriPaket detail={this.state.detail} />
+          <FormKategori detail={this.state.detail} />
         ) : null}
       </Layout>
     );
@@ -239,4 +276,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(KategoriPaket);
+export default connect(mapStateToProps)(Kategori);

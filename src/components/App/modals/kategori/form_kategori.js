@@ -10,7 +10,7 @@ import {
 } from "../../../../redux/actions/kategori/kategori.action";
 import Preloader from "../../../../Preloader";
 
-class FormKategoriPaket extends Component {
+class FormKategori extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -46,29 +46,30 @@ class FormKategoriPaket extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let state = this.state;
-    let parsedata = { title: state.title, type: 0 };
+    let parsedata = { title: state.title, type: this.props.detail.paramType };
     if (state.title === "" || state.title === undefined) {
       ToastQ.fire({ icon: "error", title: `title tidak boleh kosong` });
       return;
     }
     if (this.props.detail.id !== "") {
       this.props.dispatch(
-        putKategori(this.props.detail.id, parsedata, "membership")
+        putKategori(this.props.detail.id, parsedata, this.props.detail.param)
       );
     } else {
-      this.props.dispatch(postKategori(parsedata, "membership"));
+      this.props.dispatch(postKategori(parsedata, this.props.detail.param));
     }
   }
 
   render() {
     return (
       <WrapperModal
-        isOpen={this.props.isOpen && this.props.type === "formKategoriPaket"}
+        isOpen={this.props.isOpen && this.props.type === "formKategori"}
         size="md"
       >
         {this.props.isLoadingPost ? <Preloader /> : null}
         <ModalHeader toggle={this.toggle}>
-          {this.props.detail.id !== "" ? "Ubah" : "Tambah"} Kategori Paket
+          {this.props.detail.id !== "" ? "Ubah" : "Tambah"} Kategori &nbsp;
+          {this.props.detail.param} {this.props.detail.paramType}
         </ModalHeader>
         <ModalBody>
           <div className="row">
@@ -119,4 +120,4 @@ const mapStateToProps = (state) => {
     isError: state.kategoriReducer.isError,
   };
 };
-export default connect(mapStateToProps)(FormKategoriPaket);
+export default connect(mapStateToProps)(FormKategori);

@@ -52,7 +52,7 @@ export function setDataFailed(data = []) {
 export const fetchKategori = (where) => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    let url = `category/${where}`;
+    let url = `category/${where}`.toLocaleLowerCase();
     axios
       .get(HEADERS.URL + `${url}`)
       .then(function (response) {
@@ -129,6 +129,7 @@ export const postKategori = (data, param) => {
 };
 
 export const putKategori = (id, data, param) => {
+  console.log(param);
   return (dispatch) => {
     dispatch(setLoadingPost(true));
     dispatch(setIsError(false));

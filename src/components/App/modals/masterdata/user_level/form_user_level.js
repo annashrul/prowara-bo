@@ -82,7 +82,7 @@ class FormUserLevel extends Component {
             {
               id: 102,
               label: "kategori paket",
-              path: "/kategori_paket",
+              path: "/kategori/paket",
               parent: "paket",
               isChecked: false,
             },
@@ -114,14 +114,30 @@ class FormUserLevel extends Component {
           ],
         },
         {
-          id: 14,
+          id: 201,
           label: "berita",
-          path: "/berita",
+          path: "",
           isChecked: false,
           isToggle: false,
           icons: "fa fa-newspaper-o",
-          sub: undefined,
+          sub: [
+            {
+              id: 202,
+              label: "daftar Berita",
+              path: "/daftar_berita",
+              parent: "berita",
+              isChecked: false,
+            },
+            {
+              id: 203,
+              label: "Kategori Berita",
+              path: "/kategori/berita",
+              parent: "berita",
+              isChecked: false,
+            },
+          ],
         },
+
         {
           id: 5,
           label: "laporan",
@@ -137,31 +153,31 @@ class FormUserLevel extends Component {
               parent: "laporan",
               isChecked: false,
             },
-            {
-              id: 7,
-              label: "penjualan",
-              path: "",
-              parent: "laporan",
-              isChecked: false,
-              sub: [
-                {
-                  id: 8,
-                  label: "paket",
-                  path: "/laporan/paket",
-                  parent: "penjualan",
-                  isChecked: false,
-                  sub: undefined,
-                },
-                {
-                  id: 9,
-                  label: "pin",
-                  path: "/laporan/pin",
-                  parent: "penjualan",
-                  isChecked: false,
-                  sub: undefined,
-                },
-              ],
-            },
+            // {
+            //   id: 7,
+            //   label: "penjualan",
+            //   path: "",
+            //   parent: "laporan",
+            //   isChecked: false,
+            //   sub: [
+            //     {
+            //       id: 8,
+            //       label: "paket",
+            //       path: "/laporan/paket",
+            //       parent: "penjualan",
+            //       isChecked: false,
+            //       sub: undefined,
+            //     },
+            //     {
+            //       id: 9,
+            //       label: "pin",
+            //       path: "/laporan/pin",
+            //       parent: "penjualan",
+            //       isChecked: false,
+            //       sub: undefined,
+            //     },
+            //   ],
+            // },
           ],
           otherSub: true,
         },
@@ -197,8 +213,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      // this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {
