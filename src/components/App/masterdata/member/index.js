@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "../../../../components/Layout";
-import Paginationq, { statusQ, toCurrency } from "../../../../helper";
+import Paginationq, { statusQ, ToastQ, toCurrency } from "../../../../helper";
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import moment from "moment";
@@ -24,6 +24,7 @@ import { getDetailBank } from "../../../../redux/actions/masterdata/bank.action"
 import { getDetailAlamat } from "../../../../redux/actions/masterdata/alamat.action";
 import * as Swal from "sweetalert2";
 import Select from "react-select";
+import FormMemberBank from "../../modals/masterdata/member/form_member_bank";
 
 class IndexMember extends Component {
   constructor(props) {
@@ -59,7 +60,9 @@ class IndexMember extends Component {
     this.handleStatus = this.handleStatus.bind(this);
     this.handleInvestment = this.handleInvestment.bind(this);
     this.handleAlamat = this.handleAlamat.bind(this);
+    this.handleBankEdit = this.handleBankEdit.bind(this);
     this.handleBank = this.handleBank.bind(this);
+    this.handleMemberEdit = this.handleMemberEdit.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -80,7 +83,7 @@ class IndexMember extends Component {
     localStorage.removeItem("isAlamat");
     localStorage.removeItem("isBank");
     localStorage.removeItem("isDetail");
-    this.props.dispatch(getMember(`page=1`));
+    this.props.dispatch(getMember(1));
     this.props.dispatch(fetchKategori(`membership`));
   }
   getExcel(props) {
@@ -141,9 +144,9 @@ class IndexMember extends Component {
     let where = this.handleValidate();
     // console.log(where);
     if (val.value !== "") {
-      this.props.dispatch(getMember(`page=1&status=${val.value}&${where}`));
+      this.props.dispatch(getMember(1, `&status=${val.value}&${where}`));
     } else {
-      this.props.dispatch(getMember(`page=1&${where}`));
+      this.props.dispatch(getMember(1, `&${where}`));
     }
   }
   handleChange = (event) => {
@@ -163,10 +166,9 @@ class IndexMember extends Component {
     return where;
   }
   handlePage(pageNumber) {
-    console.log(pageNumber);
     localStorage.setItem("pageMember", pageNumber);
     let where = this.handleValidate();
-    this.props.dispatch(getMember(`page=${pageNumber}&${where}`));
+    this.props.dispatch(getMember(pageNumber, where));
   }
   handleEvent = (event, picker) => {
     const from = moment(picker.startDate._d).format("YYYY-MM-DD");
@@ -179,7 +181,7 @@ class IndexMember extends Component {
   handleSearch(e) {
     e.preventDefault();
     let where = this.handleValidate();
-    this.props.dispatch(getMember(where));
+    this.props.dispatch(getMember(1, where));
   }
   handleInvestment(e, val) {
     e.preventDefault();
@@ -196,6 +198,18 @@ class IndexMember extends Component {
   handleBank(e, id) {
     e.preventDefault();
     this.props.dispatch(getDetailBank(id));
+    const bool = !this.props.isOpen;
+    this.props.dispatch(ModalToggle(bool));
+    this.props.dispatch(ModalType("detailBank"));
+  }
+  handleBankEdit(e, par, name) {
+    e.preventDefault();
+    localStorage.setItem("isBankEdit", "true");
+    const bool = !this.props.isOpen;
+    this.props.dispatch(ModalToggle(bool));
+    this.props.dispatch(ModalType("formMemberBank"));
+    this.setState({ detail: { id: par, member_name: name } });
+    this.props.dispatch(getDetailBank(par));
   }
   handleUpdate(e, val) {
     e.preventDefault();
@@ -221,6 +235,87 @@ class IndexMember extends Component {
     });
   }
 
+  handleMemberEdit(e, id, name_old, mobile_no) {
+    e.preventDefault();
+    let proping = this.props;
+    Swal.fire({
+      title: "Ubah Member",
+      focusConfirm: true,
+      html:
+        '<div class="form-group"><label class="text-dark">Nama Member</label><div class="input-group"><input type="text" id="nameModal" class="form-control" placeholder="Nama Member" value="' +
+        name_old +
+        '"></div></div>' +
+        '<div class="form-group"><label class="text-dark">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
+        mobile_no +
+        '"></div></div>' +
+        '<div class="form-group"><label class="text-dark">PIN Member</label><div class="input-group"><input type="number" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonColor: "grey",
+      confirmButtonText: "Ubah!",
+      allowOutsideClick: true,
+      preConfirm: function () {
+        return new Promise(function (resolve) {
+          resolve({
+            fullname: document.getElementById("nameModal").value,
+            mobile_no: document.getElementById("mobilenoModal").value,
+            pin_member: document.getElementById("pinModal").value,
+          });
+        });
+      },
+      onOpen: function () {
+        // $('#swal-input1').focus()
+        document.getElementById("nameModal").focus();
+      },
+    })
+      .then(function (result) {
+        if (result.isConfirmed) {
+          if (!result) return null;
+          let parseData = {};
+          parseData["fullname"] = result.value.fullname;
+          parseData["mobile_no"] = result.value.mobile_no;
+          parseData["pin"] = result.value.pin_member;
+
+          if (parseData.fullname === "") {
+            // return Swal.fire({
+            //   title: "Nama tidak boleh kosong!",
+            //   type: "danger",
+            // });
+            delete parseData.fullname;
+          } else if (parseData.mobile_no === "") {
+            delete parseData.mobile_no;
+          } else if (parseData.pin === "") {
+            delete parseData.pin;
+          } else if (isNaN(String(parseData.mobile_no).replace(/[0-9]/g, ""))) {
+            return ToastQ.fire({
+              icon: "warning",
+              title: `No Hp harus berupa angka!`,
+            });
+            // alert("No Hp harus berupa angka!");
+          } else if (parseData.pin.length === 1 && parseData.pin.length < 6) {
+            return ToastQ.fire({
+              icon: "warning",
+              title: `PIN masih kurang dari 6 digit!`,
+            });
+            // alert("PIN masih kurang dari 6 digit!");
+          } else if (isNaN(String(parseData.pin).replace(/[0-9]/g, ""))) {
+            return ToastQ.fire({
+              icon: "warning",
+              title: `PIN harus berupa angka!`,
+            });
+            // alert("PIN harus berupa angka!");
+          }
+          // alert(JSON.stringify(result))
+          proping.dispatch(putMember(parseData, id));
+        }
+      })
+      .catch(Swal.noop);
+    //   inputValidator: (value) => {
+    //     if (!value) {
+    //       return 'You need to write something!'
+    //     }
+    //   }
+  }
   render() {
     const headStyle = {
       verticalAlign: "middle",
@@ -413,6 +508,25 @@ class IndexMember extends Component {
                                       Bank
                                     </DropdownItem>
                                     <DropdownItem
+                                      onClick={(e) =>
+                                        this.handleBankEdit(e, v.id, v.fullname)
+                                      }
+                                    >
+                                      Edit Bank
+                                    </DropdownItem>
+                                    <DropdownItem
+                                      onClick={(e) =>
+                                        this.handleMemberEdit(
+                                          e,
+                                          v.id,
+                                          v.fullname,
+                                          v.mobile_no
+                                        )
+                                      }
+                                    >
+                                      Edit Member
+                                    </DropdownItem>
+                                    <DropdownItem
                                       onClick={(e) => this.handleUpdate(e, v)}
                                     >
                                       {v.status === 0
@@ -427,10 +541,22 @@ class IndexMember extends Component {
                             <td style={headStyle}>{v.referral}</td>
                             <td style={headStyle}>{v.mobile_no}</td>
                             <td style={numberStyle} className="txtGreen">
-                              {toCurrency(`${v.saldo}`)}
+                              Rp{" "}
+                              {v.saldo === "0"
+                                ? 0
+                                : toCurrency(parseInt(v.saldo, 10))}{" "}
+                              .-
                             </td>
-                            <td style={numberStyle}>{v.sponsor}</td>
-                            <td style={numberStyle}>{v.pin}</td>
+                            <td style={numberStyle}>
+                              {v.sponsor === "0"
+                                ? 0
+                                : toCurrency(parseInt(v.sponsor, 10))}
+                            </td>
+                            <td style={numberStyle}>
+                              {v.pin === "0"
+                                ? 0
+                                : toCurrency(parseInt(v.pin, 10))}
+                            </td>
                             <td style={headStyle}>{statusQ(v.status)}</td>
                           </tr>
                         );
@@ -450,14 +576,18 @@ class IndexMember extends Component {
                     </tr>
                   )}
                 </tbody>
-                <tfoot className="bgWithOpacity">
+                <tfoot>
                   <tr>
                     <td colSpan={5}>TOTAL PERHALAMAN</td>
                     <td style={numberStyle} className="txtGreen">
-                      {toCurrency(`${totSaldo}`)}
+                      Rp {totSaldo === 0 ? 0 : toCurrency(totSaldo)} .-
                     </td>
-                    <td style={numberStyle}>{totSponsor}</td>
-                    <td style={numberStyle}>{totPin}</td>
+                    <td style={numberStyle}>
+                      {totSponsor === 0 ? 0 : toCurrency(totSponsor)}
+                    </td>
+                    <td style={numberStyle}>
+                      {totPin === 0 ? 0 : toCurrency(totPin)}
+                    </td>
                     <td />
                   </tr>
                 </tfoot>
@@ -492,6 +622,13 @@ class IndexMember extends Component {
             detail={this.state.detail}
           />
         ) : null}
+
+        {localStorage.isBankEdit === "true" ? (
+          <FormMemberBank
+            detail={this.state.detail}
+            detailBank={this.props.detailBank}
+          />
+        ) : null}
         {/*{*/}
         {/*localStorage.isBank === "true"?<DetailBank*/}
         {/*detail={this.props.detailBank}*/}
@@ -507,6 +644,7 @@ class IndexMember extends Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log("state.bankReducer", state.bankReducer);
   return {
     isOpen: state.modalReducer,
 

@@ -294,31 +294,25 @@ class Dashboard extends Component {
               <Cards
                 classCols="col-md-6 col-xl-3 box-margin"
                 title="TOTAL SALDO MEMBER"
-                data={"Rp " + toCurrency(this.state.saldo_member)}
+                data={toCurrency(this.state.saldo_member)}
                 icon="fa fa-money text-white"
               />
               <Cards
                 classCols="col-md-6 col-xl-3 box-margin"
-                title="TOTAL PENARIKAN"
-                data={"Rp " + toCurrency(this.state.total_penarikan)}
-                icon="fa fa-dollar text-white"
-              />
-              <Cards
-                classCols="col-md-6 col-xl-2 box-margin"
                 title="TOTAL MODAL"
-                data={"Rp " + toCurrency(this.state.total_modal)}
+                data={toCurrency(this.state.total_modal)}
                 icon="fa fa-shopping-cart text-white"
               />
               <Cards
-                classCols="col-md-6 col-xl-2 box-margin"
+                classCols="col-md-6 col-xl-3 box-margin"
                 title="MEMBER AKTIF"
-                data={toCurrency(this.state.total_member)}
+                data={this.state.total_member}
                 icon="fa fa-users text-white"
               />
               <Cards
-                classCols="col-md-6 col-xl-2 box-margin"
+                classCols="col-md-6 col-xl-3 box-margin"
                 title="SLOT AKTIF"
-                data={toCurrency(this.state.slot_aktif)}
+                data={this.state.slot_aktif}
                 icon="fa fa-list text-white"
               />
             </div>
@@ -518,7 +512,10 @@ class Dashboard extends Component {
 // }
 
 const mapStateToProps = (state) => {
+<<<<<<< HEAD
   console.log("state dashboard", state.dashboardReducer);
+=======
+>>>>>>> ca5a1a46183e4b9601202de6ae1ed27fd17de996
   return {
     auth: state.auth,
     stock: state.dashboardReducer.data,
