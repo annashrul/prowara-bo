@@ -7,16 +7,17 @@ import { ModalToggle } from "../../../../../redux/actions/modal.action";
 import Select, { components } from "react-select";
 import { fetchDataBank } from "../../../../../redux/actions/setting/bank.action";
 import Skeleton from "react-loading-skeleton";
-import { putMember } from "../../../../../redux/actions/masterdata/member.action";
+// import { putMember } from "../../../../../redux/actions/masterdata/member.action";
 import Swal from "sweetalert2";
+import { putMemberBank } from "../../../../../redux/actions/masterdata/bank.action";
 const { Option } = components;
 const IconOption = (props) => (
   <Option {...props}>
     <div className="client-media-content d-flex align-items-center p-1">
       {/* <img className="client-thumb mr-3" src={props.data.icon} alt={props.data.label} /> */}
       <div className="user--media-body">
-        <h6 className="mb-0 text-dark font-15">{props.data.label}</h6>
-        <span className="font-13 text-dark">{props.data.childLabel}</span>
+        <h6 className="mb-0 text-light font-15">{props.data.label}</h6>
+        <span className="font-13 text-light">{props.data.childLabel}</span>
       </div>
     </div>
   </Option>
@@ -36,11 +37,13 @@ class FormMemberBank extends Component {
       acc_name: "",
       bank_name: "",
       bank_no: "",
+      bank_id: "",
       error: {
         full_name: "",
         acc_name: "",
         bank_name: "",
         bank_no: "",
+        bank_id: "",
       },
     };
   }
@@ -50,10 +53,12 @@ class FormMemberBank extends Component {
       bank_data: [],
       bank_name: "",
       bank_no: "",
+      bank_id: "",
       error: {
         full_name: "",
         bank_name: "",
         bank_no: "",
+        bank_id: "",
       },
     });
   }
@@ -80,6 +85,7 @@ class FormMemberBank extends Component {
         bank_name: nextProps.detailBank[0].bank_name,
         full_name: nextProps.detailBank[0].acc_name,
         bank_no: nextProps.detailBank[0].acc_no,
+        bank_id: nextProps.detailBank[0].id,
       });
     }
     console.log("nextProps.detailBank", nextProps.detailBank);
@@ -117,7 +123,7 @@ class FormMemberBank extends Component {
     parseDetail["bank_name"] = this.state.bank_name;
 
     parseData["bank"] = parseDetail;
-
+    let id_bank = this.state.bank_id;
     let err = this.state.error;
     if (
       parseDetail["acc_name"] === "" ||
@@ -159,7 +165,7 @@ class FormMemberBank extends Component {
       }).then(
         function (result) {
           if (result.value) {
-            this.props.dispatch(putMember(parseData, this.props.detail.id));
+            this.props.dispatch(putMemberBank(parseData, id_bank));
           }
         }.bind(this)
       );
@@ -190,7 +196,7 @@ class FormMemberBank extends Component {
                 <small className="text-muted">Data Bank</small>
 
                 <div className="form-group">
-                  <label>Nama Pemilik Bank</label>
+                  <label className="text-dark">Nama Pemilik Bank</label>
                   <input
                     type="text"
                     className="form-control"
@@ -211,7 +217,7 @@ class FormMemberBank extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label>Nama Bank</label>
+                  <label className="text-dark">Nama Bank</label>
                   {typeof this.state.bank_data === "object" ? (
                     this.state.bank_data.length > 0 ? (
                       <Select
@@ -242,7 +248,7 @@ class FormMemberBank extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label>Nomor Rekening Bank</label>
+                  <label className="text-dark">Nomor Rekening Bank</label>
                   <input
                     type="text"
                     className="form-control form-control-lg"

@@ -495,13 +495,13 @@ class IndexMember extends Component {
                                     >
                                       Invesment
                                     </DropdownItem>
-                                    <DropdownItem
+                                    {/* <DropdownItem
                                       onClick={(e) =>
                                         this.handleAlamat(e, v.id)
                                       }
                                     >
                                       Alamat
-                                    </DropdownItem>
+                                    </DropdownItem> */}
                                     <DropdownItem
                                       onClick={(e) => this.handleBank(e, v.id)}
                                     >
