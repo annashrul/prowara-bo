@@ -27,7 +27,7 @@ class ThreeMenu extends Component {
           href="about:blank"
           onClick={(e) => this.changeMenu(e, this.props.arg1, this.props.arg2)}
         >
-          <i className={`${this.props.icon}`} /> <span>{this.props.label}</span>{" "}
+          <i className={`${this.props.icon}`} /> <span>{this.props.label}</span>
           <i className="fa fa-angle-right" />
         </a>
         <ul

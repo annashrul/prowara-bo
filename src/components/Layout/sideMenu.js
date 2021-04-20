@@ -45,7 +45,6 @@ class SideMenu extends Component {
       v.isToggle = false;
       if (v.sub !== undefined) {
         v.sub.forEach((val) => {
-          console.log("masuk", val.path);
           if (val.sub === undefined) {
             if (val.path === path) {
               if (val.parent === v.label) {
@@ -121,7 +120,6 @@ class SideMenu extends Component {
           {(() => {
             let child = [];
             aksesMember.forEach((val, idx) => {
-              console.log(val.icons);
               if (val.sub === undefined && val.otherSub === undefined) {
                 child.push(
                   <OneMenu
@@ -218,7 +216,6 @@ class SideMenu extends Component {
               style={{ cursor: "pointer", color: "#a6b6d0" }}
               onClick={(event) => this.handleLogout(event)}
             >
-              {" "}
               <i className="fa fa-sign-out" />
               <span> Logout</span>
             </a>
