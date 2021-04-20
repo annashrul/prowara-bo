@@ -28,7 +28,7 @@ class FormUserLevel extends Component {
           isChecked: false,
           isToggle: false,
           sub: undefined,
-          icons: "fa fa-address-book-o",
+          icons: "fa fa-user-o",
         },
         {
           id: 1,
@@ -45,19 +45,19 @@ class FormUserLevel extends Component {
           path: "",
           isChecked: false,
           isToggle: false,
-          icons: "fa fa-user-o",
+          icons: "fa fa-address-book-o",
           sub: [
             {
               id: 3,
               label: "daftar pengguna",
-              path: "/daftar_pengguna",
+              path: "/pengguna",
               parent: "pengguna",
               isChecked: false,
             },
             {
               id: 4,
               label: "akses pengguna",
-              path: "/akses_pengguna",
+              path: "/pengguna/akses",
               parent: "pengguna",
               isChecked: false,
             },
@@ -74,14 +74,14 @@ class FormUserLevel extends Component {
             {
               id: 101,
               label: "daftar paket",
-              path: "/daftar_paket",
+              path: "/paket",
               parent: "paket",
               isChecked: false,
             },
             {
               id: 102,
               label: "kategori paket",
-              path: "/kategori/paket",
+              path: "/paket/kategori",
               parent: "paket",
               isChecked: false,
             },
@@ -123,14 +123,14 @@ class FormUserLevel extends Component {
             {
               id: 202,
               label: "daftar Berita",
-              path: "/daftar_berita",
+              path: "/berita",
               parent: "berita",
               isChecked: false,
             },
             {
               id: 203,
               label: "Kategori Berita",
-              path: "/kategori/berita",
+              path: "/berita/kategori",
               parent: "berita",
               isChecked: false,
             },
@@ -212,8 +212,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      // this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -302,6 +302,7 @@ class FormUserLevel extends Component {
                 />
               </div>
             </div>
+
             {menu.map((val, key) => {
               return val.sub === undefined ? (
                 <div style={{ zoom: "80%" }} className="col-md-12" key={key}>

@@ -23,7 +23,7 @@ class Kategori extends Component {
       any: "",
       param: "",
       paramType: "",
-      path: this.props.location.pathname.split("/")[2],
+      path: this.props.location.pathname.split("/")[1],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -41,7 +41,7 @@ class Kategori extends Component {
     let newParam = "";
     let newParamType;
     let newPath = "";
-    if (this.props.location.pathname.split("/")[2] === "paket") {
+    if (this.props.location.pathname.split("/")[1] === "paket") {
       newParam = "membership";
       newParamType = 0;
       newPath = "Paket";
