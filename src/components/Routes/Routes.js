@@ -47,16 +47,12 @@ const Routes = (
       <PrivateRoute path="/laporan/transaksi" exact strict component={Saldo} />
       {/* E-WALLET SECTION START */}
       <PrivateRoute path="/ewallet/deposit" exact strict component={Deposit} />
-<<<<<<< HEAD
       <PrivateRoute
         path="/ewallet/penarikan"
         exact
         strict
         component={Penarikan}
       />
-=======
-      <PrivateRoute path = "/ewallet/penarikan" exact strict component={Penarikan}/>
->>>>>>> ca5a1a46183e4b9601202de6ae1ed27fd17de996
       {/* E-WALLET SECTION END */}
       {/* LAPORAN SECTION END */}
       <PrivateRoute path="/pengaturan/bank" exact strict component={Bank} />

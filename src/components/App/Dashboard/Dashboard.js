@@ -512,10 +512,6 @@ class Dashboard extends Component {
 // }
 
 const mapStateToProps = (state) => {
-<<<<<<< HEAD
-  console.log("state dashboard", state.dashboardReducer);
-=======
->>>>>>> ca5a1a46183e4b9601202de6ae1ed27fd17de996
   return {
     auth: state.auth,
     stock: state.dashboardReducer.data,
