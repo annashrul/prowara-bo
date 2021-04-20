@@ -29,15 +29,15 @@ class IndexSetting extends Component {
           <div className="col-12 box-margin">
             <Tabs>
               <TabList style={{ margin: "0px" }}>
-                <Tab>General</Tab>
                 <Tab>Alokasi</Tab>
+                <Tab>General</Tab>
               </TabList>
 
               <TabPanel>
-                <General res_general={this.props.resData.general} />
+                <Alokasi res_alokasi={this.props.resData} />
               </TabPanel>
               <TabPanel>
-                <Alokasi res_alokasi={this.props.resData} />
+                <General res_general={this.props.resData.general} />
               </TabPanel>
             </Tabs>
           </div>

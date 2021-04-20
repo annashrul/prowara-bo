@@ -188,7 +188,7 @@ class Index extends Component {
           <div className="row">
             <div className="col-md-6 col-sm-12">
               <div className="form-group">
-                <label>Minimal Withdraw</label>
+                <label>Minimal Deposit</label>
                 <div className="input-group">
                   <div className="input-group-append">
                     <span className="input-group-text">Poin</span>
@@ -390,7 +390,7 @@ class Index extends Component {
                 <label>Kontrak</label>
                 <div className="input-group">
                   <div className="input-group-prepend">
-                    <span className="input-group-text">Orang</span>
+                    <span className="input-group-text">Hari</span>
                   </div>
                   <input
                     type="number"

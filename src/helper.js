@@ -86,7 +86,7 @@ export const noData = () => {
 export const toCurrency = (angka) => {
   if (angka === undefined) return 0;
   const number_string = angka;
-  const split = number_string.split(".");
+  const split = String(number_string).split(".");
   const sisa = split[0].length % 3;
   let rupiah = split[0].substr(0, sisa);
   const ribuan = split[0].substr(sisa).match(/\d{3}/gi);
