@@ -2,117 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdbe91fa-b40c-4286-9548-33994a09d0f5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/konten/indexTestimoni.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/laporan/indexBonus.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/laporan/indexReportBarang.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/laporan/pagePrintPenjualan.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/masterdata/member_approval/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/masterdata/voucher/indexVoucher.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/barang/form_adjusment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/barang/form_barang.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/barang_redeem/form_barang_redeem.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/konten/testimoni/detailTestimoni.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/konten/testimoni/form_testimoni.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_barang.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/laporan/form_penarikan_bonus.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/voucher/form_voucher.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/paket/form_paket.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/pin/generate_pin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/reward/form_barang_reward.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/modals/setting/karir.modal.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/claim/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/redeem/report_redeem.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/reward/indexReportReward.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/cardSatus.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/filter.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/list/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/list/src/ekspedisi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/list/src/info.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/list/src/produk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/list/src/tagihan.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/skeleton/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/skeleton/src/ekspedisi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/skeleton/src/info.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/skeleton/src/produk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/skeleton/src/tagihan.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/order/src/skeleton_list.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/paket/indexBarang.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/paket/indexBarangRedeem.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/paket/indexBarangReward.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/paket/indexPaket.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/print/layout.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/print/print.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/print/print_laporan_penjualan.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/ppob/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/bonus/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/general/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/karir/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/kurir/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/plafon/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/poin_kelipatan_ro/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/umum/stokis/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/about/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/download/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/header/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/howit/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/paket/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/privacy/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/App/setting/website/tos/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/common/jenjangKarir.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/common/membership.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/masterdata/voucher.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/paket/barang.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/paket/barang_redeem.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/paket/barang_reward.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/paket/paket.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/setting/kurir.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/setting/poin_kelipatan_ro.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/setting/ppob.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/actions/setting/stokis.action.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/masterdata/voucher.reducer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/paket/barang.reducer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/paket/barang_redeem.reducer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/paket/barang_reward.reducer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/redux/reducers/paket/paket.reducer.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/Auth/Login/Login.js" afterPath="$PROJECT_DIR$/src/components/App/Auth/Login/Login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js" afterPath="$PROJECT_DIR$/src/components/App/Dashboard/Dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js" afterPath="$PROJECT_DIR$/src/components/App/Dashboard/src/Filter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js" afterPath="$PROJECT_DIR$/src/components/App/ewallet/indexDeposit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js" afterPath="$PROJECT_DIR$/src/components/App/ewallet/indexPenarikan.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/konten/indexBerita.js" afterPath="$PROJECT_DIR$/src/components/App/konten/indexBerita.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js" afterPath="$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/masterdata/indexUserLevel.js" afterPath="$PROJECT_DIR$/src/components/App/masterdata/indexUserLevel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/masterdata/indexUserList.js" afterPath="$PROJECT_DIR$/src/components/App/masterdata/indexUserList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/masterdata/member/index.js" afterPath="$PROJECT_DIR$/src/components/App/masterdata/member/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js" afterPath="$PROJECT_DIR$/src/components/App/modals/konten/berita/form_berita.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js" afterPath="$PROJECT_DIR$/src/components/App/modals/laporan/detail_laporan_saldo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_alamat.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_alamat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_bank.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_bank.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_list/form_user_list.js" afterPath="$PROJECT_DIR$/src/components/App/modals/masterdata/user_list/form_user_list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/modals/setting/bank.modal.js" afterPath="$PROJECT_DIR$/src/components/App/modals/setting/bank.modal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/pin/index.js" afterPath="$PROJECT_DIR$/src/components/App/pin/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/setting/bank/index.js" afterPath="$PROJECT_DIR$/src/components/App/setting/bank/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Layout/header.js" afterPath="$PROJECT_DIR$/src/components/Layout/header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Layout/index.js" afterPath="$PROJECT_DIR$/src/components/Layout/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Layout/sideMenu.js" afterPath="$PROJECT_DIR$/src/components/Layout/sideMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Routes/Routes.js" afterPath="$PROJECT_DIR$/src/components/Routes/Routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/twoMenu.js" afterPath="$PROJECT_DIR$/src/components/common/twoMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helper.js" afterPath="$PROJECT_DIR$/src/helper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/_constants.js" afterPath="$PROJECT_DIR$/src/redux/actions/_constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/ewallet/saldo.action.js" afterPath="$PROJECT_DIR$/src/redux/actions/ewallet/saldo.action.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/actions/masterdata/member.action.js" afterPath="$PROJECT_DIR$/src/redux/actions/masterdata/member.action.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/reducers/index.js" afterPath="$PROJECT_DIR$/src/redux/reducers/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux/reducers/masterdata/member.reducer.js" afterPath="$PROJECT_DIR$/src/redux/reducers/masterdata/member.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/setAuthToken.js" afterPath="$PROJECT_DIR$/src/utils/setAuthToken.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -129,8 +19,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/App/masterdata/member/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-208">
-              <caret line="228" column="16" lean-forward="true" selection-start-line="228" selection-start-column="16" selection-end-line="228" selection-end-column="16" />
+            <state relative-caret-position="0">
+              <caret line="228" column="16" lean-forward="false" selection-start-line="228" selection-start-column="16" selection-end-line="228" selection-end-column="16" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
                 <element signature="e#3006#3068#0" expanded="false" />
@@ -150,7 +40,7 @@
       <file leaf-file-name="indexSaldo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="2016">
               <caret line="164" column="59" lean-forward="false" selection-start-line="164" selection-start-column="59" selection-end-line="164" selection-end-column="59" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
@@ -163,8 +53,8 @@
       <file leaf-file-name="form_user_level.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="59" column="9" lean-forward="true" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
+            <state relative-caret-position="352">
+              <caret line="59" column="9" lean-forward="false" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
               <folding>
                 <element signature="e#920#2911#0" expanded="false" />
                 <element signature="n#!!block;n#handleChange#0;n#FormUserLevel#0" expanded="false" />
@@ -173,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="222" column="20" lean-forward="false" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
+            <state relative-caret-position="206">
+              <caret line="221" column="16" lean-forward="true" selection-start-line="221" selection-start-column="16" selection-end-line="221" selection-end-column="16" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
                 <element signature="e#598#1712#0" expanded="false" />
@@ -188,21 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Pagination.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/node_modules/react-js-pagination/dist/Pagination.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="114" column="51" lean-forward="true" selection-start-line="114" selection-start-column="51" selection-end-line="114" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="member.reducer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/redux/reducers/masterdata/member.reducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-224">
-              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="64">
+              <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -211,7 +91,7 @@
       <file leaf-file-name="detail_invesment.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
+            <state relative-caret-position="1440">
               <caret line="103" column="54" lean-forward="false" selection-start-line="103" selection-start-column="47" selection-end-line="103" selection-end-column="54" />
               <folding />
             </state>
@@ -221,7 +101,7 @@
       <file leaf-file-name="member.action.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/redux/actions/masterdata/member.action.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
+            <state relative-caret-position="2288">
               <caret line="145" column="25" lean-forward="false" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
               <folding>
                 <element signature="e#3521#4285#0" expanded="false" />
@@ -399,6 +279,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -475,14 +357,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sangku-fo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prowara-fo" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SearchEverywhereHistoryKey" value="default.png&#9;FILE&#9;file://E:/NETINDO/web/prowara-bo/src/assets/default.png&#10;claim&#9;null&#9;null" />
@@ -518,18 +398,18 @@
       <workItem from="1617192905771" duration="4169000" />
       <workItem from="1617201146305" duration="17320000" />
       <workItem from="1617257013921" duration="18194000" />
-      <workItem from="1617310617162" duration="30503000" />
+      <workItem from="1617310617162" duration="31145000" />
+      <workItem from="1617883732813" duration="166000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116774000" />
+    <option name="totallyTimeSpent" value="117582000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17708333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -537,13 +417,14 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2598684" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -566,7 +447,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-570">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -574,7 +454,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -582,7 +461,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-924">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -590,7 +468,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-730">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -598,7 +475,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1098">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -606,7 +482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-960">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -614,7 +489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2170">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -622,7 +496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2362">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -630,7 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1162">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -638,7 +510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-236">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -646,7 +517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -654,7 +524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-796">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -662,7 +531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-426">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -670,9 +538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-          <folding>
-            <element signature="e#893#919#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -680,7 +545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1386">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -688,7 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1818">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -696,7 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2039">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -704,7 +566,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-844">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -712,7 +573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-748">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -720,7 +580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -728,7 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-684">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -736,7 +594,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-172">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -744,7 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-812">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -752,7 +608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1964">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -760,7 +615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -768,7 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1276">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -776,7 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -784,7 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="77" column="18" lean-forward="false" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -792,9 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="410" column="44" lean-forward="false" selection-start-line="410" selection-start-column="35" selection-end-line="410" selection-end-column="44" />
-          <folding>
-            <element signature="e#25#126#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -802,7 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1852">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -810,7 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -818,7 +664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="35" column="72" lean-forward="false" selection-start-line="35" selection-start-column="72" selection-end-line="35" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -826,7 +671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="25" column="43" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -834,11 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="153" column="46" lean-forward="false" selection-start-line="153" selection-start-column="46" selection-end-line="153" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-            <element signature="n#!!block;n#constructor#0;n#SideMenu#0" expanded="false" />
-            <element signature="e#655#1325#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -846,7 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="22" column="45" lean-forward="false" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -864,20 +702,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
           <caret line="167" column="80" lean-forward="false" selection-start-line="167" selection-start-column="80" selection-end-line="167" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-            <element signature="n#!!block;n#handleChange#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#handleValidate#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#componentDidUpdate#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#getExcel#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="e#4605#4765#0" expanded="false" />
-            <element signature="n#!!block;n#handleSearch#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#handlePage#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#handleChangeKolom#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#handleModal#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#handlePaymentSlip#0;n#IndexDeposit#0" expanded="false" />
-            <element signature="n#!!block;n#handleApproval#0;n#IndexDeposit#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -885,30 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="412" column="41" lean-forward="true" selection-start-line="412" selection-start-column="24" selection-end-line="412" selection-end-column="41" />
-          <folding>
-            <element signature="e#3977#4217#0" expanded="false" />
-            <element signature="e#4236#4478#0" expanded="false" />
-            <element signature="e#4488#4571#0" expanded="false" />
-            <element signature="e#4594#4675#0" expanded="false" />
-            <element signature="e#4714#4789#0" expanded="false" />
-            <element signature="e#7480#7588#0" expanded="false" />
-            <element signature="e#7616#7724#0" expanded="false" />
-            <element signature="e#7739#7813#0" expanded="false" />
-            <element signature="e#11739#11765#0" expanded="false" />
-            <element signature="e#11776#11883#0" expanded="false" />
-            <element signature="e#12184#12292#0" expanded="false" />
-            <element signature="e#12318#12426#0" expanded="false" />
-            <element signature="e#12903#13048#0" expanded="false" />
-            <element signature="e#13145#13240#0" expanded="false" />
-            <element signature="e#13250#13314#0" expanded="false" />
-            <element signature="e#13585#13693#0" expanded="false" />
-            <element signature="e#14485#14525#0" expanded="false" />
-            <element signature="e#14539#14566#0" expanded="false" />
-            <element signature="e#14577#14630#0" expanded="false" />
-            <element signature="e#14644#14685#0" expanded="false" />
-            <element signature="e#14763#14874#0" expanded="false" />
-            <element signature="e#14888#14926#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -916,7 +716,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="173" column="35" lean-forward="true" selection-start-line="173" selection-start-column="35" selection-end-line="173" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -924,13 +723,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="26" column="10" lean-forward="true" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/member/detail_invesment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="1440">
           <caret line="103" column="54" lean-forward="false" selection-start-line="103" selection-start-column="47" selection-end-line="103" selection-end-column="54" />
           <folding />
         </state>
@@ -938,15 +736,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/reducers/masterdata/member.reducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-224">
-          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="64">
+          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/actions/masterdata/member.action.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
+        <state relative-caret-position="2288">
           <caret line="145" column="25" lean-forward="false" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
           <folding>
             <element signature="e#3521#4285#0" expanded="false" />
@@ -958,8 +756,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App/modals/masterdata/user_level/form_user_level.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="59" column="9" lean-forward="true" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
+        <state relative-caret-position="352">
+          <caret line="59" column="9" lean-forward="false" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
           <folding>
             <element signature="e#920#2911#0" expanded="false" />
             <element signature="n#!!block;n#handleChange#0;n#FormUserLevel#0" expanded="false" />
@@ -969,8 +767,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App/masterdata/member/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-208">
-          <caret line="228" column="16" lean-forward="true" selection-start-line="228" selection-start-column="16" selection-end-line="228" selection-end-column="16" />
+        <state relative-caret-position="0">
+          <caret line="228" column="16" lean-forward="false" selection-start-line="228" selection-start-column="16" selection-end-line="228" selection-end-column="16" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
             <element signature="e#3006#3068#0" expanded="false" />
@@ -990,7 +788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -998,20 +795,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="50" column="38" lean-forward="true" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
-          <folding>
-            <element signature="e#43432#47245#0" expanded="false" />
-            <element signature="e#47274#48707#0" expanded="false" />
-            <element signature="e#48736#49623#0" expanded="false" />
-            <element signature="e#49654#49792#0" expanded="false" />
-            <element signature="e#49829#50398#0" expanded="false" />
-            <element signature="e#50435#50597#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App/laporan/indexSaldo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
+        <state relative-caret-position="2016">
           <caret line="164" column="59" lean-forward="false" selection-start-line="164" selection-start-column="59" selection-end-line="164" selection-end-column="59" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
@@ -1024,28 +813,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/react-js-pagination/dist/Pagination.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="118" column="53" lean-forward="true" selection-start-line="118" selection-start-column="53" selection-end-line="118" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="222" column="20" lean-forward="false" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
+        <state relative-caret-position="206">
+          <caret line="221" column="16" lean-forward="true" selection-start-line="221" selection-start-column="16" selection-end-line="221" selection-end-column="16" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
             <element signature="e#598#1712#0" expanded="false" />
             <element signature="e#1744#1783#0" expanded="false" />
             <element signature="e#1818#1860#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-js-pagination/dist/Pagination.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="114" column="51" lean-forward="true" selection-start-line="114" selection-start-column="51" selection-end-line="114" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
