@@ -217,7 +217,7 @@ class IndexPenarikan extends Component {
     let totAmountRp = 0;
     const { total, per_page, last_page, current_page, data } = this.props.data;
     return (
-      <Layout page={"Penarikan"}>
+      <Layout page={"Laporan Penarikan"}>
         <div className="row">
           <div className="col-12 col-xs-12 col-md-10">
             <div className="row">

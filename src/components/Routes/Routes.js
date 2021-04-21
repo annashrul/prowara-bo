@@ -27,22 +27,21 @@ const Routes = (
       {/* DASHBOARD SECTION END */}
       {/* PAKET SECTION START */}
       <PrivateRoute path="/pin" exact strict component={Pin} />
-      <PrivateRoute path="/daftar_paket" exact strict component={DaftarPaket} />
+      <PrivateRoute path="/paket" exact strict component={DaftarPaket} />
       <PrivateRoute
-        path="/kategori/:kategori"
+        path="/:kategori/kategori"
         exact
         strict
         component={Kategori}
       />
       {/* PAKET SECTION END */}
       {/* MASTERDATA SECTION START */}
-      <PrivateRoute path="/daftar_pengguna" exact strict component={UserList} />
-      <PrivateRoute path="/akses_pengguna" exact strict component={UserLevel} />
+      <PrivateRoute path="/pengguna" exact strict component={UserList} />
+      <PrivateRoute path="/pengguna/akses" exact strict component={UserLevel} />
       {/* MASTERDATA SECTION END */}
       {/* MANAGEMENT CONTENT SECTION START */}
       <PrivateRoute path="/member" exact strict component={Member} />
-      <PrivateRoute path="/daftar_berita" exact strict component={Berita} />
-
+      <PrivateRoute path="/berita" exact strict component={Berita} />
       {/* MANAGEMENT CONTENT SECTION END */}
       {/* LAPORAN SECTION START */}
       <PrivateRoute path="/laporan/transaksi" exact strict component={Saldo} />
@@ -57,7 +56,12 @@ const Routes = (
       {/* E-WALLET SECTION END */}
       {/* LAPORAN SECTION END */}
       <PrivateRoute path="/pengaturan/bank" exact strict component={Bank} />
-      <PrivateRoute path="/pengaturan/umum" exact strict component={IndexSetting} />
+      <PrivateRoute
+        path="/pengaturan/umum"
+        exact
+        strict
+        component={IndexSetting}
+      />
       <Route component={NotFound} />
     </Switch>
   </div>
