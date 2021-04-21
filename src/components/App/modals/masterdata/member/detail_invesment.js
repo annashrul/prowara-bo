@@ -73,13 +73,12 @@ class DetailInvesment extends Component {
     if (props.dataExcel.data !== undefined) {
       if (props.dataExcel.data.length > 0) {
         let content = [];
-        // let totTrx;
         props.dataExcel.data.forEach((v, i) => {
           content.push([
             v.kd_trx,
             v.fullname,
-            parseInt(v.trx_in, 10),
-            parseInt(v.trx_out, 10),
+            parseFloat(v.trx_in),
+            parseFloat(v.trx_out),
             v.note,
             myDate(v.created_at),
           ]);
@@ -90,8 +89,8 @@ class DetailInvesment extends Component {
           [
             "KODE TRANSAKSI",
             "NAMA",
-            "TRX MASUK",
-            "TRX KELUAR",
+            "TRX MASUK ( POIN )",
+            "TRX KELUAR ( POIN )",
             "CATATAN",
             "TANGGAL",
           ],
@@ -103,15 +102,10 @@ class DetailInvesment extends Component {
             [
               "TOTAL",
               "",
-              parseInt(props.dataExcel.summary.trx_in, 10),
-              parseInt(props.dataExcel.summary.trx_out, 10),
+              parseFloat(props.dataExcel.summary.trx_in),
+              parseFloat(props.dataExcel.summary.trx_out),
             ],
-            [
-              `SALDO AWAL : ${parseInt(
-                props.dataExcel.summary.saldo_awal,
-                10
-              )}`,
-            ],
+            [`SALDO AWAL : ${parseFloat(props.dataExcel.summary.saldo_awal)}`],
           ]
         );
       }
@@ -156,9 +150,11 @@ class DetailInvesment extends Component {
       >
         <ModalHeader toggle={this.toggle}>
           Detail Invesment {this.props.detail.fullname} <br /> Saldo Awal :
-          <span className="txtGreen">
+          <span className="poin">
             &nbsp;
-            {summary !== undefined ? toCurrency(`${summary.saldo_awal}`) : 0}
+            {summary !== undefined
+              ? toCurrency(`${summary.saldo_awal}`)
+              : 0 + " Poin"}
           </span>
         </ModalHeader>
         {this.props.isLoading || this.props.isLoadingExcel ? (

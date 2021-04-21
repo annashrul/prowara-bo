@@ -96,16 +96,45 @@ class IndexMember extends Component {
     if (props.dataExcel.data !== undefined) {
       if (props.dataExcel.data.length > 0) {
         this.setState({ isLoading: false });
+
         let stts = this.state.status;
         let content = [];
+        let totSaldo = 0;
+        let totSposor = 0;
+        let totPin = 0;
+        let totPayment = 0;
+        let totSlotActive = 0;
+        let totModal = 0;
+        let totOmset = 0;
+
         props.dataExcel.data.forEach((v, i) => {
+          let newSaldo = parseFloat(v.saldo);
+          let newSponsor = parseFloat(v.sponsor);
+          let newPin = parseFloat(v.pin);
+          let newPayment = parseFloat(v.total_payment);
+          let newSlotActive = parseFloat(v.slot_active);
+          let newModal = parseFloat(v.total_modal);
+          let newOmset = parseFloat(v.omset);
+
+          totSaldo += newSaldo;
+          totSposor += newSponsor;
+          totPin += newPin;
+          totPayment += newPayment;
+          totSlotActive += newSlotActive;
+          totModal += newModal;
+          totOmset += newOmset;
+
           content.push([
             v.fullname,
             v.referral,
             v.mobile_no,
-            parseInt(v.saldo, 10),
-            parseInt(v.sponsor, 10),
-            parseInt(v.pin, 10),
+            newSaldo,
+            newSponsor,
+            newPin,
+            newPayment,
+            newSlotActive,
+            newModal,
+            newOmset,
             v.status === 0 ? "Tidak Aktif" : "Aktif",
           ]);
         });
@@ -118,12 +147,32 @@ class IndexMember extends Component {
             "NAMA",
             "REFERRAL",
             "NO.TELEPON",
-            "SALDO",
+            "SALDO ( POIN )",
             "SPONSOR",
-            "PIN",
+            "TIKET",
+            "PENARIKAN ( POIN )",
+            "SLOT AKTIF",
+            "MODAL ( POIN )",
+            "OMSET ( POIN )",
             "STATUS",
           ],
-          content
+          content,
+          [
+            [""],
+            [""],
+            [
+              "TOTAL",
+              "",
+              "",
+              totSaldo,
+              totSposor,
+              totPin,
+              totPayment,
+              totSlotActive,
+              totModal,
+              totOmset,
+            ],
+          ]
         );
       }
     }
@@ -468,32 +517,23 @@ class IndexMember extends Component {
                     <th rowSpan="2" style={headStyle}>
                       NO.TELEPON
                     </th>
-                    <th rowSpan="2" style={headStyle}>
-                      SALDO
-                    </th>
-                    <th colSpan="2" style={headStyle}>
-                      JUMLAH
+
+                    <th colSpan="7" style={headStyle}>
+                      TOTAL
                     </th>
 
-                    <th rowSpan="2" style={headStyle}>
-                      TOTAL PENARIKAN
-                    </th>
-                    <th rowSpan="2" style={headStyle}>
-                      SLOT AKTIF
-                    </th>
-                    <th rowSpan="2" style={headStyle}>
-                      MODAL
-                    </th>
-                    <th rowSpan="2" style={headStyle}>
-                      OMSET
-                    </th>
                     <th rowSpan="2" style={headStyle}>
                       STATUS
                     </th>
                   </tr>
                   <tr>
-                    <th style={headStyle}>SPOMSOR</th>
-                    <th style={headStyle}>PIN</th>
+                    <th style={headStyle}>SALDO</th>
+                    <th style={headStyle}>SPONSOR</th>
+                    <th style={headStyle}>TIKET</th>
+                    <th style={headStyle}>PENARIKAN</th>
+                    <th style={headStyle}>SLOT AKTIF</th>
+                    <th style={headStyle}>MODAL</th>
+                    <th style={headStyle}>OMSET</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -572,11 +612,8 @@ class IndexMember extends Component {
                             <td style={headStyle}>{v.fullname}</td>
                             <td style={headStyle}>{v.referral}</td>
                             <td style={headStyle}>{v.mobile_no}</td>
-                            <td style={numberStyle} className="txtGreen">
-                              {v.saldo === "0"
-                                ? 0
-                                : toRp(parseInt(v.saldo, 10))}
-                              .-
+                            <td style={numberStyle} className="poin">
+                              {toCurrency(v.saldo)}
                             </td>
                             <td style={numberStyle}>
                               {v.sponsor === "0"
@@ -621,8 +658,8 @@ class IndexMember extends Component {
                 <tfoot className="bgWithOpacity">
                   <tr>
                     <td colSpan={5}>TOTAL PERHALAMAN</td>
-                    <td style={numberStyle} className="txtGreen">
-                      Rp {toRp(totSaldo)} .-
+                    <td style={numberStyle} className="poin">
+                      {toCurrency(totSaldo)}
                     </td>
                     <td style={numberStyle}>{toRp(totSponsor)}</td>
                     <td style={numberStyle}>{toRp(totPin)}</td>
