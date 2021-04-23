@@ -13,7 +13,9 @@ import Berita from "../App/konten/berita/index";
 import Kategori from "../App/kategori/index";
 import Deposit from "../App/ewallet/indexDeposit";
 import Penarikan from "../App/ewallet/indexPenarikan";
-import Saldo from "../App/laporan/indexSaldo";
+import LaporanTransaksiMember from "../App/laporan/transaksi_member";
+import LaporanPaket from "../App/laporan/penjualan/paket";
+import LaporanTiket from "../App/laporan/penjualan/tiket";
 import Bank from "../App/setting/bank";
 import IndexSetting from "../App/setting/umum";
 
@@ -44,7 +46,24 @@ const Routes = (
       <PrivateRoute path="/berita" exact strict component={Berita} />
       {/* MANAGEMENT CONTENT SECTION END */}
       {/* LAPORAN SECTION START */}
-      <PrivateRoute path="/laporan/transaksi" exact strict component={Saldo} />
+      <PrivateRoute
+        path="/laporan/member"
+        exact
+        strict
+        component={LaporanTransaksiMember}
+      />
+      <PrivateRoute
+        path="/laporan/paket"
+        exact
+        strict
+        component={LaporanPaket}
+      />
+      <PrivateRoute
+        path="/laporan/tiket"
+        exact
+        strict
+        component={LaporanTiket}
+      />
       {/* E-WALLET SECTION START */}
       <PrivateRoute path="/ewallet/deposit" exact strict component={Deposit} />
       <PrivateRoute

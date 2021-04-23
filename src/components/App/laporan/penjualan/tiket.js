@@ -2,18 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
 import { DateRangePicker } from "react-bootstrap-daterangepicker";
-import Paginationq, { rangeDate, toCurrency, toExcel } from "../../../helper";
-import { NOTIF_ALERT } from "../../../redux/actions/_constants";
-import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
+import Paginationq, {
+  rangeDate,
+  toCurrency,
+  toExcel,
+} from "../../../../helper";
+import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import moment from "moment";
-import DetailLaporanSaldo from "../modals/laporan/detail_laporan_saldo";
 import {
-  getExcelLaporanSaldo,
-  getLaporanSaldo,
-} from "../../../redux/actions/ewallet/saldo.action";
-import Preloader from "../../../Preloader";
+  getDataReportTiket,
+  getExcelReportTiket,
+} from "../../../../redux/actions/laporan/report_tiket.action";
 
-class IndexSaldo extends Component {
+class LaporanTiket extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +28,6 @@ class IndexSaldo extends Component {
     this.handlePage = this.handlePage.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleEvent = this.handleEvent.bind(this);
-    this.handleDetail = this.handleDetail.bind(this);
     this.printDocumentXLsx = this.printDocumentXLsx.bind(this);
   }
   handleValidate() {
@@ -45,17 +45,17 @@ class IndexSaldo extends Component {
   }
   componentWillMount() {
     let where = this.handleValidate();
-    this.props.dispatch(getLaporanSaldo("page=1&" + where));
+    this.props.dispatch(getDataReportTiket("page=1&" + where));
   }
 
   handleSearch(e) {
     e.preventDefault();
     let where = this.handleValidate();
-    this.props.dispatch(getLaporanSaldo("page=1&" + where));
+    this.props.dispatch(getDataReportTiket("page=1&" + where));
   }
   handlePage(num) {
     let where = this.handleValidate();
-    this.props.dispatch(getLaporanSaldo(`page=${num}&${where}`));
+    this.props.dispatch(getDataReportTiket(`page=${num}&${where}`));
   }
   handleEvent = (event, picker) => {
     event.preventDefault();
@@ -66,22 +66,10 @@ class IndexSaldo extends Component {
       dateTo: to,
     });
     this.props.dispatch(
-      getLaporanSaldo(`page=1&datefrom=${from}&dateto=${to}`)
+      getDataReportTiket(`page=1&datefrom=${from}&dateto=${to}`)
     );
   };
-  handleDetail(e, id, nama) {
-    e.preventDefault();
-    this.setState({
-      detail: {
-        id: id,
-        nama: nama,
-        tgl: `datefrom=${this.state.dateFrom}&dateto=${this.state.dateTo}`,
-      },
-    });
-    const bool = !this.props.isOpen;
-    this.props.dispatch(ModalToggle(bool));
-    this.props.dispatch(ModalType("detailLaporanSaldo"));
-  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.dataExcel.data !== this.props.dataExcel.data) {
       this.getExcel(this.props);
@@ -91,39 +79,36 @@ class IndexSaldo extends Component {
     if (props.dataExcel.data !== undefined) {
       if (props.dataExcel.data.length > 0) {
         let content = [];
+        let status = "";
         props.dataExcel.data.forEach((v, i) => {
+          if (v.status === 0) status = "Pending";
+          if (v.status === 1) status = "Sukses";
+          if (v.status === 2) status = "Gagal";
           content.push([
+            v.kd_trx,
+            v.title,
+            v.qty,
+            parseFloat(v.total),
+            v.metode_pembayaran,
             v.fullname,
-            parseInt(v.saldo_awal, 10),
-            parseInt(v.trx_in, 10),
-            parseInt(v.trx_out, 10),
-            parseInt(v.saldo_akhir, 10),
+            v.bank_name,
+            v.acc_name,
           ]);
         });
         toExcel(
-          "LAPORAN TRASANSAKSI MEMBER",
+          "LAPORAN TIKET",
           `${this.state.dateFrom} - ${this.state.dateTo}`,
-          ["NAMA", "SALDO AWAL", "SALDO MASUK", "SALDO KELUAR", "SALDO AKHIR"],
-          content,
           [
-            [""],
-            [""],
-            [
-              "TOTAL",
-              props.dataExcel.summary === undefined
-                ? 0
-                : parseInt(props.dataExcel.summary.saldo_awal, 10),
-              props.dataExcel.summary === undefined
-                ? 0
-                : parseInt(props.dataExcel.summary.trx_in, 10),
-              props.dataExcel.summary === undefined
-                ? 0
-                : parseInt(props.dataExcel.summary.trx_out, 10),
-              props.dataExcel.summary === undefined
-                ? 0
-                : parseInt(props.dataExcel.summary.saldo_akhir, 10),
-            ],
-          ]
+            "KODE TRANSAKSI",
+            "NAMA PAKET",
+            "QTY",
+            "TOTAL (POIN)",
+            "METODE PEMBAYARAN",
+            "NAMA PEMESAN",
+            "BANK TUJUAN",
+            "ATAS NAMA",
+          ],
+          content
         );
       }
     }
@@ -138,14 +123,7 @@ class IndexSaldo extends Component {
     ) {
       where += `&q=${this.state.any}`;
     }
-    if (
-      this.state.membership !== null &&
-      this.state.membership !== undefined &&
-      this.state.membership !== ""
-    ) {
-      where += `&membership=${this.state.membership}`;
-    }
-    this.props.dispatch(getExcelLaporanSaldo(where));
+    this.props.dispatch(getExcelReportTiket(where));
   };
 
   render() {
@@ -153,10 +131,16 @@ class IndexSaldo extends Component {
       verticalAlign: "middle",
       textAlign: "center",
       whiteSpace: "nowrap",
+      color: "white",
     };
     const numStyle = {
       verticalAlign: "middle",
       textAlign: "right",
+      whiteSpace: "nowrap",
+    };
+    const cusStyle = {
+      verticalAlign: "middle",
+      textAlign: "left",
       whiteSpace: "nowrap",
     };
     let totPlafon = 0;
@@ -173,7 +157,7 @@ class IndexSaldo extends Component {
       summary,
     } = this.props.data;
     return (
-      <Layout page={"Laporan Transaksi"}>
+      <Layout page={"Laporan Penjualan Tiket"}>
         <div className="row">
           <div className="col-md-10">
             <div className="row">
@@ -252,64 +236,54 @@ class IndexSaldo extends Component {
           <table className="table table-bordered">
             <thead className="thead-dark">
               <tr>
-                <th rowSpan="2" style={columnStyle}>
-                  NO
-                </th>
-                <th rowSpan="2" style={columnStyle}>
-                  #
-                </th>
-                <th rowSpan="2" style={columnStyle}>
-                  NAMA
-                </th>
-                <th colSpan="4" style={columnStyle}>
-                  SALDO
-                </th>
-              </tr>
-              <tr>
-                <th style={columnStyle}>AWAL</th>
-                <th style={columnStyle}>MASUK</th>
-                <th style={columnStyle}>KELUAR</th>
-                <th style={columnStyle}>AKHIR</th>
+                <th style={columnStyle}>NO</th>
+                <th style={columnStyle}>KODE TRANSAKSI</th>
+                <th style={columnStyle}>QTY</th>
+                <th style={columnStyle}>TOTAL</th>
+                <th style={columnStyle}>METODE PEMBAYARAN</th>
+                <th style={columnStyle}>BANK</th>
+                <th style={columnStyle}>STATUS</th>
               </tr>
             </thead>
             <tbody>
               {typeof data === "object" ? (
                 data.length > 0 ? (
                   data.map((v, i) => {
-                    totPlafon = totPlafon + parseInt(v.plafon, 10);
-                    totSaldoAwal = totSaldoAwal + parseInt(v.saldo_awal, 10);
-                    totSaldoAkhir = totSaldoAkhir + parseInt(v.saldo_akhir, 10);
-                    totTrxIn = totTrxIn + parseInt(v.trx_in, 10);
-                    totTrxOut = totTrxOut + parseInt(v.trx_out, 10);
+                    let status = "";
+                    if (v.status === 0) {
+                      status = (
+                        <span className={"badge badge-warning"}>Pending</span>
+                      );
+                    }
+                    if (v.status === 1) {
+                      status = (
+                        <span className={"badge badge-success"}>Sukses</span>
+                      );
+                    }
+                    if (v.status === 2) {
+                      status = (
+                        <span className={"badge badge-danger"}>Gagal</span>
+                      );
+                    }
                     return (
                       <tr key={i}>
                         <td style={columnStyle}>
                           {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
                         </td>
+                        <td style={columnStyle}>{v.kd_trx}</td>
+                        <td style={columnStyle}>{v.qty}</td>
+                        <td style={columnStyle} className="poin">
+                          {toCurrency(v.total)}
+                        </td>
+                        <td style={columnStyle}>{v.metode_pembayaran}</td>
                         <td style={columnStyle}>
-                          <button
-                            className={"btn btn-primary"}
-                            onClick={(e) =>
-                              this.handleDetail(e, v.id, v.fullname)
-                            }
-                          >
-                            <i className={"fa fa-eye"} />
-                          </button>
+                          <small className="text-left text-white">
+                            {v.bank_name}
+                          </small>
+                          <br />
+                          <small className="text-white">{v.acc_name}</small>
                         </td>
-
-                        <td style={columnStyle}>{v.fullname}</td>
-                        <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.saldo_awal}`)}
-                        </td>
-                        <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.trx_in}`)}
-                        </td>
-                        <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.trx_out}`)}
-                        </td>
-                        <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.saldo_akhir}`)}
-                        </td>
+                        <td style={columnStyle}>{status}</td>
                       </tr>
                     );
                   })
@@ -328,55 +302,6 @@ class IndexSaldo extends Component {
                 </tr>
               )}
             </tbody>
-            <tfoot className="bgWithOpacity">
-              <tr>
-                <th colSpan={3}>TOTAL PERHALAMAN</th>
-                <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totSaldoAwal}`)}
-                </th>
-                <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totTrxIn}`)}
-                </th>
-                <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totTrxOut}`)}
-                </th>
-                <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totSaldoAkhir}`)}
-                </th>
-              </tr>
-
-              <tr>
-                <th colSpan={3}>TOTAL KESELURUHAN</th>
-                <th className={"poin"} style={numStyle}>
-                  {summary === undefined
-                    ? "0 Poin"
-                    : parseInt(summary.saldo_awal, 10) === 0
-                    ? "0 Poin"
-                    : toCurrency(`${summary.saldo_awal}`)}
-                </th>
-                <th className={"poin"} style={numStyle}>
-                  {summary === undefined
-                    ? "0 Poin"
-                    : parseInt(summary.trx_in, 10) === 0
-                    ? "0 Poin"
-                    : toCurrency(`${summary.trx_in}`)}
-                </th>
-                <th className={"poin"} style={numStyle}>
-                  {summary === undefined
-                    ? "0 Poin"
-                    : parseInt(summary.trx_out, 10) === 0
-                    ? "0 Poin"
-                    : toCurrency(`${summary.trx_out}`)}
-                </th>
-                <th className={"poin"} style={numStyle}>
-                  {summary === undefined
-                    ? "0 Poin"
-                    : parseInt(summary.saldo_akhir, 10) === 0
-                    ? "0 Poin"
-                    : toCurrency(`${summary.saldo_akhir}`)}
-                </th>
-              </tr>
-            </tfoot>
           </table>
         </div>
         <div
@@ -389,23 +314,18 @@ class IndexSaldo extends Component {
             callback={this.handlePage}
           />
         </div>
-
-        {this.props.isOpen === true ? (
-          <DetailLaporanSaldo detail={this.state.detail} />
-        ) : null}
       </Layout>
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.saldoReducer.isLoading,
-    isLoadingExcel: state.saldoReducer.isLoadingExcel,
+    isLoading: state.reportTiketReducer.isLoading,
+    isLoadingExcel: state.reportTiketReducer.isLoadingExcel,
     isOpen: state.modalReducer,
-    data: state.saldoReducer.data,
-    dataExcel: state.saldoReducer.excel,
-    kategori: state.kategoriReducer.data,
+    data: state.reportTiketReducer.data,
+    dataExcel: state.reportTiketReducer.excel,
   };
 };
 
-export default connect(mapStateToProps)(IndexSaldo);
+export default connect(mapStateToProps)(LaporanTiket);

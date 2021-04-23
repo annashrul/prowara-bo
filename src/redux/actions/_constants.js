@@ -369,3 +369,54 @@ export const CONFIG_WALLET = {
   SUCCESS: `SUCCESS_${configWallet}`,
   FAILED: `FAILED_${configWallet}`,
 };
+
+/****************
+     REPORT_TRANSAKSI
+     *****************/
+let prefReportTransaksiMember = "REPORT_TRANSAKSI_MEMBER";
+export const REPORT_TRANSAKSI_MEMBER = {
+  LOADING: `SET_${prefReportTransaksiMember}_LOADING`,
+  LOADING_DETAIL: `SET_${prefReportTransaksiMember}_LOADING_DETAIL`,
+  LOADING_POST: `SET_${prefReportTransaksiMember}_LOADING_POST`,
+  IS_ERROR: `SET_${prefReportTransaksiMember}_IS_ERROR`,
+  SUCCESS: `SUCCESS_${prefReportTransaksiMember}`,
+  FAILED: `FAILED_${prefReportTransaksiMember}`,
+  DETAIL: `DETAIL_${prefReportTransaksiMember}`,
+  EDIT: `EDIT_${prefReportTransaksiMember}`,
+  EXCEL: `EXCEL_${prefReportTransaksiMember}`,
+  LOADING_EXCEL: `SET_${prefReportTransaksiMember}_LOADING_EXCEL`,
+};
+
+/****************
+     REPORT_PAKET
+     *****************/
+let prefReportPaket = "REPORT_PAKET";
+export const REPORT_PAKET = {
+  LOADING: `SET_${prefReportPaket}_LOADING`,
+  SUCCESS: `SUCCESS_${prefReportPaket}`,
+
+  LOADING_DETAIL: `SET_${prefReportPaket}_LOADING_DETAIL`,
+  DETAIL: `DETAIL_${prefReportPaket}`,
+
+  LOADING_EXCEL: `SET_${prefReportPaket}_LOADING_EXCEL`,
+  EXCEL: `EXCEL_${prefReportPaket}`,
+
+  LOADING_POST: `SET_${prefReportPaket}_LOADING_POST`,
+};
+
+/****************
+     REPORT_TIKET
+     *****************/
+let prefReportTiket = "REPORT_TIKET";
+export const REPORT_TIKET = {
+  LOADING: `SET_${prefReportTiket}_LOADING`,
+  SUCCESS: `SUCCESS_${prefReportTiket}`,
+
+  LOADING_DETAIL: `SET_${prefReportTiket}_LOADING_DETAIL`,
+  DETAIL: `DETAIL_${prefReportTiket}`,
+
+  LOADING_EXCEL: `SET_${prefReportTiket}_LOADING_EXCEL`,
+  EXCEL: `EXCEL_${prefReportTiket}`,
+
+  LOADING_POST: `SET_${prefReportTiket}_LOADING_POST`,
+};
