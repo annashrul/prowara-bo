@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
-import { myDate, rmHtml, toCurrency } from "../../../helper";
+import Paginationq, { myDate, rmHtml, toCurrency } from "../../../helper";
 import moment from "moment";
 import {
   UncontrolledButtonDropdown,
@@ -17,11 +17,10 @@ import {
   getPaket,
   deletePaket,
 } from "../../../redux/actions/paket/paket.action";
-import Preloader from "../../../Preloader";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 
 moment.locale("id"); // en
-
+const perpage = 3;
 class DaftarPaket extends Component {
   constructor(props) {
     super(props);
@@ -36,21 +35,21 @@ class DaftarPaket extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(getPaket(`page=1`));
+    this.props.dispatch(getPaket(`page=1&perpage=${perpage}`));
   }
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   handleValidate() {
-    let where = "";
+    let where = `perpage=${perpage}`;
     let page = localStorage.getItem("pagePaket");
     let any = this.state.any;
 
     if (page !== null && page !== undefined && page !== "") {
-      where += `page=${page}`;
+      where += `&page=${page}`;
     } else {
-      where += "page=1";
+      where += "&page=1";
     }
     if (any !== null && any !== undefined && any !== "") {
       where += `&q=${any}`;
@@ -113,7 +112,7 @@ class DaftarPaket extends Component {
   }
 
   render() {
-    const { data } = this.props.data;
+    const { total, per_page, current_page, data } = this.props.data;
 
     return (
       <Layout page={"Daftar Paket"}>
@@ -293,6 +292,16 @@ class DaftarPaket extends Component {
               </main>
             </div>
           </div>
+        </div>
+        <div
+          style={{ marginTop: "20px", marginBottom: "20px", float: "right" }}
+        >
+          <Paginationq
+            current_page={current_page}
+            per_page={per_page}
+            total={total}
+            callback={this.handlePage}
+          />
         </div>
         {this.props.isOpen === true ? (
           <FormPaket detail={this.state.detail} />

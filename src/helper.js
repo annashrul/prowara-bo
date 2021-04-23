@@ -255,10 +255,10 @@ class Paginationq extends Component {
         linkClass="page-link"
         activeClass="page-item active"
         disabledClass="page-item disabled"
-        prevPageText="sebelumnya"
-        nextPageText="selanjutnya"
-        firstPageText="pertama"
-        lastPageText="terakhir"
+        // prevPageText="sebelumnya"
+        // nextPageText="selanjutnya"
+        // firstPageText="pertama"
+        // lastPageText="terakhir"
       />
     );
   }

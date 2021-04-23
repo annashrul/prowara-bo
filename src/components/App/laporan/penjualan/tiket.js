@@ -233,7 +233,7 @@ class LaporanTiket extends Component {
         </div>
         <br />
         <div style={{ overflowX: "auto" }}>
-          <table className="table table-bordered">
+          <table className="table table-hover">
             <thead className="thead-dark">
               <tr>
                 <th style={columnStyle}>NO</th>
@@ -277,11 +277,9 @@ class LaporanTiket extends Component {
                         </td>
                         <td style={columnStyle}>{v.metode_pembayaran}</td>
                         <td style={columnStyle}>
-                          <small className="text-left text-white">
-                            {v.bank_name}
-                          </small>
+                          {v.bank_name}
                           <br />
-                          <small className="text-white">{v.acc_name}</small>
+                          {v.acc_name}
                         </td>
                         <td style={columnStyle}>{status}</td>
                       </tr>

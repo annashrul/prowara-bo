@@ -14,6 +14,7 @@ import DetailAlamat from "../../modals/masterdata/member/detail_alamat";
 import DetailBank from "../../modals/masterdata/member/detail_bank";
 import DetailInvesment from "../../modals/masterdata/member/detail_invesment";
 import {
+  getInvesment,
   getMember,
   putMember,
 } from "../../../../redux/actions/masterdata/member.action";
@@ -24,13 +25,14 @@ import DropdownItem from "reactstrap/es/DropdownItem";
 import { fetchKategori } from "../../../../redux/actions/kategori/kategori.action";
 import { getExcelMember } from "../../../../redux/actions/masterdata/member.action";
 import { toExcel } from "../../../../helper";
-import Preloader from "../../../../Preloader";
-import { getDetailBank } from "../../../../redux/actions/masterdata/bank.action";
+import {
+  getDetailBank,
+  setShowModal,
+} from "../../../../redux/actions/masterdata/bank.action";
 import { getDetailAlamat } from "../../../../redux/actions/masterdata/alamat.action";
 import * as Swal from "sweetalert2";
 import Select from "react-select";
 import FormMemberBank from "../../modals/masterdata/member/form_member_bank";
-import LoadingBar from "react-top-loading-bar";
 
 class IndexMember extends Component {
   constructor(props) {
@@ -56,6 +58,7 @@ class IndexMember extends Component {
         { value: 0, label: "Tidak Aktif" },
         { value: 1, label: "Aktif" },
       ],
+      isModalInvest: false,
     };
     this.handleEvent = this.handleEvent.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -65,24 +68,28 @@ class IndexMember extends Component {
     this.printDocumentXLsx = this.printDocumentXLsx.bind(this);
     this.handleStatus = this.handleStatus.bind(this);
     this.handleInvestment = this.handleInvestment.bind(this);
-    this.handleAlamat = this.handleAlamat.bind(this);
     this.handleBankEdit = this.handleBankEdit.bind(this);
-    this.handleBank = this.handleBank.bind(this);
     this.handleMemberEdit = this.handleMemberEdit.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.setState({ isModalInvest: false });
+    this.props.dispatch(setShowModal(false));
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.dataExcel.data !== this.props.dataExcel.data) {
       this.getExcel(this.props);
     }
-    // if(prevProps.isShowModalBank!==this.props.isShowModalBank){
-    //
-    // }
-    // if(prevProps.isShowModalAlamat!==this.props.isShowModalAlamat){
-    //
-    // }
-    // if(prevProps.isShowModalInvesment!==this.props.isShowModalInvesment){
-    //
+    // console.log("modal", prevProps.isShowModalInvestment);
+    // console.log("modal", this.props.isShowModalInvestment);
+    // if (
+    //   (prevProps.isShowModalInvestment === false &&
+    //     this.props.isShowModalInvestment === true) ||
+    //   prevProps.isShowModalInvestment === this.props.isShowModalInvestment
+    // ) {
+    //   this.props.dispatch(ModalToggle(true));
+    //   this.props.dispatch(ModalType("detailInvesment"));
     // }
   }
   componentWillMount() {
@@ -240,29 +247,14 @@ class IndexMember extends Component {
   }
   handleInvestment(e, val) {
     e.preventDefault();
-    // this.props.dispatch(getInvesment(`page=1&id_member=${val.id}`));
-    this.setState({ detail: val });
+    this.setState({ detail: val, isModalInvest: true });
     const bool = !this.props.isOpen;
     this.props.dispatch(ModalToggle(bool));
     this.props.dispatch(ModalType("detailInvesment"));
   }
-  handleAlamat(e, id) {
-    e.preventDefault();
-    this.props.dispatch(getDetailAlamat(id));
-  }
-  handleBank(e, id) {
-    e.preventDefault();
-    this.props.dispatch(getDetailBank(id));
-    const bool = !this.props.isOpen;
-    this.props.dispatch(ModalToggle(bool));
-    this.props.dispatch(ModalType("detailBank"));
-  }
+
   handleBankEdit(e, par, name) {
     e.preventDefault();
-    localStorage.setItem("isBankEdit", "true");
-    const bool = !this.props.isOpen;
-    this.props.dispatch(ModalToggle(bool));
-    this.props.dispatch(ModalType("formMemberBank"));
     this.setState({ detail: { id: par, member_name: name } });
     this.props.dispatch(getDetailBank(par));
   }
@@ -400,352 +392,310 @@ class IndexMember extends Component {
     let totOmset = 0;
     return (
       <Layout page={"Member"}>
-        {this.props.isLoadingBank || this.props.isLoadingAlamat ? (
-          <Preloader />
-        ) : null}
-
         <div className="row">
-          <div className="col-12 box-margin">
+          <div className="col-md-10">
             <div className="row">
-              <div className="col-md-10">
-                <div className="row">
-                  <div className="col-12 col-xs-12 col-md-3">
-                    <div className="form-group">
-                      <label htmlFor="">Kolom</label>
-                      <Select
-                        options={this.state.searchByData}
-                        placeholder="==== Pilih Kategori ===="
-                        onChange={this.handleSearchBy}
-                        value={this.state.searchByData.find((op) => {
-                          return op.value === this.state.searchBy;
-                        })}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className="col-12 col-xs-12 col-md-3"
-                    style={{
-                      display:
-                        this.state.searchBy === "status" ? "block" : "none",
-                    }}
-                  >
-                    <div className="form-group">
-                      <label>Status</label>
-
-                      <Select
-                        options={this.state.statusData}
-                        placeholder="==== Pilih ===="
-                        onChange={this.handleStatus}
-                        value={this.state.statusData.find((op) => {
-                          return op.value === this.state.status;
-                        })}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className="col-12 col-xs-12 col-md-3"
-                    style={{
-                      display:
-                        this.state.searchBy === "status" ? "none" : "block",
-                    }}
-                  >
-                    <div className="form-group">
-                      <label>Tulis Pencarian Disini</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="any"
-                        placeholder={"Tulis Pencarian Disini"}
-                        value={this.state.any}
-                        onChange={this.handleChange}
-                        onKeyPress={(event) => {
-                          if (event.key === "Enter") {
-                            this.handleSearch(event);
-                          }
-                        }}
-                      />
-                    </div>
-                  </div>
+              <div className="col-12 col-xs-12 col-md-3">
+                <div className="form-group">
+                  <label htmlFor="">Kolom</label>
+                  <Select
+                    options={this.state.searchByData}
+                    placeholder="==== Pilih Kategori ===="
+                    onChange={this.handleSearchBy}
+                    value={this.state.searchByData.find((op) => {
+                      return op.value === this.state.searchBy;
+                    })}
+                  />
                 </div>
               </div>
               <div
-                className="col-12 col-xs-12 col-md-2"
-                style={{ textAlign: "right" }}
+                className="col-12 col-xs-12 col-md-3"
+                style={{
+                  display: this.state.searchBy === "status" ? "block" : "none",
+                }}
               >
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <button
-                        style={{ marginTop: "28px", marginRight: "5px" }}
-                        className="btn btn-primary"
-                        onClick={this.handleSearch}
-                      >
-                        <i className="fa fa-search" />
-                      </button>
-                      <button
-                        style={{ marginTop: "28px" }}
-                        className="btn btn-primary"
-                        onClick={(e) =>
-                          this.printDocumentXLsx(e, per_page * last_page)
-                        }
-                      >
-                        <i className="fa fa-print" />{" "}
-                        {this.props.loading ? "....." : ""}
-                      </button>
-                    </div>
-                  </div>
+                <div className="form-group">
+                  <label>Status</label>
+
+                  <Select
+                    options={this.state.statusData}
+                    placeholder="==== Pilih ===="
+                    onChange={this.handleStatus}
+                    value={this.state.statusData.find((op) => {
+                      return op.value === this.state.status;
+                    })}
+                  />
+                </div>
+              </div>
+              <div
+                className="col-12 col-xs-12 col-md-3"
+                style={{
+                  display: this.state.searchBy === "status" ? "none" : "block",
+                }}
+              >
+                <div className="form-group">
+                  <label>Tulis Pencarian Disini</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="any"
+                    placeholder={"Tulis Pencarian Disini"}
+                    value={this.state.any}
+                    onChange={this.handleChange}
+                    onKeyPress={(event) => {
+                      if (event.key === "Enter") {
+                        this.handleSearch(event);
+                      }
+                    }}
+                  />
                 </div>
               </div>
             </div>
-            <br />
-            <div style={{ overflowX: "auto" }}>
-              <table className="table table-bordered">
-                <thead className="thead-dark">
-                  <tr>
-                    <th rowSpan="2" style={headStyle}>
-                      NO
-                    </th>
-                    <th rowSpan="2" style={headStyle}>
-                      #
-                    </th>
-                    <th rowSpan="2" style={headStyle}>
-                      NAMA
-                    </th>
-                    <th rowSpan="2" style={headStyle}>
-                      USER ID
-                    </th>
-                    <th rowSpan="2" style={headStyle}>
-                      NO.TELEPON
-                    </th>
+          </div>
+          <div
+            className="col-12 col-xs-12 col-md-2"
+            style={{ textAlign: "right" }}
+          >
+            <div className="row">
+              <div className="col-md-12">
+                <div className="form-group">
+                  <button
+                    style={{ marginTop: "28px", marginRight: "5px" }}
+                    className="btn btn-primary"
+                    onClick={this.handleSearch}
+                  >
+                    <i className="fa fa-search" />
+                  </button>
+                  <button
+                    style={{ marginTop: "28px" }}
+                    className="btn btn-primary"
+                    onClick={(e) =>
+                      this.printDocumentXLsx(e, per_page * last_page)
+                    }
+                  >
+                    <i className="fa fa-print" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div style={{ overflowX: "auto" }}>
+          <table className="table table-hover">
+            <thead className="thead-dark">
+              <tr>
+                <th rowSpan="2" style={headStyle}>
+                  NO
+                </th>
+                <th rowSpan="2" style={headStyle}>
+                  #
+                </th>
+                <th rowSpan="2" style={headStyle}>
+                  NAMA
+                </th>
+                <th rowSpan="2" style={headStyle}>
+                  USER ID
+                </th>
+                <th rowSpan="2" style={headStyle}>
+                  NO.TELEPON
+                </th>
 
-                    <th colSpan="7" style={headStyle}>
-                      TOTAL
-                    </th>
+                <th colSpan="7" style={headStyle}>
+                  TOTAL
+                </th>
 
-                    <th rowSpan="2" style={headStyle}>
-                      STATUS
-                    </th>
-                  </tr>
-                  <tr>
-                    <th style={headStyle}>SALDO</th>
-                    <th style={headStyle}>SPONSOR</th>
-                    <th style={headStyle}>TIKET</th>
-                    <th style={headStyle}>PENARIKAN</th>
-                    <th style={headStyle}>SLOT AKTIF</th>
-                    <th style={headStyle}>MODAL</th>
-                    <th style={headStyle}>OMSET</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {typeof data === "object" ? (
-                    data.length > 0 ? (
-                      data.map((v, i) => {
-                        totSaldo += parseInt(v.saldo, 10);
-                        totPin += parseInt(v.pin, 10);
-                        totSponsor += parseInt(v.sponsor, 10);
-                        totPayment += parseInt(v.total_payment, 10);
-                        totSlot += parseInt(v.slot_active, 10);
-                        totModal += parseInt(v.total_modal, 10);
-                        totOmset += parseInt(v.omset, 10);
+                <th rowSpan="2" style={headStyle}>
+                  STATUS
+                </th>
+              </tr>
+              <tr>
+                <th style={headStyle}>SALDO</th>
+                <th style={headStyle}>SPONSOR</th>
+                <th style={headStyle}>TIKET</th>
+                <th style={headStyle}>PENARIKAN</th>
+                <th style={headStyle}>SLOT AKTIF</th>
+                <th style={headStyle}>MODAL</th>
+                <th style={headStyle}>OMSET</th>
+              </tr>
+            </thead>
+            <tbody>
+              {typeof data === "object" ? (
+                data.length > 0 ? (
+                  data.map((v, i) => {
+                    totSaldo += parseInt(v.saldo, 10);
+                    totPin += parseInt(v.pin, 10);
+                    totSponsor += parseInt(v.sponsor, 10);
+                    totPayment += parseInt(v.total_payment, 10);
+                    totSlot += parseInt(v.slot_active, 10);
+                    totModal += parseInt(v.total_modal, 10);
+                    totOmset += parseInt(v.omset, 10);
 
-                        return (
-                          <tr key={i}>
-                            <td style={headStyle}>
-                              {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
-                            </td>
-                            <td style={headStyle}>
-                              <div className="btn-group">
-                                <UncontrolledButtonDropdown nav>
-                                  <DropdownToggle caret className="myDropdown">
-                                    Pilihan
-                                  </DropdownToggle>
-                                  <DropdownMenu>
-                                    <DropdownItem
-                                      onClick={(e) =>
-                                        this.handleInvestment(e, v)
-                                      }
-                                    >
-                                      Invesment
-                                    </DropdownItem>
-                                    {/* <DropdownItem
+                    return (
+                      <tr key={i}>
+                        <td style={headStyle}>
+                          {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
+                        </td>
+                        <td style={headStyle}>
+                          <div className="btn-group">
+                            <UncontrolledButtonDropdown nav>
+                              <DropdownToggle caret className="myDropdown">
+                                Pilihan
+                              </DropdownToggle>
+                              <DropdownMenu>
+                                <DropdownItem
+                                  onClick={(e) => this.handleInvestment(e, v)}
+                                >
+                                  Invesment
+                                </DropdownItem>
+                                {/* <DropdownItem
                                       onClick={(e) =>
                                         this.handleAlamat(e, v.id)
                                       }
                                     >
                                       Alamat
                                     </DropdownItem> */}
-                                    {/* <DropdownItem
+                                {/* <DropdownItem
                                       onClick={(e) => this.handleBank(e, v.id)}
                                     >
                                       Bank
                                     </DropdownItem> */}
-                                    <DropdownItem
-                                      onClick={(e) =>
-                                        this.handleBankEdit(e, v.id, v.fullname)
-                                      }
-                                    >
-                                      Edit Bank
-                                    </DropdownItem>
-                                    <DropdownItem
-                                      onClick={(e) =>
-                                        this.handleMemberEdit(
-                                          e,
-                                          v.id,
-                                          v.fullname,
-                                          v.mobile_no
-                                        )
-                                      }
-                                    >
-                                      Edit Member
-                                    </DropdownItem>
-                                    <DropdownItem
-                                      onClick={(e) => this.handleUpdate(e, v)}
-                                    >
-                                      {v.status === 0
-                                        ? "Aktifkan"
-                                        : "Non-aktifkan"}
-                                    </DropdownItem>
-                                  </DropdownMenu>
-                                </UncontrolledButtonDropdown>
-                              </div>
-                            </td>
-                            <td style={headStyle}>{v.fullname}</td>
-                            <td style={headStyle}>{v.referral}</td>
-                            <td style={headStyle}>{v.mobile_no}</td>
-                            <td style={numberStyle} className="poin">
-                              {toCurrency(v.saldo)}
-                            </td>
-                            <td style={numberStyle}>
-                              {v.sponsor === "0"
-                                ? 0
-                                : toRp(parseInt(v.sponsor, 10))}
-                            </td>
-                            <td style={numberStyle}>
-                              {v.pin === "0" ? 0 : toRp(parseInt(v.pin, 10))}
-                            </td>
-                            <td className="poin" style={numberStyle}>
-                              {toCurrency(v.total_payment)}
-                            </td>
-                            <td style={numberStyle}>
-                              {v.slot_active === "0" ? 0 : toRp(v.slot_active)}
-                            </td>
-                            <td className="poin" style={numberStyle}>
-                              {toCurrency(v.total_modal)}
-                            </td>
-                            <td className="poin" style={numberStyle}>
-                              {toCurrency(v.omset)}
-                            </td>
-
-                            <td style={headStyle}>{statusQ(v.status)}</td>
-                          </tr>
-                        );
-                      })
-                    ) : (
-                      <tr>
-                        <td colSpan={19} style={headStyle}>
-                          <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
+                                <DropdownItem
+                                  onClick={(e) =>
+                                    this.handleBankEdit(e, v.id, v.fullname)
+                                  }
+                                >
+                                  Edit Bank
+                                </DropdownItem>
+                                <DropdownItem
+                                  onClick={(e) =>
+                                    this.handleMemberEdit(
+                                      e,
+                                      v.id,
+                                      v.fullname,
+                                      v.mobile_no
+                                    )
+                                  }
+                                >
+                                  Edit Member
+                                </DropdownItem>
+                                <DropdownItem
+                                  onClick={(e) => this.handleUpdate(e, v)}
+                                >
+                                  {v.status === 0 ? "Aktifkan" : "Non-aktifkan"}
+                                </DropdownItem>
+                              </DropdownMenu>
+                            </UncontrolledButtonDropdown>
+                          </div>
                         </td>
+                        <td style={headStyle}>{v.fullname}</td>
+                        <td style={headStyle}>{v.referral}</td>
+                        <td style={headStyle}>{v.mobile_no}</td>
+                        <td style={numberStyle} className="poin">
+                          {toCurrency(v.saldo)}
+                        </td>
+                        <td style={numberStyle}>
+                          {v.sponsor === "0"
+                            ? 0
+                            : toRp(parseInt(v.sponsor, 10))}
+                        </td>
+                        <td style={numberStyle}>
+                          {v.pin === "0" ? 0 : toRp(parseInt(v.pin, 10))}
+                        </td>
+                        <td className="poin" style={numberStyle}>
+                          {toCurrency(v.total_payment)}
+                        </td>
+                        <td style={numberStyle}>
+                          {v.slot_active === "0" ? 0 : toRp(v.slot_active)}
+                        </td>
+                        <td className="poin" style={numberStyle}>
+                          {toCurrency(v.total_modal)}
+                        </td>
+                        <td className="poin" style={numberStyle}>
+                          {toCurrency(v.omset)}
+                        </td>
+
+                        <td style={headStyle}>{statusQ(v.status)}</td>
                       </tr>
-                    )
-                  ) : (
-                    <tr>
-                      <td colSpan={19} style={headStyle}>
-                        <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-                <tfoot className="bgWithOpacity">
+                    );
+                  })
+                ) : (
                   <tr>
-                    <td colSpan={5}>TOTAL PERHALAMAN</td>
-                    <td style={numberStyle} className="poin">
-                      {toCurrency(totSaldo)}
+                    <td colSpan={19} style={headStyle}>
+                      <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
                     </td>
-                    <td style={numberStyle}>{toRp(totSponsor)}</td>
-                    <td style={numberStyle}>{toRp(totPin)}</td>
-                    <td className="poin" style={numberStyle}>
-                      {toCurrency(totPayment)}
-                    </td>
-                    <td style={numberStyle}>{toRp(totSlot)}</td>
-                    <td className="poin" style={numberStyle}>
-                      {toCurrency(totModal)}
-                    </td>
-                    <td className="poin" style={numberStyle}>
-                      {toCurrency(totOmset)}
-                    </td>
-                    <td />
                   </tr>
-                </tfoot>
-              </table>
-            </div>
-            <div
-              style={{
-                marginTop: "20px",
-                marginBottom: "20px",
-                float: "right",
-              }}
-            >
-              <Paginationq
-                current_page={current_page}
-                per_page={per_page}
-                total={total}
-                callback={this.handlePage}
-              />
-            </div>
-          </div>
+                )
+              ) : (
+                <tr>
+                  <td colSpan={19} style={headStyle}>
+                    <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
+                  </td>
+                </tr>
+              )}
+            </tbody>
+            <tfoot className="bgWithOpacity">
+              <tr>
+                <td colSpan={5}>TOTAL PERHALAMAN</td>
+                <td style={numberStyle} className="poin">
+                  {toCurrency(totSaldo)}
+                </td>
+                <td style={numberStyle}>{toRp(totSponsor)}</td>
+                <td style={numberStyle}>{toRp(totPin)}</td>
+                <td className="poin" style={numberStyle}>
+                  {toCurrency(totPayment)}
+                </td>
+                <td style={numberStyle}>{toRp(totSlot)}</td>
+                <td className="poin" style={numberStyle}>
+                  {toCurrency(totModal)}
+                </td>
+                <td className="poin" style={numberStyle}>
+                  {toCurrency(totOmset)}
+                </td>
+                <td />
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div
+          style={{
+            marginTop: "20px",
+            marginBottom: "20px",
+            float: "right",
+          }}
+        >
+          <Paginationq
+            current_page={current_page}
+            per_page={per_page}
+            total={total}
+            callback={this.handlePage}
+          />
         </div>
 
-        {this.props.isShowModalBank ? (
-          <DetailBank detail={this.props.detailBank} />
-        ) : null}
-        {this.props.isShowModalAlamat ? (
-          <DetailAlamat detail={this.props.detailAlamat} />
-        ) : null}
-        {this.props.isOpen ? (
-          <DetailInvesment
-            // data={this.props.invesment}
-            detail={this.state.detail}
-          />
+        {this.state.isModalInvest ? (
+          <DetailInvesment detail={this.state.detail} />
         ) : null}
 
-        {localStorage.isBankEdit === "true" ? (
+        {this.props.isShowModalBank ? (
           <FormMemberBank
             detail={this.state.detail}
             detailBank={this.props.detailBank}
           />
         ) : null}
-        {/*{*/}
-        {/*localStorage.isBank === "true"?<DetailBank*/}
-        {/*detail={this.props.detailBank}*/}
-        {/*/>:null*/}
-        {/*}*/}
-        {/*{*/}
-        {/*localStorage.isDetail === "true"?<DetailTransaksi*/}
-        {/*detail={this.props.detailAlamat}*/}
-        {/*/>:null*/}
-        {/*}*/}
       </Layout>
     );
   }
 }
 const mapStateToProps = (state) => {
-  console.log("state.bankReducer", state.bankReducer);
   return {
     isOpen: state.modalReducer,
-
-    // isLoadingInvesment:state.memberReducer.isLoadingInvesment,
-    // isShowModalInvesment:state.memberReducer.isShowModal,
-    // invesment:state.memberReducer.invesment,
+    isShowModalInvestment: state.memberReducer.isShowModal,
 
     isLoading: state.memberReducer.isLoading,
     data: state.memberReducer.data,
 
     loading: state.memberReducer.isLoadingExcel,
     dataExcel: state.memberReducer.excel,
-
-    isLoadingAlamat: state.alamatReducer.isLoadingDetail,
-    isShowModalAlamat: state.alamatReducer.isShowModal,
-    detailAlamat: state.alamatReducer.data,
 
     isLoadingBank: state.bankReducer.isLoadingDetail,
     isShowModalBank: state.bankReducer.isShowModal,

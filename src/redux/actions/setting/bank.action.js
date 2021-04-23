@@ -2,9 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { BANKS, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-
+import { handleGet } from "../../handle_http";
 export function setLoading(load) {
   return {
     type: BANKS.LOADING,
@@ -67,54 +65,22 @@ export function setDataFailed(data = []) {
 
 export const fetchDataBank = () => {
   return (dispatch) => {
-    dispatch(setLoading(true));
     let url = "bank/data";
-
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setDataBank(data));
-        dispatch(setLoading(false));
-      })
-      .catch(function (error) {
-        dispatch(setLoading(false));
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (data) => {
+      dispatch(setDataBank(data));
+    });
   };
 };
 
 export const getBankList = (where) => {
   return (dispatch) => {
-    NProgress.start();
     let url = "bank";
     if (where) {
       url += `?${where}`;
     }
-
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setData(data));
-        NProgress.done();
-      })
-      .catch(function (error) {
-        NProgress.done();
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (data) => {
+      dispatch(setData(data));
+    });
   };
 };
 

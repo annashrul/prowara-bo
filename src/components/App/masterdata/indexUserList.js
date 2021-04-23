@@ -158,7 +158,7 @@ class IndexUserList extends Component {
           </div>
         </div>
         <div style={{ overflowX: "auto" }}>
-          <table className="table table-bordered">
+          <table className="table table-hover">
             <thead className="thead-dark">
               <tr>
                 <th style={headStyle}>NO</th>

@@ -351,7 +351,7 @@ class IndexDeposit extends Component {
         </div>
         <br />
         <div style={{ overflowX: "auto" }}>
-          <table className="table table-bordered">
+          <table className="table table-hover">
             <thead className="thead-dark">
               <tr>
                 <th rowSpan="2" style={columnStyle}>

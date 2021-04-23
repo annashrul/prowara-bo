@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
 
-export async function configure(cacheName) {
+export async function configure() {
   await localforage.defineDriver(memoryDriver);
   const forageStore = localforage.createInstance({
     driver: [
@@ -15,7 +15,7 @@ export async function configure(cacheName) {
       localforage.LOCALSTORAGE,
       memoryDriver._driver,
     ],
-    name: cacheName,
+    name: "cacheName",
   });
 
   return setup({
@@ -29,7 +29,7 @@ export async function configure(cacheName) {
 
 export function handleGet(url, callback) {
   Nprogress.start();
-  configure(url)
+  configure()
     .then(async (api) => {
       const response = await api.get(url);
       const data = response.data;

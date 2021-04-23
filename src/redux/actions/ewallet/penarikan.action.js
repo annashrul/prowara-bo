@@ -2,8 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { PENARIKAN, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
+import { handleGet } from "../../handle_http";
 
 export function setLoading(load) {
   return {
@@ -72,57 +71,26 @@ export function setDataFailed(data = []) {
 
 export const getPenarikan = (where = "") => {
   return (dispatch) => {
-    NProgress.start();
     let url = "transaction/withdrawal";
     if (where !== "") {
       url += `?${where}`;
     }
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setData(data));
-        NProgress.done();
-      })
-      .catch(function (error) {
-        NProgress.done();
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (res) => {
+      dispatch(setData(res));
+    });
   };
 };
 export const getExcelPenarikan = (where = "") => {
   return (dispatch) => {
-    NProgress.start();
     let url = "transaction/withdrawal";
     if (where !== "") {
       url += `?${where}`;
     }
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setDataExcel(data));
-        if (data.result.length === 0) {
-          Swal.fire("Terjadi Kesalahan", "Data Tidak Tersedia", "error");
-        }
-        NProgress.done();
-      })
-      .catch(function (error) {
-        NProgress.done();
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (res) => {
+      dispatch(setDataExcel(res));
+      if (res.result.length === 0)
+        Swal.fire("Terjadi Kesalahan", "Data Tidak Tersedia", "error");
+    });
   };
 };
 

@@ -289,7 +289,7 @@
             color: #fff;
             background-color: #D4AF37!important;
             border-color: #D4AF37!important;
-            border-radius: 50px!important;
+            border-radius: 10px!important;
         }
         
         .page-link {
@@ -300,16 +300,16 @@
             line-height: 1.25;
             color: #fff!important;
             background-color: #343a40!important;
-            border: 1px solid #fff!important;
+            border: 1px solid transparent!important;
             cursor: pointer;
-            border-radius: 50px!important;
+            border-radius: 10px!important;
         }
         
         .page-item:first-child .page-link {
             margin-left: 0;
             border-top-left-radius: .25rem;
             border-bottom-left-radius: .25rem;
-            border-radius: 50px!important;
+            border-radius: 10px!important;
         }
         
         .page-link:hover {
@@ -523,6 +523,16 @@
                         letter-spacing: 2px!important;
 
         }
+        .swal2-popup .swal2-styled.swal2-confirm{
+            background-color: #D4AF37!important;
+            border: 1px solid #D4AF37!important;
+                        letter-spacing: 2px!important;
+        }
+        .swal2-popup .swal2-styled.swal2-confirm:focus{
+            background-color: #D4AF37!important;
+            border: 1px solid #D4AF37!important;
+                        letter-spacing: 2px!important;
+        }
         
         button.btn {
             height: 39px!important;
@@ -621,29 +631,29 @@
          ::-webkit-scrollbar {
             width: 5px;
             height: 5px;
-            background-color: #1a1c23!important;
+            /* background: #1a1c23!important; */
+            /* border: thin solid #1a1c23!important; */
+            /* box-shadow: 0px 0px 3px #1a1c23 inset; */
+            /* border-radius: 10px; */
         }
         
-         ::-webkit-scrollbar-button {
-            width: 5px;
-            height: 5px;
-        }
+        
         
          ::-webkit-scrollbar-track {
-            background: #1a1c23!important;
-            border: thin solid #1a1c23!important;
-            box-shadow: 0px 0px 3px #1a1c23 inset;
+            background: #343a40!important;
+            border: thin solid #343a40!important;
+            box-shadow: 0px 0px 3px #343a40 inset;
             border-radius: 10px;
         }
         
          ::-webkit-scrollbar-thumb {
-            background: #999;
-            border: thin solid gray;
+            background: black;
+            border: thin solid black;
             border-radius: 10px;
         }
         
          ::-webkit-scrollbar-thumb:hover {
-            background: #7d7d7d;
+            background: black;
         }
         
         .react-bootstrap-daterangepicker-container {
@@ -701,6 +711,32 @@
         .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
             background-color: black!important;
             }
+
+            .border{
+                border:1px solid black!important;
+            }
+
+            thead.thead-dark{
+                background-color: #1a1c23!important;
+                               border:1px solid  #3f4451!important;
+            }
+            thead.thead-dark>tr{
+                 background-color: #1a1c23!important;
+
+                               border:1px solid  #3f4451!important;
+            }
+            thead.thead-dark>tr>th{
+                 background-color: #1a1c23!important;
+
+                               border:1px solid  #3f4451!important;
+                               color:gray!important;
+
+            }
+            .swal2-popup{
+                background-color: #1a1c23!important;
+            }
+            
+            
         
     </style>
     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqD1Z03FoLnIGJTbpAgRvjcchrR-NiICk&libraries=places" async defer></script>-->
