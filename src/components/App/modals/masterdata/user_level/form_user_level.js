@@ -148,35 +148,35 @@ class FormUserLevel extends Component {
             {
               id: 6,
               label: "transaksi",
-              path: "/laporan/transaksi",
+              path: "/laporan/member",
               parent: "laporan",
               isChecked: false,
             },
-            // {
-            //   id: 7,
-            //   label: "penjualan",
-            //   path: "",
-            //   parent: "laporan",
-            //   isChecked: false,
-            //   sub: [
-            //     {
-            //       id: 8,
-            //       label: "paket",
-            //       path: "/laporan/paket",
-            //       parent: "penjualan",
-            //       isChecked: false,
-            //       sub: undefined,
-            //     },
-            //     {
-            //       id: 9,
-            //       label: "pin",
-            //       path: "/laporan/pin",
-            //       parent: "penjualan",
-            //       isChecked: false,
-            //       sub: undefined,
-            //     },
-            //   ],
-            // },
+            {
+              id: 7,
+              label: "penjualan",
+              path: "",
+              parent: "laporan",
+              isChecked: false,
+              sub: [
+                {
+                  id: 8,
+                  label: "paket",
+                  path: "/laporan/paket",
+                  parent: "penjualan",
+                  isChecked: false,
+                  sub: undefined,
+                },
+                {
+                  id: 9,
+                  label: "tiket",
+                  path: "/laporan/tiket",
+                  parent: "penjualan",
+                  isChecked: false,
+                  sub: undefined,
+                },
+              ],
+            },
           ],
           otherSub: true,
         },
@@ -212,8 +212,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      // this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {

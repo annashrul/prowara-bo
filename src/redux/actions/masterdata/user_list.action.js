@@ -2,8 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { USER_LIST, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
+import { handleGet } from "../../handle_http";
 
 export function setLoading(load) {
   return {
@@ -60,29 +59,13 @@ export function setDataFailed(data = []) {
 
 export const getUserList = (where) => {
   return (dispatch) => {
-    NProgress.start();
     let url = "user";
     if (where) {
       url += `?${where}`;
     }
-
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setData(data));
-        NProgress.done();
-      })
-      .catch(function (error) {
-        NProgress.done();
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (res) => {
+      dispatch(setData(res));
+    });
   };
 };
 

@@ -64,6 +64,13 @@ class DetailInvesment extends Component {
       )
     );
   }
+  componentDidMount() {
+    this.props.dispatch(
+      getInvesment(
+        `page=1&id_member=${this.props.detail.id}&datefrom=${this.state.dateFrom}&dateto=${this.state.dateTo}`
+      )
+    );
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.dataExcel.data !== this.props.dataExcel.data) {
       this.getExcel(this.props);
@@ -204,7 +211,7 @@ class DetailInvesment extends Component {
             </div>
           </div>
           <div style={{ overflowX: "auto" }}>
-            <table className="table table-bordered">
+            <table className="table table-hover">
               <thead className="thead-dark">
                 <tr>
                   <th style={headStyle} rowSpan={"2"}>

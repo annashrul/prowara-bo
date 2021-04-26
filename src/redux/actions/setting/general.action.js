@@ -67,6 +67,8 @@ export const updateGeneral = (data, type = "site") => {
     let url = HEADERS.URL;
     if (type !== "site") url += "site/config/general";
     else url += "site/config/alokasi";
+
+    console.log(url);
     axios
       .put(url, data)
       .then(function (response) {

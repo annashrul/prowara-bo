@@ -4,12 +4,7 @@ import File64 from "components/common/File64";
 import Select from "react-select";
 import Skeleton from "react-loading-skeleton";
 import { updateGeneral } from "../../../../../redux/actions/setting/general.action";
-// import {fetchGeneral, updateGeneral} from 'redux/actions/setting/general.action'
-// import {
-//   fetchKecamatan,
-//   fetchKota,
-//   fetchProvinsi,
-// } from "redux/actions/setting/kurir.action";
+import Switch from "react-switch";
 
 class Index extends Component {
   constructor(props) {
@@ -47,6 +42,7 @@ class Index extends Component {
         },
       ],
       provider_otp: "whatsapp",
+      sharing_profit_engine: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleTypeOtp = this.handleTypeOtp.bind(this);
@@ -82,6 +78,7 @@ class Index extends Component {
           invest_time: props.res_alokasi.invest_time,
           schedule_wd: props.res_alokasi.schedule_wd,
           schedule_dp: props.res_alokasi.schedule_dp,
+          sharing_profit_engine: props.res_alokasi.sharing_profit_engine,
 
           hariWithdrawFrom: props.res_alokasi.schedule_wd.days[0],
           hariWithdrawTo: props.res_alokasi.schedule_wd.days[1],
@@ -156,11 +153,17 @@ class Index extends Component {
     this.props.dispatch(updateGeneral(data, type));
   };
 
-  handleChange = (event) => {
+  handleChange = (event, e = null) => {
     // console.log(event.target);
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    if (e === null) {
+      this.setState({ [event.target.name]: event.target.value });
+    } else {
+      // alert(event);
+      this.props.dispatch(
+        updateGeneral({ sharing_profit_engine: event ? 1 : 0 }, "site")
+      );
+      this.setState({ sharing_profit_engine: event });
+    }
   };
 
   render() {
@@ -306,6 +309,14 @@ class Index extends Component {
                     placeholder="Biaya Investment"
                   />
                 </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="">Sharing Profit Engine</label>
+                <br />
+                <Switch
+                  onChange={(e) => this.handleChange(e, "-")}
+                  checked={this.state.sharing_profit_engine}
+                />
               </div>
             </div>
 

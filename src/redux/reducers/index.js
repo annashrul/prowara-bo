@@ -16,7 +16,9 @@ import { userLevelReducer } from "./masterdata/user_level.reducer";
 import { depositReducer } from "./ewallet/deposit.reducer";
 import { configWalletReducer } from "./ewallet/config_wallet.reducer";
 import { penarikanReducer } from "./ewallet/penarikan.reducer";
-import { saldoReducer } from "./ewallet/saldo.reducer";
+import { reportTransaksiMemberReducer } from "./laporan/report_transaksi_member.reducer";
+import { reportPaketReducer } from "./laporan/report_paket.reducer";
+import { reportTiketReducer } from "./laporan/report_tiket.reducer";
 import { generalReducer } from "./setting/general.reducer";
 import { banksReducer } from "./setting/bank.reducer";
 
@@ -37,7 +39,9 @@ export default combineReducers({
   depositReducer,
   configWalletReducer,
   penarikanReducer,
-  saldoReducer,
+  reportTransaksiMemberReducer,
+  reportPaketReducer,
+  reportTiketReducer,
   generalReducer,
   banksReducer,
   auth: authReducer,

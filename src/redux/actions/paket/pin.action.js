@@ -2,8 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { PIN, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
+import { handleGet } from "../../handle_http";
 
 export function setLoading(load) {
   return {
@@ -12,12 +11,6 @@ export function setLoading(load) {
   };
 }
 
-export function setLoadingDetail(load) {
-  return {
-    type: PIN.LOADING_DETAIL,
-    load,
-  };
-}
 export function setLoadingPost(load) {
   return {
     type: PIN.LOADING_POST,
@@ -38,44 +31,15 @@ export function setData(data = []) {
   };
 }
 
-export function setDataDetail(data = []) {
-  return {
-    type: PIN.DETAIL,
-    data,
-  };
-}
-
-export function setDataFailed(data = []) {
-  return {
-    type: PIN.FAILED,
-    data,
-  };
-}
-
 export const getPin = (where) => {
   return (dispatch) => {
-    NProgress.start();
     let url = "pin";
     if (where) {
       url += `?${where}`;
     }
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setData(data));
-        NProgress.done();
-      })
-      .catch(function (error) {
-        NProgress.done();
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (res) => {
+      dispatch(setData(res));
+    });
   };
 };
 

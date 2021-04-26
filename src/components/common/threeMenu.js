@@ -31,13 +31,7 @@ class ThreeMenu extends Component {
           <i className="fa fa-angle-right" />
         </a>
         <ul
-          className={
-            "treeview-menu animate__animated" +
-            (this.props.isActive
-              ? " animate__bounceInRight "
-              : " animate__fadeOutLeft ") +
-            "animate__faster"
-          }
+          className={"treeview-menu"}
           style={{ display: this.props.isActive ? "block" : "none" }}
         >
           {this.props.data.map((v, i) => {
@@ -56,13 +50,7 @@ class ThreeMenu extends Component {
                   {v.label} <i className="fa fa-angle-right" />
                 </a>
                 <ul
-                  className={
-                    "treeview-menu animate__animated" +
-                    (v.isActive
-                      ? " animate__bounceInRight "
-                      : " animate__fadeOutLeft ") +
-                    "animate__faster"
-                  }
+                  className={"treeview-menu"}
                   style={{ display: v.isActive ? "block" : "none" }}
                 >
                   {v.data !== undefined

@@ -4,6 +4,7 @@ import { KATEGORI, HEADERS, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { handleGet } from "../../handle_http";
 
 export function setLoading(load) {
   return {
@@ -53,25 +54,10 @@ export function setDataFailed(data = []) {
 
 export const fetchKategori = (where) => {
   return (dispatch) => {
-    NProgress.start();
     let url = `category/${where}`.toLocaleLowerCase();
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setData(data));
-        NProgress.done();
-      })
-      .catch(function (error) {
-        NProgress.done();
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (res) => {
+      dispatch(setData(res));
+    });
   };
 };
 
