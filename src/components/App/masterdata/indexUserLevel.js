@@ -10,7 +10,6 @@ import {
   deleteUserLevel,
   getUserLevel,
 } from "../../../redux/actions/masterdata/user_level.action";
-import Preloader from "../../../Preloader";
 
 class IndexUserLevel extends Component {
   constructor(props) {
@@ -18,6 +17,7 @@ class IndexUserLevel extends Component {
     this.state = {
       detail: {},
       any: "",
+      isModalForm: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -25,14 +25,14 @@ class IndexUserLevel extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleModal = this.handleModal.bind(this);
   }
+  componentWillUnmount() {
+    this.setState({ isModalForm: false });
+  }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   componentWillMount() {
-    let where = this.handleValidate();
-    this.props.dispatch(
-      getUserLevel(`page=1${where !== "" ? `&${where}` : ""}`)
-    );
+    this.props.dispatch(getUserLevel(`page=1`));
   }
   handleValidate() {
     let data = this.state;
@@ -58,6 +58,7 @@ class IndexUserLevel extends Component {
   handleModal(e, par) {
     if (par !== "") {
       this.setState({
+        isModalForm: true,
         detail: {
           id: this.props.data.data[par].id,
           access: this.props.data.data[par].access_level,
@@ -66,6 +67,7 @@ class IndexUserLevel extends Component {
       });
     } else {
       this.setState({
+        isModalForm: true,
         detail: {
           id: "",
         },
@@ -105,7 +107,7 @@ class IndexUserLevel extends Component {
     return (
       <Layout page={"Akses Pengguna"}>
         <div className="row">
-          <div className="col-md-10">
+          <div className="col-8 col-xs-8 col-md-10">
             <div className="row">
               <div className="col-12 col-xs-12 col-md-12">
                 <div className="form-group">
@@ -127,13 +129,14 @@ class IndexUserLevel extends Component {
               </div>
             </div>
           </div>
+
           <div
-            className="col-12 col-xs-12 col-md-2"
+            className="col-4 col-xs-4 col-md-2"
             style={{ textAlign: "right" }}
           >
             <div className="form-group">
               <button
-                style={{ marginTop: "27px" }}
+                style={{ marginTop: "28px" }}
                 type="button"
                 className="btn btn-primary"
                 onClick={(e) => this.handleSearch(e)}
@@ -141,7 +144,7 @@ class IndexUserLevel extends Component {
                 <i className="fa fa-search" />
               </button>
               <button
-                style={{ marginTop: "27px", marginLeft: "5px" }}
+                style={{ marginTop: "28px", marginLeft: "5px" }}
                 type="button"
                 className="btn btn-primary"
                 onClick={(e) => this.handleModal(e, "")}
@@ -217,7 +220,7 @@ class IndexUserLevel extends Component {
             callback={this.handlePage}
           />
         </div>
-        {this.props.isOpen === true ? (
+        {this.state.isModalForm ? (
           <FormUserLevel detail={this.state.detail} />
         ) : null}
       </Layout>

@@ -136,33 +136,18 @@ class LaporanPaket extends Component {
       whiteSpace: "nowrap",
       color: "white",
     };
-    const numStyle = {
-      verticalAlign: "middle",
-      textAlign: "right",
-      whiteSpace: "nowrap",
-    };
+
     const cusStyle = {
       verticalAlign: "middle",
       textAlign: "left",
       whiteSpace: "nowrap",
     };
-    let totPlafon = 0;
-    let totSaldoAwal = 0;
-    let totSaldoAkhir = 0;
-    let totTrxIn = 0;
-    let totTrxOut = 0;
-    const {
-      total,
-      per_page,
-      last_page,
-      current_page,
-      data,
-      summary,
-    } = this.props.data;
+
+    const { total, per_page, last_page, current_page, data } = this.props.data;
     return (
       <Layout page={"Laporan Penjualan Paket"}>
         <div className="row">
-          <div className="col-md-10">
+          <div className="col-12 col-xs-12 col-md-10">
             <div className="row">
               <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
@@ -186,7 +171,7 @@ class LaporanPaket extends Component {
                 </div>
               </div>
 
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Cari</label>
                   <input
@@ -207,7 +192,7 @@ class LaporanPaket extends Component {
             </div>
           </div>
           <div
-            className="col-6 col-xs-6 col-md-2"
+            className="col-12 col-xs-12 col-md-2"
             style={{ textAlign: "right" }}
           >
             <div className="row">
@@ -221,7 +206,7 @@ class LaporanPaket extends Component {
                     <i className="fa fa-search" />
                   </button>
                   <button
-                    style={{ marginTop: "28px", marginRight: "5px" }}
+                    style={{ marginTop: "28px" }}
                     className="btn btn-primary"
                     onClick={(e) =>
                       this.printDocumentXLsx(e, per_page * last_page)

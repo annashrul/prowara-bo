@@ -2,7 +2,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { MEMBER, HEADERS, NOTIF_ALERT } from "../_constants";
 import { handleGet } from "../../handle_http";
-import { ModalToggle, ModalType } from "../modal.action";
 
 export function setLoading(load) {
   return {

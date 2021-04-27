@@ -9,7 +9,6 @@ import * as Swal from "sweetalert2";
 import { deleteBankList, getBankList } from "redux/actions/setting/bank.action";
 import { myDate } from "../../../../helper";
 import { fetchDataBank } from "../../../../redux/actions/setting/bank.action";
-import Preloader from "../../../../Preloader";
 
 class Bank extends Component {
   constructor(props) {

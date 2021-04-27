@@ -10,7 +10,6 @@ import {
   deleteUserList,
   getUserList,
 } from "../../../redux/actions/masterdata/user_list.action";
-import Preloader from "../../../Preloader";
 
 class IndexUserList extends Component {
   constructor(props) {
@@ -110,7 +109,7 @@ class IndexUserList extends Component {
     return (
       <Layout page={"Daftar Pengguna"}>
         <div className="row">
-          <div className="col-md-10">
+          <div className="col-8 col-xs-8 col-md-10">
             <div className="row">
               <div className="col-12 col-xs-12 col-md-12">
                 <div className="form-group">
@@ -134,7 +133,7 @@ class IndexUserList extends Component {
           </div>
 
           <div
-            className="col-12 col-xs-12 col-md-2"
+            className="col-4 col-xs-4 col-md-2"
             style={{ textAlign: "right" }}
           >
             <div className="form-group">

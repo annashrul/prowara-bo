@@ -7,7 +7,6 @@ import moment from "moment";
 import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
 import FormKategori from "../modals/kategori/form_kategori";
 import * as Swal from "sweetalert2";
-import Preloader from "../../../Preloader";
 import {
   deleteKategori,
   fetchKategori,

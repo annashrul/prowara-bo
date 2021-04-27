@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
-import { myDate, noImage, rmHtml } from "../../../../helper";
+import { myDate, rmHtml } from "../../../../helper";
 import moment from "moment";
 import {
   UncontrolledButtonDropdown,
@@ -17,7 +17,6 @@ import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import FormBerita from "../../modals/konten/berita/form_berita";
 import * as Swal from "sweetalert2";
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
-import Preloader from "../../../../Preloader";
 
 moment.locale("id"); // en
 
@@ -250,10 +249,10 @@ class IndexBerita extends Component {
                             );
                           })
                         ) : (
-                          <img src={NOTIF_ALERT.NO_DATA} />
+                          <img src={NOTIF_ALERT.NO_DATA} alt="member" />
                         )
                       ) : (
-                        <img src={NOTIF_ALERT.NO_DATA} />
+                        <img src={NOTIF_ALERT.NO_DATA} alt="member" />
                       )}
                     </main>
                   </div>

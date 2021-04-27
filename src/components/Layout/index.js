@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Header from "./header";
 import SideMenu from "./sideMenu";
 import { connect } from "react-redux";
-import FreeScrollbar from "react-free-scrollbar";
 import Default from "assets/default.png";
 import { logoutUser } from "redux/actions/authActions";
 import PropTypes from "prop-types";

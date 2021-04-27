@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import File64 from "components/common/File64";
-import Select from "react-select";
 import Skeleton from "react-loading-skeleton";
 import { updateGeneral } from "../../../../../redux/actions/setting/general.action";
 import Switch from "react-switch";

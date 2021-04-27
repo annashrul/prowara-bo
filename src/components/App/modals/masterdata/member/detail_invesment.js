@@ -169,9 +169,9 @@ class DetailInvesment extends Component {
         ) : null}
         <ModalBody>
           <div className="row">
-            <div className="col-md-10">
+            <div className="col-10 col-xs-10 col-md-10">
               <div className="row">
-                <div className="col-6 col-xs-6 col-md-4">
+                <div className="col-12 col-xs-12 col-md-4">
                   <div className="form-group">
                     <label>Periode </label>
                     <DateRangePicker
@@ -194,7 +194,7 @@ class DetailInvesment extends Component {
               </div>
             </div>
             <div
-              className="col-12 col-xs-12 col-md-2"
+              className="col-2 col-xs-2 col-md-2"
               style={{ textAlign: "right" }}
             >
               <div className="form-group">
