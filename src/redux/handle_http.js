@@ -22,7 +22,6 @@ export async function configure() {
   // ],
   //   name: "prowaracache",
   // });
-  // console.log("forageStore", forageStore);
   // return setup({
   //   baseURL: HEADERS.URL,
   //   cache: {
@@ -68,7 +67,6 @@ export function handleGet(url, callback) {
 
 const CACHE_MAX_AGE = 2 * 60 * 60 * 1000;
 
-// Extracting 'axios-cache-adapter/src/exclude' as importing it leads to webpack not compiling it.
 function exclude(config = {}, req) {
   const { exclude = {}, debug } = config;
 
@@ -110,7 +108,7 @@ const cacheStore = localforage.createInstance({
 
 const cacheAdapter = setupCache({
   clearOnStale: false,
-  debug: true,
+  debug: false,
   exclude: {
     query: false,
     filter: (req) => {
@@ -166,7 +164,6 @@ const myAdapter = function (adapter) {
         req.cache.useOnNetworkError &&
         !isExcluded
       ) {
-        // Mimic the behaviour of axios-cache-adapter, but directly get from store.
         res = await cacheStore.getItem(key);
         if (res && res.data) {
           res = res.data;
@@ -199,7 +196,6 @@ const get = async function (url, config) {
 };
 
 const clearCacheByKey = async function (key) {
-  console.log("Clearing cache by key: " + key);
   let result = await cacheStore.getItem(key);
   if (result && "expires" in result) {
     result.expires = 1;
@@ -208,7 +204,6 @@ const clearCacheByKey = async function (key) {
 };
 
 const clearCacheByGroup = async function (group) {
-  console.log("Clearing cache by group: " + group);
   const groups = (await cacheStore.getItem("__groups")) || {};
   const keys = groups[group] || [];
   for (let key of keys) {
@@ -221,7 +216,6 @@ const clearCacheByGroups = function (groups) {
 };
 
 const purgeCache = async function () {
-  console.log("Clearing all caches");
   await cacheStore.clear();
 };
 
