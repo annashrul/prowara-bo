@@ -111,7 +111,7 @@ class IndexUserList extends Component {
         <div className="row">
           <div className="col-8 col-xs-8 col-md-10">
             <div className="row">
-              <div className="col-12 col-xs-12 col-md-12">
+              <div className="col-12 col-xs-12 col-md-5">
                 <div className="form-group">
                   <label>Cari</label>
                   <input

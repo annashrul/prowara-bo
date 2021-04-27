@@ -15,6 +15,7 @@ import moment from "moment";
 import {
   getExcelInvesment,
   getInvesment,
+  setInvesment,
 } from "../../../../../redux/actions/masterdata/member.action";
 import Preloader from "../../../../../Preloader";
 
@@ -31,6 +32,7 @@ class DetailInvesment extends Component {
   }
   toggle = (e) => {
     e.preventDefault();
+
     localStorage.removeItem("isAlamat");
     const bool = !this.props.isOpen;
     this.props.dispatch(ModalToggle(bool));
@@ -237,28 +239,36 @@ class DetailInvesment extends Component {
                 </tr>
               </thead>
               <tbody>
-                {typeof data === "object" ? (
-                  data.length > 0 ? (
-                    data.map((v, i) => {
-                      totTrxIn = totTrxIn + parseInt(v.trx_in, 10);
-                      totTrxOut = totTrxOut + parseInt(v.trx_out, 10);
-                      return (
-                        <tr key={i}>
-                          <td style={headStyle}>
-                            {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
-                          </td>
-                          <td style={headStyle}>{v.kd_trx}</td>
-                          <td style={numberStyle} className="poin">
-                            {toCurrency(v.trx_in)}
-                          </td>
-                          <td style={numberStyle} className="poin">
-                            {toCurrency(v.trx_out)}
-                          </td>
-                          <td style={headStyle}>{v.note}</td>
-                          <td style={headStyle}>{myDate(v.created_at)}</td>
-                        </tr>
-                      );
-                    })
+                {!this.props.isLoading ? (
+                  typeof data === "object" ? (
+                    data.length > 0 ? (
+                      data.map((v, i) => {
+                        totTrxIn = totTrxIn + parseInt(v.trx_in, 10);
+                        totTrxOut = totTrxOut + parseInt(v.trx_out, 10);
+                        return (
+                          <tr key={i}>
+                            <td style={headStyle}>
+                              {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
+                            </td>
+                            <td style={headStyle}>{v.kd_trx}</td>
+                            <td style={numberStyle} className="poin">
+                              {toCurrency(v.trx_in)}
+                            </td>
+                            <td style={numberStyle} className="poin">
+                              {toCurrency(v.trx_out)}
+                            </td>
+                            <td style={headStyle}>{v.note}</td>
+                            <td style={headStyle}>{myDate(v.created_at)}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan={6} style={headStyle}>
+                          <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
+                        </td>
+                      </tr>
+                    )
                   ) : (
                     <tr>
                       <td colSpan={6} style={headStyle}>
@@ -267,11 +277,7 @@ class DetailInvesment extends Component {
                     </tr>
                   )
                 ) : (
-                  <tr>
-                    <td colSpan={6} style={headStyle}>
-                      <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
-                    </td>
-                  </tr>
+                  <Preloader />
                 )}
               </tbody>
               <tfoot className="bgWithOpacity">
