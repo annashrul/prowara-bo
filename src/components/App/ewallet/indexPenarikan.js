@@ -11,10 +11,8 @@ import {
   getPenarikan,
   postPenarikan,
 } from "../../../redux/actions/ewallet/penarikan.action";
-import Preloader from "../../../Preloader";
 import Select from "react-select";
 import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
-import LoadingBar from "react-top-loading-bar";
 
 class IndexPenarikan extends Component {
   constructor(props) {
@@ -221,7 +219,7 @@ class IndexPenarikan extends Component {
         <div className="row">
           <div className="col-12 col-xs-12 col-md-10">
             <div className="row">
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Periode </label>
                   <DateRangePicker
@@ -241,7 +239,7 @@ class IndexPenarikan extends Component {
                   </DateRangePicker>
                 </div>
               </div>
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Kolom</label>
                   <Select
@@ -297,32 +295,25 @@ class IndexPenarikan extends Component {
               </div>
             </div>
           </div>
-
           <div
             className="col-12 col-xs-12 col-md-2"
             style={{ textAlign: "right" }}
           >
-            <div className="row">
-              <div className="col-md-12">
-                <div className="form-group">
-                  <button
-                    style={{ marginTop: "28px", marginRight: "5px" }}
-                    className="btn btn-primary"
-                    onClick={(e) => this.handleSearch(e)}
-                  >
-                    <i className="fa fa-search" />
-                  </button>
-                  <button
-                    style={{ marginTop: "28px", marginRight: "5px" }}
-                    className="btn btn-primary"
-                    onClick={(e) =>
-                      this.printDocumentXLsx(e, per_page * last_page)
-                    }
-                  >
-                    <i className="fa fa-print" />
-                  </button>
-                </div>
-              </div>
+            <div className="form-group">
+              <button
+                style={{ marginTop: "28px", marginRight: "5px" }}
+                className="btn btn-primary"
+                onClick={(e) => this.handleSearch(e)}
+              >
+                <i className="fa fa-search" />
+              </button>
+              <button
+                style={{ marginTop: "28px" }}
+                className="btn btn-primary"
+                onClick={(e) => this.printDocumentXLsx(e, per_page * last_page)}
+              >
+                <i className="fa fa-print" />
+              </button>
             </div>
           </div>
         </div>

@@ -79,11 +79,7 @@ class LaporanTiket extends Component {
     if (props.dataExcel.data !== undefined) {
       if (props.dataExcel.data.length > 0) {
         let content = [];
-        let status = "";
         props.dataExcel.data.forEach((v, i) => {
-          if (v.status === 0) status = "Pending";
-          if (v.status === 1) status = "Sukses";
-          if (v.status === 2) status = "Gagal";
           content.push([
             v.kd_trx,
             v.title,
@@ -133,29 +129,8 @@ class LaporanTiket extends Component {
       whiteSpace: "nowrap",
       color: "white",
     };
-    const numStyle = {
-      verticalAlign: "middle",
-      textAlign: "right",
-      whiteSpace: "nowrap",
-    };
-    const cusStyle = {
-      verticalAlign: "middle",
-      textAlign: "left",
-      whiteSpace: "nowrap",
-    };
-    let totPlafon = 0;
-    let totSaldoAwal = 0;
-    let totSaldoAkhir = 0;
-    let totTrxIn = 0;
-    let totTrxOut = 0;
-    const {
-      total,
-      per_page,
-      last_page,
-      current_page,
-      data,
-      summary,
-    } = this.props.data;
+
+    const { total, per_page, last_page, current_page, data } = this.props.data;
     return (
       <Layout page={"Laporan Penjualan Tiket"}>
         <div className="row">
@@ -183,7 +158,7 @@ class LaporanTiket extends Component {
                 </div>
               </div>
 
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Cari</label>
                   <input
@@ -204,7 +179,7 @@ class LaporanTiket extends Component {
             </div>
           </div>
           <div
-            className="col-6 col-xs-6 col-md-2"
+            className="col-12 col-xs-12 col-md-2"
             style={{ textAlign: "right" }}
           >
             <div className="row">
@@ -218,7 +193,7 @@ class LaporanTiket extends Component {
                     <i className="fa fa-search" />
                   </button>
                   <button
-                    style={{ marginTop: "28px", marginRight: "5px" }}
+                    style={{ marginTop: "28px" }}
                     className="btn btn-primary"
                     onClick={(e) =>
                       this.printDocumentXLsx(e, per_page * last_page)

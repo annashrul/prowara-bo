@@ -10,13 +10,11 @@ import Paginationq, {
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import moment from "moment";
-import DetailAlamat from "../../modals/masterdata/member/detail_alamat";
-import DetailBank from "../../modals/masterdata/member/detail_bank";
 import DetailInvesment from "../../modals/masterdata/member/detail_invesment";
 import {
-  getInvesment,
   getMember,
   putMember,
+  setInvesment,
 } from "../../../../redux/actions/masterdata/member.action";
 import UncontrolledButtonDropdown from "reactstrap/es/UncontrolledButtonDropdown";
 import DropdownToggle from "reactstrap/es/DropdownToggle";
@@ -29,7 +27,6 @@ import {
   getDetailBank,
   setShowModal,
 } from "../../../../redux/actions/masterdata/bank.action";
-import { getDetailAlamat } from "../../../../redux/actions/masterdata/alamat.action";
 import * as Swal from "sweetalert2";
 import Select from "react-select";
 import FormMemberBank from "../../modals/masterdata/member/form_member_bank";
@@ -395,7 +392,7 @@ class IndexMember extends Component {
         <div className="row">
           <div className="col-md-10">
             <div className="row">
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label htmlFor="">Kolom</label>
                   <Select
@@ -409,7 +406,7 @@ class IndexMember extends Component {
                 </div>
               </div>
               <div
-                className="col-12 col-xs-12 col-md-3"
+                className="col-6 col-xs-6 col-md-3"
                 style={{
                   display: this.state.searchBy === "status" ? "block" : "none",
                 }}
@@ -428,7 +425,7 @@ class IndexMember extends Component {
                 </div>
               </div>
               <div
-                className="col-12 col-xs-12 col-md-3"
+                className="col-6 col-xs-6 col-md-3"
                 style={{
                   display: this.state.searchBy === "status" ? "none" : "block",
                 }}

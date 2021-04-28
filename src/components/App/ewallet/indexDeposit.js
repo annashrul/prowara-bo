@@ -18,10 +18,8 @@ import {
   postDeposit,
 } from "../../../redux/actions/ewallet/deposit.action";
 import * as Swal from "sweetalert2";
-import Preloader from "../../../Preloader";
 import Select from "react-select";
 import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
-import LoadingBar from "react-top-loading-bar";
 
 class IndexDeposit extends Component {
   constructor(props) {
@@ -251,7 +249,7 @@ class IndexDeposit extends Component {
         <div className="row">
           <div className="col-12 col-xs-12 col-md-10">
             <div className="row">
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Periode </label>
                   <DateRangePicker
@@ -271,7 +269,7 @@ class IndexDeposit extends Component {
                   </DateRangePicker>
                 </div>
               </div>
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Kolom</label>
                   <Select

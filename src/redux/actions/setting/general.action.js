@@ -1,6 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { GENERAL, HEADERS, NOTIF_ALERT } from "../_constants";
+import { GENERAL, HEADERS } from "../_constants";
 import { ModalToggle } from "../modal.action";
 import { ToastQ } from "helper";
 

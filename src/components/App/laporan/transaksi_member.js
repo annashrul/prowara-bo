@@ -192,7 +192,7 @@ class LaporanTransaksiMember extends Component {
                 </div>
               </div>
 
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Cari</label>
                   <input
@@ -213,7 +213,7 @@ class LaporanTransaksiMember extends Component {
             </div>
           </div>
           <div
-            className="col-6 col-xs-6 col-md-2"
+            className="col-12 col-xs-12 col-md-2"
             style={{ textAlign: "right" }}
           >
             <div className="row">

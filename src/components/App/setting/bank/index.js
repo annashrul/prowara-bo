@@ -9,7 +9,6 @@ import * as Swal from "sweetalert2";
 import { deleteBankList, getBankList } from "redux/actions/setting/bank.action";
 import { myDate } from "../../../../helper";
 import { fetchDataBank } from "../../../../redux/actions/setting/bank.action";
-import Preloader from "../../../../Preloader";
 
 class Bank extends Component {
   constructor(props) {
@@ -105,9 +104,9 @@ class Bank extends Component {
     return (
       <Layout page={"Bank Perusahaan"}>
         <div className="row">
-          <div className="col-md-10">
+          <div className="col-8 col-xs-8 col-md-10">
             <div className="row">
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-md-5">
                 <div className="form-group">
                   <label>Cari</label>
                   <input
@@ -127,11 +126,7 @@ class Bank extends Component {
               </div>
             </div>
           </div>
-
-          <div
-            className="col-12 col-xs-12 col-md-2"
-            style={{ textAlign: "right" }}
-          >
+          <div className="col-4 col-xs-4 col-md-2 text-right">
             <div className="form-group">
               <button
                 style={{ marginTop: "27px" }}
@@ -151,7 +146,9 @@ class Bank extends Component {
               </button>
             </div>
           </div>
+          <br />
         </div>
+
         <div style={{ overflowX: "auto" }}>
           <table className="table table-hover">
             <thead className="thead-dark">
