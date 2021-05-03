@@ -14,7 +14,6 @@ import DetailInvesment from "../../modals/masterdata/member/detail_invesment";
 import {
   getMember,
   putMember,
-  setInvesment,
 } from "../../../../redux/actions/masterdata/member.action";
 import UncontrolledButtonDropdown from "reactstrap/es/UncontrolledButtonDropdown";
 import DropdownToggle from "reactstrap/es/DropdownToggle";

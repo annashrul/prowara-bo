@@ -1,4 +1,4 @@
-import { HEADERS } from "./actions/_constants";
+import { HEADERS, NOTIF_ALERT } from "./actions/_constants";
 // import localforage from "localforage";
 import memoryDriver from "localforage-memoryStorageDriver";
 // import { setup } from "axios-cache-adapter";
@@ -12,33 +12,12 @@ import localforage from "localforage";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
 
-export async function configure() {
-  // await localforage.defineDriver(memoryDriver);
-  // const forageStore = localforage.createInstance({
-  // driver: [
-  //   localforage.INDEXEDDB,
-  //   localforage.LOCALSTORAGE,
-  //   memoryDriver._driver,
-  // ],
-  //   name: "prowaracache",
-  // });
-  // return setup({
-  //   baseURL: HEADERS.URL,
-  //   cache: {
-  //     maxAge: 15 * 60 * 1000,
-  //     store: forageStore, // Pass `localforage` store to `axios-cache-adapter`
-  //   },
-  // });
-}
-
-export function handleGet(url, callback) {
+export function handleGet(url, callback, isClear = false) {
   Nprogress.start();
-  get(HEADERS.URL + url, {
-    cache: {
-      key: "prowara",
-      groups: ["prowara"],
-    },
-  })
+  // if (isClear) {
+  //   purgeCache().then((res) => {});
+  // }
+  Axios.get(HEADERS.URL + url)
     .then(async (api) => {
       const data = api.data;
       callback(data);
@@ -50,22 +29,138 @@ export function handleGet(url, callback) {
         Swal.fire("Terjadi Kesalahan", "cek koneksi internet anda", "error");
       }
     });
-  // configure()
-  //   .then(async (api) => {
-  //     const response = await api.get(url);
-  //     const data = response.data;
-  //     callback(data);
-  //     Nprogress.done();
-  //   })
-  //   .catch(function (error) {
-  //     Nprogress.done();
-  //     if (error.message === "Network Error") {
-  //       Swal.fire("Terjadi Kesalahan", "cek koneksi internet anda", "error");
-  //     }
-  //   });
 }
+export const handlePost = (url, data, callback) => {
+  Axios.post(HEADERS.URL + url, data)
+    .then(function (response) {
+      const data = response.data;
+      if (data.status === "success") {
+        purgeCache().then((res) => {});
 
-const CACHE_MAX_AGE = 2 * 60 * 60 * 1000;
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          text: NOTIF_ALERT.SUCCESS,
+        });
+        callback(true);
+      } else {
+        Swal.fire({
+          title: "failed",
+          icon: "error",
+          text: NOTIF_ALERT.FAILED,
+        });
+        callback(false);
+      }
+    })
+    .catch(function (error) {
+      callback(false);
+      if (error.message === "Network Error") {
+        Swal.fire("Network Failed!.", "Please check your connection", "error");
+      } else {
+        Swal.fire({
+          title: "failed",
+          icon: "error",
+          text: error.response.data.msg,
+        });
+
+        if (error.response) {
+        }
+      }
+    });
+};
+
+export const handlePut = (url, data, callback) => {
+  Axios.put(HEADERS.URL + url, data)
+    .then(function (response) {
+      const data = response.data;
+      if (data.status === "success") {
+        purgeCache().then((res) => {});
+
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          text: NOTIF_ALERT.SUCCESS,
+        });
+        callback(true);
+      } else {
+        Swal.fire({
+          title: "failed",
+          icon: "error",
+          text: NOTIF_ALERT.FAILED,
+        });
+        callback(false);
+      }
+    })
+    .catch(function (error) {
+      callback(false);
+      if (error.message === "Network Error") {
+        Swal.fire("Network Failed!.", "Please check your connection", "error");
+      } else {
+        Swal.fire({
+          title: "failed",
+          icon: "error",
+          text: error.response.data.msg,
+        });
+
+        if (error.response) {
+        }
+      }
+    });
+};
+
+export const handleDelete = (url, callback) => {
+  Swal.fire({
+    title: "Tunggu sebentar.",
+    html: NOTIF_ALERT.CHECKING,
+    onBeforeOpen: () => {
+      Swal.showLoading();
+    },
+    onClose: () => {},
+  });
+
+  Axios.delete(HEADERS.URL + url)
+    .then((response) => {
+      setTimeout(function () {
+        Swal.close();
+        const data = response.data;
+        if (data.status === "success") {
+          purgeCache().then((res) => {});
+
+          Swal.fire({
+            title: "Success",
+            icon: "success",
+            text: NOTIF_ALERT.SUCCESS,
+          });
+          callback(true);
+        } else {
+          Swal.fire({
+            title: "failed",
+            icon: "error",
+            text: NOTIF_ALERT.FAILED,
+          });
+          callback(false);
+        }
+      }, 800);
+    })
+    .catch((error) => {
+      Swal.close();
+      callback(false);
+
+      if (error.message === "Network Error") {
+        Swal.fire("Network Failed!.", "Please check your connection", "error");
+      } else {
+        Swal.fire({
+          title: "failed",
+          icon: "error",
+          text: error.response.data.msg,
+        });
+        if (error.response) {
+        }
+      }
+    });
+};
+
+const CACHE_MAX_AGE = 120000;
 
 function exclude(config = {}, req) {
   const { exclude = {}, debug } = config;
@@ -96,6 +191,7 @@ function exclude(config = {}, req) {
 
   return false;
 }
+localforage.defineDriver(memoryDriver);
 
 const cacheStore = localforage.createInstance({
   driver: [
@@ -110,17 +206,36 @@ const cacheAdapter = setupCache({
   clearOnStale: false,
   debug: false,
   exclude: {
-    query: false,
+    // query: false,
     filter: (req) => {
       return req.cache && req.cache.exclude;
     },
   },
-  key: (req) => {
-    return (req.cache && req.cache.key) || req.url;
-  },
+  // key: (req) => {
+  //   return (req.cache && req.cache.key) || req.url;
+  // },
   maxAge: CACHE_MAX_AGE,
   store: cacheStore,
-  readHeaders: false,
+  validateStatus: function () {
+    return true;
+  },
+  readOnError: (error, request) => {
+    return error.response.status >= 400 && error.response.status < 600;
+  },
+  invalidate: async (config, request) => {
+    if (request.data && typeof request.data === "string") {
+      let data = JSON.parse(request.data);
+
+      if (data.clearCacheEntry) {
+        await config.store.removeItem(config.uuid);
+      }
+
+      if (data.purgeCache) {
+        config.store.store = {};
+      }
+    }
+  },
+  // readHeaders: false,
 });
 
 const getKey = cacheAdapter.config.key;
@@ -189,6 +304,7 @@ const axios = Axios.create({
     key: null,
     useOnNetworkError: true,
   },
+  // withCredentials: true,
 });
 
 const get = async function (url, config) {

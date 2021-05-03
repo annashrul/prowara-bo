@@ -46,14 +46,14 @@ class IndexUserLevel extends Component {
   handlePage(pageNumber) {
     let where = this.handleValidate();
     this.props.dispatch(
-      getUserLevel(`page=${pageNumber}${where !== "" ? `&${where}` : ""}`)
+      getUserLevel(`page=${pageNumber}${where !== "" ? `&${where}` : ""}`, true)
     );
   }
 
   handleSearch(e) {
     e.preventDefault();
     let where = this.handleValidate();
-    this.props.dispatch(getUserLevel(where));
+    this.props.dispatch(getUserLevel(where, true));
   }
   handleModal(e, par) {
     if (par !== "") {
