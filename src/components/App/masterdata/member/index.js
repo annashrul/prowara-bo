@@ -63,6 +63,7 @@ class IndexMember extends Component {
     this.handleBankEdit = this.handleBankEdit.bind(this);
     this.handleBank = this.handleBank.bind(this);
     this.handleMemberEdit = this.handleMemberEdit.bind(this);
+    this.handleMemberResetPin = this.handleMemberResetPin.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -248,8 +249,7 @@ class IndexMember extends Component {
         '"></div></div>' +
         '<div class="form-group"><label class="text-light">No Hp Member</label><div class="input-group"><input type="number" id="mobilenoModal" class="form-control" placeholder="No Hp Member" value="' +
         mobile_no +
-        '"></div></div>' +
-        '<div class="form-group"><label class="text-light">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+        '"></div></div>',
       type: "warning",
       showCancelButton: true,
       cancelButtonColor: "grey",
@@ -260,7 +260,6 @@ class IndexMember extends Component {
           resolve({
             fullname: document.getElementById("nameModal").value,
             mobile_no: document.getElementById("mobilenoModal").value,
-            pin_member: document.getElementById("pinModal").value,
           });
         });
       },
@@ -275,42 +274,102 @@ class IndexMember extends Component {
           let parseData = {};
           parseData["fullname"] = result.value.fullname;
           parseData["mobile_no"] = result.value.mobile_no;
-          parseData["pin"] = result.value.pin_member;
 
           if (parseData.fullname === "") {
-            // return Swal.fire({
-            //   title: "Nama tidak boleh kosong!",
-            //   type: "danger",
-            // });
             delete parseData.fullname;
           } else if (parseData.mobile_no === "") {
             delete parseData.mobile_no;
-          } else if (parseData.pin === "") {
-            delete parseData.pin;
           } else if (isNaN(String(parseData.mobile_no).replace(/[0-9]/g, ""))) {
             return ToastQ.fire({
               icon: "warning",
               title: `No Hp harus berupa angka!`,
             });
-            // alert("No Hp harus berupa angka!");
+          }
+          // alert(JSON.stringify(result))
+          proping.dispatch(putMember(parseData, id));
+        }
+      })
+      .catch(Swal.noop);
+    //   inputValidator: (value) => {
+    //     if (!value) {
+    //       return 'You need to write something!'
+    //     }
+    //   }
+  }
+  handleMemberResetPin(e, id) {
+    e.preventDefault();
+    let proping = this.props;
+    Swal.fire({
+      title: '<span class="text-light">Reset PIN Member</span>',
+      focusConfirm: true,
+      background: "#1a1c23",
+      html:
+        '<div class="form-group"><label class="text-light">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6" onkeypress="evt = event; var charCode = (evt.which) ? evt.which : evt.keyCode; if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; } return true;"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>' +
+        '<div class="form-group"><label class="text-light">Ulangi PIN Member</label><div class="input-group"><input type="text" id="pinReModal" class="form-control" placeholder="Ulangi PIN Member" value="" maxlength="6" onkeypress="evt = event; var charCode = (evt.which) ? evt.which : evt.keyCode; if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; } return true;"></div><small class="text-muted">Masukan Kembali 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonColor: "grey",
+      confirmButtonText: "Reset!",
+      allowOutsideClick: true,
+      preConfirm: function () {
+        return new Promise(function (resolve) {
+          resolve({
+            pin_member: document.getElementById("pinModal").value,
+            pin_member_re: document.getElementById("pinReModal").value,
+          });
+        });
+      },
+      onOpen: function () {
+        // $('#swal-input1').focus()
+        document.getElementById("pinModal").focus();
+      },
+    })
+      .then(function (result) {
+        if (result.isConfirmed) {
+          if (!result) return null;
+          let parseData = {};
+          parseData["pin"] = result.value.pin_member;
+          parseData["pin_re"] = result.value.pin_member_re;
+
+          if (parseData.pin === "") {
+            delete parseData.pin;
+            return ToastQ.fire({
+              icon: "warning",
+              title: `PIN tidak boleh kosong!`,
+            });
           } else if (parseData.pin.length > 1 && parseData.pin.length < 6) {
             return ToastQ.fire({
               icon: "warning",
               title: `PIN masih kurang dari 6 digit!`,
             });
-            // alert("PIN masih kurang dari 6 digit!");
           } else if (parseData.pin.length > 6) {
             return ToastQ.fire({
               icon: "warning",
               title: `PIN lebih dari 6 digit!`,
             });
-            // alert("PIN masih kurang dari 6 digit!");
           } else if (isNaN(String(parseData.pin).replace(/[0-9]/g, ""))) {
             return ToastQ.fire({
               icon: "warning",
               title: `PIN harus berupa angka!`,
             });
-            // alert("PIN harus berupa angka!");
+          } else if (
+            parseData.pin_re.length > 1 &&
+            parseData.pin_re.length < 6
+          ) {
+            return ToastQ.fire({
+              icon: "warning",
+              title: `Ulangi PIN masih kurang dari 6 digit!`,
+            });
+          } else if (parseData.pin_re.length > 6) {
+            return ToastQ.fire({
+              icon: "warning",
+              title: `Ulangi PIN lebih dari 6 digit!`,
+            });
+          } else if (isNaN(String(parseData.pin_re).replace(/[0-9]/g, ""))) {
+            return ToastQ.fire({
+              icon: "warning",
+              title: `Ulangi PIN harus berupa angka!`,
+            });
           }
           // alert(JSON.stringify(result))
           proping.dispatch(putMember(parseData, id));
@@ -532,6 +591,13 @@ class IndexMember extends Component {
                                       }
                                     >
                                       Edit Member
+                                    </DropdownItem>
+                                    <DropdownItem
+                                      onClick={(e) =>
+                                        this.handleMemberResetPin(e, v.id)
+                                      }
+                                    >
+                                      Reset PIN Member
                                     </DropdownItem>
                                     <DropdownItem
                                       onClick={(e) => this.handleUpdate(e, v)}
