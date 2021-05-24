@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
-import { myDate, noImage, rmHtml, ToastQ, toCurrency } from "../../../helper";
+import Paginationq, { myDate, rmHtml, toCurrency } from "../../../helper";
 import moment from "moment";
 import {
   UncontrolledButtonDropdown,
@@ -17,10 +17,10 @@ import {
   getPaket,
   deletePaket,
 } from "../../../redux/actions/paket/paket.action";
-import Preloader from "../../../Preloader";
+import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 
 moment.locale("id"); // en
-
+const perpage = 3;
 class DaftarPaket extends Component {
   constructor(props) {
     super(props);
@@ -35,21 +35,21 @@ class DaftarPaket extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(getPaket(`page=1`));
+    this.props.dispatch(getPaket(`page=1&perpage=${perpage}`));
   }
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   handleValidate() {
-    let where = "";
+    let where = `perpage=${perpage}`;
     let page = localStorage.getItem("pagePaket");
     let any = this.state.any;
 
     if (page !== null && page !== undefined && page !== "") {
-      where += `page=${page}`;
+      where += `&page=${page}`;
     } else {
-      where += "page=1";
+      where += "&page=1";
     }
     if (any !== null && any !== undefined && any !== "") {
       where += `&q=${any}`;
@@ -112,186 +112,198 @@ class DaftarPaket extends Component {
   }
 
   render() {
-    const headStyle = {
-      verticalAlign: "middle",
-      textAlign: "center",
-      whiteSpace: "nowrap",
-    };
-    const { current_page, data } = this.props.data;
+    const { total, per_page, current_page, data } = this.props.data;
 
     return (
       <Layout page={"Daftar Paket"}>
-        {this.props.isLoading ? <Preloader /> : null}
-        <div className="col-md-12">
-          <div className="row">
-            <div className="col-8 col-xs-8 col-md-10">
-              <div className="form-group">
-                <label>Cari</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="any"
-                  placeholder={"cari disini"}
-                  value={this.state.any}
-                  onChange={this.handleChange}
-                  onKeyPress={(event) => {
-                    if (event.key === "Enter") {
-                      this.handleSearch(event);
-                    }
-                  }}
-                />
+        <div className="row">
+          <div className="col-8 col-xs-8 col-md-10">
+            <div className="row">
+              <div className="col-md-5">
+                <div className="form-group">
+                  <label>Cari</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="any"
+                    placeholder={"cari disini"}
+                    value={this.state.any}
+                    onChange={this.handleChange}
+                    onKeyPress={(event) => {
+                      if (event.key === "Enter") {
+                        this.handleSearch(event);
+                      }
+                    }}
+                  />
+                </div>
               </div>
             </div>
-            <div className="col-4 col-xs-4 col-md-2 text-right">
-              <div className="form-group">
-                <button
-                  style={{ marginTop: "27px" }}
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={(e) => this.handleSearch(e)}
-                >
-                  <i className="fa fa-search" />
-                </button>
-                <button
-                  style={{ marginTop: "27px", marginLeft: "5px" }}
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={(e) => this.handleModal(e, "")}
-                >
-                  <i className="fa fa-plus" />
-                </button>
-              </div>
+          </div>
+          <div className="col-4 col-xs-4 col-md-2 text-right">
+            <div className="form-group">
+              <button
+                style={{ marginTop: "27px" }}
+                type="button"
+                className="btn btn-primary"
+                onClick={(e) => this.handleSearch(e)}
+              >
+                <i className="fa fa-search" />
+              </button>
+              <button
+                style={{ marginTop: "27px", marginLeft: "5px" }}
+                type="button"
+                className="btn btn-primary"
+                onClick={(e) => this.handleModal(e, "")}
+              >
+                <i className="fa fa-plus" />
+              </button>
             </div>
-            <br />
-            <div className="col-md-12">
-              <main>
-                {typeof data === "object"
-                  ? data.length > 0
-                    ? data.map((v, i) => {
-                        return (
-                          <article key={i}>
-                            <div className="box-margin">
-                              <div
-                                className="coupon"
-                                style={{
-                                  borderRadius: "15px",
-                                  margin: "0 auto",
-                                  breakInside: "avoid-column",
-                                }}
-                              >
-                                <div className="ribbon-wrapper bgWithOpacity">
-                                  <div className="ribbon ribbon-bookmark ribbon-success">
-                                    {v.category}
-                                  </div>
-                                  <img
-                                    src={`${v.gambar}`}
-                                    style={{ width: "100%" }}
-                                    alt="member"
-                                  />
+          </div>
+          <br />
+          <div className="col-md-12">
+            <main>
+              {typeof data === "object" ? (
+                data.length > 0 ? (
+                  data.map((v, i) => {
+                    return (
+                      <article key={i}>
+                        <div className="box-margin">
+                          <div
+                            className="coupon"
+                            style={{
+                              borderRadius: "15px",
+                              margin: "0 auto",
+                              breakInside: "avoid-column",
+                            }}
+                          >
+                            <div className="ribbon-wrapper bgWithOpacity">
+                              <div className="ribbon ribbon-bookmark ribbon-success">
+                                {v.category}
+                              </div>
+                              <img
+                                src={`${v.gambar}`}
+                                style={{ width: "100%" }}
+                                alt="member"
+                              />
+                              <br />
+                              <div className="row">
+                                <div
+                                  className="col-md-12 text-muted"
+                                  style={{ padding: "5" }}
+                                >
                                   <br />
-                                  <div className="row">
-                                    <div
-                                      className="col-md-12 text-muted"
-                                      style={{ padding: "5" }}
-                                    >
-                                      <br />
-                                      <p className="text-muted">
-                                        {myDate(v.created_at)}
-                                      </p>
-                                      <h4 className="text-white">{v.title}</h4>
-                                      <table className="table">
-                                        <thead>
-                                          <tr>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              Tiket yang dibutuhkan
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              :
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              {v.pin_required} Tiket
-                                            </th>
-                                          </tr>
-                                          <tr>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              Poin
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              style={{ padding: "0" }}
-                                              className="text-white"
-                                            >
-                                              :
-                                            </th>
-                                            <th
-                                              style={{ padding: "0" }}
-                                              className="txtGreen"
-                                            >
-                                              {toCurrency(v.price)}
-                                            </th>
-                                          </tr>
-                                        </thead>
-                                      </table>
-                                      <p className="text-muted">
-                                        {rmHtml(v.caption)}
-                                      </p>
-                                    </div>
-                                    <div className="col-md-12">
-                                      <div
-                                        className="btn-group btn-block"
-                                        style={{ textAlign: "right" }}
+                                  <p className="text-muted">
+                                    {myDate(v.created_at)}
+                                  </p>
+                                  <h4 className="text-white">{v.title}</h4>
+                                  <table className="table">
+                                    <thead>
+                                      <tr>
+                                        <th
+                                          style={{ padding: "0" }}
+                                          className="text-white"
+                                        >
+                                          Tiket yang dibutuhkan
+                                        </th>
+                                        <th
+                                          style={{ padding: "0" }}
+                                          className="text-white"
+                                        >
+                                          :
+                                        </th>
+                                        <th
+                                          style={{ padding: "0" }}
+                                          className="text-white"
+                                        >
+                                          {v.pin_required} Tiket
+                                        </th>
+                                      </tr>
+                                      <tr>
+                                        <th
+                                          style={{ padding: "0" }}
+                                          className="text-white"
+                                        >
+                                          Poin
+                                        </th>
+                                        <th
+                                          style={{ padding: "0" }}
+                                          className="text-white"
+                                        >
+                                          :
+                                        </th>
+                                        <th
+                                          style={{ padding: "0" }}
+                                          className="poin"
+                                        >
+                                          {toCurrency(v.price)}
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                  </table>
+                                  <p className="text-muted">
+                                    {rmHtml(v.caption)}
+                                  </p>
+                                </div>
+                                <div className="col-md-12">
+                                  <div
+                                    className="btn-group btn-block"
+                                    style={{ textAlign: "right" }}
+                                  >
+                                    <UncontrolledButtonDropdown nav>
+                                      <DropdownToggle
+                                        caret
+                                        className="myDropdown"
                                       >
-                                        <UncontrolledButtonDropdown nav>
-                                          <DropdownToggle
-                                            caret
-                                            className="myDropdown"
-                                          >
-                                            Pilihan
-                                          </DropdownToggle>
-                                          <DropdownMenu>
-                                            <DropdownItem
-                                              onClick={(e) =>
-                                                this.handleModal(e, i)
-                                              }
-                                            >
-                                              Ubah
-                                            </DropdownItem>
-                                            <DropdownItem
-                                              onClick={(e) =>
-                                                this.handleDelete(e, v.id)
-                                              }
-                                            >
-                                              Hapus
-                                            </DropdownItem>
-                                          </DropdownMenu>
-                                        </UncontrolledButtonDropdown>
-                                      </div>
-                                    </div>
+                                        Pilihan
+                                      </DropdownToggle>
+                                      <DropdownMenu>
+                                        <DropdownItem
+                                          onClick={(e) =>
+                                            this.handleModal(e, i)
+                                          }
+                                        >
+                                          Ubah
+                                        </DropdownItem>
+                                        <DropdownItem
+                                          onClick={(e) =>
+                                            this.handleDelete(e, v.id)
+                                          }
+                                        >
+                                          Hapus
+                                        </DropdownItem>
+                                      </DropdownMenu>
+                                    </UncontrolledButtonDropdown>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </article>
-                        );
-                      })
-                    : ""
-                  : ""}
-              </main>
-            </div>
+                          </div>
+                        </div>
+                      </article>
+                    );
+                  })
+                ) : (
+                  <div>
+                    <img alt='{"-"}' src={`${NOTIF_ALERT.NO_DATA}`} />
+                  </div>
+                )
+              ) : (
+                <div>
+                  <img alt='{"-"}' src={`${NOTIF_ALERT.NO_DATA}`} />
+                </div>
+              )}
+            </main>
           </div>
+        </div>
+        <div
+          style={{ marginTop: "20px", marginBottom: "20px", float: "right" }}
+        >
+          <Paginationq
+            current_page={current_page}
+            per_page={per_page}
+            total={total}
+            callback={this.handlePage}
+          />
         </div>
         {this.props.isOpen === true ? (
           <FormPaket detail={this.state.detail} />

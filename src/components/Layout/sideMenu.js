@@ -14,6 +14,7 @@ class SideMenu extends Component {
     super(props);
     this.state = {
       aksesMember: [],
+      token: "",
     };
   }
   menuChange(argument) {
@@ -72,6 +73,8 @@ class SideMenu extends Component {
         let akses = param.auth.user.access_level;
         if (akses !== undefined) {
           this.handleToggle(param, akses);
+          this.setState({ token: param.auth.user.token });
+          // console.log(param.auth.user);
         }
       }
     }
@@ -126,7 +129,7 @@ class SideMenu extends Component {
                     key={idx}
                     display={val.isChecked}
                     isActive={path === val.path ? "active" : ""}
-                    path={val.path}
+                    path={`${val.path}`}
                     icon={val.icons}
                     label={val.label}
                   />

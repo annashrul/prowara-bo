@@ -7,7 +7,6 @@ import moment from "moment";
 import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
 import FormKategori from "../modals/kategori/form_kategori";
 import * as Swal from "sweetalert2";
-import Preloader from "../../../Preloader";
 import {
   deleteKategori,
   fetchKategori,
@@ -23,7 +22,7 @@ class Kategori extends Component {
       any: "",
       param: "",
       paramType: "",
-      path: this.props.location.pathname.split("/")[2],
+      path: this.props.location.pathname.split("/")[1],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePage = this.handlePage.bind(this);
@@ -41,7 +40,7 @@ class Kategori extends Component {
     let newParam = "";
     let newParamType;
     let newPath = "";
-    if (this.props.location.pathname.split("/")[2] === "paket") {
+    if (this.props.location.pathname.split("/")[1] === "paket") {
       newParam = "membership";
       newParamType = 0;
       newPath = "Paket";
@@ -82,7 +81,6 @@ class Kategori extends Component {
 
   handlePage(pageNumber) {
     localStorage.setItem(`pageKategori${this.state.param}`, pageNumber);
-    let where = this.handleValidate();
     this.props.dispatch(
       fetchKategori(`${this.state.param}?page=${pageNumber}`)
     );
@@ -145,122 +143,126 @@ class Kategori extends Component {
 
     return (
       <Layout page={`Kategori ${this.state.path}`}>
-        {this.props.isLoading ? <Preloader /> : null}
-        <div className="col-md-12">
-          <div className="row">
-            <div className="col-8 col-xs-8 col-md-10">
-              <div className="form-group">
-                <label>Cari</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="any"
-                  placeholder={"cari disini"}
-                  value={this.state.any}
-                  onChange={this.handleChange}
-                  onKeyPress={(event) => {
-                    if (event.key === "Enter") {
-                      this.handleSearch(event);
-                    }
-                  }}
-                />
-              </div>
-            </div>
-            <div className="col-4 col-xs-4 col-md-2 text-right">
-              <div className="form-group">
-                <button
-                  style={{ marginTop: "27px" }}
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={(e) => this.handleSearch(e)}
-                >
-                  <i className="fa fa-search" />
-                </button>
-                <button
-                  style={{ marginTop: "27px", marginLeft: "5px" }}
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={(e) => this.handleModal(e, "")}
-                >
-                  <i className="fa fa-plus" />
-                </button>
-              </div>
-            </div>
-            <br />
-            <div className="col-md-12">
-              <div style={{ overflowX: "auto" }}>
-                <table className="table table-bordered">
-                  <thead className="thead-dark">
-                    <tr>
-                      <th style={headStyle}>NO</th>
-                      <th style={headStyle}>#</th>
-                      <th style={headStyle}>NAMA</th>
-                      <th style={headStyle}>TANGGAL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {typeof data === "object" ? (
-                      data.length !== undefined ? (
-                        data.map((v, i) => {
-                          return (
-                            <tr key={i}>
-                              <td style={headStyle}>
-                                {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
-                              </td>
-                              <td style={headStyle}>
-                                <button
-                                  onClick={(e) => this.handleModal(e, i)}
-                                  className={"btn btn-primary"}
-                                  style={{ marginRight: "10px" }}
-                                >
-                                  <i className={"fa fa-pencil"} />
-                                </button>
-                                <button
-                                  onClick={(e) => this.handleDelete(e, v.id)}
-                                  className={"btn btn-primary"}
-                                >
-                                  <i className={"fa fa-close"} />
-                                </button>
-                              </td>
-                              <td style={headStyle}>{v.title}</td>
-                              <td style={headStyle}>{myDate(v.created_at)}</td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <tr>
-                          <td colSpan={4} style={headStyle}>
-                            <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
-                          </td>
-                        </tr>
-                      )
-                    ) : (
-                      <tr>
-                        <td colSpan={4} style={headStyle}>
-                          <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+        <div className="row">
+          <div className="col-8 col-xs-8 col-md-10">
+            <div className="row">
+              <div className="col-md-5">
+                <div className="form-group">
+                  <label>Cari</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="any"
+                    placeholder={"cari disini"}
+                    value={this.state.any}
+                    onChange={this.handleChange}
+                    onKeyPress={(event) => {
+                      if (event.key === "Enter") {
+                        this.handleSearch(event);
+                      }
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
-          <div
-            style={{
-              marginTop: "20px",
-              marginBottom: "20px",
-              float: "right",
-            }}
-          >
-            <Paginationq
-              current_page={current_page}
-              per_page={per_page}
-              total={total}
-              callback={this.handlePage}
-            />
+          <div className="col-4 col-xs-4 col-md-2 text-right">
+            <div className="form-group">
+              <button
+                style={{ marginTop: "27px" }}
+                type="button"
+                className="btn btn-primary"
+                onClick={(e) => this.handleSearch(e)}
+              >
+                <i className="fa fa-search" />
+              </button>
+              <button
+                style={{ marginTop: "27px", marginLeft: "5px" }}
+                type="button"
+                className="btn btn-primary"
+                onClick={(e) => this.handleModal(e, "")}
+              >
+                <i className="fa fa-plus" />
+              </button>
+            </div>
+          </div>
+          <br />
+        </div>
+
+        <div className="col-md-12">
+          <div style={{ overflowX: "auto" }}>
+            <table className="table table-hover">
+              <thead className="thead-dark">
+                <tr>
+                  <th style={headStyle}>NO</th>
+                  <th style={headStyle}>#</th>
+                  <th style={headStyle}>NAMA</th>
+                  <th style={headStyle}>TANGGAL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {typeof data === "object" ? (
+                  data.length !== undefined ? (
+                    data.map((v, i) => {
+                      return (
+                        <tr key={i}>
+                          <td style={headStyle}>
+                            {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
+                          </td>
+                          <td style={headStyle}>
+                            <button
+                              onClick={(e) => this.handleModal(e, i)}
+                              className={"btn btn-primary"}
+                              style={{ marginRight: "10px" }}
+                            >
+                              <i className={"fa fa-pencil"} />
+                            </button>
+                            <button
+                              onClick={(e) => this.handleDelete(e, v.id)}
+                              className={"btn btn-primary"}
+                            >
+                              <i className={"fa fa-close"} />
+                            </button>
+                          </td>
+                          <td style={headStyle}>{v.title}</td>
+                          <td style={headStyle}>{myDate(v.created_at)}</td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={4} style={headStyle}>
+                        <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
+                      </td>
+                    </tr>
+                  )
+                ) : (
+                  <tr>
+                    <td colSpan={4} style={headStyle}>
+                      <img alt={"-"} src={NOTIF_ALERT.NO_DATA} />
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
+
+        <div
+          style={{
+            marginTop: "20px",
+            marginBottom: "20px",
+            float: "right",
+          }}
+        >
+          <Paginationq
+            current_page={current_page}
+            per_page={per_page}
+            total={total}
+            callback={this.handlePage}
+          />
+        </div>
+
         {this.props.isOpen === true ? (
           <FormKategori detail={this.state.detail} />
         ) : null}

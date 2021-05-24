@@ -18,7 +18,6 @@ import {
   postDeposit,
 } from "../../../redux/actions/ewallet/deposit.action";
 import * as Swal from "sweetalert2";
-import Preloader from "../../../Preloader";
 import Select from "react-select";
 import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
 
@@ -247,14 +246,10 @@ class IndexDeposit extends Component {
     console.log("config wallet", this.props.configWallet);
     return (
       <Layout page={"Laporan Deposit"}>
-        {this.props.isLoadingExcel || this.props.isLoading ? (
-          <Preloader />
-        ) : null}
-
         <div className="row">
           <div className="col-12 col-xs-12 col-md-10">
             <div className="row">
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Periode </label>
                   <DateRangePicker
@@ -274,7 +269,7 @@ class IndexDeposit extends Component {
                   </DateRangePicker>
                 </div>
               </div>
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Kolom</label>
                   <Select
@@ -354,7 +349,7 @@ class IndexDeposit extends Component {
         </div>
         <br />
         <div style={{ overflowX: "auto" }}>
-          <table className="table table-bordered">
+          <table className="table table-hover">
             <thead className="thead-dark">
               <tr>
                 <th rowSpan="2" style={columnStyle}>
@@ -457,7 +452,7 @@ class IndexDeposit extends Component {
                             {v.bank_name} ({v.acc_no})
                           </div>
                         </td>
-                        <td style={numStyle} className="txtGreen">
+                        <td style={numStyle} className="poin">
                           {toCurrency(`${v.amount}`)}
                         </td>
                         <td style={numStyle} className="txtGreen">
@@ -489,7 +484,7 @@ class IndexDeposit extends Component {
             <tfoot className="bgWithOpacity">
               <tr>
                 <th colSpan={5}>TOTAL PERHALAMAN</th>
-                <th colSpan={1} style={numStyle} className="txtGreen">
+                <th colSpan={1} style={numStyle} className="poin">
                   {toCurrency(`${totAmountPoint}`)}
                 </th>
                 <th colSpan={1} style={numStyle} className="txtGreen">

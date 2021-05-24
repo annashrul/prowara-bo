@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { MEMBER, HEADERS, NOTIF_ALERT } from "../_constants";
+import { handleGet } from "../../handle_http";
 
 export function setLoading(load) {
   return {
@@ -108,59 +109,25 @@ export function setDataFailed(data = []) {
 
 export const getMember = (page = 1, where) => {
   return (dispatch) => {
-    dispatch(setLoading(true));
     let url = "member";
     if (where) {
       url += `?page=${page}&${where}`;
     }
-
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setData(data));
-        dispatch(setLoading(false));
-      })
-      .catch(function (error) {
-        dispatch(setLoading(false));
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (res) => {
+      dispatch(setData(res));
+    });
   };
 };
 
 export const getExcelMember = (where) => {
   return (dispatch) => {
-    dispatch(setLoadingExcel(true));
     let url = "member";
     if (where) {
       url += `?${where}`;
     }
-
-    console.log(url);
-
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setExcel(data));
-        dispatch(setLoadingExcel(false));
-      })
-      .catch(function (error) {
-        dispatch(setLoadingExcel(false));
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    handleGet(url, (res) => {
+      dispatch(setExcel(res));
+    });
   };
 };
 export const getListApproval = (where) => {
@@ -249,31 +216,16 @@ export const putMember = (data, id) => {
 };
 export const getInvesment = (where) => {
   return (dispatch) => {
-    dispatch(setShowModal(false));
-    dispatch(setLoadingInvesment(true));
     let url = "transaction/history/investment";
     if (where) {
       url += `?${where}`;
     }
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        dispatch(setShowModal(true));
-        dispatch(setInvesment(data));
-        dispatch(setLoadingInvesment(false));
-      })
-      .catch(function (error) {
-        dispatch(setShowModal(false));
-        dispatch(setLoadingInvesment(false));
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+    console.log(url);
+    dispatch(setLoadingInvesment(true));
+    handleGet(url, (data) => {
+      dispatch(setInvesment(data));
+      dispatch(setLoadingInvesment(false));
+    });
   };
 };
 export const getExcelInvesment = (where) => {

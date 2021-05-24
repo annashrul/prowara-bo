@@ -1,7 +1,8 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import { handleGet } from "../../handle_http";
+import { ModalToggle, ModalType } from "../modal.action";
 import { BANK, HEADERS, NOTIF_ALERT } from "../_constants";
-
 export function setLoadingDetail(load) {
   return {
     type: BANK.LOADING_DETAIL,
@@ -23,33 +24,19 @@ export function setDataDetail(data = []) {
 
 export const getDetailBank = (where) => {
   return (dispatch) => {
-    dispatch(setLoadingDetail(true));
-    dispatch(setShowModal(false));
+    dispatch(ModalToggle(false));
     let url = `bank_member?id_member=${where}`;
-    axios
-      .get(HEADERS.URL + `${url}`)
-      .then(function (response) {
-        const data = response.data;
-        if (data.result.length === 0) {
-          Swal.fire("Terjadi Kesalahan", "Data Tidak Tersedia", "error");
-          dispatch(setShowModal(false));
-        } else {
-          dispatch(setShowModal(true));
-        }
-        dispatch(setDataDetail(data));
-        dispatch(setLoadingDetail(false));
-      })
-      .catch(function (error) {
+    handleGet(url, (data) => {
+      dispatch(setDataDetail(data));
+      if (data.result.length === 0) {
+        Swal.fire("Terjadi Kesalahan", "Data Tidak Tersedia", "error");
         dispatch(setShowModal(false));
-        dispatch(setLoadingDetail(false));
-        if (error.message === "Network Error") {
-          Swal.fire(
-            "Network Failed!.",
-            "Please check your connection",
-            "error"
-          );
-        }
-      });
+      } else {
+        dispatch(ModalToggle(true));
+        dispatch(ModalType("formMemberBank"));
+        dispatch(setShowModal(true));
+      }
+    });
   };
 };
 

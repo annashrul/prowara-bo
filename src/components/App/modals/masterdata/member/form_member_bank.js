@@ -9,7 +9,11 @@ import { fetchDataBank } from "../../../../../redux/actions/setting/bank.action"
 import Skeleton from "react-loading-skeleton";
 // import { putMember } from "../../../../../redux/actions/masterdata/member.action";
 import Swal from "sweetalert2";
-import { putMemberBank } from "../../../../../redux/actions/masterdata/bank.action";
+import {
+  putMemberBank,
+  setShowModal,
+} from "../../../../../redux/actions/masterdata/bank.action";
+
 const { Option } = components;
 const IconOption = (props) => (
   <Option {...props}>
@@ -103,6 +107,7 @@ class FormMemberBank extends Component {
     const bool = !this.props.isOpen;
     this.props.dispatch(ModalToggle(bool));
     this.clearState();
+    this.props.dispatch(setShowModal(false));
   };
   HandleChangeBank(bk) {
     this.setState({ bank_name: bk.label });
@@ -174,7 +179,6 @@ class FormMemberBank extends Component {
     }
   }
   render() {
-    const { array_modul } = this.state;
     return (
       <WrapperModal
         isOpen={this.props.isOpen && this.props.type === "formMemberBank"}

@@ -15,6 +15,7 @@ import moment from "moment";
 import {
   getExcelInvesment,
   getInvesment,
+  setInvesment,
 } from "../../../../../redux/actions/masterdata/member.action";
 import Preloader from "../../../../../Preloader";
 
@@ -31,6 +32,7 @@ class DetailInvesment extends Component {
   }
   toggle = (e) => {
     e.preventDefault();
+
     localStorage.removeItem("isAlamat");
     const bool = !this.props.isOpen;
     this.props.dispatch(ModalToggle(bool));
@@ -64,6 +66,13 @@ class DetailInvesment extends Component {
       )
     );
   }
+  componentDidMount() {
+    this.props.dispatch(
+      getInvesment(
+        `page=1&id_member=${this.props.detail.id}&datefrom=${this.state.dateFrom}&dateto=${this.state.dateTo}`
+      )
+    );
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.dataExcel.data !== this.props.dataExcel.data) {
       this.getExcel(this.props);
@@ -73,13 +82,12 @@ class DetailInvesment extends Component {
     if (props.dataExcel.data !== undefined) {
       if (props.dataExcel.data.length > 0) {
         let content = [];
-        // let totTrx;
         props.dataExcel.data.forEach((v, i) => {
           content.push([
             v.kd_trx,
             v.fullname,
-            parseInt(v.trx_in, 10),
-            parseInt(v.trx_out, 10),
+            parseFloat(v.trx_in),
+            parseFloat(v.trx_out),
             v.note,
             myDate(v.created_at),
           ]);
@@ -90,8 +98,8 @@ class DetailInvesment extends Component {
           [
             "KODE TRANSAKSI",
             "NAMA",
-            "TRX MASUK",
-            "TRX KELUAR",
+            "TRX MASUK ( POIN )",
+            "TRX KELUAR ( POIN )",
             "CATATAN",
             "TANGGAL",
           ],
@@ -103,15 +111,10 @@ class DetailInvesment extends Component {
             [
               "TOTAL",
               "",
-              parseInt(props.dataExcel.summary.trx_in, 10),
-              parseInt(props.dataExcel.summary.trx_out, 10),
+              parseFloat(props.dataExcel.summary.trx_in),
+              parseFloat(props.dataExcel.summary.trx_out),
             ],
-            [
-              `SALDO AWAL : ${parseInt(
-                props.dataExcel.summary.saldo_awal,
-                10
-              )}`,
-            ],
+            [`SALDO AWAL : ${parseFloat(props.dataExcel.summary.saldo_awal)}`],
           ]
         );
       }
@@ -156,9 +159,11 @@ class DetailInvesment extends Component {
       >
         <ModalHeader toggle={this.toggle}>
           Detail Invesment {this.props.detail.fullname} <br /> Saldo Awal :
-          <span className="txtGreen">
+          <span className="poin">
             &nbsp;
-            {summary !== undefined ? toCurrency(`${summary.saldo_awal}`) : 0}
+            {summary !== undefined
+              ? toCurrency(`${summary.saldo_awal}`)
+              : 0 + " Poin"}
           </span>
         </ModalHeader>
         {this.props.isLoading || this.props.isLoadingExcel ? (
@@ -166,9 +171,9 @@ class DetailInvesment extends Component {
         ) : null}
         <ModalBody>
           <div className="row">
-            <div className="col-md-10">
+            <div className="col-10 col-xs-10 col-md-10">
               <div className="row">
-                <div className="col-6 col-xs-6 col-md-4">
+                <div className="col-12 col-xs-12 col-md-4">
                   <div className="form-group">
                     <label>Periode </label>
                     <DateRangePicker
@@ -191,7 +196,7 @@ class DetailInvesment extends Component {
               </div>
             </div>
             <div
-              className="col-12 col-xs-12 col-md-2"
+              className="col-2 col-xs-2 col-md-2"
               style={{ textAlign: "right" }}
             >
               <div className="form-group">
@@ -208,7 +213,7 @@ class DetailInvesment extends Component {
             </div>
           </div>
           <div style={{ overflowX: "auto" }}>
-            <table className="table table-bordered">
+            <table className="table table-hover">
               <thead className="thead-dark">
                 <tr>
                   <th style={headStyle} rowSpan={"2"}>
@@ -234,28 +239,36 @@ class DetailInvesment extends Component {
                 </tr>
               </thead>
               <tbody>
-                {typeof data === "object" ? (
-                  data.length > 0 ? (
-                    data.map((v, i) => {
-                      totTrxIn = totTrxIn + parseInt(v.trx_in, 10);
-                      totTrxOut = totTrxOut + parseInt(v.trx_out, 10);
-                      return (
-                        <tr key={i}>
-                          <td style={headStyle}>
-                            {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
-                          </td>
-                          <td style={headStyle}>{v.kd_trx}</td>
-                          <td style={numberStyle} className="txtGreen">
-                            {toCurrency(v.trx_in)}
-                          </td>
-                          <td style={numberStyle} className="txtGreen">
-                            {toCurrency(v.trx_out)}
-                          </td>
-                          <td style={headStyle}>{v.note}</td>
-                          <td style={headStyle}>{myDate(v.created_at)}</td>
-                        </tr>
-                      );
-                    })
+                {!this.props.isLoading ? (
+                  typeof data === "object" ? (
+                    data.length > 0 ? (
+                      data.map((v, i) => {
+                        totTrxIn = totTrxIn + parseInt(v.trx_in, 10);
+                        totTrxOut = totTrxOut + parseInt(v.trx_out, 10);
+                        return (
+                          <tr key={i}>
+                            <td style={headStyle}>
+                              {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
+                            </td>
+                            <td style={headStyle}>{v.kd_trx}</td>
+                            <td style={numberStyle} className="poin">
+                              {toCurrency(v.trx_in)}
+                            </td>
+                            <td style={numberStyle} className="poin">
+                              {toCurrency(v.trx_out)}
+                            </td>
+                            <td style={headStyle}>{v.note}</td>
+                            <td style={headStyle}>{myDate(v.created_at)}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan={6} style={headStyle}>
+                          <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
+                        </td>
+                      </tr>
+                    )
                   ) : (
                     <tr>
                       <td colSpan={6} style={headStyle}>
@@ -264,32 +277,28 @@ class DetailInvesment extends Component {
                     </tr>
                   )
                 ) : (
-                  <tr>
-                    <td colSpan={6} style={headStyle}>
-                      <img alt={"-"} src={`${NOTIF_ALERT.NO_DATA}`} />
-                    </td>
-                  </tr>
+                  <Preloader />
                 )}
               </tbody>
               <tfoot className="bgWithOpacity">
                 <tr>
                   <td colSpan={2}>TOTAL PERHALAMAN</td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {toCurrency(`${totTrxIn}`)}
                   </td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {toCurrency(`${totTrxOut}`)}
                   </td>
                   <td colSpan={2} />
                 </tr>
                 <tr>
                   <td colSpan={2}>TOTAL KESELURUHAN</td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {summary !== undefined
                       ? toCurrency(`${summary.trx_in}`)
                       : 0}
                   </td>
-                  <td style={numberStyle} className="txtGreen">
+                  <td style={numberStyle} className="poin">
                     {summary !== undefined
                       ? toCurrency(`${summary.trx_out}`)
                       : 0}

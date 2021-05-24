@@ -6,7 +6,6 @@ import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
 import { getPin } from "../../../redux/actions/paket/pin.action";
 import moment from "moment";
-import Preloader from "../../../Preloader";
 import GeneratePinModal from "../modals/pin/generate_pin_modal";
 
 class IndexPin extends Component {
@@ -73,7 +72,6 @@ class IndexPin extends Component {
 
     return (
       <Layout page={"PIN"}>
-        {this.props.isLoading ? <Preloader /> : null}
         <div className="row" style={{ zoom: "80%" }}>
           <div className="col-md-12">
             <button

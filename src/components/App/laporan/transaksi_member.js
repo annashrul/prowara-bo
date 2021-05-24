@@ -4,16 +4,15 @@ import Layout from "components/Layout";
 import { DateRangePicker } from "react-bootstrap-daterangepicker";
 import Paginationq, { rangeDate, toCurrency, toExcel } from "../../../helper";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
-import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
 import moment from "moment";
-import DetailLaporanSaldo from "../modals/laporan/detail_laporan_saldo";
+import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
 import {
-  getExcelLaporanSaldo,
-  getLaporanSaldo,
-} from "../../../redux/actions/ewallet/saldo.action";
-import Preloader from "../../../Preloader";
+  getDataReportTransaksi,
+  getExcelReportTransaksi,
+} from "../../../redux/actions/laporan/report_transaksi_member.action";
+import DetailReportTransaksiMember from "../modals/laporan/detail_report_transaksi_member";
 
-class IndexSaldo extends Component {
+class LaporanTransaksiMember extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,14 +20,13 @@ class IndexSaldo extends Component {
       any: "",
       dateFrom: moment(new Date()).format("yyyy-MM-DD"),
       dateTo: moment(new Date()).format("yyyy-MM-DD"),
-      data: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePage = this.handlePage.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleEvent = this.handleEvent.bind(this);
-    this.handleDetail = this.handleDetail.bind(this);
     this.printDocumentXLsx = this.printDocumentXLsx.bind(this);
+    this.handleDetail = this.handleDetail.bind(this);
   }
   handleValidate() {
     let data = this.state;
@@ -45,17 +43,17 @@ class IndexSaldo extends Component {
   }
   componentWillMount() {
     let where = this.handleValidate();
-    this.props.dispatch(getLaporanSaldo("page=1&" + where));
+    this.props.dispatch(getDataReportTransaksi("page=1&" + where));
   }
 
   handleSearch(e) {
     e.preventDefault();
     let where = this.handleValidate();
-    this.props.dispatch(getLaporanSaldo("page=1&" + where));
+    this.props.dispatch(getDataReportTransaksi("page=1&" + where));
   }
   handlePage(num) {
     let where = this.handleValidate();
-    this.props.dispatch(getLaporanSaldo(`page=${num}&${where}`));
+    this.props.dispatch(getDataReportTransaksi(`page=${num}&${where}`));
   }
   handleEvent = (event, picker) => {
     event.preventDefault();
@@ -66,22 +64,10 @@ class IndexSaldo extends Component {
       dateTo: to,
     });
     this.props.dispatch(
-      getLaporanSaldo(`page=1&datefrom=${from}&dateto=${to}`)
+      getDataReportTransaksi(`page=1&datefrom=${from}&dateto=${to}`)
     );
   };
-  handleDetail(e, id, nama) {
-    e.preventDefault();
-    this.setState({
-      detail: {
-        id: id,
-        nama: nama,
-        tgl: `datefrom=${this.state.dateFrom}&dateto=${this.state.dateTo}`,
-      },
-    });
-    const bool = !this.props.isOpen;
-    this.props.dispatch(ModalToggle(bool));
-    this.props.dispatch(ModalType("detailLaporanSaldo"));
-  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.dataExcel.data !== this.props.dataExcel.data) {
       this.getExcel(this.props);
@@ -138,15 +124,22 @@ class IndexSaldo extends Component {
     ) {
       where += `&q=${this.state.any}`;
     }
-    if (
-      this.state.membership !== null &&
-      this.state.membership !== undefined &&
-      this.state.membership !== ""
-    ) {
-      where += `&membership=${this.state.membership}`;
-    }
-    this.props.dispatch(getExcelLaporanSaldo(where));
+
+    this.props.dispatch(getExcelReportTransaksi(where));
   };
+  handleDetail(e, id, nama) {
+    e.preventDefault();
+    this.setState({
+      detail: {
+        id: id,
+        nama: nama,
+        tgl: `datefrom=${this.state.dateFrom}&dateto=${this.state.dateTo}`,
+      },
+    });
+    const bool = !this.props.isOpen;
+    this.props.dispatch(ModalToggle(bool));
+    this.props.dispatch(ModalType("detailReportTransaksiMember"));
+  }
 
   render() {
     const columnStyle = {
@@ -174,9 +167,6 @@ class IndexSaldo extends Component {
     } = this.props.data;
     return (
       <Layout page={"Laporan Transaksi"}>
-        {this.props.isLoadingExcel || this.props.isLoading ? (
-          <Preloader />
-        ) : null}
         <div className="row">
           <div className="col-md-10">
             <div className="row">
@@ -202,7 +192,7 @@ class IndexSaldo extends Component {
                 </div>
               </div>
 
-              <div className="col-12 col-xs-12 col-md-3">
+              <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Cari</label>
                   <input
@@ -223,7 +213,7 @@ class IndexSaldo extends Component {
             </div>
           </div>
           <div
-            className="col-6 col-xs-6 col-md-2"
+            className="col-12 col-xs-12 col-md-2"
             style={{ textAlign: "right" }}
           >
             <div className="row">
@@ -301,16 +291,16 @@ class IndexSaldo extends Component {
                         </td>
 
                         <td style={columnStyle}>{v.fullname}</td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.saldo_awal}`)}
                         </td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.trx_in}`)}
                         </td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.trx_out}`)}
                         </td>
-                        <td className={"txtGreen"} style={numStyle}>
+                        <td className={"poin"} style={numStyle}>
                           {toCurrency(`${v.saldo_akhir}`)}
                         </td>
                       </tr>
@@ -334,48 +324,48 @@ class IndexSaldo extends Component {
             <tfoot className="bgWithOpacity">
               <tr>
                 <th colSpan={3}>TOTAL PERHALAMAN</th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totSaldoAwal}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totTrxIn}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totTrxOut}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {toCurrency(`${totSaldoAkhir}`)}
                 </th>
               </tr>
 
               <tr>
                 <th colSpan={3}>TOTAL KESELURUHAN</th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.saldo_awal, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.saldo_awal}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.trx_in, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.trx_in}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.trx_out, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.trx_out}`)}
                 </th>
-                <th className={"txtGreen"} style={numStyle}>
+                <th className={"poin"} style={numStyle}>
                   {summary === undefined
-                    ? 0
+                    ? "0 Poin"
                     : parseInt(summary.saldo_akhir, 10) === 0
-                    ? 0
+                    ? "0 Poin"
                     : toCurrency(`${summary.saldo_akhir}`)}
                 </th>
               </tr>
@@ -392,9 +382,8 @@ class IndexSaldo extends Component {
             callback={this.handlePage}
           />
         </div>
-
         {this.props.isOpen === true ? (
-          <DetailLaporanSaldo detail={this.state.detail} />
+          <DetailReportTransaksiMember detail={this.state.detail} />
         ) : null}
       </Layout>
     );
@@ -402,13 +391,13 @@ class IndexSaldo extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.saldoReducer.isLoading,
-    isLoadingExcel: state.saldoReducer.isLoadingExcel,
+    isLoading: state.reportTransaksiMemberReducer.isLoading,
+    isLoadingExcel: state.reportTransaksiMemberReducer.isLoadingExcel,
     isOpen: state.modalReducer,
-    data: state.saldoReducer.data,
-    dataExcel: state.saldoReducer.excel,
+    data: state.reportTransaksiMemberReducer.data,
+    dataExcel: state.reportTransaksiMemberReducer.excel,
     kategori: state.kategoriReducer.data,
   };
 };
 
-export default connect(mapStateToProps)(IndexSaldo);
+export default connect(mapStateToProps)(LaporanTransaksiMember);

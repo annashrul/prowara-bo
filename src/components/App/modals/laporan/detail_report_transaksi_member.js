@@ -3,13 +3,13 @@ import WrapperModal from "../_wrapper.modal";
 import connect from "react-redux/es/connect/connect";
 import { ModalBody, ModalHeader } from "reactstrap";
 import { ModalToggle } from "../../../../redux/actions/modal.action";
-import { getDetailLaporanSaldo } from "../../../../redux/actions/ewallet/saldo.action";
+import { getDetailReportTransaksi } from "../../../../redux/actions/laporan/report_transaksi_member.action";
 import moment from "moment";
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import Paginationq, { toCurrency } from "../../../../helper";
 import Preloader from "../../../../Preloader";
 
-class DetailLaporanSaldo extends Component {
+class DetailReportTransaksiMember extends Component {
   //MENU ACCESS MASTERDATA = 0-9
   constructor(props) {
     super(props);
@@ -24,14 +24,14 @@ class DetailLaporanSaldo extends Component {
   };
   componentWillMount() {
     this.props.dispatch(
-      getDetailLaporanSaldo(
+      getDetailReportTransaksi(
         `page=1&id_member=${this.props.detail.id}&perpage=10&${this.props.detail.tgl}`
       )
     );
   }
   handlePage(num) {
     this.props.dispatch(
-      getDetailLaporanSaldo(
+      getDetailReportTransaksi(
         `page=${num}&id_member=${this.props.detail.id}&perpage=10&${this.props.detail.tgl}`
       )
     );
@@ -41,7 +41,9 @@ class DetailLaporanSaldo extends Component {
     const { total, per_page, current_page, data, summary } = this.props.data;
     return (
       <WrapperModal
-        isOpen={this.props.isOpen && this.props.type === "detailLaporanSaldo"}
+        isOpen={
+          this.props.isOpen && this.props.type === "detailReportTransaksiMember"
+        }
         size="lg"
       >
         <ModalHeader toggle={this.toggle}>
@@ -134,7 +136,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo Awal</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(`${summary.saldo_awal}`)}
@@ -143,7 +145,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo Masuk</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(`${summary.trx_in}`)}
@@ -152,7 +154,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo Keluar</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(`${summary.trx_out}`)}
@@ -161,7 +163,7 @@ class DetailLaporanSaldo extends Component {
                       <tr>
                         <th>Saldo saat ini</th>
                         <td>:</td>
-                        <td className={"txtGreen"}>
+                        <td className={"poin"}>
                           {summary === undefined
                             ? 0
                             : toCurrency(
@@ -205,9 +207,9 @@ const mapStateToProps = (state) => {
   return {
     isOpen: state.modalReducer,
     type: state.modalTypeReducer,
-    data: state.saldoReducer.detail,
-    isLoading: state.saldoReducer.isLoadingDetail,
+    data: state.reportTransaksiMemberReducer.detail,
+    isLoading: state.reportTransaksiMemberReducer.isLoadingDetail,
   };
 };
 
-export default connect(mapStateToProps)(DetailLaporanSaldo);
+export default connect(mapStateToProps)(DetailReportTransaksiMember);

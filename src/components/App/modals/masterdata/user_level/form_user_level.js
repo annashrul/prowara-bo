@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import WrapperModal from "../../_wrapper.modal";
 import connect from "react-redux/es/connect/connect";
 import Switch from "react-switch";
-
 import { ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { ModalToggle } from "../../../../../redux/actions/modal.action";
 import { ToastQ } from "../../../../../helper";
@@ -29,7 +28,7 @@ class FormUserLevel extends Component {
           isChecked: false,
           isToggle: false,
           sub: undefined,
-          icons: "fa fa-address-book-o",
+          icons: "fa fa-user-o",
         },
         {
           id: 1,
@@ -46,19 +45,19 @@ class FormUserLevel extends Component {
           path: "",
           isChecked: false,
           isToggle: false,
-          icons: "fa fa-user-o",
+          icons: "fa fa-address-book-o",
           sub: [
             {
               id: 3,
               label: "daftar pengguna",
-              path: "/daftar_pengguna",
+              path: "/pengguna",
               parent: "pengguna",
               isChecked: false,
             },
             {
               id: 4,
               label: "akses pengguna",
-              path: "/akses_pengguna",
+              path: "/pengguna/akses",
               parent: "pengguna",
               isChecked: false,
             },
@@ -75,14 +74,14 @@ class FormUserLevel extends Component {
             {
               id: 101,
               label: "daftar paket",
-              path: "/daftar_paket",
+              path: "/paket",
               parent: "paket",
               isChecked: false,
             },
             {
               id: 102,
               label: "kategori paket",
-              path: "/kategori/paket",
+              path: "/paket/kategori",
               parent: "paket",
               isChecked: false,
             },
@@ -124,14 +123,14 @@ class FormUserLevel extends Component {
             {
               id: 202,
               label: "daftar Berita",
-              path: "/daftar_berita",
+              path: "/berita",
               parent: "berita",
               isChecked: false,
             },
             {
               id: 203,
               label: "Kategori Berita",
-              path: "/kategori/berita",
+              path: "/berita/kategori",
               parent: "berita",
               isChecked: false,
             },
@@ -149,35 +148,35 @@ class FormUserLevel extends Component {
             {
               id: 6,
               label: "transaksi",
-              path: "/laporan/transaksi",
+              path: "/laporan/member",
               parent: "laporan",
               isChecked: false,
             },
-            // {
-            //   id: 7,
-            //   label: "penjualan",
-            //   path: "",
-            //   parent: "laporan",
-            //   isChecked: false,
-            //   sub: [
-            //     {
-            //       id: 8,
-            //       label: "paket",
-            //       path: "/laporan/paket",
-            //       parent: "penjualan",
-            //       isChecked: false,
-            //       sub: undefined,
-            //     },
-            //     {
-            //       id: 9,
-            //       label: "pin",
-            //       path: "/laporan/pin",
-            //       parent: "penjualan",
-            //       isChecked: false,
-            //       sub: undefined,
-            //     },
-            //   ],
-            // },
+            {
+              id: 7,
+              label: "penjualan",
+              path: "",
+              parent: "laporan",
+              isChecked: false,
+              sub: [
+                {
+                  id: 8,
+                  label: "paket",
+                  path: "/laporan/paket",
+                  parent: "penjualan",
+                  isChecked: false,
+                  sub: undefined,
+                },
+                {
+                  id: 9,
+                  label: "tiket",
+                  path: "/laporan/tiket",
+                  parent: "penjualan",
+                  isChecked: false,
+                  sub: undefined,
+                },
+              ],
+            },
           ],
           otherSub: true,
         },
@@ -213,8 +212,8 @@ class FormUserLevel extends Component {
 
   getProps(param) {
     if (param.detail.id !== "") {
-      // this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
-      this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
+      this.setState({ lvl: param.detail.lvl, menu: param.detail.access });
+      // this.setState({ lvl: param.detail.lvl, menu: this.state.menu });
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -255,13 +254,8 @@ class FormUserLevel extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    let err = Object.assign({}, this.state.error, {
-      [event.target.name]: "",
-    });
-    this.setState({ error: err });
   }
   handleChangeToggle(e, val) {
-    console.log(e, val);
     this.setState({ checked: val });
   }
   handleSubmit(e) {
@@ -269,7 +263,7 @@ class FormUserLevel extends Component {
     let parseData = {};
     parseData["level"] = this.state.lvl;
     parseData["access_level"] = JSON.stringify(this.state.menu);
-    console.log(parseData);
+    console.log(this.state.menu);
     if (parseData["level"] === "" || parseData["level"] === undefined) {
       ToastQ.fire({
         icon: "error",
@@ -308,6 +302,7 @@ class FormUserLevel extends Component {
                 />
               </div>
             </div>
+
             {menu.map((val, key) => {
               return val.sub === undefined ? (
                 <div style={{ zoom: "80%" }} className="col-md-12" key={key}>

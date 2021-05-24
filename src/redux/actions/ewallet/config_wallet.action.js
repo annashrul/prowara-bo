@@ -1,7 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { CONFIG_WALLET, HEADERS, NOTIF_ALERT } from "../_constants";
-import { ModalToggle } from "../modal.action";
+import { CONFIG_WALLET, HEADERS } from "../_constants";
 
 export function setLoading(load) {
   return {

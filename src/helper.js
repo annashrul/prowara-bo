@@ -23,7 +23,6 @@ export const toExcel = (
   let footer = foot;
   let body = header.concat(content);
   let data = footer === undefined || footer === [] ? body : body.concat(footer);
-  console.log(`=========================> ${data} <==========================`);
   let ws = XLSX.utils.json_to_sheet(data, { skipHeader: true });
   let merge = [
     { s: { r: 0, c: 0 }, e: { r: 0, c: head.length } },
@@ -97,7 +96,7 @@ export const toCurrency = (angka) => {
     rupiah += separator + ribuan.join(".");
   }
 
-  rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+  rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
   return rupiah + " Poin";
 };
 export const stringifyFormData = (fd) => {
@@ -256,10 +255,10 @@ class Paginationq extends Component {
         linkClass="page-link"
         activeClass="page-item active"
         disabledClass="page-item disabled"
-        prevPageText="sebelumnya"
-        nextPageText="selanjutnya"
-        firstPageText="pertama"
-        lastPageText="terakhir"
+        // prevPageText="sebelumnya"
+        // nextPageText="selanjutnya"
+        // firstPageText="pertama"
+        // lastPageText="terakhir"
       />
     );
   }
