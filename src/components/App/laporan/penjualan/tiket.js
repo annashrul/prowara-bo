@@ -84,7 +84,7 @@ class LaporanTiket extends Component {
             v.kd_trx,
             v.title,
             v.qty,
-            parseFloat(v.total),
+            parseFloat(v.total).toFixed(2),
             v.metode_pembayaran,
             v.fullname,
             v.bank_name,

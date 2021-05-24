@@ -415,7 +415,7 @@ class IndexPenarikan extends Component {
                           Rp {toRp(nomRp)} .-
                         </td>
                         <td style={numStyle} className="txtGreen">
-                          Rp {toRp(parseFloat(v.charge) * konv)} .-
+                          Rp {toRp(parseFloat(v.charge).toFixed(2) * konv)} .-
                         </td>
                         <td style={columnStyle}>
                           <span className={`span ${badge}`}>{txt}</span>

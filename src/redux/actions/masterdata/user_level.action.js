@@ -1,6 +1,5 @@
-import axios from "axios";
 import Swal from "sweetalert2";
-import { USER_LEVEL, HEADERS, NOTIF_ALERT } from "../_constants";
+import { USER_LEVEL, NOTIF_ALERT } from "../_constants";
 import { ModalToggle } from "../modal.action";
 import {
   handleDelete,
