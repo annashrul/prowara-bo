@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Select from "react-select";
+import Preloader from "../../../../../Preloader";
 import { updateGeneral } from "../../../../../redux/actions/setting/general.action";
-// import {fetchGeneral, updateGeneral} from 'redux/actions/setting/general.action'
-// import {
-//   fetchKecamatan,
-//   fetchKota,
-//   fetchProvinsi,
-// } from "redux/actions/setting/kurir.action";
+
 
 class Index extends Component {
   constructor(props) {
@@ -114,6 +110,8 @@ class Index extends Component {
   };
 
   render() {
+    if (this.props.isLoading) return <Preloader/>
+
     return (
       <div className="card bg-transparent">
         <div className="card-body">

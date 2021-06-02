@@ -93,14 +93,6 @@ class Index extends Component {
   }
 
   handleTypeOtp(val) {
-    // this.props.dispatch(
-    //   updateGeneral(
-    //     {
-    //       type_otp: val.value,
-    //     },
-    //     "site"
-    //   )
-    // );
 
     this.setState({
       type_otp: val.value,
@@ -108,14 +100,6 @@ class Index extends Component {
   }
 
   handleProviderOtp(val) {
-    // this.props.dispatch(
-    //   updateGeneral(
-    //     {
-    //       provider_otp: val.value,
-    //     },
-    //     "site"
-    //   )
-    // );
 
     this.setState({
       provider_otp: val.value,

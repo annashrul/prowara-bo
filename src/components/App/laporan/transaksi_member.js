@@ -80,10 +80,10 @@ class LaporanTransaksiMember extends Component {
         props.dataExcel.data.forEach((v, i) => {
           content.push([
             v.fullname,
-            parseInt(v.saldo_awal, 10),
-            parseInt(v.trx_in, 10),
-            parseInt(v.trx_out, 10),
-            parseInt(v.saldo_akhir, 10),
+            parseFloat(v.saldo_awal).toFixed(2),
+            parseFloat(v.trx_in).toFixed(2),
+            parseFloat(v.trx_out).toFixed(2),
+            parseFloat(v.saldo_akhir).toFixed(2),
           ]);
         });
         toExcel(
@@ -98,16 +98,16 @@ class LaporanTransaksiMember extends Component {
               "TOTAL",
               props.dataExcel.summary === undefined
                 ? 0
-                : parseInt(props.dataExcel.summary.saldo_awal, 10),
+                : parseFloat(props.dataExcel.summary.saldo_awal).toFixed(2),
               props.dataExcel.summary === undefined
                 ? 0
-                : parseInt(props.dataExcel.summary.trx_in, 10),
+                : parseFloat(props.dataExcel.summary.trx_in).toFixed(2),
               props.dataExcel.summary === undefined
                 ? 0
-                : parseInt(props.dataExcel.summary.trx_out, 10),
+                : parseFloat(props.dataExcel.summary.trx_out).toFixed(2),
               props.dataExcel.summary === undefined
                 ? 0
-                : parseInt(props.dataExcel.summary.saldo_akhir, 10),
+                : parseFloat(props.dataExcel.summary.saldo_akhir).toFixed(2),
             ],
           ]
         );
@@ -269,11 +269,11 @@ class LaporanTransaksiMember extends Component {
               {typeof data === "object" ? (
                 data.length > 0 ? (
                   data.map((v, i) => {
-                    totPlafon = totPlafon + parseInt(v.plafon, 10);
-                    totSaldoAwal = totSaldoAwal + parseInt(v.saldo_awal, 10);
-                    totSaldoAkhir = totSaldoAkhir + parseInt(v.saldo_akhir, 10);
-                    totTrxIn = totTrxIn + parseInt(v.trx_in, 10);
-                    totTrxOut = totTrxOut + parseInt(v.trx_out, 10);
+                    totPlafon = totPlafon + parseFloat(v.plafon);
+                    totSaldoAwal = totSaldoAwal + parseFloat(v.saldo_awal);
+                    totSaldoAkhir = totSaldoAkhir + parseFloat(v.saldo_akhir);
+                    totTrxIn = totTrxIn + parseFloat(v.trx_in);
+                    totTrxOut = totTrxOut + parseFloat(v.trx_out);
                     return (
                       <tr key={i}>
                         <td style={columnStyle}>
@@ -292,16 +292,16 @@ class LaporanTransaksiMember extends Component {
 
                         <td style={columnStyle}>{v.fullname}</td>
                         <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.saldo_awal}`)}
+                          {toCurrency(`${parseFloat(v.saldo_awal).toFixed(2)}`)}
                         </td>
                         <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.trx_in}`)}
+                          {toCurrency(`${parseFloat(v.trx_in).toFixed(2)}`)}
                         </td>
                         <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.trx_out}`)}
+                          {toCurrency(`${parseFloat(v.trx_out).toFixed(2)}`)}
                         </td>
                         <td className={"poin"} style={numStyle}>
-                          {toCurrency(`${v.saldo_akhir}`)}
+                          {toCurrency(`${parseFloat(v.saldo_akhir).toFixed(2)}`)}
                         </td>
                       </tr>
                     );
@@ -325,16 +325,16 @@ class LaporanTransaksiMember extends Component {
               <tr>
                 <th colSpan={3}>TOTAL PERHALAMAN</th>
                 <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totSaldoAwal}`)}
+                  {toCurrency(`${totSaldoAwal.toFixed(2)}`)}
                 </th>
                 <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totTrxIn}`)}
+                  {toCurrency(`${totTrxIn.toFixed(2)}`)}
                 </th>
                 <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totTrxOut}`)}
+                  {toCurrency(`${totTrxOut.toFixed(2)}`)}
                 </th>
                 <th className={"poin"} style={numStyle}>
-                  {toCurrency(`${totSaldoAkhir}`)}
+                  {toCurrency(`${totSaldoAkhir.toFixed(2)}`)}
                 </th>
               </tr>
 
@@ -345,28 +345,28 @@ class LaporanTransaksiMember extends Component {
                     ? "0 Poin"
                     : parseInt(summary.saldo_awal, 10) === 0
                     ? "0 Poin"
-                    : toCurrency(`${summary.saldo_awal}`)}
+                    : toCurrency(`${parseFloat(summary.saldo_awal).toFixed(2)}`)}
                 </th>
                 <th className={"poin"} style={numStyle}>
                   {summary === undefined
                     ? "0 Poin"
                     : parseInt(summary.trx_in, 10) === 0
                     ? "0 Poin"
-                    : toCurrency(`${summary.trx_in}`)}
+                    : toCurrency(`${parseFloat(summary.trx_in).toFixed(2)}`)}
                 </th>
                 <th className={"poin"} style={numStyle}>
                   {summary === undefined
                     ? "0 Poin"
                     : parseInt(summary.trx_out, 10) === 0
                     ? "0 Poin"
-                    : toCurrency(`${summary.trx_out}`)}
+                    : toCurrency(`${parseFloat(summary.trx_out).toFixed(2)}`)}
                 </th>
                 <th className={"poin"} style={numStyle}>
                   {summary === undefined
                     ? "0 Poin"
                     : parseInt(summary.saldo_akhir, 10) === 0
                     ? "0 Poin"
-                    : toCurrency(`${summary.saldo_akhir}`)}
+                    : toCurrency(`${parseFloat(summary.saldo_akhir).toFixed(2)}`)}
                 </th>
               </tr>
             </tfoot>

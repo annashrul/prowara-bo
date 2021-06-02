@@ -578,13 +578,13 @@ class IndexMember extends Component {
               {typeof data === "object" ? (
                 data.length > 0 ? (
                   data.map((v, i) => {
-                    totSaldo += parseInt(v.saldo, 10);
-                    totPin += parseInt(v.pin, 10);
-                    totSponsor += parseInt(v.sponsor, 10);
-                    totPayment += parseInt(v.total_payment, 10);
-                    totSlot += parseInt(v.slot_active, 10);
-                    totModal += parseInt(v.total_modal, 10);
-                    totOmset += parseInt(v.omset, 10);
+                    totSaldo += parseFloat(v.saldo);
+                    totPin += parseFloat(v.pin);
+                    totSponsor += parseFloat(v.sponsor);
+                    totPayment += parseFloat(v.total_payment);
+                    totSlot += parseFloat(v.slot_active);
+                    totModal += parseFloat(v.total_modal);
+                    totOmset += parseFloat(v.omset);
 
                     return (
                       <tr key={i}>
@@ -603,18 +603,6 @@ class IndexMember extends Component {
                                 >
                                   Invesment
                                 </DropdownItem>
-                                {/* <DropdownItem
-                                      onClick={(e) =>
-                                        this.handleAlamat(e, v.id)
-                                      }
-                                    >
-                                      Alamat
-                                    </DropdownItem> */}
-                                {/* <DropdownItem
-                                      onClick={(e) => this.handleBank(e, v.id)}
-                                    >
-                                      Bank
-                                    </DropdownItem> */}
                                 <DropdownItem
                                   onClick={(e) =>
                                     this.handleBankEdit(e, v.id, v.fullname)
@@ -647,18 +635,22 @@ class IndexMember extends Component {
                         <td style={headStyle}>{v.referral}</td>
                         <td style={headStyle}>{v.mobile_no}</td>
                         <td style={numberStyle} className="poin">
-                          {toCurrency(v.saldo)}
+                          {
+                            toCurrency(parseFloat(v.saldo).toFixed(2))
+                          }
                         </td>
                         <td style={numberStyle}>
                           {v.sponsor === "0"
                             ? 0
-                            : toRp(parseInt(v.sponsor, 10))}
+                            : toRp(parseFloat(v.sponsor, 10))}
                         </td>
                         <td style={numberStyle}>
-                          {v.pin === "0" ? 0 : toRp(parseInt(v.pin, 10))}
+                          {v.pin === "0" ? 0 : toRp(parseFloat(v.pin, 10))}
                         </td>
                         <td className="poin" style={numberStyle}>
-                          {toCurrency(v.total_payment)}
+                          {
+                            toCurrency(parseFloat(v.total_payment).toFixed(2))
+                          }
                         </td>
                         <td style={numberStyle}>
                           {v.slot_active === "0" ? 0 : toRp(v.slot_active)}
@@ -693,7 +685,9 @@ class IndexMember extends Component {
               <tr>
                 <td colSpan={5}>TOTAL PERHALAMAN</td>
                 <td style={numberStyle} className="poin">
-                  {toCurrency(totSaldo)}
+                  {
+                    toCurrency(totSaldo.toFixed(2))
+                  }
                 </td>
                 <td style={numberStyle}>{toRp(totSponsor)}</td>
                 <td style={numberStyle}>{toRp(totPin)}</td>
