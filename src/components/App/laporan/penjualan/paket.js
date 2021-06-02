@@ -89,7 +89,7 @@ class LaporanPaket extends Component {
             v.kd_trx,
             v.title,
             v.pin_required,
-            parseFloat(v.total),
+            parseFloat(v.total).toFixed(2),
             v.metode_pembayaran,
             v.fullname,
             v.bank_name,

@@ -88,11 +88,11 @@ export const updateGeneral = (data, type = "site") => {
           dispatch(setIsError(false));
         }
         dispatch(setLoading(false));
-        Swal.close();
+        // Swal.close();
       })
       .catch(function (error) {
         dispatch(setLoading(false));
-        Swal.close();
+        // Swal.close();
         dispatch(setIsError(false));
         dispatch(ModalToggle(true));
         if (error.message === "Network Error") {

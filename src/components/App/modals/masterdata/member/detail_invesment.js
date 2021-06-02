@@ -15,7 +15,6 @@ import moment from "moment";
 import {
   getExcelInvesment,
   getInvesment,
-  setInvesment,
 } from "../../../../../redux/actions/masterdata/member.action";
 import Preloader from "../../../../../Preloader";
 
@@ -86,8 +85,8 @@ class DetailInvesment extends Component {
           content.push([
             v.kd_trx,
             v.fullname,
-            parseFloat(v.trx_in),
-            parseFloat(v.trx_out),
+            parseFloat(v.trx_in).toFixed(2),
+            parseFloat(v.trx_out).toFixed(2),
             v.note,
             myDate(v.created_at),
           ]);
@@ -111,10 +110,10 @@ class DetailInvesment extends Component {
             [
               "TOTAL",
               "",
-              parseFloat(props.dataExcel.summary.trx_in),
-              parseFloat(props.dataExcel.summary.trx_out),
+              parseFloat(props.dataExcel.summary.trx_in).toFixed(2),
+              parseFloat(props.dataExcel.summary.trx_out).toFixed(2),
             ],
-            [`SALDO AWAL : ${parseFloat(props.dataExcel.summary.saldo_awal)}`],
+            [`SALDO AWAL : ${parseFloat(props.dataExcel.summary.saldo_awal).toFixed(2)}`],
           ]
         );
       }
