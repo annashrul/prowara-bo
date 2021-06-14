@@ -347,8 +347,8 @@ class IndexMember extends Component {
       focusConfirm: true,
       background: "#1a1c23",
       html:
-        '<div class="form-group"><label class="text-light">PIN Member</label><div class="input-group"><input type="text" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6" onkeypress="evt = event; var charCode = (evt.which) ? evt.which : evt.keyCode; if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; } return true;"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk login.</small></div>' +
-        '<div class="form-group"><label class="text-light">Ulangi PIN Member</label><div class="input-group"><input type="text" id="pinReModal" class="form-control" placeholder="Ulangi PIN Member" value="" maxlength="6" onkeypress="evt = event; var charCode = (evt.which) ? evt.which : evt.keyCode; if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; } return true;"></div><small class="text-muted">Masukan Kembali 6 digit angka yang akan digunakan member baru untuk login.</small></div>',
+        '<div class="form-group"><label class="text-light">PIN Member</label><div class="input-group"><input type="password" id="pinModal" class="form-control" placeholder="PIN Member" value="" maxlength="6" onkeypress="evt = event; var charCode = (evt.which) ? evt.which : evt.keyCode; if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; } return true;"></div><small class="text-muted">Masukan 6 digit angka yang akan digunakan member baru untuk transaksi.</small></div>' +
+        '<div class="form-group"><label class="text-light">Ulangi PIN Member</label><div class="input-group"><input type="password" id="pinReModal" class="form-control" placeholder="Ulangi PIN Member" value="" maxlength="6" onkeypress="evt = event; var charCode = (evt.which) ? evt.which : evt.keyCode; if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; } return true;"></div><small class="text-muted">Masukan Kembali 6 digit angka yang akan digunakan member baru untuk transaksi.</small></div>',
       type: "warning",
       showCancelButton: true,
       cancelButtonColor: "grey",
@@ -621,6 +621,13 @@ class IndexMember extends Component {
                                   }
                                 >
                                   Edit Member
+                                </DropdownItem>
+                                <DropdownItem
+                                  onClick={(e) =>
+                                    this.handleMemberResetPin(e, v.id)
+                                  }
+                                >
+                                  Reset PIN Member
                                 </DropdownItem>
                                 <DropdownItem
                                   onClick={(e) => this.handleUpdate(e, v)}
