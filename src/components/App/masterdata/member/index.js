@@ -1,20 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "../../../../components/Layout";
-import Paginationq, {
-  statusQ,
-  ToastQ,
-  toCurrency,
-  toRp,
-} from "../../../../helper";
+import Paginationq, { statusQ, ToastQ, toCurrency, toRp } from "../../../../helper";
 import { NOTIF_ALERT } from "../../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../../redux/actions/modal.action";
 import moment from "moment";
 import DetailInvesment from "../../modals/masterdata/member/detail_invesment";
-import {
-  getMember,
-  putMember,
-} from "../../../../redux/actions/masterdata/member.action";
+import { getMember, putMember } from "../../../../redux/actions/masterdata/member.action";
 import UncontrolledButtonDropdown from "reactstrap/es/UncontrolledButtonDropdown";
 import DropdownToggle from "reactstrap/es/DropdownToggle";
 import DropdownMenu from "reactstrap/es/DropdownMenu";
@@ -22,10 +14,7 @@ import DropdownItem from "reactstrap/es/DropdownItem";
 import { fetchKategori } from "../../../../redux/actions/kategori/kategori.action";
 import { getExcelMember } from "../../../../redux/actions/masterdata/member.action";
 import { toExcel } from "../../../../helper";
-import {
-  getDetailBank,
-  setShowModal,
-} from "../../../../redux/actions/masterdata/bank.action";
+import { getDetailBank, setShowModal } from "../../../../redux/actions/masterdata/bank.action";
 import * as Swal from "sweetalert2";
 import Select from "react-select";
 import FormMemberBank from "../../modals/masterdata/member/form_member_bank";
@@ -129,55 +118,14 @@ class IndexMember extends Component {
           totModal += newModal;
           totOmset += newOmset;
 
-          content.push([
-            v.fullname,
-            v.referral,
-            v.mobile_no,
-            newSaldo,
-            newSponsor,
-            newPin,
-            newPayment,
-            newSlotActive,
-            newModal,
-            newOmset,
-            v.status === 0 ? "Tidak Aktif" : "Aktif",
-          ]);
+          content.push([v.fullname, v.referral, v.mobile_no, newSaldo, newSponsor, newPin, newPayment, newSlotActive, newModal, newOmset, v.status === 0 ? "Tidak Aktif" : "Aktif"]);
         });
         toExcel(
-          `LAPORAN MEMBER ${
-            stts === 0 ? "Tidak Aktif" : stts === 1 ? "Aktif" : ""
-          }`,
+          `LAPORAN MEMBER ${stts === 0 ? "Tidak Aktif" : stts === 1 ? "Aktif" : ""}`,
           `SEMUA PERIODE`,
-          [
-            "NAMA",
-            "REFERRAL",
-            "NO.TELEPON",
-            "SALDO ( POIN )",
-            "SPONSOR",
-            "TIKET",
-            "PENARIKAN ( POIN )",
-            "SLOT AKTIF",
-            "MODAL ( POIN )",
-            "OMSET ( POIN )",
-            "STATUS",
-          ],
+          ["NAMA", "REFERRAL", "NO.TELEPON", "SALDO ( POIN )", "SPONSOR", "TIKET", "PENARIKAN ( POIN )", "SLOT AKTIF", "MODAL ( POIN )", "OMSET ( POIN )", "STATUS"],
           content,
-          [
-            [""],
-            [""],
-            [
-              "TOTAL",
-              "",
-              "",
-              totSaldo,
-              totSposor,
-              totPin,
-              totPayment,
-              totSlotActive,
-              totModal,
-              totOmset,
-            ],
-          ]
+          [[""], [""], ["TOTAL", "", "", totSaldo, totSposor, totPin, totPayment, totSlotActive, totModal, totOmset]]
         );
       }
     }
@@ -187,9 +135,7 @@ class IndexMember extends Component {
     this.setState({ isLoading: true });
     let where = this.handleValidate();
     if (this.state.status !== "") {
-      this.props.dispatch(
-        getExcelMember(`status=${this.state.status}&perpage=${param}&${where}`)
-      );
+      this.props.dispatch(getExcelMember(`status=${this.state.status}&perpage=${param}&${where}`));
     } else {
       this.props.dispatch(getExcelMember(`perpage=${param}&${where}`));
     }
@@ -252,7 +198,7 @@ class IndexMember extends Component {
   }
   handleMemberResetPin(e, val) {
     e.preventDefault();
-    this.setState({ detail: {id:val} });
+    this.setState({ detail: { id: val } });
     const bool = !this.props.isOpen;
     this.props.dispatch(ModalToggle(bool));
     this.props.dispatch(ModalType("formMemberPinReset"));
@@ -267,22 +213,16 @@ class IndexMember extends Component {
     e.preventDefault();
     Swal.fire({
       title: "Perhatian !!!",
-      html: `anda yakin akan ${
-        val.status === 1 ? "Menonaktifkan" : "Mengaktifkan"
-      } ${val.fullname} ??`,
+      html: `anda yakin akan ${val.status === 1 ? "Menonaktifkan" : "Mengaktifkan"} ${val.fullname} ??`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: `Oke, ${
-        val.status === 1 ? "Nonaktifkan" : "Aktifkan"
-      }`,
+      confirmButtonText: `Oke, ${val.status === 1 ? "Nonaktifkan" : "Aktifkan"}`,
       cancelButtonText: "Batal",
     }).then((result) => {
       if (result.value) {
-        this.props.dispatch(
-          putMember({ status: val.status === 0 ? "1" : "0" }, val.id)
-        );
+        this.props.dispatch(putMember({ status: val.status === 0 ? "1" : "0" }, val.id));
       }
     });
   }
@@ -565,27 +505,14 @@ class IndexMember extends Component {
               </div>
             </div>
           </div>
-          <div
-            className="col-12 col-xs-12 col-md-2"
-            style={{ textAlign: "right" }}
-          >
+          <div className="col-12 col-xs-12 col-md-2" style={{ textAlign: "right" }}>
             <div className="row">
               <div className="col-md-12">
                 <div className="form-group">
-                  <button
-                    style={{ marginTop: "28px", marginRight: "5px" }}
-                    className="btn btn-primary"
-                    onClick={this.handleSearch}
-                  >
+                  <button style={{ marginTop: "28px", marginRight: "5px" }} className="btn btn-primary" onClick={this.handleSearch}>
                     <i className="fa fa-search" />
                   </button>
-                  <button
-                    style={{ marginTop: "28px" }}
-                    className="btn btn-primary"
-                    onClick={(e) =>
-                      this.printDocumentXLsx(e, per_page * last_page)
-                    }
-                  >
+                  <button style={{ marginTop: "28px" }} className="btn btn-primary" onClick={(e) => this.printDocumentXLsx(e, per_page * last_page)}>
                     <i className="fa fa-print" />
                   </button>
                 </div>
@@ -646,9 +573,7 @@ class IndexMember extends Component {
 
                     return (
                       <tr key={i}>
-                        <td style={headStyle}>
-                          {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
-                        </td>
+                        <td style={headStyle}>{i + 1 + 10 * (parseInt(current_page, 10) - 1)}</td>
                         <td style={headStyle}>
                           <div className="btn-group">
                             <UncontrolledButtonDropdown nav>
@@ -656,42 +581,11 @@ class IndexMember extends Component {
                                 Pilihan
                               </DropdownToggle>
                               <DropdownMenu>
-                                <DropdownItem
-                                  onClick={(e) => this.handleInvestment(e, v)}
-                                >
-                                  Invesment
-                                </DropdownItem>
-                                <DropdownItem
-                                  onClick={(e) =>
-                                    this.handleBankEdit(e, v.id, v.fullname)
-                                  }
-                                >
-                                  Edit Bank
-                                </DropdownItem>
-                                <DropdownItem
-                                  onClick={(e) =>
-                                    this.handleMemberEdit(
-                                      e,
-                                      v.id,
-                                      v.fullname,
-                                      v.mobile_no
-                                    )
-                                  }
-                                >
-                                  Edit Member
-                                </DropdownItem>
-                                <DropdownItem
-                                  onClick={(e) =>
-                                    this.handleMemberResetPin(e, v.id)
-                                  }
-                                >
-                                  Reset PIN Member
-                                </DropdownItem>
-                                <DropdownItem
-                                  onClick={(e) => this.handleUpdate(e, v)}
-                                >
-                                  {v.status === 0 ? "Aktifkan" : "Non-aktifkan"}
-                                </DropdownItem>
+                                <DropdownItem onClick={(e) => this.handleInvestment(e, v)}>Invesment</DropdownItem>
+                                <DropdownItem onClick={(e) => this.handleBankEdit(e, v.id, v.fullname)}>Edit Bank</DropdownItem>
+                                <DropdownItem onClick={(e) => this.handleMemberEdit(e, v.id, v.fullname, v.mobile_no)}>Edit Member</DropdownItem>
+                                <DropdownItem onClick={(e) => this.handleMemberResetPin(e, v.id)}>Reset PIN Member</DropdownItem>
+                                <DropdownItem onClick={(e) => this.handleUpdate(e, v)}>{v.status === 0 ? "Aktifkan" : "Non-aktifkan"}</DropdownItem>
                               </DropdownMenu>
                             </UncontrolledButtonDropdown>
                           </div>
@@ -700,26 +594,14 @@ class IndexMember extends Component {
                         <td style={headStyle}>{v.referral}</td>
                         <td style={headStyle}>{v.mobile_no}</td>
                         <td style={numberStyle} className="poin">
-                          {
-                            toCurrency(parseFloat(v.saldo).toFixed(2))
-                          }
+                          {toCurrency(parseFloat(v.saldo).toFixed(2))}
                         </td>
-                        <td style={numberStyle}>
-                          {v.sponsor === "0"
-                            ? 0
-                            : toRp(parseFloat(v.sponsor, 10))}
-                        </td>
-                        <td style={numberStyle}>
-                          {v.pin === "0" ? 0 : toRp(parseFloat(v.pin, 10))}
-                        </td>
+                        <td style={numberStyle}>{v.sponsor === "0" ? 0 : toRp(parseFloat(v.sponsor, 10).toFixed(2))}</td>
+                        <td style={numberStyle}>{v.pin === "0" ? 0 : toRp(parseFloat(v.pin, 10))}</td>
                         <td className="poin" style={numberStyle}>
-                          {
-                            toCurrency(parseFloat(v.total_payment).toFixed(2))
-                          }
+                          {toCurrency(parseFloat(v.total_payment).toFixed(2))}
                         </td>
-                        <td style={numberStyle}>
-                          {v.slot_active === "0" ? 0 : toRp(v.slot_active)}
-                        </td>
+                        <td style={numberStyle}>{v.slot_active === "0" ? 0 : toRp(v.slot_active)}</td>
                         <td className="poin" style={numberStyle}>
                           {toCurrency(v.total_modal)}
                         </td>
@@ -750,14 +632,12 @@ class IndexMember extends Component {
               <tr>
                 <td colSpan={5}>TOTAL PERHALAMAN</td>
                 <td style={numberStyle} className="poin">
-                  {
-                    toCurrency(totSaldo.toFixed(2))
-                  }
+                  {toCurrency(totSaldo.toFixed(2))}
                 </td>
                 <td style={numberStyle}>{toRp(totSponsor)}</td>
                 <td style={numberStyle}>{toRp(totPin)}</td>
                 <td className="poin" style={numberStyle}>
-                  {toCurrency(totPayment)}
+                  {toCurrency(totPayment.toFixed(2))}
                 </td>
                 <td style={numberStyle}>{toRp(totSlot)}</td>
                 <td className="poin" style={numberStyle}>
@@ -778,26 +658,13 @@ class IndexMember extends Component {
             float: "right",
           }}
         >
-          <Paginationq
-            current_page={current_page}
-            per_page={per_page}
-            total={total}
-            callback={this.handlePage}
-          />
+          <Paginationq current_page={current_page} per_page={per_page} total={total} callback={this.handlePage} />
         </div>
 
-        {this.state.isModalInvest ? (
-          <DetailInvesment detail={this.state.detail} />
-        ) : null}
+        {this.state.isModalInvest ? <DetailInvesment detail={this.state.detail} /> : null}
 
-        {this.props.isShowModalBank ? (
-          <FormMemberBank
-            detail={this.state.detail}
-            detailBank={this.props.detailBank}
-          />
-        ) : null}
-        <FormMemberPinReset 
-            detail={this.state.detail}/>
+        {this.props.isShowModalBank ? <FormMemberBank detail={this.state.detail} detailBank={this.props.detailBank} /> : null}
+        <FormMemberPinReset detail={this.state.detail} />
       </Layout>
     );
   }
