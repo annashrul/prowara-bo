@@ -99,7 +99,7 @@ class IndexDeposit extends Component {
           `${this.state.dateFrom} - ${this.state.dateTo}`,
           ["KODE TRANSAKSI", "NAMA", "DOWNLINE", "BANK TUJUAN", "NO REKENING", "JUMLAH", "KODE UNIK", "STATUS", "TANGGAL"],
           content,
-          [[""], [""], ["TOTAL", "", "", "", total]]
+          [[""], [""], ["TOTAL", "", "", "", "", total]]
         );
       }
     }
