@@ -2,21 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Layout from "components/Layout";
 import { DateRangePicker } from "react-bootstrap-daterangepicker";
-import Paginationq, {
-  rangeDate,
-  toCurrency,
-  myDate,
-  toExcel,
-  toRp,
-} from "../../../helper";
+import Paginationq, { rangeDate, toCurrency, myDate, toExcel, toRp } from "../../../helper";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 import { ModalToggle, ModalType } from "../../../redux/actions/modal.action";
 import moment from "moment";
-import {
-  getDeposit,
-  getExcelDeposit,
-  postDeposit,
-} from "../../../redux/actions/ewallet/deposit.action";
+import { getDeposit, getExcelDeposit, postDeposit } from "../../../redux/actions/ewallet/deposit.action";
 import * as Swal from "sweetalert2";
 import Select from "react-select";
 import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
@@ -68,11 +58,7 @@ class IndexDeposit extends Component {
   handleValidate() {
     let where = "";
     let data = this.state;
-    if (
-      data.dateFrom !== null &&
-      data.dateFrom !== undefined &&
-      data.dateFrom !== ""
-    ) {
+    if (data.dateFrom !== null && data.dateFrom !== undefined && data.dateFrom !== "") {
       where += `&datefrom=${data.dateFrom}&dateto=${data.dateTo}`;
     }
     if (data.kolom !== null && data.kolom !== undefined && data.kolom !== "") {
@@ -94,9 +80,7 @@ class IndexDeposit extends Component {
         let content = [];
         let total = 0;
         props.dataExcel.data.forEach((v) => {
-          let konv =
-            parseInt(v.amount, 10) *
-            parseInt(this.props.configWallet.konversi_poin, 10);
+          let konv = parseInt(v.amount, 10) * parseInt(this.props.configWallet.konversi_poin, 10);
           total = total + konv;
           let status = "";
           if (v.status === 0) {
@@ -108,30 +92,12 @@ class IndexDeposit extends Component {
           if (v.status === 2) {
             status = "Gagal";
           }
-          content.push([
-            v.kd_trx,
-            v.fullname,
-            v.acc_name,
-            v.acc_no,
-            konv,
-            parseInt(v.unique_code, 10),
-            status,
-            myDate(v.created_at),
-          ]);
+          content.push([v.kd_trx, v.fullname, v.downline, v.acc_name, v.acc_no, konv, parseInt(v.unique_code, 10), status, myDate(v.created_at)]);
         });
         toExcel(
           "LAPORAN DEPOSIT",
           `${this.state.dateFrom} - ${this.state.dateTo}`,
-          [
-            "KODE TRANSAKSI",
-            "NAMA",
-            "BANK TUJUAN",
-            "NO REKENING",
-            "JUMLAH",
-            "KODE UNIK",
-            "STATUS",
-            "TANGGAL",
-          ],
+          ["KODE TRANSAKSI", "NAMA", "DOWNLINE", "BANK TUJUAN", "NO REKENING", "JUMLAH", "KODE UNIK", "STATUS", "TANGGAL"],
           content,
           [[""], [""], ["TOTAL", "", "", "", total]]
         );
@@ -181,11 +147,7 @@ class IndexDeposit extends Component {
       dateTo: to,
     });
     if (this.state.status !== "") {
-      this.props.dispatch(
-        getDeposit(
-          `page=1&datefrom=${from}&dateto=${to}&status=${this.state.status}`
-        )
-      );
+      this.props.dispatch(getDeposit(`page=1&datefrom=${from}&dateto=${to}&status=${this.state.status}`));
     } else {
       this.props.dispatch(getDeposit(`page=1&datefrom=${from}&dateto=${to}`));
     }
@@ -205,16 +167,12 @@ class IndexDeposit extends Component {
     e.preventDefault();
     Swal.fire({
       title: "Perhatian !!!",
-      text: `anda yakin akan ${
-        status === 1 ? "menerima" : "membatalkan"
-      } deposit ini ??`,
+      text: `anda yakin akan ${status === 1 ? "menerima" : "membatalkan"} deposit ini ??`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: `Oke, ${
-        status === 1 ? "terima" : "batalkan"
-      } sekarang!`,
+      confirmButtonText: `Oke, ${status === 1 ? "terima" : "batalkan"} sekarang!`,
       cancelButtonText: "keluar",
     }).then((result) => {
       if (result.value) {
@@ -252,20 +210,8 @@ class IndexDeposit extends Component {
               <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Periode </label>
-                  <DateRangePicker
-                    autoUpdateInput={true}
-                    showDropdowns={true}
-                    style={{ display: "unset" }}
-                    ranges={rangeDate}
-                    alwaysShowCalendars={true}
-                    onApply={this.handleEvent}
-                  >
-                    <input
-                      type="text"
-                      readOnly={true}
-                      className="form-control"
-                      value={`${this.state.dateFrom} to ${this.state.dateTo}`}
-                    />
+                  <DateRangePicker autoUpdateInput={true} showDropdowns={true} style={{ display: "unset" }} ranges={rangeDate} alwaysShowCalendars={true} onApply={this.handleEvent}>
+                    <input type="text" readOnly={true} className="form-control" value={`${this.state.dateFrom} to ${this.state.dateTo}`} />
                   </DateRangePicker>
                 </div>
               </div>
@@ -325,23 +271,12 @@ class IndexDeposit extends Component {
               </div>
             </div>
           </div>
-          <div
-            className="col-12 col-xs-12 col-md-2"
-            style={{ textAlign: "right" }}
-          >
+          <div className="col-12 col-xs-12 col-md-2" style={{ textAlign: "right" }}>
             <div className="form-group">
-              <button
-                style={{ marginTop: "28px", marginRight: "5px" }}
-                className="btn btn-primary"
-                onClick={(e) => this.handleSearch(e)}
-              >
+              <button style={{ marginTop: "28px", marginRight: "5px" }} className="btn btn-primary" onClick={(e) => this.handleSearch(e)}>
                 <i className="fa fa-search" />
               </button>
-              <button
-                style={{ marginTop: "28px" }}
-                className="btn btn-primary"
-                onClick={(e) => this.printDocumentXLsx(e, per_page * last_page)}
-              >
+              <button style={{ marginTop: "28px" }} className="btn btn-primary" onClick={(e) => this.printDocumentXLsx(e, per_page * last_page)}>
                 <i className="fa fa-print" />
               </button>
             </div>
@@ -363,6 +298,9 @@ class IndexDeposit extends Component {
                 </th>
                 <th rowSpan="2" style={columnStyle}>
                   NAMA
+                </th>
+                <th rowSpan="2" style={columnStyle}>
+                  DOWNLINE
                 </th>
                 <th rowSpan="2" style={columnStyle}>
                   BANK TUJUAN
@@ -392,59 +330,37 @@ class IndexDeposit extends Component {
                     totAmountPoint = totAmountPoint + parseInt(v.amount);
                     let nomRp = 0;
                     if (this.props.configWallet !== undefined) {
-                      let konv =
-                        parseInt(v.amount, 10) *
-                        parseInt(this.props.configWallet.konversi_poin);
+                      let konv = parseInt(v.amount, 10) * parseInt(this.props.configWallet.konversi_poin);
                       nomRp = konv;
                       totAmountRp = totAmountRp + parseInt(konv);
                     }
                     let status = "";
                     if (v.status === 0) {
-                      status = (
-                        <span className={"badge badge-warning"}>Pending</span>
-                      );
+                      status = <span className={"badge badge-warning"}>Pending</span>;
                     }
                     if (v.status === 1) {
-                      status = (
-                        <span className={"badge badge-success"}>Sukses</span>
-                      );
+                      status = <span className={"badge badge-success"}>Sukses</span>;
                     }
                     if (v.status === 2) {
-                      status = (
-                        <span className={"badge badge-danger"}>Gagal</span>
-                      );
+                      status = <span className={"badge badge-danger"}>Gagal</span>;
                     }
                     return (
                       <tr key={i}>
+                        <td style={columnStyle}>{i + 1 + 10 * (parseInt(current_page, 10) - 1)}</td>
                         <td style={columnStyle}>
-                          {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
-                        </td>
-                        <td style={columnStyle}>
-                          <button
-                            style={{ marginRight: "5px" }}
-                            className={"btn btn-primary"}
-                            disabled={v.status === 1 || v.status === 2}
-                            onClick={(e) => this.handleApproval(e, v.kd_trx, 1)}
-                          >
+                          <button style={{ marginRight: "5px" }} className={"btn btn-primary"} disabled={v.status === 1 || v.status === 2} onClick={(e) => this.handleApproval(e, v.kd_trx, 1)}>
                             <i className={"fa fa-check"} />
                           </button>
-                          <button
-                            style={{ marginRight: "5px" }}
-                            className={"btn btn-primary"}
-                            disabled={v.status === 1 || v.status === 2}
-                            onClick={(e) => this.handleApproval(e, v.kd_trx, 2)}
-                          >
+                          <button style={{ marginRight: "5px" }} className={"btn btn-primary"} disabled={v.status === 1 || v.status === 2} onClick={(e) => this.handleApproval(e, v.kd_trx, 2)}>
                             <i className={"fa fa-close"} />
                           </button>
-                          <button
-                            className={"btn btn-primary"}
-                            onClick={(e) => this.handlePaymentSlip(e, i)}
-                          >
+                          <button className={"btn btn-primary"} onClick={(e) => this.handlePaymentSlip(e, i)}>
                             <i className={"fa fa-image"} />
                           </button>
                         </td>
                         <td style={columnStyle}>{v.kd_trx}</td>
                         <td style={columnStyle}>{v.fullname}</td>
+                        <td style={columnStyle}>{v.downline}</td>
                         <td style={strStyle}>
                           {v.acc_name}
                           <br />
@@ -483,7 +399,7 @@ class IndexDeposit extends Component {
             </tbody>
             <tfoot className="bgWithOpacity">
               <tr>
-                <th colSpan={5}>TOTAL PERHALAMAN</th>
+                <th colSpan={6}>TOTAL PERHALAMAN</th>
                 <th colSpan={1} style={numStyle} className="poin">
                   {toCurrency(`${totAmountPoint}`)}
                 </th>
@@ -502,12 +418,7 @@ class IndexDeposit extends Component {
             float: "right",
           }}
         >
-          <Paginationq
-            current_page={current_page}
-            per_page={per_page}
-            total={total}
-            callback={this.handlePage}
-          />
+          <Paginationq current_page={current_page} per_page={per_page} total={total} callback={this.handlePage} />
         </div>
       </Layout>
     );

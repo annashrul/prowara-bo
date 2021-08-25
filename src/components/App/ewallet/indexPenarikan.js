@@ -6,11 +6,7 @@ import Paginationq, { rangeDate, toExcel, myDate, toRp } from "../../../helper";
 import { NOTIF_ALERT } from "../../../redux/actions/_constants";
 import moment from "moment";
 import * as Swal from "sweetalert2";
-import {
-  getExcelPenarikan,
-  getPenarikan,
-  postPenarikan,
-} from "../../../redux/actions/ewallet/penarikan.action";
+import { getExcelPenarikan, getPenarikan, postPenarikan } from "../../../redux/actions/ewallet/penarikan.action";
 import Select from "react-select";
 import { getConfigWallet } from "../../../redux/actions/ewallet/config_wallet.action";
 
@@ -48,11 +44,7 @@ class IndexPenarikan extends Component {
   handleValidate() {
     let where = "";
     let data = this.state;
-    if (
-      data.dateFrom !== null &&
-      data.dateFrom !== undefined &&
-      data.dateFrom !== ""
-    ) {
+    if (data.dateFrom !== null && data.dateFrom !== undefined && data.dateFrom !== "") {
       where += `&datefrom=${data.dateFrom}&dateto=${data.dateTo}`;
     }
     if (data.kolom !== null && data.kolom !== undefined && data.kolom !== "") {
@@ -114,16 +106,12 @@ class IndexPenarikan extends Component {
     e.preventDefault();
     Swal.fire({
       title: "Perhatian !!!",
-      text: `anda yakin akan ${
-        status === 1 ? "menerima" : "membatalkan"
-      } penarikan ini ??`,
+      text: `anda yakin akan ${status === 1 ? "menerima" : "membatalkan"} penarikan ini ??`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: `Oke, ${
-        status === 1 ? "terima" : "batalkan"
-      } sekarang!`,
+      confirmButtonText: `Oke, ${status === 1 ? "terima" : "batalkan"} sekarang!`,
       cancelButtonText: "keluar",
     }).then((result) => {
       if (result.value) {
@@ -157,32 +145,12 @@ class IndexPenarikan extends Component {
           if (v.status === 2) {
             status = "Gagal";
           }
-          content.push([
-            v.kd_trx,
-            v.fullname,
-            v.bank_name,
-            v.acc_name,
-            v.acc_no,
-            parseFloat(v.amount) * konv,
-            parseFloat(v.charge) * konv,
-            status,
-            myDate(v.created_at),
-          ]);
+          content.push([v.kd_trx, v.fullname, v.bank_name, v.acc_name, v.acc_no, parseFloat(v.amount) * konv, parseFloat(v.charge) * konv, status, myDate(v.created_at)]);
         });
         toExcel(
           "LAPORAN PENARIKAN",
           `${this.state.dateFrom} - ${this.state.dateTo}`,
-          [
-            "KODE TRANSAKSI",
-            "NAMA",
-            "BANK",
-            "ATAS NAMA",
-            "NO REKENING",
-            "JUMLAH",
-            "BIAYA ADMIN",
-            "STATUS",
-            "TANGGAL",
-          ],
+          ["KODE TRANSAKSI", "NAMA", "BANK", "ATAS NAMA", "NO REKENING", "JUMLAH", "BIAYA ADMIN", "STATUS", "TANGGAL"],
           content,
           [[""], [""], ["TOTAL", "", "", "", "", total]]
         );
@@ -222,20 +190,8 @@ class IndexPenarikan extends Component {
               <div className="col-6 col-xs-6 col-md-3">
                 <div className="form-group">
                   <label>Periode </label>
-                  <DateRangePicker
-                    autoUpdateInput={true}
-                    showDropdowns={true}
-                    style={{ display: "unset" }}
-                    ranges={rangeDate}
-                    alwaysShowCalendars={true}
-                    onApply={this.handleEvent}
-                  >
-                    <input
-                      type="text"
-                      readOnly={true}
-                      className="form-control"
-                      value={`${this.state.dateFrom} to ${this.state.dateTo}`}
-                    />
+                  <DateRangePicker autoUpdateInput={true} showDropdowns={true} style={{ display: "unset" }} ranges={rangeDate} alwaysShowCalendars={true} onApply={this.handleEvent}>
+                    <input type="text" readOnly={true} className="form-control" value={`${this.state.dateFrom} to ${this.state.dateTo}`} />
                   </DateRangePicker>
                 </div>
               </div>
@@ -295,23 +251,12 @@ class IndexPenarikan extends Component {
               </div>
             </div>
           </div>
-          <div
-            className="col-12 col-xs-12 col-md-2"
-            style={{ textAlign: "right" }}
-          >
+          <div className="col-12 col-xs-12 col-md-2" style={{ textAlign: "right" }}>
             <div className="form-group">
-              <button
-                style={{ marginTop: "28px", marginRight: "5px" }}
-                className="btn btn-primary"
-                onClick={(e) => this.handleSearch(e)}
-              >
+              <button style={{ marginTop: "28px", marginRight: "5px" }} className="btn btn-primary" onClick={(e) => this.handleSearch(e)}>
                 <i className="fa fa-search" />
               </button>
-              <button
-                style={{ marginTop: "28px" }}
-                className="btn btn-primary"
-                onClick={(e) => this.printDocumentXLsx(e, per_page * last_page)}
-              >
+              <button style={{ marginTop: "28px" }} className="btn btn-primary" onClick={(e) => this.printDocumentXLsx(e, per_page * last_page)}>
                 <i className="fa fa-print" />
               </button>
             </div>
@@ -382,25 +327,13 @@ class IndexPenarikan extends Component {
                     return (
                       <tr key={i}>
                         <td style={columnStyle}>
-                          <span className="circle">
-                            {i + 1 + 10 * (parseInt(current_page, 10) - 1)}
-                          </span>
+                          <span className="circle">{i + 1 + 10 * (parseInt(current_page, 10) - 1)}</span>
                         </td>
                         <td style={columnStyle}>
-                          <button
-                            style={{ marginRight: "5px" }}
-                            className={"btn btn-primary"}
-                            disabled={v.status === 1 || v.status === 2}
-                            onClick={(e) => this.handleApproval(e, v.id, 1)}
-                          >
+                          <button style={{ marginRight: "5px" }} className={"btn btn-primary"} disabled={v.status === 1 || v.status === 2} onClick={(e) => this.handleApproval(e, v.id, 1)}>
                             <i className={"fa fa-check"} />
                           </button>
-                          <button
-                            style={{ marginRight: "5px" }}
-                            className={"btn btn-primary"}
-                            disabled={v.status === 1 || v.status === 2}
-                            onClick={(e) => this.handleApproval(e, v.id, 2)}
-                          >
+                          <button style={{ marginRight: "5px" }} className={"btn btn-primary"} disabled={v.status === 1 || v.status === 2} onClick={(e) => this.handleApproval(e, v.id, 2)}>
                             <i className={"fa fa-close"} />
                           </button>
                         </td>
@@ -412,7 +345,7 @@ class IndexPenarikan extends Component {
                           {v.bank_name} ({v.acc_no})
                         </td>
                         <td style={numStyle} className="txtGreen">
-                          Rp {toRp(nomRp)} .-
+                          Rp {toRp(parseFloat(nomRp).toFixed(2))} .-
                         </td>
                         <td style={numStyle} className="txtGreen">
                           Rp {toRp(parseFloat(v.charge).toFixed(2) * konv)} .-
@@ -443,22 +376,15 @@ class IndexPenarikan extends Component {
               <tr>
                 <th colSpan={5}>TOTAL PERHALAMAN</th>
                 <th colSpan={1} style={numStyle} className="txtGreen">
-                  Rp {toRp(`${totAmountRp}`)} .-
+                  Rp {toRp(parseFloat(`${totAmountRp}`).toFixed(2))} .-
                 </th>
                 <th colSpan={3} />
               </tr>
             </tfoot>
           </table>
         </div>
-        <div
-          style={{ marginTop: "20px", marginBottom: "20px", float: "right" }}
-        >
-          <Paginationq
-            current_page={current_page}
-            per_page={per_page}
-            total={total}
-            callback={this.handlePage}
-          />
+        <div style={{ marginTop: "20px", marginBottom: "20px", float: "right" }}>
+          <Paginationq current_page={current_page} per_page={per_page} total={total} callback={this.handlePage} />
         </div>
       </Layout>
     );

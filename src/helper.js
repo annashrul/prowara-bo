@@ -12,13 +12,7 @@ import XLSX from "xlsx";
 export const myDate = (val) => {
   return moment(val).locale("id").format("L");
 };
-export const toExcel = (
-  title = "",
-  periode = "",
-  head = [],
-  content = [],
-  foot = []
-) => {
+export const toExcel = (title = "", periode = "", head = [], content = [], foot = []) => {
   let header = [[title.toUpperCase()], [`PERIODE : ${periode}`], [""], head];
   let footer = foot;
   let body = header.concat(content);
@@ -42,9 +36,7 @@ export const toExcel = (
 
   let wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, title.toUpperCase());
-  let exportFileName = `${title.replaceAll(" ", "_").toUpperCase()}_${moment(
-    new Date()
-  ).format("YYYYMMDDHHMMss")}.xlsx`;
+  let exportFileName = `${title.replaceAll(" ", "_").toUpperCase()}_${moment(new Date()).format("YYYYMMDDHHMMss")}.xlsx`;
   XLSX.writeFile(wb, exportFileName, { type: "file", bookType: "xlsx" });
   return;
 };
@@ -65,13 +57,7 @@ export const noImage = () => {
 };
 export const copyTxt = (txt) => {
   return (
-    <CopyToClipboard
-      text={txt}
-      style={{ cursor: "copy" }}
-      onCopy={() =>
-        ToastQ.fire({ icon: "success", title: `${txt} has been copied.` })
-      }
-    >
+    <CopyToClipboard text={txt} style={{ cursor: "copy" }} onCopy={() => ToastQ.fire({ icon: "success", title: `${txt} has been copied.` })}>
       <span>
         <i className="fa fa-copy" style={{ color: "green" }} /> {txt}{" "}
       </span>
@@ -128,10 +114,7 @@ export const rmComma = (angka) => {
   } else {
     numbers = angka;
   }
-  var number_string =
-      numbers === "" || numbers === undefined
-        ? String(0.0)
-        : numbers.toString().replace(/,|\D/g, ""),
+  var number_string = numbers === "" || numbers === undefined ? String(0.0) : numbers.toString().replace(/,|\D/g, ""),
     split = number_string.split("."),
     sisa = split[0].length % 3,
     rupiah = split[0].substr(0, sisa),
@@ -142,10 +125,7 @@ export const rmComma = (angka) => {
   }
 
   rupiah = split[1] !== undefined ? rupiah + "" + split[1] : rupiah;
-  rupiah =
-    parseFloat(angka) < 0
-      ? "-" + rupiah.replace(/^0+/, "")
-      : rupiah.replace(/^0+/, "");
+  rupiah = parseFloat(angka) < 0 ? "-" + rupiah.replace(/^0+/, "") : rupiah.replace(/^0+/, "");
   return parseInt(rupiah, 10);
 };
 
@@ -159,10 +139,7 @@ export const toRp = (angka) => {
   } else {
     numbers = angka;
   }
-  var number_string =
-      numbers === "" || numbers === undefined || numbers === null
-        ? String(0.0)
-        : numbers.toString(),
+  var number_string = numbers === "" || numbers === undefined || numbers === null ? String(0.0) : numbers.toString(),
     split = number_string.split("."),
     sisa = split[0].length % 3,
     rupiah = split[0].substr(0, sisa),
@@ -202,11 +179,7 @@ export const statusQ = (txt) => {
   }
 };
 export const getMargin = (hrg_jual, hrg_beli) => {
-  return (
-    ((parseInt(hrg_jual, 10) - parseInt(hrg_beli, 10)) /
-      parseInt(hrg_beli, 10)) *
-    100
-  ).toFixed(2);
+  return (((parseInt(hrg_jual, 10) - parseInt(hrg_beli, 10)) / parseInt(hrg_beli, 10)) * 100).toFixed(2);
 };
 
 export const rmHtml = (str) => {
@@ -223,20 +196,11 @@ export const rangeDate = {
   "7 Hari Terakhir": [moment().subtract(6, "days"), moment()],
   "30 Hari Terakhir": [moment().subtract(29, "days"), moment()],
   "Minggu Ini": [moment().startOf("isoWeek"), moment().endOf("isoWeek")],
-  "Minggu Lalu": [
-    moment().subtract(1, "weeks").startOf("isoWeek"),
-    moment().subtract(1, "weeks").endOf("isoWeek"),
-  ],
+  "Minggu Lalu": [moment().subtract(1, "weeks").startOf("isoWeek"), moment().subtract(1, "weeks").endOf("isoWeek")],
   "Bulan Ini": [moment().startOf("month"), moment().endOf("month")],
-  "Bulan Lalu": [
-    moment().subtract(1, "month").startOf("month"),
-    moment().subtract(1, "month").endOf("month"),
-  ],
+  "Bulan Lalu": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")],
   "Tahun Ini": [moment().startOf("year"), moment().endOf("year")],
-  "Tahun Lalu": [
-    moment().subtract(1, "year").startOf("year"),
-    moment().subtract(1, "year").endOf("year"),
-  ],
+  "Tahun Lalu": [moment().subtract(1, "year").startOf("year"), moment().subtract(1, "year").endOf("year")],
 };
 
 class Paginationq extends Component {
