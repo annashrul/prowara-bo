@@ -21,7 +21,7 @@ export const NOTIF_ALERT = {
 
 export const HEADERS = {
   // URL: "http://192.168.100.9:6704/",
-  URL: "https://api.prowara.com/",
+  URL: "https://api-mitra.prowara.com/",
   TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwY2RiN2M5OC0wNWNmLTQ4NDgtOGM3Yy0yZTFiYTczZGUwNmYiLCJpYXQiOjE1NzAxNzM0ODYsImV4cCI6MTU3MDc3ODI4Nn0.1NiWtt2luG83am8FJSvWpL5p35Oxd8GSJJTwhFmAdgw",
   USERNAME: "netindo",
